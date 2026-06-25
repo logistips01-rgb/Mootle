@@ -68,6 +68,14 @@ function encontrarAnuncios(obj, prof = 0) {
   const html = await resp.text();
   console.log('Tamaño del HTML:', html.length, 'caracteres');
 
+  // Si la página es sospechosamente pequeña, casi seguro es un bloqueo/challenge.
+  if (html.length < 50000) {
+    console.log('\n⚠️  Página muy pequeña — probable bloqueo anti-bot. Contenido:');
+    console.log('──────────────────────────────────────────');
+    console.log(html.replace(/\s+/g, ' ').slice(0, 1500));
+    console.log('──────────────────────────────────────────');
+  }
+
   if (resp.status !== 200) {
     console.log('Recorte:', html.slice(0, 200));
     console.log('\n(Si es 403, el sitio bloquea peticiones sin navegador.)');
