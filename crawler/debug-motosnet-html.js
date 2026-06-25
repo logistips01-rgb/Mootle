@@ -108,6 +108,16 @@ function encontrarAnuncios(obj, prof = 0) {
   const precios = (html.match(/\d[\d.]*\s?€/g) || []).length;
   console.log(`Apariciones de precios (…€) en el HTML: ${precios}`);
 
+  // (A0) Conteo de elementos clave de las tarjetas en el HTML.
+  const cuenta = (re) => (html.match(re) || []).length;
+  console.log('\n── Conteo de tarjetas en el HTML ──');
+  console.log('  contenedores mt-ListAds-item:   ', cuenta(/mt-ListAds-item/g));
+  console.log('  contenedores mt-CardAd:         ', cuenta(/mt-CardAd[ "]/g));
+  console.log('  títulos (infoHeaderTitleLink):  ', cuenta(/mt-CardAd-infoHeaderTitleLink/g));
+  console.log('  precios (cashAmount):           ', cuenta(/mt-CardAdPrice-cashAmount/g));
+  console.log('  enlaces de ficha (…\\d+.htm):    ',
+    cuenta(/href="\/(?:ocasion|segunda-mano)\/[^"]*\d{5,}\.htm"/g));
+
   // (A) ¿Qué variables window.__XXXX__ hay? (donde suele ir el estado)
   const vars = [...new Set((html.match(/window\.__[A-Za-z0-9_]+/g) || []))];
   console.log('\nVariables window.* encontradas:', vars.join(', ') || '(ninguna)');
