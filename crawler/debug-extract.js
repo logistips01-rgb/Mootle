@@ -13,9 +13,19 @@ require('dotenv').config();
 
 const FirecrawlApp = require('@mendable/firecrawl-js').default;
 
-const portalId = process.argv[2] || 'cochesnet';
+// El primer argumento puede ser un portalId conocido o una URL completa.
+const arg1 = process.argv[2] || 'cochesnet';
 const usarStealth = (process.argv[3] || '').toLowerCase() === 'stealth';
-const portal = require('./portals/' + portalId);
+
+let targetUrl, etiqueta;
+if (/^https?:\/\//i.test(arg1)) {
+  targetUrl = arg1;
+  etiqueta = 'URL directa';
+} else {
+  const portal = require('./portals/' + arg1);
+  targetUrl = portal.searchUrl;
+  etiqueta = arg1;
+}
 
 // Schema de LISTA: un array de anuncios con los campos clave de cada tarjeta.
 const SCHEMA_LISTA = {
@@ -63,10 +73,10 @@ const PROMPT =
   };
   if (usarStealth) opts.proxy = 'stealth';
 
-  console.log(`\nPortal: ${portalId}${usarStealth ? '  (STEALTH)' : ''}`);
-  console.log(`Extrayendo lista de: ${portal.searchUrl}\n`);
+  console.log(`\nObjetivo: ${etiqueta}${usarStealth ? '  (STEALTH)' : ''}`);
+  console.log(`Extrayendo lista de: ${targetUrl}\n`);
 
-  const res = await app.scrapeUrl(portal.searchUrl, opts);
+  const res = await app.scrapeUrl(targetUrl, opts);
   const json = (res && (res.json || (res.data && res.data.json))) || {};
   const anuncios = json.anuncios || [];
 
