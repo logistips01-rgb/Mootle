@@ -103,10 +103,29 @@ function encontrarAnuncios(obj, prof = 0) {
   // Intento 2: bloques JSON-LD (schema.org) — a veces traen los productos.
   const ld = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
   console.log(`\nBloques JSON-LD encontrados: ${ld.length}`);
-  ld.slice(0, 3).forEach((b, i) => console.log(`  LD ${i + 1}:`, b[1].slice(0, 120)));
 
   // Pista bruta: ¿cuántos precios "€" hay en el HTML?
   const precios = (html.match(/\d[\d.]*\s?€/g) || []).length;
-  console.log(`\nApariciones de precios (…€) en el HTML: ${precios}`);
-  console.log('(Si hay muchos, los datos están en el HTML y puedo parsearlos.)');
+  console.log(`Apariciones de precios (…€) en el HTML: ${precios}`);
+
+  // (A) ¿Qué variables window.__XXXX__ hay? (donde suele ir el estado)
+  const vars = [...new Set((html.match(/window\.__[A-Za-z0-9_]+/g) || []))];
+  console.log('\nVariables window.* encontradas:', vars.join(', ') || '(ninguna)');
+
+  // (B) ¿Hay pistas de datos estructurados de anuncios en algún <script>?
+  const pistas = ['"price"', '"make"', '"model"', 'precio', 'kilometers', '"ads"', '"items"', '"results"'];
+  console.log('\nPistas de datos en el HTML:');
+  pistas.forEach((p) => console.log(`  ${p}:`, html.includes(p)));
+
+  // (C) Contexto alrededor de los 3 primeros precios, para ver la estructura
+  //     (¿están en tarjetas HTML o dentro de un JSON?).
+  console.log('\n── Contexto de los primeros precios (300 chars antes/después) ──');
+  const re = /\d[\d.]*\s?€/g;
+  let mm, n = 0;
+  while ((mm = re.exec(html)) && n < 3) {
+    const ini = Math.max(0, mm.index - 300);
+    const frag = html.slice(ini, mm.index + 40).replace(/\s+/g, ' ');
+    console.log(`\n[precio ${n + 1}] …${frag}…`);
+    n++;
+  }
 })();
