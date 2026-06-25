@@ -22,3 +22,6 @@ ui-debug.log
 # Sistema
 .DS_Store
 Thumbs.db
+
+# Datos generados por foodle/extract.js
+foodle/data/

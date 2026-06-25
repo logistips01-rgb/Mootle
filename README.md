@@ -124,6 +124,23 @@ Los campos que no se puedan extraer quedan como `null` (nunca se omiten).
 
 ---
 
+## Foodle (experimento) — buscador de restaurantes por foodies
+
+Pivote del proyecto: en vez de scrapear portales bloqueados, agrega
+**recomendaciones de foodies de YouTube** (datos accesibles vía API oficial).
+
+```bash
+npm install
+# en .env: YOUTUBE_API_KEY=... y ANTHROPIC_API_KEY=...
+node foodle/extract.js @cenandoconpablo @cocituber 40            # → foodle/data/restaurantes.json
+node foodle/extract.js @cenandoconpablo @cocituber 40 --firestore # además escribe en Firestore
+```
+
+Flujo: YouTube Data API (títulos + descripciones de los últimos vídeos) →
+Claude Haiku extrae la ficha de restaurante (o descarta el vídeo si no lo es) →
+JSON / colección `restaurants` de Firestore. Coste de IA: ~0,2 céntimos por
+vídeo.
+
 ## Notas y limitaciones de v0.1
 
 - **Wallapop** es una SPA con anti-bot agresivo: `/map` puede devolver pocas
