@@ -8,8 +8,10 @@
 const milanuncios = require('./milanuncios');
 const wallapop = require('./wallapop');
 const cochesnet = require('./cochesnet');
+const motosnet = require('./motosnet');
 
-const PORTALS = [milanuncios, wallapop, cochesnet];
+// motosnet usa engine 'html' (descarga directa); el resto usarían Firecrawl.
+const PORTALS = [motosnet, milanuncios, wallapop, cochesnet];
 
 /**
  * Schema que se pasa a Firecrawl en `jsonOptions.schema` para que extraiga

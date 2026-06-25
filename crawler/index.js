@@ -138,9 +138,115 @@ async function extraerDatos(app, urls) {
     .filter((x) => x.url && x.json);
 }
 
+/* ───────────────── portales tipo HTML (descarga directa) ───────────── */
+
+/**
+ * Procesa un portal con engine 'html': descarga las páginas de resultados
+ * directamente (sin Firecrawl) y las parsea con la función del propio portal.
+ */
+async function procesarPortalHtml(portal) {
+  let nuevos = 0;
+  let duplicados = 0;
+  let errores = 0;
+
+  try {
+    const { hashes: hashesExistentes } = await cargarExistentes(portal.id);
+    const maxPages = parseInt(
+      process.env.CRAWL_MAX_PAGES || portal.maxPages || '1',
+      10
+    );
+
+    const hashesEsteRun = new Set();
+    const paraEscribir = [];
+    let muestras = 0;
+
+    for (let p = 1; p <= maxPages; p++) {
+      const url = portal.pageUrl(p);
+      logPortal(portal, `descargando página ${p}/${maxPages}: ${url}`);
+
+      let html;
+      try {
+        const resp = await fetch(url, { headers: portal.headers });
+        if (!resp.ok) {
+          logPortal(portal, `HTTP ${resp.status} en página ${p} — paro`);
+          errores += 1;
+          break;
+        }
+        html = await resp.text();
+      } catch (e) {
+        logPortal(portal, `error de red en página ${p}: ${e.message}`);
+        errores += 1;
+        break;
+      }
+
+      const cards = portal.parseListings(html);
+      logPortal(portal, `página ${p}: ${cards.length} anuncios parseados`);
+      if (cards.length === 0) break;
+
+      for (const raw of cards) {
+        try {
+          const anuncio = normalizar(raw, portal, raw.url, {});
+          if (!esValido(anuncio)) {
+            errores += 1;
+            continue;
+          }
+          const hash = generarHash(anuncio);
+          if (hashesExistentes.has(hash) || hashesEsteRun.has(hash)) {
+            duplicados += 1;
+            continue;
+          }
+          hashesEsteRun.add(hash);
+          anuncio.id = hash;
+          anuncio.fecha_crawl = new Date().toISOString();
+          paraEscribir.push(anuncio);
+
+          if (muestras < 3) {
+            console.log(
+              `   ej: ${anuncio.marca || '?'} ${anuncio.modelo || ''} | ` +
+                `${anuncio.precio ?? '?'} € | ${anuncio.km ?? '?'} km | ` +
+                `${anuncio.año ?? '?'} | ${anuncio.provincia || anuncio.ubicacion || '?'}`
+            );
+            muestras += 1;
+          }
+        } catch (e) {
+          errores += 1;
+        }
+      }
+
+      await sleep(portal.rateLimit || 1500);
+    }
+
+    nuevos = await escribirListings(paraEscribir);
+    await actualizarEstadoPortal(portal, {
+      nuevos,
+      duplicados,
+      errores,
+      estado: 'ok',
+    });
+  } catch (e) {
+    errores += 1;
+    logPortal(portal, `ERROR de portal: ${e.message}`);
+    await actualizarEstadoPortal(portal, {
+      estado: 'error',
+      ultimo_error: e.message,
+    }).catch(() => {});
+  }
+
+  logPortal(
+    portal,
+    `${nuevos} nuevos anuncios | ${duplicados} duplicados descartados | ${errores} errores`
+  );
+  return { nuevos, duplicados, errores };
+}
+
 /* ────────────────────────────── por portal ─────────────────────────── */
 
 async function procesarPortal(app, portal) {
+  // Portales que sirven el HTML directamente (sin Firecrawl).
+  if (portal.engine === 'html') {
+    return procesarPortalHtml(portal);
+  }
+
   let nuevos = 0;
   let duplicados = 0;
   let errores = 0;
@@ -231,13 +337,6 @@ async function procesarPortal(app, portal) {
 /* ──────────────────────────────── main ─────────────────────────────── */
 
 async function runCrawler(portalIds) {
-  const apiKey = process.env.FIRECRAWL_API_KEY;
-  if (!apiKey) {
-    throw new Error('Falta FIRECRAWL_API_KEY en el entorno (.env).');
-  }
-
-  const app = new FirecrawlApp({ apiKey });
-
   const seleccionados =
     portalIds && portalIds.length
       ? PORTALS.filter((p) => portalIds.includes(p.id))
@@ -247,6 +346,17 @@ async function runCrawler(portalIds) {
     throw new Error(
       `Ningún portal coincide con: ${(portalIds || []).join(', ')}`
     );
+  }
+
+  // Solo necesitamos Firecrawl si hay algún portal que no sea de tipo HTML.
+  const necesitaFirecrawl = seleccionados.some((p) => p.engine !== 'html');
+  let app = null;
+  if (necesitaFirecrawl) {
+    const apiKey = process.env.FIRECRAWL_API_KEY;
+    if (!apiKey) {
+      throw new Error('Falta FIRECRAWL_API_KEY en el entorno (.env).');
+    }
+    app = new FirecrawlApp({ apiKey });
   }
 
   console.log(
