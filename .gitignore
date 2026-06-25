@@ -1,0 +1,24 @@
+# Dependencias
+node_modules/
+functions/node_modules/
+
+# Secretos / configuración local
+.env
+.env.local
+serviceAccount*.json
+
+# Copia generada del crawler para el deploy de Functions
+functions/crawler/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Firebase
+.firebase/
+firebase-debug.log
+ui-debug.log
+
+# Sistema
+.DS_Store
+Thumbs.db

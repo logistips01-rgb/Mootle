@@ -1,0 +1,29 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Los anuncios y el estado son de solo lectura para el frontend.
+    // La escritura la realiza exclusivamente el crawler vía Admin SDK,
+    // que omite estas reglas (privilegios de servicio).
+    match /listings/{id} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /portals/{id} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    match /stats/{id} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Todo lo demás, denegado.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
