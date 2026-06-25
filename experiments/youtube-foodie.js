@@ -60,13 +60,22 @@ async function traerCanal(handle) {
   );
   console.log(`══════════════════════════════════════════`);
 
-  const pl = await api('/playlistItems', {
-    part: 'snippet',
-    playlistId: uploads,
-    maxResults: Math.min(N, 50),
-  });
+  // Paginar la playlist de subidas hasta reunir N vídeos (la API da 50/página).
+  const items = [];
+  let pageToken;
+  while (items.length < N) {
+    const pl = await api('/playlistItems', {
+      part: 'snippet',
+      playlistId: uploads,
+      maxResults: 50,
+      ...(pageToken ? { pageToken } : {}),
+    });
+    items.push(...pl.items);
+    if (!pl.nextPageToken) break;
+    pageToken = pl.nextPageToken;
+  }
 
-  pl.items.forEach((it, i) => {
+  items.slice(0, N).forEach((it, i) => {
     const s = it.snippet;
     const vid = s.resourceId.videoId;
     const desc = (s.description || '').replace(/\s+/g, ' ').slice(0, 550);
