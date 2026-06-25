@@ -1,16 +1,15 @@
 'use strict';
 
 /**
- * Experimento Foodle — paso 1: traer los últimos vídeos de un canal foodie
+ * Experimento Foodle — trae los últimos vídeos de UNO O VARIOS canales foodie
  * usando la YouTube Data API v3 (oficial, gratis, sin bloqueos de IP).
  *
- * Saca título + descripción de cada vídeo, que en canales como
- * "Cenando con Pablo" ya contienen el restaurante, la ciudad y a menudo
- * dirección/precio. Luego esa salida se la pasamos a la IA para extraer la
- * ficha estructurada (nombre, zona, cocina, precio, veredicto).
+ * Saca título + descripción de cada vídeo (que en estos canales ya traen el
+ * restaurante, la ciudad y a menudo dirección/precio). Esa salida se la
+ * pasamos a la IA para extraer las fichas estructuradas de restaurante.
  *
- * Uso:  node experiments/youtube-foodie.js [@handle] [nVideos]
- *   node experiments/youtube-foodie.js @cenandoconpablo 15
+ * Uso:  node experiments/youtube-foodie.js @canal1 @canal2 ... [nPorCanal]
+ *   node experiments/youtube-foodie.js @cenandoconpablo @cocituber 10
  *
  * Requiere en .env:  YOUTUBE_API_KEY=AIza...
  * Requiere Node 18+ (fetch nativo).
@@ -18,8 +17,16 @@
 require('dotenv').config();
 
 const API = 'https://www.googleapis.com/youtube/v3';
-const handle = (process.argv[2] || '@cenandoconpablo').replace(/^@/, '');
-const N = parseInt(process.argv[3] || '15', 10);
+
+// Separar argumentos: los @handles por un lado, el número (nPorCanal) por otro.
+const args = process.argv.slice(2);
+let N = 10;
+const handles = [];
+for (const a of args) {
+  if (/^\d+$/.test(a)) N = parseInt(a, 10);
+  else handles.push(a.replace(/^@/, ''));
+}
+if (handles.length === 0) handles.push('cenandoconpablo', 'cocituber');
 
 async function api(path, params) {
   const url = new URL(API + path);
@@ -33,53 +40,61 @@ async function api(path, params) {
   return data;
 }
 
-(async () => {
-  if (!process.env.YOUTUBE_API_KEY) {
-    console.error('Falta YOUTUBE_API_KEY en el .env');
-    process.exit(1);
-  }
-
-  // 1) Resolver el canal por su @handle → playlist de subidas.
-  console.log(`\nBuscando canal @${handle}…`);
+async function traerCanal(handle) {
   const ch = await api('/channels', {
     part: 'contentDetails,snippet,statistics',
     forHandle: handle,
   });
   if (!ch.items || !ch.items.length) {
-    throw new Error(`No se encontró el canal @${handle}`);
+    console.log(`\n⚠️  No se encontró el canal @${handle} — lo salto.\n`);
+    return;
   }
   const canal = ch.items[0];
   const uploads = canal.contentDetails.relatedPlaylists.uploads;
-  console.log(
-    `Canal: ${canal.snippet.title} · ${Number(
-      canal.statistics.subscriberCount || 0
-    ).toLocaleString('es-ES')} subs · ${canal.statistics.videoCount} vídeos\n`
-  );
 
-  // 2) Traer los últimos N vídeos (título + descripción).
+  console.log(`\n══════════════════════════════════════════`);
+  console.log(
+    `CANAL: ${canal.snippet.title}  (@${handle}) · ${Number(
+      canal.statistics.subscriberCount || 0
+    ).toLocaleString('es-ES')} subs`
+  );
+  console.log(`══════════════════════════════════════════`);
+
   const pl = await api('/playlistItems', {
     part: 'snippet',
     playlistId: uploads,
     maxResults: Math.min(N, 50),
   });
 
-  console.log(`──────── Últimos ${pl.items.length} vídeos ────────\n`);
   pl.items.forEach((it, i) => {
     const s = it.snippet;
     const vid = s.resourceId.videoId;
-    const desc = (s.description || '').replace(/\s+/g, ' ').slice(0, 600);
-    console.log(`### ${i + 1}. ${s.title}`);
+    const desc = (s.description || '').replace(/\s+/g, ' ').slice(0, 550);
+    console.log(`\n### [${canal.snippet.title}] ${i + 1}. ${s.title}`);
     console.log(`URL: https://youtu.be/${vid}`);
     console.log(`FECHA: ${s.publishedAt.slice(0, 10)}`);
-    console.log(`DESCRIPCIÓN: ${desc}`);
-    console.log('');
+    console.log(`DESCRIPCIÓN: ${desc || '(vacía)'}`);
   });
+}
 
+(async () => {
+  if (!process.env.YOUTUBE_API_KEY) {
+    console.error('Falta YOUTUBE_API_KEY en el .env');
+    process.exit(1);
+  }
+  console.log(`\nFoodle — canales: ${handles.map((h) => '@' + h).join(', ')} · ${N} vídeos c/u`);
+  for (const h of handles) {
+    try {
+      await traerCanal(h);
+    } catch (e) {
+      console.log(`\nERROR con @${h}: ${e.message}`);
+    }
+  }
   console.log(
-    '─────────────────────────────────────────\n' +
-      'Copia TODO lo de arriba y pégamelo en el chat: yo lo convierto en\n' +
-      'las fichas Foodle (restaurante · zona · cocina · precio · veredicto)\n' +
-      'y vemos si la extracción es fiable.\n'
+    '\n─────────────────────────────────────────\n' +
+      'Copia TODO lo de arriba y pégamelo: lo convierto en fichas Foodle\n' +
+      '(restaurante · ciudad · cocina · precio · veredicto · creador) y las\n' +
+      'añado al buscador.\n'
   );
 })().catch((e) => {
   console.error('\nERROR:', e.message);
