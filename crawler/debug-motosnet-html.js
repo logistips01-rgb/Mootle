@@ -135,6 +135,35 @@ function encontrarAnuncios(obj, prof = 0) {
       continue;
     }
     console.log(`\n${v}: parseado ✅  claves raíz: ${Object.keys(data).join(', ').slice(0, 200)}`);
+
+    // Exploración dirigida de initialSearch (donde suelen ir los anuncios).
+    if (data.initialSearch) {
+      const is = data.initialSearch;
+      console.log('  initialSearch · tipo:', Array.isArray(is) ? 'array' : typeof is);
+      if (is && typeof is === 'object') {
+        console.log('  initialSearch · claves:', Object.keys(is).join(', '));
+        for (const k of Object.keys(is)) {
+          const val = is[k];
+          if (Array.isArray(val)) {
+            console.log(`    · ${k}: array(${val.length})`);
+            if (val[0] && typeof val[0] === 'object') {
+              console.log(`        claves[0]: ${Object.keys(val[0]).join(', ').slice(0, 400)}`);
+              console.log(`        muestra:   ${JSON.stringify(val[0]).slice(0, 500)}`);
+            }
+          } else if (val && typeof val === 'object') {
+            const subArr = arrayMasGrande(val);
+            if (subArr) {
+              console.log(`    · ${k}.<array>: ${subArr.length} elementos`);
+              if (subArr[0] && typeof subArr[0] === 'object') {
+                console.log(`        claves[0]: ${Object.keys(subArr[0]).join(', ').slice(0, 400)}`);
+                console.log(`        muestra:   ${JSON.stringify(subArr[0]).slice(0, 500)}`);
+              }
+            }
+          }
+        }
+      }
+    }
+
     const arr = arrayMasGrande(data);
     if (arr) {
       console.log(`  → array más grande: ${arr.length} elementos`);
