@@ -183,17 +183,12 @@
       import { getFirestore, collection, query, where, limit, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
       /* ════════════════════════════════════════════════════════════════
-       *  CONFIG — pega aquí la config de tu app web de Firebase
-       *  (Console → Configuración del proyecto → Tus apps → Web </>)
+       *  CONFIG — la config de tu app web de Firebase vive en un archivo
+       *  aparte: firebase-config.js (que git ignora, para no chocar al
+       *  actualizar). Copia firebase-config.example.js → firebase-config.js
+       *  y pega ahí tus datos. Se carga abajo, en init().
        * ════════════════════════════════════════════════════════════════ */
-      const firebaseConfig = {
-        apiKey: "TU_API_KEY",
-        authDomain: "TU_PROYECTO.firebaseapp.com",
-        projectId: "TU_PROYECTO",
-        storageBucket: "TU_PROYECTO.appspot.com",
-        messagingSenderId: "TU_SENDER_ID",
-        appId: "TU_APP_ID",
-      };
+      let firebaseConfig = null;
 
       const FETCH_LIMIT = 1000;
       const PAGE_SIZE = 24;
@@ -323,9 +318,14 @@
       $("filterToggle").addEventListener("click", () => $("filters").classList.toggle("open"));
 
       async function init() {
-        if (firebaseConfig.projectId === "TU_PROYECTO") {
+        try {
+          const m = await import("./firebase-config.js");
+          firebaseConfig = m.firebaseConfig;
+        } catch (_) { /* archivo ausente → mensaje de config abajo */ }
+
+        if (!firebaseConfig || firebaseConfig.projectId === "TU_PROYECTO") {
           irAResultados("");
-          showState("🛠️", "Configura Firebase", 'Edita el objeto <code>firebaseConfig</code> al final de <code>index.html</code> con los datos de tu app web de Firebase.');
+          showState("🛠️", "Configura Firebase", 'Crea <code>firebase-config.js</code> (copia <code>firebase-config.example.js</code>) y pega ahí los datos de tu app web de Firebase.');
           return;
         }
         try {
