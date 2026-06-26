@@ -28,7 +28,9 @@ const { YoutubeTranscript } = require('youtube-transcript');
 const { db } = require('../crawler/firebase-client');
 
 const refresh = process.argv.includes('--refresh');
-const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+// maxRetries alto: ante un 429 (límite de ritmo) el SDK reintenta con backoff
+// en vez de fallar — así una sola pasada termina todos los pendientes.
+const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY, maxRetries: 8 });
 
 function sysPrompt(nombre, ciudad) {
   return `Eres un extractor para Foodle. Te doy la TRANSCRIPCIÓN automática (puede tener erratas) de un vídeo en el que un foodie reseña el restaurante "${nombre}"${ciudad ? ' en ' + ciudad : ''}. Extrae SOLO lo que se diga de ese restaurante y su comida.
@@ -99,26 +101,31 @@ async function pool(items, limite, fn) {
   const docs = snap.docs.filter((d) => d.get('vid') && (refresh || d.get('tr') !== true));
   console.log(`\n🎙️  ${snap.size} restaurantes · con transcripción por analizar: ${docs.length}${refresh ? ' (refresh)' : ''}\n`);
 
-  let con = 0, sin = 0, hechos = 0, muestras = 0;
-  await pool(docs, 3, async (doc) => {
+  let con = 0, sin = 0, err = 0, hechos = 0, muestras = 0;
+  await pool(docs, 2, async (doc) => {
     const r = doc.data();
-    const res = await analizar(r);
-    hechos++;
-    if (res.sinTranscripcion) {
-      sin++;
-      await doc.ref.set({ tr: true }, { merge: true }); // marcado para no reintentar
-    } else {
-      con++;
-      await doc.ref.set({ ...res, tr: true }, { merge: true });
-      if (muestras < 8) {
-        console.log(`  ✓ ${r.nombre}: ${(res.platos || []).slice(0, 3).join(', ') || '—'}${res.precio_aprox ? ' · ' + res.precio_aprox : ''}`);
-        muestras++;
+    try {
+      const res = await analizar(r);
+      if (res.sinTranscripcion) {
+        sin++;
+        await doc.ref.set({ tr: true }, { merge: true }); // marcado para no reintentar
+      } else {
+        con++;
+        await doc.ref.set({ ...res, tr: true }, { merge: true });
+        if (muestras < 8) {
+          console.log(`  ✓ ${r.nombre}: ${(res.platos || []).slice(0, 3).join(', ') || '—'}${res.precio_aprox ? ' · ' + res.precio_aprox : ''}`);
+          muestras++;
+        }
       }
+    } catch (e) {
+      err++; // p.ej. límite de ritmo de la API; se reintentará en la próxima pasada
     }
+    hechos++;
     if (hechos % 20 === 0) console.log(`  …${hechos}/${docs.length}`);
   });
 
-  console.log(`\n✅ Con transcripción: ${con} · sin subtítulos: ${sin}`);
+  console.log(`\n✅ Con transcripción: ${con} · sin subtítulos: ${sin}${err ? ` · sin procesar (errores): ${err}` : ''}`);
+  if (err) console.log('   ⚠️ Los "sin procesar" suelen ser por límite de ritmo de la API. Vuelve a lanzar para terminarlos.');
   console.log('   (YouTube no siempre tiene subtítulos; esos se quedan con la info básica.)');
   process.exit(0);
 })().catch((e) => { console.error('💥 Error:', e.message); process.exit(1); });
