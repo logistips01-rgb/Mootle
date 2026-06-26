@@ -24,18 +24,40 @@ require('dotenv').config();
 
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const AnthropicMod = require('@anthropic-ai/sdk');
 const Anthropic = AnthropicMod.default || AnthropicMod;
 
 const YT_API = 'https://www.googleapis.com/youtube/v3';
 
+const DATA_DIR = path.join(__dirname, 'data');
+const SEEN_FILE = path.join(DATA_DIR, 'seen.json');
+const OUT_FILE = path.join(DATA_DIR, 'restaurantes.json');
+
+/** id estable de una ficha: mismo restaurante + ciudad + foodie = misma ficha. */
+function hashFicha(r) {
+  return crypto
+    .createHash('sha1')
+    .update(`${(r.nombre || '').toLowerCase()}|${(r.ciudad || '').toLowerCase()}|${(r.creador || '').toLowerCase()}`)
+    .digest('hex');
+}
+
+function leerJSON(file, porDefecto) {
+  try {
+    return JSON.parse(fs.readFileSync(file, 'utf8'));
+  } catch (_) {
+    return porDefecto;
+  }
+}
+
 /* ───────────────────────── argumentos ───────────────────────── */
 const args = process.argv.slice(2);
 const usarFirestore = args.includes('--firestore');
+const reanalizar = args.includes('--reanalyze'); // ignora "ya vistos" y reprocesa todo
 let N = 40;
 const handles = [];
 for (const a of args) {
-  if (a === '--firestore') continue;
+  if (a === '--firestore' || a === '--reanalyze') continue;
   if (/^\d+$/.test(a)) N = parseInt(a, 10);
   else handles.push(a.replace(/^@/, ''));
 }
@@ -187,6 +209,8 @@ async function extraer(video) {
     creador: video.creador,
     url: `https://youtu.be/${video.vid}`,
     vid: video.vid,
+    // Miniatura del vídeo (gratis): la foto que puso el propio foodie.
+    imagen: `https://i.ytimg.com/vi/${video.vid}/hqdefault.jpg`,
     fecha: video.fecha,
   };
 }
@@ -211,19 +235,13 @@ async function pool(items, limite, fn) {
 
 /* ───────────────────────── Firestore (opcional) ───────────────────────── */
 async function guardarEnFirestore(fichas) {
-  const crypto = require('crypto');
-  const { admin, db } = require('../crawler/firebase-client');
-  const hash = (r) =>
-    crypto.createHash('sha1')
-      .update(`${(r.nombre || '').toLowerCase()}|${(r.ciudad || '').toLowerCase()}|${(r.creador || '').toLowerCase()}`)
-      .digest('hex');
-
+  const { db } = require('../crawler/firebase-client');
   let escritos = 0;
   for (let i = 0; i < fichas.length; i += 400) {
     const lote = fichas.slice(i, i + 400);
     const batch = db.batch();
     for (const f of lote) {
-      const ref = db.collection('restaurants').doc(hash(f));
+      const ref = db.collection('restaurants').doc(hashFicha(f));
       batch.set(
         ref,
         { ...f, fecha_extraccion: new Date().toISOString(), activo: true },
@@ -241,7 +259,8 @@ async function guardarEnFirestore(fichas) {
   if (!process.env.YOUTUBE_API_KEY) throw new Error('Falta YOUTUBE_API_KEY en el .env');
   if (!process.env.ANTHROPIC_API_KEY) throw new Error('Falta ANTHROPIC_API_KEY en el .env');
 
-  console.log(`\n🍽️  Foodle extract — canales: ${handles.map((h) => '@' + h).join(', ')} · ${N} vídeos c/u\n`);
+  fs.mkdirSync(DATA_DIR, { recursive: true });
+  console.log(`\n🍽️  Foodle extract — canales: ${handles.map((h) => '@' + h).join(', ')} · ${N} vídeos c/u${reanalizar ? ' · (reanalizando todo)' : ''}\n`);
 
   // 1. Traer vídeos
   let videos = [];
@@ -250,37 +269,53 @@ async function guardarEnFirestore(fichas) {
     console.log(`[${h}] ${v.length} vídeos`);
     videos = videos.concat(v);
   }
-  console.log(`\nTotal vídeos a analizar: ${videos.length}\n`);
+
+  // 1b. Filtrar los ya vistos (salvo --reanalyze)
+  const seen = new Set(reanalizar ? [] : leerJSON(SEEN_FILE, []));
+  const nuevos = videos.filter((v) => !seen.has(v.vid));
+  console.log(
+    `\nVídeos totales: ${videos.length} · ya vistos: ${videos.length - nuevos.length} · a analizar: ${nuevos.length}\n`
+  );
+
+  if (nuevos.length === 0) {
+    console.log('No hay vídeos nuevos que analizar. 🎉 (usa --reanalyze para reprocesar todo)');
+    process.exit(0);
+  }
 
   // 2. Extraer con Claude (concurrencia 5)
   let procesados = 0;
-  const fichas = (await pool(videos, 5, async (v) => {
+  const fichas = (await pool(nuevos, 5, async (v) => {
     const ficha = await extraer(v);
     procesados++;
-    if (procesados % 10 === 0) process.stdout.write(`  …${procesados}/${videos.length}\n`);
+    if (procesados % 10 === 0) process.stdout.write(`  …${procesados}/${nuevos.length}\n`);
     return ficha;
   })).filter((f) => f && !f.__error);
 
-  console.log(`\n✅ ${fichas.length} restaurantes extraídos de ${videos.length} vídeos`);
-  console.log(`   (${videos.length - fichas.length} descartados: no eran restaurantes o sin nombre)\n`);
+  console.log(`\n✅ ${fichas.length} restaurantes nuevos extraídos de ${nuevos.length} vídeos`);
+  console.log(`   (${nuevos.length - fichas.length} descartados: no eran restaurantes o sin nombre)\n`);
 
-  // Muestra
   fichas.slice(0, 8).forEach((f, i) =>
     console.log(`  ${i + 1}. ${f.nombre} · ${f.ciudad || '?'} · ${f.cocina || '?'} · ${f.nivel}${f.publi ? ' · 📣' : ''} (${f.creador})`)
   );
 
-  // 3. Guardar JSON
-  const outDir = path.join(__dirname, 'data');
-  fs.mkdirSync(outDir, { recursive: true });
-  const outFile = path.join(outDir, 'restaurantes.json');
-  fs.writeFileSync(outFile, JSON.stringify(fichas, null, 2));
-  console.log(`\n💾 Guardado en ${outFile}`);
+  // 3. Marcar como vistos TODOS los analizados (incluidos los descartados, para no repagarlos)
+  nuevos.forEach((v) => seen.add(v.vid));
+  fs.writeFileSync(SEEN_FILE, JSON.stringify([...seen], null, 2));
 
-  // 4. Firestore (opcional)
+  // 4. Acumular en restaurantes.json (dedup por hash; las nuevas pisan a las viejas)
+  const previas = leerJSON(OUT_FILE, []);
+  const porId = new Map(previas.map((f) => [hashFicha(f), f]));
+  for (const f of fichas) porId.set(hashFicha(f), f);
+  const todas = [...porId.values()];
+  fs.writeFileSync(OUT_FILE, JSON.stringify(todas, null, 2));
+  console.log(`\n💾 ${OUT_FILE}`);
+  console.log(`   ${fichas.length} nuevas · ${todas.length} en total acumuladas`);
+
+  // 5. Firestore (opcional) — solo las nuevas de esta tanda
   if (usarFirestore) {
     console.log('\nEscribiendo en Firestore (colección "restaurants")…');
     const n = await guardarEnFirestore(fichas);
-    console.log(`✅ ${n} fichas escritas en Firestore`);
+    console.log(`✅ ${n} fichas escritas/actualizadas en Firestore`);
   } else {
     console.log('\n(Para escribir en Firestore añade --firestore al comando)');
   }
