@@ -45,6 +45,13 @@ async function yt(pathname, params) {
   return data;
 }
 
+// Canales que YA tienes en Foodle (nacionales que salen en todas las ciudades).
+// Se excluyen de los resultados para dejar sitio a foodies locales nuevos.
+const YA_TENGO = new Set([
+  'cenandoconpablo', 'cocituber', 'detapasconrufo', 'topfoodbcn', 'sezarblue',
+  'paufeel', 'lalatinatv', 'saboreamlg', 'paisanoconbigote', 'loscomensaleses',
+]);
+
 async function buscarCiudad(ciudad) {
   // Buscamos VÍDEOS de reseña (no canales): da mucha mejor señal de quién
   // hace de verdad reseñas de restaurantes en esa ciudad.
@@ -52,7 +59,7 @@ async function buscarCiudad(ciudad) {
     part: 'snippet',
     type: 'video',
     q: `reseña restaurante dónde comer ${ciudad}`,
-    maxResults: 25,
+    maxResults: 50,
     regionCode: 'ES',
     relevanceLanguage: 'es',
   });
@@ -77,8 +84,11 @@ async function buscarCiudad(ciudad) {
   }));
 
   // Filtra el ruido: fuera mega-canales (generalistas), radios/TV con miles de
-  // vídeos, y canales demasiado pequeños/de un solo vídeo.
-  canales = canales.filter((c) => c.subs <= 1500000 && c.videos >= 15 && c.videos <= 4000);
+  // vídeos, canales minúsculos, y los que YA tienes (nacionales repetidos).
+  canales = canales.filter((c) =>
+    c.subs <= 1500000 && c.videos >= 15 && c.videos <= 4000 &&
+    !(c.handle && YA_TENGO.has(c.handle.toLowerCase()))
+  );
 
   // Ordena por frecuencia de reseñas (lo relevante), y a igualdad por subs.
   canales.sort((a, b) => b.freq - a.freq || b.subs - a.subs);
