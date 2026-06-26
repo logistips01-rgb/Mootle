@@ -132,6 +132,8 @@
       .btn-loadmore:hover { background: var(--accent-hover); }
 
       footer { text-align: center; padding: 26px 20px; color: var(--text-faint); font-size: 12.5px; }
+      footer p { margin: 4px auto; max-width: 640px; }
+      footer a { color: var(--accent-hover); }
       .app footer { border-top: 1px solid var(--border-soft); }
       .mobile-filter-toggle { display: none; width: 100%; padding: 12px; margin-bottom: 16px; background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text); font-size: 14px; font-weight: 600; }
       @media (max-width: 820px) {
@@ -202,7 +204,10 @@
           <div class="loadmore-wrap" id="loadmore-wrap" style="display:none"><button class="btn-loadmore" id="loadmore">Cargar más</button></div>
         </section>
       </main>
-      <footer>Foodle · restaurantes recomendados por foodies de YouTube · enlazamos siempre al vídeo original</footer>
+      <footer>
+        <p>Foodle agrega recomendaciones públicas de foodies de YouTube. Las opiniones y el contenido pertenecen a sus creadores; cada ficha enlaza siempre al vídeo original.</p>
+        <p>¿Eres creador y quieres aparecer, corregir algo o que retiremos tu contenido? <a href="mailto:hola@foodle.es">Escríbenos</a>.</p>
+      </footer>
     </div>
 
     <script type="module">
