@@ -21,6 +21,13 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    // Foodle: restaurantes recomendados por foodies (lectura pública,
+    // escritura solo desde el extractor con Admin SDK).
+    match /restaurants/{id} {
+      allow read: if true;
+      allow write: if false;
+    }
+
     // Todo lo demás, denegado.
     match /{document=**} {
       allow read, write: if false;

@@ -3,759 +3,188 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Mootle — el buscador de motos de segunda mano</title>
-    <meta
-      name="description"
-      content="Mootle agrega anuncios de motos de segunda mano de Milanuncios, Wallapop y Coches.net en un solo buscador."
-    />
-
-    <!-- Tipografías: display con personalidad + body legible -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Sora:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-
+    <title>Foodle — dónde comer según los foodies</title>
+    <meta name="description" content="Foodle agrega los restaurantes recomendados por foodies de YouTube en un buscador filtrable por ciudad, cocina y precio." />
     <style>
       :root {
-        --bg: #0d0d0d;
-        --bg-soft: #161616;
-        --bg-card: #1a1a1a;
-        --bg-elev: #202020;
-        --border: #2a2a2a;
-        --border-soft: #232323;
-        --text: #f2f2f2;
-        --text-dim: #a0a0a0;
-        --text-faint: #6b6b6b;
-        --accent: #e8670a;
-        --accent-hover: #ff7a1a;
-        --accent-soft: rgba(232, 103, 10, 0.12);
-        --radius: 14px;
-        --radius-sm: 10px;
-        --shadow: 0 6px 24px rgba(0, 0, 0, 0.45);
-        --maxw: 1280px;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      html,
-      body {
-        margin: 0;
-        padding: 0;
-      }
-
-      body {
-        background: var(--bg);
-        color: var(--text);
-        font-family: "Sora", system-ui, -apple-system, sans-serif;
-        font-size: 15px;
-        line-height: 1.5;
-        -webkit-font-smoothing: antialiased;
-        min-height: 100vh;
-      }
-
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-
-      button {
-        font-family: inherit;
-        cursor: pointer;
-      }
-
-      /* ───────────────────────── Header / hero ───────────────────────── */
-      header.hero {
-        position: relative;
-        padding: 28px 20px 26px;
-        background: radial-gradient(
-            1200px 360px at 50% -120px,
-            rgba(232, 103, 10, 0.18),
-            transparent 70%
-          ),
-          var(--bg);
-        border-bottom: 1px solid var(--border-soft);
-      }
-
-      .hero-inner {
-        max-width: var(--maxw);
-        margin: 0 auto;
-      }
-
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        justify-content: center;
-        margin-bottom: 18px;
-      }
-
-      .brand .logo {
-        font-family: "Archivo Black", sans-serif;
-        font-size: 30px;
-        letter-spacing: -0.5px;
-        color: var(--text);
-      }
-
-      .brand .logo .dot {
-        color: var(--accent);
-      }
-
-      .brand .tag {
-        font-size: 12px;
-        color: var(--text-faint);
-        border-left: 1px solid var(--border);
-        padding-left: 12px;
-        margin-top: 4px;
-      }
-
-      /* Barra de búsqueda signature */
-      .searchbar {
-        position: relative;
-        max-width: 680px;
-        margin: 0 auto;
-      }
-
-      .searchbar input {
-        width: 100%;
-        padding: 18px 54px 18px 22px;
-        font-size: 17px;
-        color: var(--text);
-        background: var(--bg-elev);
-        border: 1.5px solid var(--border);
-        border-radius: 999px;
-        outline: none;
-        transition: border-color 0.15s, box-shadow 0.15s;
-      }
-
-      .searchbar input::placeholder {
-        color: var(--text-faint);
-      }
-
-      .searchbar input:focus {
-        border-color: var(--accent);
-        box-shadow: 0 0 0 4px var(--accent-soft);
-      }
-
-      .searchbar .icon {
-        position: absolute;
-        right: 20px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: var(--accent);
-        font-size: 20px;
-        pointer-events: none;
-      }
-
-      /* Autocompletado */
-      .autocomplete {
-        position: absolute;
-        z-index: 30;
-        left: 0;
-        right: 0;
-        top: calc(100% + 8px);
-        background: var(--bg-elev);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-sm);
-        box-shadow: var(--shadow);
-        overflow: hidden;
-        display: none;
-      }
-
-      .autocomplete.open {
-        display: block;
-      }
-
-      .autocomplete .opt {
-        padding: 11px 18px;
-        font-size: 14px;
-        cursor: pointer;
-        display: flex;
-        justify-content: space-between;
-        gap: 12px;
-      }
-
-      .autocomplete .opt:hover,
-      .autocomplete .opt.active {
-        background: var(--accent-soft);
-        color: var(--accent-hover);
-      }
-
-      .autocomplete .opt .count {
-        color: var(--text-faint);
-        font-size: 12px;
-      }
-
-      /* ───────────────────────── Layout ───────────────────────── */
-      .layout {
-        max-width: var(--maxw);
-        margin: 0 auto;
-        padding: 24px 20px 64px;
-        display: grid;
-        grid-template-columns: 268px 1fr;
-        gap: 26px;
-        align-items: start;
-      }
-
-      /* ───────────────────────── Sidebar filtros ───────────────────────── */
-      aside.filters {
-        position: sticky;
-        top: 18px;
-        background: var(--bg-soft);
-        border: 1px solid var(--border-soft);
-        border-radius: var(--radius);
-        padding: 20px 18px;
-      }
-
-      .filters h2 {
-        font-size: 13px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        color: var(--text-faint);
-        margin: 0 0 16px;
-        font-weight: 700;
-      }
-
-      .fgroup {
-        margin-bottom: 18px;
-      }
-
-      .fgroup > label {
-        display: block;
-        font-size: 12px;
-        color: var(--text-dim);
-        margin-bottom: 7px;
-        font-weight: 600;
-      }
-
-      .filters select,
-      .filters input[type="number"] {
-        width: 100%;
-        padding: 10px 12px;
-        background: var(--bg-elev);
-        color: var(--text);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-sm);
-        font-size: 14px;
-        outline: none;
-      }
-
-      .filters select:focus,
-      .filters input:focus {
-        border-color: var(--accent);
-      }
-
-      .range {
-        display: flex;
-        gap: 8px;
-      }
-
-      .range input {
-        width: 50%;
-      }
-
-      .checks label {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 14px;
-        color: var(--text);
-        padding: 5px 0;
-        cursor: pointer;
-      }
-
-      .checks input[type="checkbox"] {
-        accent-color: var(--accent);
-        width: 16px;
-        height: 16px;
-      }
-
-      .pill-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 7px;
-      }
-
-      .pill {
-        padding: 7px 12px;
-        font-size: 13px;
-        border-radius: 999px;
-        background: var(--bg-elev);
-        border: 1px solid var(--border);
-        color: var(--text-dim);
-        user-select: none;
-      }
-
-      .pill.on {
-        background: var(--accent-soft);
-        border-color: var(--accent);
-        color: var(--accent-hover);
-      }
-
-      .btn-clear {
-        width: 100%;
-        margin-top: 4px;
-        padding: 11px;
-        background: transparent;
-        color: var(--text-dim);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-sm);
-        font-size: 13px;
-        transition: all 0.15s;
-      }
-
-      .btn-clear:hover {
-        color: var(--text);
-        border-color: var(--text-faint);
-      }
-
-      /* ───────────────────────── Resultados ───────────────────────── */
-      .results-head {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 14px;
-        margin-bottom: 18px;
-        flex-wrap: wrap;
-      }
-
-      .results-count {
-        font-size: 14px;
-        color: var(--text-dim);
-      }
-
-      .results-count strong {
-        color: var(--text);
-      }
-
-      .sort-wrap {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-
-      .sort-wrap label {
-        font-size: 13px;
-        color: var(--text-faint);
-      }
-
-      .sort-wrap select {
-        padding: 8px 12px;
-        background: var(--bg-elev);
-        color: var(--text);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-sm);
-        font-size: 13px;
-        outline: none;
-      }
-
-      .grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-        gap: 16px;
-      }
-
-      .card {
-        background: var(--bg-card);
-        border: 1px solid var(--border-soft);
-        border-radius: var(--radius);
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        transition: transform 0.12s, border-color 0.12s, box-shadow 0.12s;
-      }
-
-      .card:hover {
-        transform: translateY(-3px);
-        border-color: var(--accent);
-        box-shadow: var(--shadow);
-      }
-
-      .card .photo {
-        position: relative;
-        aspect-ratio: 4 / 3;
-        background: var(--bg-elev)
-          linear-gradient(135deg, #1d1d1d, #141414);
-        overflow: hidden;
-      }
-
-      .card .photo img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
-      }
-
-      .card .photo .noimg {
-        position: absolute;
-        inset: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--text-faint);
-        font-size: 36px;
-      }
-
-      .badge {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        font-size: 11px;
-        font-weight: 600;
-        padding: 4px 9px;
-        border-radius: 999px;
-        color: #fff;
-        backdrop-filter: blur(4px);
-        background: rgba(0, 0, 0, 0.55);
-      }
-
-      .badge.milanuncios {
-        background: rgba(0, 174, 102, 0.9);
-      }
-      .badge.wallapop {
-        background: rgba(19, 193, 172, 0.9);
-      }
-      .badge.cochesnet {
-        background: rgba(230, 70, 30, 0.9);
-      }
-
-      .card .body {
-        padding: 13px 14px 15px;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        flex: 1;
-      }
-
-      .card .title {
-        font-size: 14px;
-        font-weight: 600;
-        line-height: 1.35;
-        color: var(--text);
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        min-height: 2.7em;
-      }
-
-      .card .price {
-        font-family: "Archivo Black", sans-serif;
-        font-size: 22px;
-        color: var(--accent);
-        letter-spacing: -0.5px;
-      }
-
-      .card .meta {
-        font-size: 12.5px;
-        color: var(--text-dim);
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-        margin-top: auto;
-      }
-
-      .card .meta span:not(:last-child)::after {
-        content: "·";
-        margin-left: 6px;
-        color: var(--text-faint);
-      }
-
-      /* Estados (vacío / carga / error) */
-      .state {
-        text-align: center;
-        padding: 70px 20px;
-        color: var(--text-dim);
-      }
-
-      .state .big {
-        font-size: 46px;
-        margin-bottom: 14px;
-      }
-
-      .state h3 {
-        color: var(--text);
-        font-size: 19px;
-        margin: 0 0 8px;
-      }
-
-      .state p {
-        margin: 0 auto;
-        max-width: 420px;
-        font-size: 14px;
-        color: var(--text-faint);
-      }
-
-      .state code {
-        background: var(--bg-elev);
-        padding: 2px 7px;
-        border-radius: 6px;
-        color: var(--accent-hover);
-        font-size: 13px;
-      }
-
-      .loadmore-wrap {
-        display: flex;
-        justify-content: center;
-        margin-top: 30px;
-      }
-
-      .btn-loadmore {
-        padding: 13px 30px;
-        background: var(--accent);
-        color: #1a0e04;
-        border: none;
-        border-radius: 999px;
-        font-size: 14px;
-        font-weight: 700;
-        transition: background 0.15s, transform 0.1s;
-      }
-
-      .btn-loadmore:hover {
-        background: var(--accent-hover);
-      }
-
-      .btn-loadmore:active {
-        transform: scale(0.98);
-      }
-
-      .skeleton {
-        background: var(--bg-card);
-        border: 1px solid var(--border-soft);
-        border-radius: var(--radius);
-        overflow: hidden;
-      }
-
-      .skeleton .ph {
-        aspect-ratio: 4 / 3;
-        background: linear-gradient(
-          90deg,
-          #1a1a1a 25%,
-          #232323 50%,
-          #1a1a1a 75%
-        );
-        background-size: 200% 100%;
-        animation: shimmer 1.3s infinite;
-      }
-
-      .skeleton .ln {
-        height: 12px;
-        margin: 12px 14px;
-        border-radius: 6px;
-        background: linear-gradient(
-          90deg,
-          #1a1a1a 25%,
-          #232323 50%,
-          #1a1a1a 75%
-        );
-        background-size: 200% 100%;
-        animation: shimmer 1.3s infinite;
-      }
-
-      @keyframes shimmer {
-        0% {
-          background-position: 200% 0;
-        }
-        100% {
-          background-position: -200% 0;
-        }
-      }
-
-      footer {
-        text-align: center;
-        padding: 30px 20px;
-        color: var(--text-faint);
-        font-size: 12.5px;
-        border-top: 1px solid var(--border-soft);
-      }
-
-      /* Botón de filtros para móvil */
-      .mobile-filter-toggle {
-        display: none;
-        width: 100%;
-        padding: 12px;
-        margin-bottom: 16px;
-        background: var(--bg-elev);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-sm);
-        color: var(--text);
-        font-size: 14px;
-        font-weight: 600;
-      }
-
-      /* ───────────────────────── Responsive ───────────────────────── */
-      @media (max-width: 860px) {
-        .layout {
-          grid-template-columns: 1fr;
-        }
-
-        .mobile-filter-toggle {
-          display: block;
-        }
-
-        aside.filters {
-          position: static;
-          display: none;
-        }
-
-        aside.filters.open {
-          display: block;
-        }
-
-        .brand .logo {
-          font-size: 26px;
-        }
+        --bg: #14100e; --bg-soft: #1d1714; --bg-card: #221b17; --bg-elev: #2a221d;
+        --border: #362c25; --border-soft: #2c241f;
+        --text: #f6ede5; --text-dim: #b6a99e; --text-faint: #7d7167;
+        --accent: #ff5a3c; --accent-hover: #ff7559; --accent-soft: rgba(255,90,60,0.13);
+        --gold: #f2b705; --radius: 15px; --radius-sm: 10px;
+        --shadow: 0 8px 28px rgba(0,0,0,0.5); --maxw: 1200px;
+        --display: "Arial Black","Helvetica Neue",Impact,system-ui,sans-serif;
+        --body: system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--body); font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased; min-height: 100vh; }
+      a { color: inherit; text-decoration: none; }
+      button { font-family: inherit; cursor: pointer; }
+      [hidden] { display: none !important; }
+      :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+      .logo { font-family: var(--display); font-weight: 900; letter-spacing: -1.5px; color: var(--text); line-height: 1; }
+      .logo .dot { color: var(--accent); }
+
+      .home { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px 20px 90px; text-align: center; background: radial-gradient(900px 460px at 50% 30%, rgba(255,90,60,0.16), transparent 65%), var(--bg); }
+      .home .logo { font-size: clamp(56px,12vw,96px); margin-bottom: 6px; }
+      .home .tagline { color: var(--text-dim); font-size: clamp(14px,2.6vw,18px); margin-bottom: 34px; }
+      .home .tagline b { color: var(--text); font-weight: 600; }
+      .home-search { position: relative; width: 100%; max-width: 600px; }
+      .home-search input { width: 100%; padding: 19px 56px 19px 24px; font-size: 17px; color: var(--text); background: var(--bg-elev); border: 1.5px solid var(--border); border-radius: 999px; outline: none; transition: border-color .15s, box-shadow .15s; }
+      .home-search input::placeholder { color: var(--text-faint); }
+      .home-search input:focus { border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+      .home-search .icon { position: absolute; right: 22px; top: 50%; transform: translateY(-50%); color: var(--accent); font-size: 21px; pointer-events: none; }
+      .home-actions { margin-top: 30px; display: flex; flex-direction: column; align-items: center; gap: 22px; width: 100%; }
+      .shortcuts-label { color: var(--text-faint); font-size: 12px; text-transform: uppercase; letter-spacing: 1.4px; display: flex; align-items: center; gap: 7px; }
+      .chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 9px; max-width: 600px; }
+      .chip { padding: 9px 16px; font-size: 14px; border-radius: 999px; background: var(--bg-soft); border: 1px solid var(--border); color: var(--text-dim); transition: all .14s; }
+      .chip:hover { color: var(--accent-hover); border-color: var(--accent); background: var(--accent-soft); }
+
+      .topbar { position: sticky; top: 0; z-index: 40; display: flex; align-items: center; gap: 18px; padding: 12px 20px; background: rgba(20,16,14,.93); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border-soft); }
+      .topbar .logo { font-size: 26px; cursor: pointer; flex-shrink: 0; }
+      .topbar-search { position: relative; flex: 1; max-width: 620px; }
+      .topbar-search input { width: 100%; padding: 11px 44px 11px 18px; font-size: 15px; color: var(--text); background: var(--bg-elev); border: 1px solid var(--border); border-radius: 999px; outline: none; }
+      .topbar-search input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+      .topbar-search .icon { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: var(--accent); pointer-events: none; }
+
+      .layout { max-width: var(--maxw); margin: 0 auto; padding: 24px 20px 64px; display: grid; grid-template-columns: 250px 1fr; gap: 26px; align-items: start; }
+      aside.filters { position: sticky; top: 74px; background: var(--bg-soft); border: 1px solid var(--border-soft); border-radius: var(--radius); padding: 20px 18px; }
+      .filters h2 { font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-faint); margin: 0 0 16px; font-weight: 700; }
+      .fgroup { margin-bottom: 18px; }
+      .fgroup > label { display: block; font-size: 12px; color: var(--text-dim); margin-bottom: 7px; font-weight: 600; }
+      .filters select { width: 100%; padding: 10px 12px; background: var(--bg-elev); color: var(--text); border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 14px; outline: none; }
+      .filters select:focus { border-color: var(--accent); }
+      .pill-row { display: flex; flex-wrap: wrap; gap: 7px; }
+      .pill { padding: 7px 12px; font-size: 13px; border-radius: 999px; background: var(--bg-elev); border: 1px solid var(--border); color: var(--text-dim); user-select: none; }
+      .pill.on { background: var(--accent-soft); border-color: var(--accent); color: var(--accent-hover); }
+      .btn-clear { width: 100%; margin-top: 4px; padding: 11px; background: transparent; color: var(--text-dim); border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 13px; transition: all .15s; }
+      .btn-clear:hover { color: var(--text); border-color: var(--text-faint); }
+
+      .results-head { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 18px; flex-wrap: wrap; }
+      .results-count { font-size: 14px; color: var(--text-dim); }
+      .results-count strong { color: var(--text); }
+      .sort-wrap { display: flex; align-items: center; gap: 8px; }
+      .sort-wrap label { font-size: 13px; color: var(--text-faint); }
+      .sort-wrap select { padding: 8px 12px; background: var(--bg-elev); color: var(--text); border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 13px; outline: none; }
+
+      .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(270px,1fr)); gap: 18px; }
+      .card { background: var(--bg-card); border: 1px solid var(--border-soft); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; transition: transform .12s, border-color .12s, box-shadow .12s; }
+      .card:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: var(--shadow); }
+      .card .photo { position: relative; aspect-ratio: 16/9; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+      .card .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+      .card .photo .ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 50px; }
+      .card .photo .nivel { position: absolute; top: 10px; right: 10px; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 999px; backdrop-filter: blur(4px); }
+      .nivel.top { background: rgba(242,183,5,.92); color: #2a1d00; }
+      .nivel.rec { background: rgba(76,175,80,.9); color: #06210a; }
+      .nivel.mix { background: rgba(120,120,120,.85); color: #fff; }
+      .nivel.ver { background: rgba(255,90,60,.9); color: #2a0a04; }
+      .card .photo .city { position: absolute; bottom: 10px; left: 12px; font-size: 12px; font-weight: 600; color: #fff; background: rgba(0,0,0,.55); padding: 3px 9px; border-radius: 999px; backdrop-filter: blur(3px); }
+      .card .body { padding: 14px 15px 15px; display: flex; flex-direction: column; gap: 9px; flex: 1; }
+      .card .name { font-size: 17px; font-weight: 700; color: var(--text); line-height: 1.25; }
+      .card .sub { font-size: 12.5px; color: var(--text-dim); display: flex; flex-wrap: wrap; gap: 6px; }
+      .card .sub span:not(:last-child)::after { content: "·"; margin-left: 6px; color: var(--text-faint); }
+      .card .verdict { font-size: 13.5px; color: var(--text); background: var(--bg-elev); border-left: 3px solid var(--accent); padding: 8px 10px; border-radius: 0 8px 8px 0; font-style: italic; }
+      .card .chips-row { display: flex; flex-wrap: wrap; gap: 6px; }
+      .tag { font-size: 11px; padding: 3px 8px; border-radius: 999px; background: var(--bg-elev); border: 1px solid var(--border); color: var(--text-dim); }
+      .tag.warn { color: #ffb38a; border-color: rgba(255,120,60,.4); }
+      .tag.good { color: #9be29b; border-color: rgba(76,175,80,.35); }
+      .tag.publi { color: #2a1d00; background: var(--gold); border-color: var(--gold); font-weight: 700; }
+      .card .foot { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-top: 6px; }
+      .card .creator { font-size: 11.5px; color: var(--text-faint); display: flex; align-items: center; gap: 6px; }
+      .card .creator .av { width: 18px; height: 18px; border-radius: 50%; background: linear-gradient(135deg,var(--accent),var(--gold)); }
+      .card .watch { font-size: 12.5px; font-weight: 600; color: var(--accent-hover); }
+      .card:hover .watch { text-decoration: underline; }
+
+      .state { text-align: center; padding: 70px 20px; color: var(--text-dim); }
+      .state .big { font-size: 46px; margin-bottom: 14px; }
+      .state h3 { color: var(--text); font-size: 19px; margin: 0 0 8px; }
+      .state p { margin: 0 auto; max-width: 440px; font-size: 14px; color: var(--text-faint); }
+      .state code { background: var(--bg-elev); padding: 2px 7px; border-radius: 6px; color: var(--accent-hover); font-size: 13px; }
+      .loadmore-wrap { display: flex; justify-content: center; margin-top: 30px; }
+      .btn-loadmore { padding: 13px 30px; background: var(--accent); color: #1a0e04; border: none; border-radius: 999px; font-size: 14px; font-weight: 700; }
+      .btn-loadmore:hover { background: var(--accent-hover); }
+
+      footer { text-align: center; padding: 26px 20px; color: var(--text-faint); font-size: 12.5px; }
+      .app footer { border-top: 1px solid var(--border-soft); }
+      .mobile-filter-toggle { display: none; width: 100%; padding: 12px; margin-bottom: 16px; background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius-sm); color: var(--text); font-size: 14px; font-weight: 600; }
+      @media (max-width: 820px) {
+        .layout { grid-template-columns: 1fr; }
+        .mobile-filter-toggle { display: block; }
+        aside.filters { position: static; display: none; }
+        aside.filters.open { display: block; }
+        .topbar .logo { font-size: 22px; }
       }
     </style>
   </head>
-
   <body>
-    <header class="hero">
-      <div class="hero-inner">
-        <div class="brand">
-          <span class="logo">moot<span class="dot">l</span>e</span>
-          <span class="tag">el buscador de motos<br />de segunda mano</span>
-        </div>
-        <div class="searchbar">
-          <input
-            id="q"
-            type="text"
-            autocomplete="off"
-            placeholder="Busca por marca o modelo… (ej. Honda CB650, MT-07, Vespa)"
-          />
-          <span class="icon">⌕</span>
-          <div class="autocomplete" id="ac"></div>
-        </div>
+    <!-- ════════ PORTADA ════════ -->
+    <section class="home" id="home">
+      <div class="logo">food<span class="dot">l</span>e</div>
+      <div class="tagline">dónde comer según los <b>foodies</b> en los que confías</div>
+      <form class="home-search" id="home-form" autocomplete="off">
+        <input id="q-home" type="text" placeholder="Busca restaurante, ciudad o tipo de comida…" aria-label="Buscar" />
+        <span class="icon">⌕</span>
+      </form>
+      <div class="home-actions">
+        <span class="shortcuts-label">🔥 Ciudades</span>
+        <div class="chips" id="city-chips"></div>
       </div>
-    </header>
+    </section>
 
-    <main class="layout">
-      <button class="mobile-filter-toggle" id="filterToggle">
-        ⚙︎ Filtros
-      </button>
-
-      <aside class="filters" id="filters">
-        <h2>Filtros</h2>
-
-        <div class="fgroup">
-          <label for="f-marca">Marca</label>
-          <select id="f-marca">
-            <option value="">Todas</option>
-          </select>
-        </div>
-
-        <div class="fgroup">
-          <label for="f-modelo">Modelo</label>
-          <select id="f-modelo">
-            <option value="">Todos</option>
-          </select>
-        </div>
-
-        <div class="fgroup">
-          <label>Precio (€)</label>
-          <div class="range">
-            <input id="f-precio-min" type="number" min="0" placeholder="mín" />
-            <input id="f-precio-max" type="number" min="0" placeholder="máx" />
+    <!-- ════════ RESULTADOS ════════ -->
+    <div class="app" id="app" hidden>
+      <header class="topbar">
+        <div class="logo" id="logo-home" title="Inicio">food<span class="dot">l</span>e</div>
+        <form class="topbar-search" id="top-form" autocomplete="off">
+          <input id="q" type="text" placeholder="Buscar restaurante, ciudad o comida…" aria-label="Buscar" />
+          <span class="icon">⌕</span>
+        </form>
+      </header>
+      <main class="layout">
+        <button class="mobile-filter-toggle" id="filterToggle">⚙︎ Filtros</button>
+        <aside class="filters" id="filters">
+          <h2>Filtros</h2>
+          <div class="fgroup"><label for="f-ciudad">Ciudad</label><select id="f-ciudad"><option value="">Todas</option></select></div>
+          <div class="fgroup"><label for="f-cocina">Tipo de cocina</label><select id="f-cocina"><option value="">Todas</option></select></div>
+          <div class="fgroup">
+            <label>Veredicto</label>
+            <div class="pill-row" id="f-nivel">
+              <span class="pill" data-n="top">🔥 Top</span>
+              <span class="pill" data-n="rec">👍 Recomendado</span>
+              <span class="pill" data-n="mix">😐 Mixto</span>
+            </div>
           </div>
-        </div>
-
-        <div class="fgroup">
-          <label for="f-km-max">Km máximos</label>
-          <input id="f-km-max" type="number" min="0" placeholder="ej. 30000" />
-        </div>
-
-        <div class="fgroup">
-          <label>Año</label>
-          <div class="range">
-            <input id="f-anio-min" type="number" min="1950" placeholder="desde" />
-            <input id="f-anio-max" type="number" min="1950" placeholder="hasta" />
+          <div class="fgroup"><label for="f-creador">Recomendado por</label><select id="f-creador"><option value="">Todos los foodies</option></select></div>
+          <button class="btn-clear" id="clearFilters">Limpiar filtros</button>
+        </aside>
+        <section class="results">
+          <div class="results-head">
+            <div class="results-count" id="count">—</div>
+            <div class="sort-wrap">
+              <label for="sort">Ordenar:</label>
+              <select id="sort">
+                <option value="relevancia">Mejor valorados</option>
+                <option value="recientes">Más recientes</option>
+                <option value="nombre">Nombre (A-Z)</option>
+              </select>
+            </div>
           </div>
-        </div>
-
-        <div class="fgroup">
-          <label for="f-provincia">Provincia</label>
-          <select id="f-provincia">
-            <option value="">Todas</option>
-          </select>
-        </div>
-
-        <div class="fgroup">
-          <label>Tipo de moto</label>
-          <div class="pill-row" id="f-tipo">
-            <span class="pill" data-tipo="naked">Naked</span>
-            <span class="pill" data-tipo="trail">Trail</span>
-            <span class="pill" data-tipo="deportiva">Deportiva</span>
-            <span class="pill" data-tipo="custom">Custom</span>
-            <span class="pill" data-tipo="scooter">Scooter</span>
-          </div>
-        </div>
-
-        <div class="fgroup">
-          <label>Portal de origen</label>
-          <div class="checks" id="f-portal">
-            <label
-              ><input type="checkbox" value="milanuncios" checked />
-              Milanuncios</label
-            >
-            <label
-              ><input type="checkbox" value="wallapop" checked /> Wallapop</label
-            >
-            <label
-              ><input type="checkbox" value="cochesnet" checked />
-              Coches.net</label
-            >
-          </div>
-        </div>
-
-        <button class="btn-clear" id="clearFilters">Limpiar filtros</button>
-      </aside>
-
-      <section class="results">
-        <div class="results-head">
-          <div class="results-count" id="count">Cargando anuncios…</div>
-          <div class="sort-wrap">
-            <label for="sort">Ordenar:</label>
-            <select id="sort">
-              <option value="recientes">Más recientes</option>
-              <option value="precio-asc">Precio: menor a mayor</option>
-              <option value="precio-desc">Precio: mayor a menor</option>
-              <option value="km-asc">Km: menos primero</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="grid" id="grid"></div>
-        <div id="state-slot"></div>
-
-        <div class="loadmore-wrap" id="loadmore-wrap" style="display: none">
-          <button class="btn-loadmore" id="loadmore">Cargar más</button>
-        </div>
-      </section>
-    </main>
-
-    <footer>
-      Mootle v0.1 · agrega anuncios públicos de Milanuncios, Wallapop y
-      Coches.net · los precios y datos pertenecen a sus portales de origen
-    </footer>
+          <div class="grid" id="grid"></div>
+          <div id="state-slot"></div>
+          <div class="loadmore-wrap" id="loadmore-wrap" style="display:none"><button class="btn-loadmore" id="loadmore">Cargar más</button></div>
+        </section>
+      </main>
+      <footer>Foodle · restaurantes recomendados por foodies de YouTube · enlazamos siempre al vídeo original</footer>
+    </div>
 
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-      import {
-        getFirestore,
-        collection,
-        query,
-        where,
-        orderBy,
-        limit,
-        getDocs,
-      } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+      import { getFirestore, collection, query, where, limit, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
       /* ════════════════════════════════════════════════════════════════
-       *  CONFIGURACIÓN — rellena con la config de tu app web de Firebase
-       *  (Firebase Console > Configuración del proyecto > Tus apps > Web).
+       *  CONFIG — pega aquí la config de tu app web de Firebase
+       *  (Console → Configuración del proyecto → Tus apps → Web </>)
        * ════════════════════════════════════════════════════════════════ */
       const firebaseConfig = {
         apiKey: "TU_API_KEY",
@@ -766,465 +195,136 @@
         appId: "TU_APP_ID",
       };
 
-      // Cuántos anuncios traer de Firestore al cargar. El filtrado, orden y
-      // paginación se hacen en cliente sobre este conjunto (suficiente para
-      // v0.1; al crecer, los filtros pasarán a consultas server-side).
-      const FETCH_LIMIT = 500;
+      const FETCH_LIMIT = 1000;
       const PAGE_SIZE = 24;
 
-      /* ───────────────────────── estado ───────────────────────── */
-      let TODOS = []; // todos los anuncios traídos
-      let FILTRADOS = []; // tras aplicar filtros + orden
-      let visibles = PAGE_SIZE; // cuántos se muestran ahora
+      const NIVEL_LABEL = { top: "🔥 Top", rec: "👍 Recomendado", mix: "😐 Mixto", ver: "⏳ Por descubrir" };
+      const NIVEL_ORDER = { top: 0, rec: 1, ver: 2, mix: 3 };
+      const COCINA_EMOJI = {
+        Arroces: "🥘", Marisco: "🦐", Carnes: "🥩", Asador: "🔥", Tapas: "🍤",
+        Tradicional: "🍲", Asturiana: "🧀", Gallega: "🐙", Extremeña: "🐖",
+        "Alta cocina": "⭐", Italiana: "🍝", Hamburguesas: "🍔", Dulce: "🧁",
+        Bocadillos: "🥪", "Sin gluten": "🌾", Internacional: "🍱", Fusión: "🍽️", Catalana: "🍲",
+      };
+      const GRAD = [["#3a2a05","#1d1714"],["#0e2a12","#1d1714"],["#3a1505","#1d1714"],["#2a2520","#1d1714"],["#0a2520","#1d1714"]];
 
+      let TODOS = [], FILTRADOS = [], visibles = PAGE_SIZE;
+      const niveles = new Set();
       const $ = (id) => document.getElementById(id);
-      const grid = $("grid");
-      const stateSlot = $("state-slot");
-
-      const tiposActivos = new Set();
-
-      /* ───────────────────────── helpers UI ───────────────────────── */
-      function fmtPrecio(p) {
-        if (p === null || p === undefined) return "Consultar";
-        return new Intl.NumberFormat("es-ES").format(p) + " €";
-      }
-
-      function fmtNum(n) {
-        if (n === null || n === undefined) return null;
-        return new Intl.NumberFormat("es-ES").format(n);
-      }
-
-      function escapeHtml(s) {
-        return String(s ?? "").replace(
-          /[&<>"']/g,
-          (c) =>
-            ({
-              "&": "&amp;",
-              "<": "&lt;",
-              ">": "&gt;",
-              '"': "&quot;",
-              "'": "&#39;",
-            }[c])
-        );
-      }
-
-      function nombrePortal(id) {
-        return (
-          { milanuncios: "Milanuncios", wallapop: "Wallapop", cochesnet: "Coches.net" }[
-            id
-          ] || id
-        );
-      }
-
-      function tituloAnuncio(a) {
-        if (a.titulo) return a.titulo;
-        const partes = [a.marca, a.modelo, a.año].filter(Boolean);
-        return partes.length ? partes.join(" ") : "Moto de segunda mano";
-      }
+      const grid = $("grid"), stateSlot = $("state-slot");
+      const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+      const emojiDe = (c) => COCINA_EMOJI[c] || "🍽️";
 
       function showState(emoji, titulo, html) {
+        grid.innerHTML = "";
         stateSlot.innerHTML = `<div class="state"><div class="big">${emoji}</div><h3>${titulo}</h3><p>${html}</p></div>`;
       }
 
-      function clearState() {
-        stateSlot.innerHTML = "";
-      }
+      function irAResultados(q) { $("q").value = q || ""; $("home").hidden = true; $("app").hidden = false; window.scrollTo(0,0); aplicar(); if (!q) $("q").focus(); }
+      function irAInicio() { $("app").hidden = true; $("home").hidden = false; $("q-home").value = ""; }
+      $("home-form").addEventListener("submit", (e) => { e.preventDefault(); irAResultados($("q-home").value.trim()); });
+      $("top-form").addEventListener("submit", (e) => { e.preventDefault(); aplicar(); });
+      $("logo-home").addEventListener("click", irAInicio);
 
-      function skeletons(n = 8) {
-        grid.innerHTML = Array.from({ length: n })
-          .map(
-            () =>
-              `<div class="skeleton"><div class="ph"></div><div class="ln" style="width:80%"></div><div class="ln" style="width:50%"></div><div class="ln" style="width:65%"></div></div>`
-          )
-          .join("");
-      }
-
-      /* ───────────────────────── render cards ───────────────────────── */
-      function cardHTML(a) {
-        const foto = Array.isArray(a.fotos) && a.fotos.length ? a.fotos[0] : null;
-        const metaParts = [];
-        if (a.km !== null && a.km !== undefined)
-          metaParts.push(`<span>${fmtNum(a.km)} km</span>`);
-        if (a.año) metaParts.push(`<span>${a.año}</span>`);
-        if (a.provincia) metaParts.push(`<span>${escapeHtml(a.provincia)}</span>`);
-
-        const photoInner = foto
-          ? `<img src="${escapeHtml(
-              foto
-            )}" alt="${escapeHtml(tituloAnuncio(a))}" loading="lazy"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
-             <div class="noimg" style="display:none">🏍️</div>`
-          : `<div class="noimg">🏍️</div>`;
-
-        return `<a class="card" href="${escapeHtml(
-          a.url_original || "#"
-        )}" target="_blank" rel="noopener noreferrer">
-          <div class="photo">
-            ${photoInner}
-            <span class="badge ${escapeHtml(a.portal)}">${escapeHtml(
-          nombrePortal(a.portal)
-        )}</span>
+      function cardHTML(r, i) {
+        const nivel = r.nivel || "rec";
+        const g = GRAD[i % GRAD.length];
+        const sub = [r.cocina, r.zona, r.precio].filter(Boolean).map((x) => `<span>${esc(x)}</span>`).join("");
+        const chips = (r.tags || []).map((t) => {
+          const cls = t.startsWith("⚠️") ? "warn" : (t.startsWith("📣") ? "publi" : (/pet/i.test(t) ? "good" : ""));
+          return `<span class="tag ${cls}">${esc(t)}</span>`;
+        }).join("");
+        const ph = `<div class="ph" style="background:linear-gradient(135deg,${g[0]},${g[1]})">${emojiDe(r.cocina)}</div>`;
+        const img = r.imagen
+          ? `<img src="${esc(r.imagen)}" alt="${esc(r.nombre)}" loading="lazy" onerror="this.remove()" />${ph}`
+          : ph;
+        return `<a class="card" href="${esc(r.url || "#")}" target="_blank" rel="noopener noreferrer">
+          <div class="photo">${img}
+            <span class="nivel ${nivel}">${NIVEL_LABEL[nivel] || ""}</span>
+            ${r.ciudad ? `<span class="city">📍 ${esc(r.ciudad)}</span>` : ""}
           </div>
           <div class="body">
-            <div class="title">${escapeHtml(tituloAnuncio(a))}</div>
-            <div class="price">${fmtPrecio(a.precio)}</div>
-            <div class="meta">${metaParts.join("")}</div>
+            <div class="name">${esc(r.nombre)}</div>
+            <div class="sub">${sub}</div>
+            ${r.veredicto ? `<div class="verdict">“${esc(r.veredicto)}”</div>` : ""}
+            ${chips ? `<div class="chips-row">${chips}</div>` : ""}
+            <div class="foot">
+              <span class="creator"><span class="av"></span> ${esc(r.creador || "")}</span>
+              <span class="watch">▶ Ver reseña</span>
+            </div>
           </div>
         </a>`;
       }
 
       function render() {
-        clearState();
         const total = FILTRADOS.length;
-        $("count").innerHTML =
-          total === 0
-            ? "Sin resultados"
-            : `<strong>${fmtNum(total)}</strong> motos encontradas`;
-
-        if (total === 0) {
-          grid.innerHTML = "";
-          showState(
-            "🔍",
-            "No hay motos con esos filtros",
-            "Prueba a ampliar el rango de precio o quitar algún filtro."
-          );
-          $("loadmore-wrap").style.display = "none";
-          return;
-        }
-
-        const slice = FILTRADOS.slice(0, visibles);
-        grid.innerHTML = slice.map(cardHTML).join("");
-        $("loadmore-wrap").style.display =
-          visibles < total ? "flex" : "none";
+        $("count").innerHTML = total === 0 ? "Sin resultados" : `<strong>${total}</strong> restaurantes`;
+        if (total === 0) { showState("🔍", "No hay sitios con esos filtros", "Prueba a quitar alguno."); $("loadmore-wrap").style.display = "none"; return; }
+        stateSlot.innerHTML = "";
+        grid.innerHTML = FILTRADOS.slice(0, visibles).map(cardHTML).join("");
+        $("loadmore-wrap").style.display = visibles < total ? "flex" : "none";
       }
 
-      /* ───────────────────────── filtros + orden ───────────────────────── */
-      function leerFiltros() {
-        const portalesOn = new Set(
-          [...document.querySelectorAll("#f-portal input:checked")].map(
-            (c) => c.value
-          )
-        );
-        return {
-          texto: $("q").value.trim().toLowerCase(),
-          marca: $("f-marca").value,
-          modelo: $("f-modelo").value,
-          precioMin: parseFloat($("f-precio-min").value) || null,
-          precioMax: parseFloat($("f-precio-max").value) || null,
-          kmMax: parseFloat($("f-km-max").value) || null,
-          anioMin: parseInt($("f-anio-min").value) || null,
-          anioMax: parseInt($("f-anio-max").value) || null,
-          provincia: $("f-provincia").value,
-          tipos: tiposActivos,
-          portales: portalesOn,
-        };
+      function leer() {
+        return { texto: $("q").value.trim().toLowerCase(), ciudad: $("f-ciudad").value, cocina: $("f-cocina").value, creador: $("f-creador").value, niveles };
       }
-
-      function pasaFiltros(a, f) {
-        if (f.marca && a.marca !== f.marca) return false;
-        if (f.modelo && a.modelo !== f.modelo) return false;
-        if (f.provincia && a.provincia !== f.provincia) return false;
-        if (f.precioMin !== null && (a.precio ?? Infinity) < f.precioMin)
-          return false;
-        if (f.precioMax !== null && (a.precio ?? Infinity) > f.precioMax)
-          return false;
-        if (f.kmMax !== null && (a.km ?? Infinity) > f.kmMax) return false;
-        if (f.anioMin !== null && (a.año ?? 0) < f.anioMin) return false;
-        if (f.anioMax !== null && (a.año ?? 9999) > f.anioMax) return false;
-        if (f.tipos.size && !f.tipos.has(a.tipo)) return false;
-        if (f.portales.size && !f.portales.has(a.portal)) return false;
-        if (f.texto) {
-          const hay = [a.titulo, a.marca, a.modelo]
-            .filter(Boolean)
-            .join(" ")
-            .toLowerCase();
-          if (!hay.includes(f.texto)) return false;
-        }
+      function pasa(r, f) {
+        if (f.ciudad && r.ciudad !== f.ciudad) return false;
+        if (f.cocina && r.cocina !== f.cocina) return false;
+        if (f.creador && r.creador !== f.creador) return false;
+        if (f.niveles.size && !f.niveles.has(r.nivel || "rec")) return false;
+        if (f.texto) { const h = [r.nombre, r.ciudad, r.zona, r.cocina, r.veredicto, r.creador].filter(Boolean).join(" ").toLowerCase(); if (!h.includes(f.texto)) return false; }
         return true;
       }
-
       function ordenar(arr) {
-        const modo = $("sort").value;
-        const c = [...arr];
-        const inf = (v, alto) =>
-          v === null || v === undefined ? (alto ? Infinity : -Infinity) : v;
-        switch (modo) {
-          case "precio-asc":
-            c.sort((a, b) => inf(a.precio, true) - inf(b.precio, true));
-            break;
-          case "precio-desc":
-            c.sort((a, b) => inf(b.precio, false) - inf(a.precio, false));
-            break;
-          case "km-asc":
-            c.sort((a, b) => inf(a.km, true) - inf(b.km, true));
-            break;
-          default: // recientes
-            c.sort((a, b) =>
-              String(b.fecha_crawl || "").localeCompare(String(a.fecha_crawl || ""))
-            );
-        }
+        const m = $("sort").value, c = [...arr];
+        if (m === "nombre") c.sort((a, b) => (a.nombre || "").localeCompare(b.nombre || "", "es"));
+        else if (m === "recientes") c.sort((a, b) => String(b.fecha || "").localeCompare(String(a.fecha || "")));
+        else c.sort((a, b) => (NIVEL_ORDER[a.nivel || "rec"] ?? 1) - (NIVEL_ORDER[b.nivel || "rec"] ?? 1));
         return c;
       }
+      function aplicar() { const f = leer(); FILTRADOS = ordenar(TODOS.filter((r) => pasa(r, f))); visibles = PAGE_SIZE; render(); }
 
-      function aplicar() {
-        const f = leerFiltros();
-        FILTRADOS = ordenar(TODOS.filter((a) => pasaFiltros(a, f)));
-        visibles = PAGE_SIZE;
-        render();
+      function poblar() {
+        const ciudades = [...new Set(TODOS.map((r) => r.ciudad).filter(Boolean))].sort((a, b) => a.localeCompare(b, "es"));
+        const cocinas = [...new Set(TODOS.map((r) => r.cocina).filter(Boolean))].sort((a, b) => a.localeCompare(b, "es"));
+        const creadores = [...new Set(TODOS.map((r) => r.creador).filter(Boolean))].sort((a, b) => a.localeCompare(b, "es"));
+        const add = (sel, vals) => vals.forEach((v) => { const o = document.createElement("option"); o.value = v; o.textContent = v; $(sel).appendChild(o); });
+        add("f-ciudad", ciudades); add("f-cocina", cocinas); add("f-creador", creadores);
+        const cc = $("city-chips");
+        ciudades.slice(0, 8).forEach((c) => { const b = document.createElement("button"); b.className = "chip"; b.textContent = c; b.onclick = () => irAResultados(c); cc.appendChild(b); });
       }
 
-      /* ───────────────── poblar selects desde los datos ───────────────── */
-      function poblarSelects() {
-        const marcas = new Map();
-        const provincias = new Set();
-        for (const a of TODOS) {
-          if (a.marca) marcas.set(a.marca, (marcas.get(a.marca) || 0) + 1);
-          if (a.provincia) provincias.add(a.provincia);
-        }
+      ["f-ciudad","f-cocina","f-creador","sort"].forEach((id) => $(id).addEventListener("change", aplicar));
+      $("q").addEventListener("input", aplicar);
+      $("f-nivel").addEventListener("click", (e) => { const p = e.target.closest(".pill"); if (!p) return; const n = p.dataset.n; niveles.has(n) ? niveles.delete(n) : niveles.add(n); p.classList.toggle("on"); aplicar(); });
+      $("clearFilters").addEventListener("click", () => { $("q").value = ""; $("f-ciudad").value = ""; $("f-cocina").value = ""; $("f-creador").value = ""; niveles.clear(); document.querySelectorAll("#f-nivel .pill").forEach((p) => p.classList.remove("on")); $("sort").value = "relevancia"; aplicar(); });
+      $("loadmore").addEventListener("click", () => { visibles += PAGE_SIZE; render(); });
+      $("filterToggle").addEventListener("click", () => $("filters").classList.toggle("open"));
 
-        const selMarca = $("f-marca");
-        [...marcas.keys()]
-          .sort((x, y) => x.localeCompare(y, "es"))
-          .forEach((m) => {
-            const o = document.createElement("option");
-            o.value = m;
-            o.textContent = `${m} (${marcas.get(m)})`;
-            selMarca.appendChild(o);
-          });
-
-        const selProv = $("f-provincia");
-        [...provincias]
-          .sort((x, y) => x.localeCompare(y, "es"))
-          .forEach((p) => {
-            const o = document.createElement("option");
-            o.value = p;
-            o.textContent = p;
-            selProv.appendChild(o);
-          });
-      }
-
-      function poblarModelos() {
-        const marca = $("f-marca").value;
-        const selModelo = $("f-modelo");
-        selModelo.innerHTML = '<option value="">Todos</option>';
-        if (!marca) {
-          selModelo.disabled = true;
-          return;
-        }
-        selModelo.disabled = false;
-        const modelos = new Set();
-        for (const a of TODOS) {
-          if (a.marca === marca && a.modelo) modelos.add(a.modelo);
-        }
-        [...modelos]
-          .sort((x, y) => x.localeCompare(y, "es"))
-          .forEach((m) => {
-            const o = document.createElement("option");
-            o.value = m;
-            o.textContent = m;
-            selModelo.appendChild(o);
-          });
-      }
-
-      /* ───────────────────────── autocompletado ───────────────────────── */
-      const ac = $("ac");
-      let acIndex = -1;
-      let acOpts = [];
-
-      function buildAutocomplete() {
-        const q = $("q").value.trim().toLowerCase();
-        if (q.length < 1) {
-          ac.classList.remove("open");
-          return;
-        }
-        const conteo = new Map();
-        for (const a of TODOS) {
-          for (const cand of [
-            a.marca,
-            a.marca && a.modelo ? `${a.marca} ${a.modelo}` : null,
-          ]) {
-            if (cand && cand.toLowerCase().includes(q)) {
-              conteo.set(cand, (conteo.get(cand) || 0) + 1);
-            }
-          }
-        }
-        acOpts = [...conteo.entries()]
-          .sort((a, b) => b[1] - a[1])
-          .slice(0, 7);
-        if (acOpts.length === 0) {
-          ac.classList.remove("open");
-          return;
-        }
-        acIndex = -1;
-        ac.innerHTML = acOpts
-          .map(
-            ([txt, n], i) =>
-              `<div class="opt" data-i="${i}"><span>${escapeHtml(
-                txt
-              )}</span><span class="count">${n}</span></div>`
-          )
-          .join("");
-        ac.classList.add("open");
-      }
-
-      ac.addEventListener("click", (e) => {
-        const opt = e.target.closest(".opt");
-        if (!opt) return;
-        $("q").value = acOpts[+opt.dataset.i][0];
-        ac.classList.remove("open");
-        aplicar();
-      });
-
-      /* ───────────────────────── eventos ───────────────────────── */
-      let debounce;
-      function debounced(fn, ms = 200) {
-        clearTimeout(debounce);
-        debounce = setTimeout(fn, ms);
-      }
-
-      $("q").addEventListener("input", () => {
-        buildAutocomplete();
-        debounced(aplicar);
-      });
-
-      $("q").addEventListener("keydown", (e) => {
-        if (!ac.classList.contains("open")) return;
-        const opts = [...ac.querySelectorAll(".opt")];
-        if (e.key === "ArrowDown") {
-          e.preventDefault();
-          acIndex = Math.min(acIndex + 1, opts.length - 1);
-        } else if (e.key === "ArrowUp") {
-          e.preventDefault();
-          acIndex = Math.max(acIndex - 1, 0);
-        } else if (e.key === "Enter" && acIndex >= 0) {
-          e.preventDefault();
-          $("q").value = acOpts[acIndex][0];
-          ac.classList.remove("open");
-          aplicar();
-          return;
-        } else if (e.key === "Escape") {
-          ac.classList.remove("open");
-          return;
-        }
-        opts.forEach((o, i) => o.classList.toggle("active", i === acIndex));
-      });
-
-      document.addEventListener("click", (e) => {
-        if (!e.target.closest(".searchbar")) ac.classList.remove("open");
-      });
-
-      $("f-marca").addEventListener("change", () => {
-        poblarModelos();
-        aplicar();
-      });
-
-      ["f-modelo", "f-provincia", "sort"].forEach((id) =>
-        $(id).addEventListener("change", aplicar)
-      );
-
-      [
-        "f-precio-min",
-        "f-precio-max",
-        "f-km-max",
-        "f-anio-min",
-        "f-anio-max",
-      ].forEach((id) => $(id).addEventListener("input", () => debounced(aplicar)));
-
-      document.querySelectorAll("#f-portal input").forEach((c) =>
-        c.addEventListener("change", aplicar)
-      );
-
-      $("f-tipo").addEventListener("click", (e) => {
-        const pill = e.target.closest(".pill");
-        if (!pill) return;
-        const t = pill.dataset.tipo;
-        if (tiposActivos.has(t)) tiposActivos.delete(t);
-        else tiposActivos.add(t);
-        pill.classList.toggle("on");
-        aplicar();
-      });
-
-      $("clearFilters").addEventListener("click", () => {
-        $("q").value = "";
-        $("f-marca").value = "";
-        poblarModelos();
-        $("f-modelo").value = "";
-        $("f-precio-min").value = "";
-        $("f-precio-max").value = "";
-        $("f-km-max").value = "";
-        $("f-anio-min").value = "";
-        $("f-anio-max").value = "";
-        $("f-provincia").value = "";
-        tiposActivos.clear();
-        document
-          .querySelectorAll("#f-tipo .pill")
-          .forEach((p) => p.classList.remove("on"));
-        document
-          .querySelectorAll("#f-portal input")
-          .forEach((c) => (c.checked = true));
-        $("sort").value = "recientes";
-        aplicar();
-      });
-
-      $("loadmore").addEventListener("click", () => {
-        visibles += PAGE_SIZE;
-        render();
-      });
-
-      $("filterToggle").addEventListener("click", () =>
-        $("filters").classList.toggle("open")
-      );
-
-      /* ───────────────────────── carga inicial ───────────────────────── */
       async function init() {
-        skeletons();
-
         if (firebaseConfig.projectId === "TU_PROYECTO") {
-          grid.innerHTML = "";
-          showState(
-            "🛠️",
-            "Configura Firebase",
-            'Edita el objeto <code>firebaseConfig</code> al final de <code>index.html</code> con los datos de tu app web de Firebase para empezar a ver anuncios.'
-          );
+          irAResultados("");
+          showState("🛠️", "Configura Firebase", 'Edita el objeto <code>firebaseConfig</code> al final de <code>index.html</code> con los datos de tu app web de Firebase.');
           return;
         }
-
         try {
           const app = initializeApp(firebaseConfig);
           const db = getFirestore(app);
-          const q = query(
-            collection(db, "listings"),
-            where("activo", "==", true),
-            orderBy("fecha_crawl", "desc"),
-            limit(FETCH_LIMIT)
-          );
-          const snap = await getDocs(q);
+          const snap = await getDocs(query(collection(db, "restaurants"), where("activo", "==", true), limit(FETCH_LIMIT)));
           TODOS = snap.docs.map((d) => ({ id: d.id, ...d.data() }));
-
           if (TODOS.length === 0) {
-            grid.innerHTML = "";
-            showState(
-              "🏍️",
-              "Aún no hay anuncios",
-              "El crawler todavía no ha guardado motos en Firestore. Ejecuta <code>node crawler/index.js</code> y vuelve a cargar."
-            );
+            irAResultados("");
+            showState("🍽️", "Aún no hay restaurantes", "Ejecuta <code>node foodle/extract.js @canal --firestore</code> para llenar la base de datos y recarga.");
             return;
           }
-
-          poblarSelects();
-          poblarModelos();
-          aplicar();
+          poblar();
         } catch (e) {
           console.error(e);
-          grid.innerHTML = "";
-          showState(
-            "⚠️",
-            "Error al cargar los anuncios",
-            "Revisa la consola del navegador. Posibles causas: configuración de Firebase incorrecta, reglas de Firestore o falta el índice (activo + fecha_crawl)."
-          );
+          irAResultados("");
+          showState("⚠️", "Error al cargar", "Revisa la consola del navegador: config de Firebase o reglas de Firestore.");
         }
       }
-
       init();
     </script>
   </body>
