@@ -7,6 +7,10 @@
       "**/node_modules/**",
       "crawler/**",
       "functions/**",
+      "foodle/**",
+      "serviceAccount*.json",
+      "*.json",
+      ".env*",
       "package.json",
       "package-lock.json",
       "README.md"
