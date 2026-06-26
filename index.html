@@ -104,6 +104,8 @@
       .heart { position: absolute; top: 10px; left: 10px; z-index: 2; width: 34px; height: 34px; border-radius: 50%; border: none; background: rgba(0,0,0,0.55); backdrop-filter: blur(4px); color: #fff; font-size: 16px; line-height: 1; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform .1s; }
       .heart:hover { transform: scale(1.12); }
       .heart.on { background: var(--accent); }
+      .mapbtn { position: absolute; bottom: 10px; right: 10px; z-index: 2; width: 32px; height: 32px; border-radius: 50%; border: none; background: rgba(0,0,0,0.55); backdrop-filter: blur(4px); color: #fff; font-size: 15px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform .1s; }
+      .mapbtn:hover { transform: scale(1.12); background: var(--accent); }
       .card.visitado { opacity: 0.62; }
       .card.visitado .name { text-decoration: line-through; }
       .ciudad-bloque { margin-bottom: 28px; }
@@ -292,7 +294,10 @@
       function cardHTML(r, i) {
         const nivel = r.nivel || "rec";
         const g = GRAD[i % GRAD.length];
-        const sub = [r.cocina, r.zona, r.precio].filter(Boolean).map((x) => `<span>${esc(x)}</span>`).join("");
+        const sub = [r.cocina, r.direccion || r.zona, r.precio].filter(Boolean).map((x) => `<span>${esc(x)}</span>`).join("");
+        const mapsUrl = (r.lat && r.lng)
+          ? `https://www.google.com/maps/search/?api=1&query=${r.lat},${r.lng}`
+          : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(((r.nombre || "") + " " + (r.ciudad || "")).trim())}`;
         const chips = (r.tags || []).map((t) => {
           const cls = t.startsWith("⚠️") ? "warn" : (t.startsWith("📣") ? "publi" : (/pet/i.test(t) ? "good" : ""));
           return `<span class="tag ${cls}">${esc(t)}</span>`;
@@ -313,6 +318,7 @@
             <button class="heart ${fav ? "on" : ""}" title="${fav ? "Quitar de mi ruta" : "Añadir a mi ruta"}" onclick="event.preventDefault();event.stopPropagation();window.__ruta('toggle','${esc(r.id)}')">${fav ? "♥" : "♡"}</button>
             <span class="nivel ${nivel}">${NIVEL_LABEL[nivel] || ""}</span>
             ${r.ciudad ? `<span class="city">📍 ${esc(r.ciudad)}</span>` : ""}
+            <button class="mapbtn" title="Cómo llegar" data-maps="${esc(mapsUrl)}" onclick="event.preventDefault();event.stopPropagation();window.open(this.dataset.maps,'_blank')">📍</button>
           </div>
           <div class="body">
             <div class="name">${esc(r.nombre)}</div>
