@@ -100,14 +100,22 @@ Responde ÚNICAMENTE con un objeto JSON válido (sin texto alrededor, sin markdo
   "precio": string|null,       // "€", "€€", "€€€" o "€€€€" según lo que sugiera el texto, o null
   "nivel": string|null,        // "top" (entusiasta, brutal, lo mejor), "rec" (positivo), "mix" (regular o con peros), "ver" (no concluye / cliffhanger)
   "veredicto": string|null,    // 1 frase corta resumiendo la opinión, en español, sin comillas
-  "tags": string[],            // etiquetas especiales: "📣 Publicidad" si es contenido patrocinado (la descripción dice "publi", "gracias por la invitación", un código de descuento del propio restaurante...), "⚠️ ojo a la cuenta", "pet-friendly", "Michelin", "menú X€", etc. Array vacío si no hay.
-  "publi": boolean             // true si es contenido claramente patrocinado
+  "tags": string[],            // etiquetas especiales: "📣 Publicidad" SOLO si la reseña del RESTAURANTE está patrocinada (ver regla abajo), "⚠️ ojo a la cuenta", "pet-friendly", "Michelin", "menú X€", etc. Array vacío si no hay.
+  "publi": boolean             // true SOLO si el propio RESTAURANTE patrocina/invita la reseña (ver regla)
 }
 
 Reglas:
 - Si es_restaurante es false, pon el resto de campos a null/[] / false.
 - Vídeos de comida en Japón, Corea u otros países: es_restaurante=false (Foodle es de España).
-- No inventes datos: si la ciudad no aparece, déjala en null (no la deduzcas a lo loco).`;
+- No inventes datos: si la ciudad no aparece, déjala en null (no la deduzcas a lo loco).
+- PUBLICIDAD (¡importante, no te confundas!): publi=true y tag "📣 Publicidad" SOLO cuando el
+  RESTAURANTE RESEÑADO es quien paga o invita. Señales válidas: la descripción empieza por "publi"
+  refiriéndose al local, etiqueta al restaurante con promoción (@nombredelrestaurante), dice "gracias
+  por la invitación", o da un código de descuento DEL PROPIO RESTAURANTE.
+  NO es publicidad del restaurante (publi=false, sin tag) cuando el patrocinio es del CANAL y no tiene
+  nada que ver con el local: códigos o menciones de proteínas/suplementos (IOGENIX), ropa (pampling),
+  bancos (N26, "20€ gratis"), o apps ajenas al restaurante. Esos patrocinios del creador aparecen en
+  casi todos sus vídeos y NO deben marcar el restaurante como patrocinado.`;
 
 const SCHEMA = {
   type: 'object',
