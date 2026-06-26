@@ -73,10 +73,14 @@ async function yt(pathname, params) {
   return data;
 }
 
-async function traerVideos(handle, n) {
-  const ch = await yt('/channels', { part: 'contentDetails,snippet', forHandle: handle });
+async function traerVideos(ref, n) {
+  // Acepta un id de canal (UC...) o un @handle.
+  const esId = /^UC[\w-]{20,}$/.test(ref);
+  const ch = await yt('/channels', esId
+    ? { part: 'contentDetails,snippet', id: ref }
+    : { part: 'contentDetails,snippet', forHandle: ref });
   if (!ch.items || !ch.items.length) {
-    console.log(`⚠️  Canal @${handle} no encontrado — lo salto.`);
+    console.log(`⚠️  Canal ${esId ? ref : '@' + ref} no encontrado — lo salto.`);
     return [];
   }
   const canal = ch.items[0];
