@@ -46,26 +46,42 @@ async function yt(pathname, params) {
 }
 
 async function buscarCiudad(ciudad) {
+  // Buscamos VÍDEOS de reseña (no canales): da mucha mejor señal de quién
+  // hace de verdad reseñas de restaurantes en esa ciudad.
   const s = await yt('/search', {
     part: 'snippet',
-    type: 'channel',
-    q: `reseña restaurantes ${ciudad}`,
-    maxResults: 8,
+    type: 'video',
+    q: `reseña restaurante dónde comer ${ciudad}`,
+    maxResults: 25,
     regionCode: 'ES',
     relevanceLanguage: 'es',
   });
-  const ids = [...new Set((s.items || []).map((it) => (it.id && it.id.channelId) || it.snippet.channelId).filter(Boolean))];
+
+  // Contamos cuántos vídeos de reseña aporta cada canal (frecuencia = señal).
+  const freq = new Map();
+  for (const it of s.items || []) {
+    const id = it.snippet && it.snippet.channelId;
+    if (id) freq.set(id, (freq.get(id) || 0) + 1);
+  }
+  const ids = [...freq.keys()];
   if (!ids.length) return [];
 
   const ch = await yt('/channels', { part: 'snippet,statistics', id: ids.join(',') });
-  const canales = (ch.items || []).map((c) => ({
+  let canales = (ch.items || []).map((c) => ({
     title: c.snippet.title,
     handle: c.snippet.customUrl ? c.snippet.customUrl.replace(/^@/, '') : null,
     id: c.id,
     subs: Number(c.statistics.subscriberCount || 0),
     videos: Number(c.statistics.videoCount || 0),
+    freq: freq.get(c.id) || 0,
   }));
-  canales.sort((a, b) => b.subs - a.subs);
+
+  // Filtra el ruido: fuera mega-canales (generalistas), radios/TV con miles de
+  // vídeos, y canales demasiado pequeños/de un solo vídeo.
+  canales = canales.filter((c) => c.subs <= 1500000 && c.videos >= 15 && c.videos <= 4000);
+
+  // Ordena por frecuencia de reseñas (lo relevante), y a igualdad por subs.
+  canales.sort((a, b) => b.freq - a.freq || b.subs - a.subs);
   return canales.slice(0, porCiudad);
 }
 
