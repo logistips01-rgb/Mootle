@@ -72,8 +72,8 @@
       .card { background: var(--bg-card); border: 1px solid var(--border-soft); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; transition: transform .12s, border-color .12s, box-shadow .12s; }
       .card:hover { transform: translateY(-3px); border-color: var(--accent); box-shadow: var(--shadow); }
       .card .photo { position: relative; aspect-ratio: 16/9; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-      .card .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-      .card .photo .ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 50px; }
+      .card .photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; z-index: 1; }
+      .card .photo .ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 50px; z-index: 0; }
       .card .photo .nivel { position: absolute; top: 10px; right: 10px; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 999px; backdrop-filter: blur(4px); }
       .nivel.top { background: rgba(242,183,5,.92); color: #2a1d00; }
       .nivel.rec { background: rgba(76,175,80,.9); color: #06210a; }
@@ -210,6 +210,20 @@
 
       let TODOS = [], FILTRADOS = [], visibles = PAGE_SIZE;
       const niveles = new Set();
+
+      // Cascada de miniaturas: si una falla (404), prueba la siguiente; si se
+      // acaban, quita el <img> y queda el degradado + emoji de respaldo.
+      window.__ytfb = (img) => {
+        const v = img.dataset.vid;
+        const steps = (img.dataset.steps || "").split(",").filter(Boolean);
+        if (v && steps.length) {
+          const next = steps.shift();
+          img.dataset.steps = steps.join(",");
+          img.src = `https://i.ytimg.com/vi/${v}/${next}`;
+        } else {
+          img.remove();
+        }
+      };
       const $ = (id) => document.getElementById(id);
       const grid = $("grid"), stateSlot = $("state-slot");
       const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
@@ -235,8 +249,14 @@
           return `<span class="tag ${cls}">${esc(t)}</span>`;
         }).join("");
         const ph = `<div class="ph" style="background:linear-gradient(135deg,${g[0]},${g[1]})">${emojiDe(r.cocina)}</div>`;
-        const img = r.imagen
-          ? `<img src="${esc(r.imagen)}" alt="${esc(r.nombre)}" loading="lazy" onerror="this.remove()" />${ph}`
+        // Saca el id del vídeo de vid / imagen / url, lo que haya.
+        const vid = r.vid
+          || (r.imagen && (r.imagen.match(/\/vi\/([^/]+)\//) || [])[1])
+          || (r.url && (r.url.match(/youtu\.be\/([^?&]+)/) || [])[1])
+          || null;
+        // Probamos varios tamaños de miniatura en cascada antes de rendirnos.
+        const img = vid
+          ? `${ph}<img src="https://i.ytimg.com/vi/${esc(vid)}/hqdefault.jpg" alt="${esc(r.nombre)}" loading="lazy" data-vid="${esc(vid)}" data-steps="mqdefault.jpg,0.jpg,1.jpg" onerror="window.__ytfb(this)" />`
           : ph;
         return `<a class="card" href="${esc(r.url || "#")}" target="_blank" rel="noopener noreferrer">
           <div class="photo">${img}
