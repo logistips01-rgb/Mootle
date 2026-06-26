@@ -96,6 +96,29 @@
       .card .watch { font-size: 12.5px; font-weight: 600; color: var(--accent-hover); }
       .card:hover .watch { text-decoration: underline; }
 
+      /* Mi Ruta */
+      .ruta-btn { flex-shrink: 0; display: flex; align-items: center; gap: 6px; padding: 9px 14px; background: var(--bg-elev); border: 1px solid var(--border); border-radius: 999px; color: var(--text); font-size: 13px; font-weight: 600; }
+      .ruta-btn:hover { border-color: var(--accent); }
+      .ruta-btn.on { background: var(--accent-soft); border-color: var(--accent); color: var(--accent-hover); }
+      .ruta-count { min-width: 18px; height: 18px; padding: 0 5px; border-radius: 999px; background: var(--accent); color: #1a0e04; font-size: 11px; font-weight: 800; display: inline-flex; align-items: center; justify-content: center; }
+      .heart { position: absolute; top: 10px; left: 10px; z-index: 2; width: 34px; height: 34px; border-radius: 50%; border: none; background: rgba(0,0,0,0.55); backdrop-filter: blur(4px); color: #fff; font-size: 16px; line-height: 1; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform .1s; }
+      .heart:hover { transform: scale(1.12); }
+      .heart.on { background: var(--accent); }
+      .card.visitado { opacity: 0.62; }
+      .card.visitado .name { text-decoration: line-through; }
+      .ciudad-bloque { margin-bottom: 28px; }
+      .ciudad-bloque h3 { font-size: 16px; color: var(--text); margin: 0 0 4px; }
+      .ciudad-bloque .prog { font-size: 12.5px; color: var(--text-faint); margin-bottom: 12px; }
+      .ruta-controls { display: flex; gap: 8px; padding-top: 6px; }
+      .ruta-controls button { flex: 1; padding: 8px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--bg-elev); color: var(--text-dim); font-size: 12.5px; font-weight: 600; cursor: pointer; }
+      .ruta-controls .visit.done { background: rgba(76,175,80,.9); color: #06210a; border-color: transparent; }
+      .ruta-controls .visit:hover { border-color: #4caf50; }
+      .ruta-controls .quitar:hover { border-color: var(--accent); color: var(--accent-hover); }
+      .ruta-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 22px; flex-wrap: wrap; }
+      .ruta-head h2 { margin: 0; font-size: 22px; }
+      .btn-volver { padding: 8px 14px; background: transparent; border: 1px solid var(--border); border-radius: 999px; color: var(--text-dim); font-size: 13px; }
+      .btn-volver:hover { color: var(--text); border-color: var(--text-faint); }
+
       .state { text-align: center; padding: 70px 20px; color: var(--text-dim); }
       .state .big { font-size: 46px; margin-bottom: 14px; }
       .state h3 { color: var(--text); font-size: 19px; margin: 0 0 8px; }
@@ -140,6 +163,7 @@
           <input id="q" type="text" placeholder="Buscar restaurante, ciudad o comida…" aria-label="Buscar" />
           <span class="icon">⌕</span>
         </form>
+        <button class="ruta-btn" id="rutaBtn" title="Mi ruta">🗺️ Mi Ruta <span class="ruta-count" id="rutaCount">0</span></button>
       </header>
       <main class="layout">
         <button class="mobile-filter-toggle" id="filterToggle">⚙︎ Filtros</button>
@@ -206,6 +230,36 @@
       let TODOS = [], FILTRADOS = [], visibles = PAGE_SIZE;
       const niveles = new Set();
 
+      /* ───────── Mi Ruta (localStorage, sin registro) ───────── */
+      let ruta = {};
+      try { ruta = JSON.parse(localStorage.getItem("foodle_ruta") || "{}"); } catch (_) { ruta = {}; }
+      let modoRuta = false;
+      const enRuta = (id) => !!ruta[id];
+      function guardarRuta() {
+        localStorage.setItem("foodle_ruta", JSON.stringify(ruta));
+        const n = Object.keys(ruta).length;
+        const c = document.getElementById("rutaCount");
+        if (c) c.textContent = n;
+      }
+      function toggleRuta(r) {
+        if (!r || !r.id) return;
+        if (ruta[r.id]) delete ruta[r.id];
+        else ruta[r.id] = { id: r.id, nombre: r.nombre, ciudad: r.ciudad, zona: r.zona, cocina: r.cocina, precio: r.precio, nivel: r.nivel, veredicto: r.veredicto, tags: r.tags, creador: r.creador, url: r.url, vid: r.vid, imagen: r.imagen, visited: false };
+        guardarRuta();
+        if (modoRuta) renderRuta(); else render();
+      }
+      // Llamada desde los botones inline de las cards.
+      window.__ruta = (accion, id) => {
+        if (accion === "toggle") {
+          const r = TODOS.find((x) => x.id === id) || ruta[id];
+          toggleRuta(r);
+        } else if (accion === "visited") {
+          if (ruta[id]) { ruta[id].visited = !ruta[id].visited; guardarRuta(); renderRuta(); }
+        } else if (accion === "remove") {
+          delete ruta[id]; guardarRuta(); renderRuta();
+        }
+      };
+
       // Cascada de miniaturas: si una falla (404), prueba la siguiente; si se
       // acaban, quita el <img> y queda el degradado + emoji de respaldo.
       window.__ytfb = (img) => {
@@ -253,8 +307,10 @@
         const img = vid
           ? `${ph}<img src="https://i.ytimg.com/vi/${esc(vid)}/hqdefault.jpg" alt="${esc(r.nombre)}" loading="lazy" data-vid="${esc(vid)}" data-steps="mqdefault.jpg,0.jpg,1.jpg" onerror="window.__ytfb(this)" />`
           : ph;
-        return `<a class="card" href="${esc(r.url || "#")}" target="_blank" rel="noopener noreferrer">
+        const fav = enRuta(r.id);
+        return `<a class="card ${ruta[r.id] && ruta[r.id].visited ? "visitado" : ""}" href="${esc(r.url || "#")}" target="_blank" rel="noopener noreferrer">
           <div class="photo">${img}
+            <button class="heart ${fav ? "on" : ""}" title="${fav ? "Quitar de mi ruta" : "Añadir a mi ruta"}" onclick="event.preventDefault();event.stopPropagation();window.__ruta('toggle','${esc(r.id)}')">${fav ? "♥" : "♡"}</button>
             <span class="nivel ${nivel}">${NIVEL_LABEL[nivel] || ""}</span>
             ${r.ciudad ? `<span class="city">📍 ${esc(r.ciudad)}</span>` : ""}
           </div>
@@ -298,7 +354,44 @@
         else c.sort((a, b) => (NIVEL_ORDER[a.nivel || "rec"] ?? 1) - (NIVEL_ORDER[b.nivel || "rec"] ?? 1));
         return c;
       }
-      function aplicar() { const f = leer(); FILTRADOS = ordenar(TODOS.filter((r) => pasa(r, f))); visibles = PAGE_SIZE; render(); }
+      function aplicar() {
+        if (modoRuta) { modoRuta = false; const rb = document.getElementById("rutaBtn"); if (rb) rb.classList.remove("on"); }
+        const f = leer(); FILTRADOS = ordenar(TODOS.filter((r) => pasa(r, f))); visibles = PAGE_SIZE; render();
+      }
+
+      /* ───────── Vista "Mi Ruta" ───────── */
+      function renderRuta() {
+        modoRuta = true;
+        document.getElementById("rutaBtn").classList.add("on");
+        grid.innerHTML = "";
+        $("count").innerHTML = "";
+        $("loadmore-wrap").style.display = "none";
+
+        const items = Object.values(ruta);
+        if (items.length === 0) {
+          stateSlot.innerHTML = `<div class="state"><div class="big">🗺️</div><h3>Tu ruta está vacía</h3><p>Pulsa el ♥ en los restaurantes que quieras visitar y se irán añadiendo a tu ruta. Luego los vas tachando según los visitas.</p></div>`;
+          return;
+        }
+        const porCiudad = {};
+        items.forEach((r) => { const c = r.ciudad || "Sin ciudad"; (porCiudad[c] = porCiudad[c] || []).push(r); });
+        const ciudades = Object.keys(porCiudad).sort((a, b) => a.localeCompare(b, "es"));
+        const visitados = items.filter((r) => r.visited).length;
+
+        let html = `<div class="ruta-head"><h2>🗺️ Mi Ruta — ${visitados}/${items.length} visitados</h2><button class="btn-volver" id="volverBtn">← Volver al buscador</button></div>`;
+        ciudades.forEach((c) => {
+          const list = porCiudad[c];
+          const v = list.filter((r) => r.visited).length;
+          html += `<div class="ciudad-bloque"><h3>📍 ${esc(c)}</h3><div class="prog">${v}/${list.length} visitados</div><div class="grid">`;
+          html += list.map((r, i) => `<div class="ruta-item">${cardHTML(r, i)}<div class="ruta-controls">`
+            + `<button class="visit ${r.visited ? "done" : ""}" onclick="window.__ruta('visited','${esc(r.id)}')">${r.visited ? "✓ Visitado" : "Marcar visitado"}</button>`
+            + `<button class="quitar" onclick="window.__ruta('remove','${esc(r.id)}')">Quitar</button>`
+            + `</div></div>`).join("");
+          html += `</div></div>`;
+        });
+        stateSlot.innerHTML = html;
+        const vb = document.getElementById("volverBtn");
+        if (vb) vb.onclick = aplicar;
+      }
 
       function poblar() {
         const ciudades = [...new Set(TODOS.map((r) => r.ciudad).filter(Boolean))].sort((a, b) => a.localeCompare(b, "es"));
@@ -316,6 +409,8 @@
       $("clearFilters").addEventListener("click", () => { $("q").value = ""; $("f-ciudad").value = ""; $("f-cocina").value = ""; $("f-creador").value = ""; niveles.clear(); document.querySelectorAll("#f-nivel .pill").forEach((p) => p.classList.remove("on")); $("sort").value = "relevancia"; aplicar(); });
       $("loadmore").addEventListener("click", () => { visibles += PAGE_SIZE; render(); });
       $("filterToggle").addEventListener("click", () => $("filters").classList.toggle("open"));
+      $("rutaBtn").addEventListener("click", () => { modoRuta ? aplicar() : renderRuta(); });
+      guardarRuta(); // pinta el contador inicial
 
       async function init() {
         try {
