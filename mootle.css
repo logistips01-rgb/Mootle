@@ -196,6 +196,20 @@ form.slim .btn { border-radius: 0; min-height: 0; padding: 0 22px; font-size: 15
 .comp-soon { margin-top: 10px; align-self: flex-start; font-size: 13px; color: var(--text-muted); border: 1px dashed var(--border-strong); border-radius: 10px; padding: 9px 13px; }
 .aff-note { margin: 14px 0 0; font-size: 12px; color: var(--text-muted); }
 
+/* Ficha ligera: precio en una línea, complementos como chips, "también en" sin caja */
+.pricerow { font-family: "Inter Tight", Inter, sans-serif; font-size: 26px; font-weight: 800; margin: 6px 0 2px; }
+.pricerow strong { color: var(--accent); }
+.pricerow .muted { font-size: 16px; font-weight: 600; }
+.pricesub { color: var(--text-muted); font-size: 14px; margin: 0; }
+.comp-bar { margin-top: 24px; }
+.comp-bar-t { display: block; font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); margin-bottom: 8px; }
+.comp-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.comp-chip { display: inline-flex; align-items: center; gap: 7px; font-size: 14px; font-weight: 600; text-decoration: none; color: var(--text-secondary); background: var(--surface-1); border: 1px solid var(--border-strong); border-radius: 999px; padding: 9px 14px; }
+.comp-chip:hover { border-color: var(--accent); color: var(--accent); }
+.comp-chip svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+.elsewhere-lite { color: var(--text-secondary); margin: 18px 0; }
+.elsewhere-lite a { font-weight: 600; text-decoration: none; }
+
 /* Tablas comparativas (seguros / financiación) */
 .tablebox { overflow-x: auto; }
 .ctable { width: 100%; border-collapse: collapse; font-size: .92rem; }

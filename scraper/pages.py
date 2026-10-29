@@ -141,9 +141,9 @@ FOOT = """  <footer><span>mootle · comparador de motos de ocasión</span><nav c
 def elsewhere(query, intro):
     from urllib.parse import quote
     q = quote(query)
-    return (f'<div class="elsewhere"><p>{intro}</p>'
-            f'<a class="ext" href="https://es.wallapop.com/search?keywords={q}&amp;category_id=14000" target="_blank" rel="noopener noreferrer">Buscar en Wallapop ↗</a>'
-            f'<a class="ext" href="https://www.milanuncios.com/motos-de-segunda-mano/?s={q}" target="_blank" rel="noopener noreferrer">Buscar en Milanuncios ↗</a></div>')
+    return (f'<p class="elsewhere-lite">{intro} '
+            f'<a href="https://es.wallapop.com/search?keywords={q}&amp;category_id=14000" target="_blank" rel="noopener noreferrer">Wallapop ↗</a> · '
+            f'<a href="https://www.milanuncios.com/motos-de-segunda-mano/?s={q}" target="_blank" rel="noopener noreferrer">Milanuncios ↗</a></p>')
 
 
 # ───────────────────────────── complementos (monetización) ─────────────────────────────
@@ -177,26 +177,22 @@ def financiacion_cuota(precio):
 def complementos(name, precio=None):
     nm = e(name)
     cuota = financiacion_cuota(precio)
-    fin_desc = (f'Desde ~{num(cuota)} €/mes <small>(ejemplo {FINANCIACION_EJEMPLO_MESES} meses)</small>'
-                if cuota else "Financia tu moto a plazos")
-    # (clave, título, desc-html, url, ¿enlace externo de afiliado?)
-    cards = [
-        ("seguro", "Seguro de moto", f'Compara aseguradoras · desde {e(SEGURO_DESDE)} <small>(orientativo)</small>', "../seguros/", False),
-        ("equip", "Equipación", "Compara cascos, guantes y chaquetas", "../equipacion/", False),
-        ("ruedas", "Neumáticos", f"Ruedas para tu {nm}", _amazon(f"neumatico moto {name}"), True),
-        ("financ", "Financiación", fin_desc, "../financiacion/", False),
+    fin = f"desde ~{num(cuota)} €/mes" if cuota else "a plazos"
+    # (etiqueta, url, icono, ¿enlace externo de afiliado?)
+    chips = [
+        (f"Seguro desde {e(SEGURO_DESDE)}", "../seguros/", "seguro", False),
+        (f"Financiación {fin}", "../financiacion/", "financ", False),
+        ("Equipación", "../equipacion/", "equip", False),
+        ("Neumáticos", _amazon(f"neumatico moto {name}"), "ruedas", True),
     ]
     out = []
-    for key, title, desc, url, ext in cards:
-        ic = f'<span class="comp-ic"><svg viewBox="0 0 24 24" aria-hidden="true">{_COMP_ICONS[key]}</svg></span>'
-        cta = (f'<a class="ext" href="{url}" target="_blank" rel="sponsored nofollow noopener noreferrer">Ver ↗</a>'
-               if ext else f'<a class="ext" href="{url}">Comparar →</a>')
-        out.append(f'<div class="comp">{ic}<span class="comp-t">{e(title)}</span>'
-                   f'<span class="comp-d">{desc}</span>{cta}</div>')
-    return (f'<div class="panel"><h2 class="display">Complementos para tu {nm}</h2>'
-            f'<p class="muted" style="margin:0 0 14px">Lo que necesitas al comprar la moto: seguro, equipación y neumáticos.</p>'
-            f'<div class="complementos">{"".join(out)}</div>'
-            f'<p class="aff-note">Seguros y financiación: datos orientativos. Equipación y neumáticos: enlaces de afiliados (si compras, mootle puede llevarse una pequeña comisión, sin coste para ti).</p></div>')
+    for label, url, key, ext in chips:
+        ic = f'<svg viewBox="0 0 24 24" aria-hidden="true">{_COMP_ICONS[key]}</svg>'
+        rel = ' target="_blank" rel="sponsored nofollow noopener noreferrer"' if ext else ''
+        out.append(f'<a class="comp-chip" href="{url}"{rel}>{ic}{label}{" ↗" if ext else ""}</a>')
+    return (f'<div class="comp-bar"><span class="comp-bar-t">Para tu {nm}</span>'
+            f'<div class="comp-chips">{"".join(out)}</div>'
+            f'<p class="aff-note" style="margin-top:10px">Seguro y financiación orientativos; equipación y neumáticos con enlaces de afiliado.</p></div>')
 
 
 # ───────────────────────────── páginas de seguros y financiación ─────────────────────────────
@@ -338,11 +334,12 @@ def model_page(g, sources, history, years):
     if g["img"]:
         ld["image"] = g["img"]
     save = f'Ahorras {eur(g["max"] - g["min"])} frente a la más cara.' if g["n"] > 1 else ""
-    kpis = (f'<div class="kpi best"><span>La más barata</span><b>{eur(g["min"])}</b><small>'
-            f'{num(best["km"]) + " km · " if best.get("km") is not None else ""}{e(sources.get(best["src"], {}).get("name", best["src"]))}</small></div>')
+    best_src = e(sources.get(best["src"], {}).get("name", best["src"]))
+    best_km = f'{num(best["km"])} km · ' if best.get("km") is not None else ""
+    pricerow = f'<p class="pricerow"><strong>Desde {eur(g["min"])}</strong>'
     if g["n"] > 1:
-        kpis += (f'<div class="kpi"><span>Precio mediano</span><b>{eur(g["med"])}</b></div>'
-                 f'<div class="kpi"><span>La más cara</span><b>{eur(g["max"])}</b></div>')
+        pricerow += f'<span class="muted"> · mediana {eur(g["med"])} · hasta {eur(g["max"])}</span>'
+    pricerow += f'</p><p class="pricesub">{best_km}{best_src}</p>'
     rows = "".join(offer_row(m, g, sources, i == 0) for i, m in enumerate(g["offers"]))
     other_years = "".join(f'<a class="pill{" on" if y == g["y"] else ""}" href="{mid}.html">{y}</a>' for y, mid in years)
     tp = f' · {TYPES.get(g["tp"], g["tp"])}' if g.get("tp") else ""
@@ -354,7 +351,7 @@ def model_page(g, sources, history, years):
       <span class="kicker">{e(g['mk'])}{e(tp)}</span>
       <h1 class="display">{e(name)} <span class="muted">{g['y']}</span></h1>
       <p class="sub">{num(g['n'])} {'moto a la venta' if g['n'] == 1 else 'motos a la venta'}{f" en {len(g['webs'])} webs" if len(g['webs']) > 1 else ""}. {save}</p>
-      <div class="kpis">{kpis}</div>
+      {pricerow}
       <p style="margin-top:16px"><a class="btn" href="{e(safe_url(best.get('url')))}" target="_blank" rel="noopener noreferrer nofollow">Ver la más barata ↗</a></p>
     </div>
   </div>
