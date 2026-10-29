@@ -30,6 +30,8 @@ STORES = [
      "cats": [], "ykm": "name"},
     {"id": "motobrave", "name": "Moto Brave", "home": "https://motobrave.com/", "city": "Vigo", "prov": "Pontevedra",
      "cats": ["usado-certificado"], "ykm": "name"},
+    {"id": "motosmadriddakar", "name": "Motos Madrid Dakar", "home": "https://motosmadriddakar.com/", "city": "Madrid", "prov": "Madrid",
+     "cats": [], "ykm": "auto"},
     # Ojo al añadir: algunas tiendas (p.ej. Motocircuit Castellón) ponen la CUOTA MENSUAL en el campo
     # de precio de la API, no el precio de venta: comprobar siempre un par de precios antes de activarlas.
     # BCN Motorbikes (Yamaha oficial): su API es casi toda moto nueva con precio 0, no sirve para ocasión.
