@@ -8,6 +8,7 @@ STORES. `cats`: slugs de categoría que son motos de ocasión (vacío = todas). 
 leer año y km — "attrs" (atributos Año/Kilómetros, como Moto Ocasión), "name" (en el título,
 "... -AÑO 2005- 61.937 KM"), "desc" (en la descripción, "Año:1990 Km:10.300") o None.
 """
+import html
 import re
 
 from ..common import brand, clean_title, is_a2, model, moto_type, province, to_int, year
@@ -27,6 +28,10 @@ STORES = [
      "cats": ["motos"], "ykm": None},
     {"id": "motoslemans", "name": "Motos LeMans", "home": "https://motoslemans.es/", "city": "Mollet del Vallès", "prov": "Barcelona",
      "cats": [], "ykm": "name"},
+    {"id": "motobrave", "name": "Moto Brave", "home": "https://motobrave.com/", "city": "Vigo", "prov": "Pontevedra",
+     "cats": ["usado-certificado"], "ykm": "name"},
+    # Ojo al añadir: algunas tiendas (p.ej. Motocircuit Castellón) ponen la CUOTA MENSUAL en el campo
+    # de precio de la API, no el precio de venta: comprobar siempre un par de precios antes de activarlas.
     # BCN Motorbikes (Yamaha oficial): su API es casi toda moto nueva con precio 0, no sirve para ocasión.
 ]
 
@@ -45,18 +50,19 @@ def _attrs(raw):
     return out
 
 
-def _clean(html):
-    return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", html or "")).strip()
+def _clean(h):
+    return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", h or "")).strip()
 
 
 def _year_km(raw, how, attrs):
-    """Devuelve (año, km) según la estrategia de la tienda."""
+    """Devuelve (año, km). "attrs" usa los atributos; cualquier otra estrategia (name/desc/auto)
+    busca el año y los km en el nombre y en la descripción, cada uno donde aparezca."""
     if how == "attrs":
         return (attrs.get("año") or attrs.get("ano") or attrs.get("anio"),
                 attrs.get("kilómetros") or attrs.get("kilometros") or attrs.get("km"))
-    text = raw.get("name", "") if how == "name" else _clean(raw.get("short_description") or raw.get("description"))
-    if not how or not text:
+    if not how:
         return None, None
+    text = raw.get("name", "") + " · " + _clean(raw.get("short_description") or raw.get("description"))
     ym = _YEAR_LABEL.search(text) or _YEAR.search(text)
     km = _KM_LABEL.search(text) or _KM.search(text)
     return (ym.group(1) if ym and ym.lastindex else (ym.group() if ym else None),
@@ -74,7 +80,7 @@ def _to_listing(raw, store, current_year):
     if not price:
         return None
     attrs = _attrs(raw)
-    name = raw.get("name") or ""
+    name = html.unescape(raw.get("name") or "")
     brands = [b.get("name") for b in raw.get("brands") or [] if b.get("name")]
     mk = brand(brands[0] if brands else name.split(" ")[0])
     y_raw, km_raw = _year_km(raw, store.get("ykm"), attrs)
