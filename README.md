@@ -1,141 +1,80 @@
-# 🛵 Mootle
+# mootle — comparador de motos de ocasión
 
-**El buscador de motos de segunda mano de España.** Agrega anuncios de
-Milanuncios, Wallapop y Coches.net en un único sitio, normalizados, sin
-duplicados y con filtros potentes — el "Skyscanner de las motos".
+Una sola búsqueda y ves las motos de segunda mano más baratas de portales y concesionarios de
+España, con el **precio de mercado** de cada modelo y la **misma moto en varias webs** agrupada
+("también en… por X €"). Misma línea que [guitle](https://guitle.com): rastreador diario en Python,
+datos en JSON dentro del repo y una web estática que los lee.
 
-Esto es **Mootle v0.1**. Todo lo demás es iteración.
-
----
-
-## Arquitectura
+## Cómo funciona
 
 ```
-Firecrawl API
-     │  /map  → descubre URLs de anuncios
-     │  /batch/scrape → extrae campos estructurados
-     ▼
-crawler/                       (Node.js)
-  ├── portals/                 schema + URL patterns por portal
-  ├── normalize.js             normaliza al schema común
-  ├── dedup.js                 hash (marca|modelo|precio|km)
-  └── index.js                 orquestador
-     │
-     ▼
-Firebase Firestore
-  ├── listings/    anuncios normalizados (doc id = hash)
-  ├── portals/     estado de cada portal (último crawl, errores)
-  └── stats/       métricas globales
-     ▲
-     │ lectura directa vía SDK web
-index.html                     frontend (un único archivo)
-
-Firebase Cloud Functions
-  └── scheduledCrawl           cada 6 h lanza el crawler
+scraper/
+  fetch.py        HTTP educado: UA de navegador, robots.txt, 3-6 s entre peticiones, detecta anti-bot
+  common.py       normalización: marca canónica, modelo, tipo de moto, A2, provincia
+  sources/        un módulo por web (scrape → anuncios + estado)
+    motosnet.py     motos.net: JSON incrustado en cada página de resultados (20 anuncios/página)
+    motoocasion.py  Moto Ocasión (Mora, Toledo): API pública de WooCommerce (100 motos/petición)
+  run.py          lee todas las webs en paralelo y actualiza data/listings.json
+data/
+  listings.json   lo que carga la web: fuentes + anuncios (claves cortas, ver abajo)
+  state.json      por dónde va cada web que se lee por partes (cursor de motos.net)
+index.html        la web: portada (chollos, bajadas, webs) y buscador con filtros
+.github/workflows/scrape.yml   cron diario que ejecuta el rastreador y commitea data/
 ```
 
----
+Cada ejecución, por web:
 
-## Puesta en marcha
+- **motos.net** (~35.000 motos, ~1.730 páginas): primero las novedades (páginas 1, 2… hasta una sin
+  anuncios nuevos) y luego sigue el barrido donde lo dejó la vez anterior, hasta agotar el tiempo.
+  Un anuncio que no se ve en 7 días se da por vendido.
+- **Moto Ocasión**: se lee entera (~9 peticiones); lo que no aparece, o está agotado, se ha vendido.
 
-### 1. Dependencias
+Después, `run.py`:
 
-```bash
-npm install
+- conserva la fecha en que se vio cada anuncio por primera vez y el **precio anterior** si cambia;
+- calcula el **precio de mercado**: mediana de las motos de la misma marca, modelo y año (±1),
+  si hay 5 o más;
+- **agrupa la misma moto en varias webs** (misma marca, año y km, modelo compatible, precio parecido):
+  la web muestra la más barata y el resto como "también en…".
+
+## Uso local
+
+```sh
+pip install -r requirements.txt
+python -m scraper.run --minutes 5 --dry-run     # informe sin tocar data/
+python -m scraper.run --only motoocasion        # solo una web, guardando
+python -m http.server                           # y abrir http://localhost:8000
 ```
 
-### 2. Variables de entorno
+## Añadir una web
 
-```bash
-cp .env.example .env
-```
+1. Crea `scraper/sources/<id>.py` con `ID`, `NAME`, `HOME` y
+   `scrape(fetcher, known, state, deadline, current_year, log)` que devuelva `(anuncios, info)`.
+   - `info["status"]`: `ok`, `http_403`, `challenge`, `robots_disallowed`, `sin_json`, `error`…
+   - `info["complete"] = True` si se ha leído la web entera (lo que falte se borra al momento).
+2. Añádela en `scraper/sources/__init__.py`.
+3. Pruébala: `python -m scraper.run --only <id> --minutes 3 --dry-run`.
 
-Rellena en `.env`:
+Antes de añadir una web: mira su `robots.txt` y busca primero un JSON (API de tienda, JSON incrustado
+en la página, feed) antes de leer HTML. Concesionarios con WordPress + WooCommerce suelen tener
+`/wp-json/wc/store/v1/products` abierto, como Moto Ocasión.
 
-- `FIRECRAWL_API_KEY` — clave de [Firecrawl](https://www.firecrawl.dev).
-- `FIREBASE_PROJECT_ID`, `FIREBASE_CLIENT_EMAIL`, `FIREBASE_PRIVATE_KEY` —
-  del service account (Firebase Console → Configuración → Cuentas de servicio
-  → Generar nueva clave privada). Solo necesarios para ejecutar el crawler en
-  local; en Cloud Functions las credenciales se inyectan solas.
+## Formato de un anuncio (`data/listings.json` → `items`)
 
-### 3. Ejecutar el crawler
+| Clave | Qué es | | Clave | Qué es |
+|---|---|---|---|---|
+| `id` | `<web>:<id en la web>` | | `prov`, `city` | provincia y ciudad |
+| `src` | web de origen | | `img` | foto |
+| `url` | anuncio original | | `cv`, `cc` | potencia y cilindrada |
+| `t` | título | | `tp` | naked, trail, scooter, deportiva, custom, turismo, campo |
+| `mk`, `md` | marca y modelo | | `a2` | apta o limitable para A2 |
+| `y`, `km` | año y kilómetros | | `pro` | vendedor profesional |
+| `p` | precio (€) | | `pub` | fecha de publicación en la web |
+| `p0` | precio tachado en la web | | `fs`, `ls` | primera y última vez visto |
+| `pa`, `pc` | precio anterior y día del cambio | | `mkt` | precio de mercado (mediana) |
+| `res` | reservada | | `g` | grupo: la misma moto en varias webs |
 
-```bash
-npm run crawl                 # todos los portales
-node crawler/index.js wallapop   # solo un portal
-```
+## Publicar la web
 
-Salida esperada por portal:
-
-```
-[Milanuncios] 47 nuevos anuncios | 12 duplicados descartados | 3 errores
-```
-
-### 4. Frontend
-
-Copia `firebase-config.example.js` a `firebase-config.js` (git lo ignora) y
-pega ahí la config de tu app web de Firebase (Console → Configuración → Tus
-apps → Web). Después sirve:
-
-```bash
-firebase serve --only hosting
-# o cualquier servidor estático: npx serve .
-```
-
-### 5. Desplegar
-
-```bash
-# Reglas e índices de Firestore
-firebase deploy --only firestore
-
-# Hosting (frontend)
-firebase deploy --only hosting
-
-# Cloud Function programada (copia el crawler a functions/ automáticamente)
-firebase functions:secrets:set FIRECRAWL_API_KEY
-firebase deploy --only functions
-```
-
----
-
-## Schema de un anuncio (`listings/`)
-
-| Campo               | Tipo            | Notas                                  |
-| ------------------- | --------------- | -------------------------------------- |
-| `id`                | string          | hash sha1 de marca\|modelo\|precio\|km |
-| `titulo`            | string          |                                        |
-| `marca` / `modelo`  | string          |                                        |
-| `año`               | number          |                                        |
-| `km` / `precio`     | number          |                                        |
-| `ubicacion`         | string          |                                        |
-| `provincia`         | string          | inferida de la ubicación               |
-| `combustible`       | string          | "gasolina" por defecto                 |
-| `cilindrada`        | number          |                                        |
-| `tipo`              | string          | naked / trail / deportiva / custom / scooter |
-| `color`             | string \| null  |                                        |
-| `descripcion`       | string          |                                        |
-| `fotos`             | string[]        |                                        |
-| `url_original`      | string          |                                        |
-| `portal`            | string          | milanuncios / wallapop / cochesnet     |
-| `fecha_publicacion` | string \| null  |                                        |
-| `fecha_crawl`       | string ISO 8601 |                                        |
-| `activo`            | boolean         |                                        |
-
-Los campos que no se puedan extraer quedan como `null` (nunca se omiten).
-
----
-
-## Notas y limitaciones de v0.1
-
-- **Wallapop** es una SPA con anti-bot agresivo: `/map` puede devolver pocas
-  URLs de ficha. Milanuncios y Coches.net suelen mapear mejor. Un fallo en un
-  portal se registra y **no detiene** el resto.
-- El **frontend filtra en cliente** sobre los últimos `FETCH_LIMIT` (500)
-  anuncios traídos de Firestore. Suficiente para v0.1; al crecer el volumen,
-  los filtros se moverán a consultas server-side con índices compuestos.
-- Firestore necesita el índice `activo + fecha_crawl` (incluido en
-  `firestore.indexes.json`). Si una consulta pide un índice que falta, Firebase
-  te da en consola el enlace exacto para crearlo.
-- El crawler respeta el `rateLimit` de cada portal y el `robots.txt` (lo
-  gestiona Firecrawl por defecto).
-```
+Es estática: GitHub Pages (Settings → Pages → rama `main`, carpeta raíz), como guitle, o cualquier
+hosting estático. El cron solo corre desde la rama por defecto.

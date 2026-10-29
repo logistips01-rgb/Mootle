@@ -1,0 +1,58 @@
+name: scrape
+
+on:
+  schedule:
+    # De madrugada en España (04:23 UTC = 05:23 en invierno, 06:23 en verano).
+    - cron: "23 4 * * *"
+  workflow_dispatch:
+    inputs:
+      minutes:
+        description: "Minutos de lectura por web (motos.net necesita ~130 para recorrerse entera)"
+        default: "50"
+      only:
+        description: "Solo estas webs, separadas por espacios (vacío = todas)"
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency:
+  group: scrape
+  cancel-in-progress: false
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Leer anuncios
+        # Cada web en paralelo y a su ritmo (3-6 s entre peticiones, robots.txt respetado).
+        # Si una web falla, se guarda lo del resto.
+        env:
+          MINUTES: ${{ inputs.minutes || '50' }}
+          ONLY: ${{ inputs.only }}
+        run: python -m scraper.run --minutes "$MINUTES" ${ONLY:+--only $ONLY}
+
+      - name: Commit de datos
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/
+          if git diff --cached --quiet; then echo "Sin cambios"; exit 0; fi
+          git commit -q -m "data: anuncios $(TZ=Europe/Madrid date +%F)"
+          for attempt in 1 2 3 4 5; do
+            if git push -q origin "HEAD:${GITHUB_REF_NAME}"; then exit 0; fi
+            echo "push rechazado, reintento $attempt"; sleep $((attempt * 5))
+            git pull -q --rebase origin "${GITHUB_REF_NAME}"
+          done
+          exit 1
