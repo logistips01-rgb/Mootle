@@ -143,6 +143,45 @@ def elsewhere(query, intro):
             f'<a class="ext" href="https://www.milanuncios.com/motos-de-segunda-mano/?s={q}" target="_blank" rel="noopener noreferrer">Buscar en Milanuncios ↗</a></div>')
 
 
+# ───────────────────────────── complementos (monetización) ─────────────────────────────
+# Todo lo "monetizable" (seguro, equipación, neumáticos, financiación) sale de aquí.
+# AMAZON_TAG: ID de afiliado de Amazon para mootle (p. ej. "mootle-21"). Se cambia SOLO aquí
+# y lo cogen todas las fichas. Una tarjeta con url=None sale como "Muy pronto" (programa sin dar de alta).
+AMAZON_TAG = "TU-TAG"
+
+_COMP_ICONS = {
+    "seguro": '<path d="M12 3l7 2.5V11c0 4.2-2.9 7.4-7 8.8C7.9 18.4 5 15.2 5 11V5.5z"/>',
+    "equip": '<path d="M4 14a8 8 0 1116 0v2H4z"/><path d="M4 16h11"/>',
+    "ruedas": '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3"/>',
+    "financ": '<circle cx="12" cy="12" r="8.5"/><path d="M15 9.5a3.5 3.5 0 100 5M8 11.5h5M8 13h4.5"/>',
+}
+
+
+def _amazon(query):
+    from urllib.parse import quote
+    return f"https://www.amazon.es/s?k={quote(query)}&amp;tag={AMAZON_TAG}"
+
+
+def complementos(name):
+    cards = [
+        ("seguro", "Seguro de moto", f"Calcula el seguro de tu {name}", None),
+        ("equip", "Equipación", "Casco, guantes y chaqueta", _amazon("equipacion moto casco")),
+        ("ruedas", "Neumáticos", f"Ruedas para tu {name}", _amazon(f"neumatico moto {name}")),
+        ("financ", "Financiación", "Financia tu moto a plazos", None),
+    ]
+    out = []
+    for key, title, desc, url in cards:
+        ic = f'<span class="comp-ic"><svg viewBox="0 0 24 24" aria-hidden="true">{_COMP_ICONS[key]}</svg></span>'
+        cta = (f'<a class="ext" href="{url}" target="_blank" rel="sponsored nofollow noopener noreferrer">Ver ↗</a>'
+               if url else '<span class="comp-soon">Muy pronto</span>')
+        out.append(f'<div class="comp">{ic}<span class="comp-t">{e(title)}</span>'
+                   f'<span class="comp-d">{e(desc)}</span>{cta}</div>')
+    return (f'<div class="panel"><h2 class="display">Complementos para tu {e(name)}</h2>'
+            f'<p class="muted" style="margin:0 0 14px">Lo que necesitas al comprar la moto: seguro, equipación y neumáticos.</p>'
+            f'<div class="complementos">{"".join(out)}</div>'
+            f'<p class="aff-note">Algunos enlaces son de afiliados: si compras, mootle puede llevarse una pequeña comisión, sin coste para ti.</p></div>')
+
+
 def chart(series):
     if not series or len(series) < 2:
         since = day(series[0][0]) if series else "hoy"
@@ -260,6 +299,7 @@ def model_page(g, sources, history, years):
     <p class="muted" style="margin:0">La más barata y el precio mediano de la {e(full)}, día a día.</p>
     {chart(history.get(g['mid']))}
   </div>
+  {complementos(name)}
   {f'<div class="panel"><h2 class="display">Otros años de la {e(name)}</h2><div class="sortbar">{other_years}</div></div>' if len(years) > 1 else ""}
 """
     return head(title, desc, canonical, g["img"], ld) + body + SORT_SCRIPT + FOOT
