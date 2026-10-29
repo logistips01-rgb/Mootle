@@ -34,6 +34,8 @@ STORES = [
      "cats": [], "ykm": "auto"},
     {"id": "motorboxgijon", "name": "Motor Box Gijón", "home": "https://www.motorboxgijon.es/", "city": "Gijón", "prov": "Asturias",
      "cats": ["motos-de-ocasion"], "ykm": "desc"},  # año y km en la descripción: "AÑO: 2017 KMS: 17.939"
+    {"id": "motosjeronimo", "name": "Motos Jerónimo", "home": "https://motosjeronimo.com/", "city": "Menorca", "prov": "Baleares",
+     "cats": [], "ykm": "desc"},  # todo son motos; año/km en la descripción ("Kilómetros: 2877 Fecha matriculación: Febrero 2025")
     # Ojo al añadir: algunas tiendas (p.ej. Motocircuit Castellón) ponen la CUOTA MENSUAL en el campo
     # de precio de la API, no el precio de venta: comprobar siempre un par de precios antes de activarlas.
     # BCN Motorbikes (Yamaha oficial): su API es casi toda moto nueva con precio 0, no sirve para ocasión.
@@ -43,6 +45,8 @@ _YEAR = re.compile(r"\b(19[5-9]\d|20[0-4]\d)\b")
 _KM = re.compile(r"([\d.]{2,})\s*(?:km|kms|kilómetros|kilometros)\b", re.I)
 _KM_LABEL = re.compile(r"(?:kms?|kilómetros|kilometros)\s*[:=]\s*([\d.]+)", re.I)
 _YEAR_LABEL = re.compile(r"(?:año|anio|a[nñ]o)\s*[:;.\-]?\s*((?:19|20)\d{2})", re.I)
+# "Fecha matriculación: ENERO 2023" / "matriculación 2021" (el mes es opcional)
+_MATRIC = re.compile(r"matriculaci[óo]n[:\s]*(?:[a-záéíóúñ]+\s+)?((?:19|20)\d{2})", re.I)
 
 
 def _attrs(raw):
@@ -67,8 +71,10 @@ def _year_km(raw, how, attrs):
     if not how:
         return None, None
     text = raw.get("name", "") + " · " + _clean(raw.get("short_description") or raw.get("description"))
-    ym = _YEAR_LABEL.search(text) or _YEAR.search(text)
     km = _KM_LABEL.search(text) or _KM.search(text)
+    # quitar los km del texto antes de buscar el año: un km como "1969" no es el año
+    ytext = (text[:km.start()] + " " + text[km.end():]) if km else text
+    ym = _MATRIC.search(ytext) or _YEAR_LABEL.search(ytext) or _YEAR.search(ytext)
     return (ym.group(1) if ym and ym.lastindex else (ym.group() if ym else None),
             km.group(1) if km else None)
 
