@@ -2,3 +2,4 @@ User-agent: *
 Allow: /
 
 Sitemap: https://mootle.es/sitemap.xml
+Sitemap: https://mootle.es/sitemap-equipacion.xml

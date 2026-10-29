@@ -182,7 +182,7 @@ def complementos(name, precio=None):
     # (clave, título, desc-html, url, ¿enlace externo de afiliado?)
     cards = [
         ("seguro", "Seguro de moto", f'Compara aseguradoras · desde {e(SEGURO_DESDE)} <small>(orientativo)</small>', "../seguros/", False),
-        ("equip", "Equipación", "Casco, guantes y chaqueta", _amazon("equipacion moto casco"), True),
+        ("equip", "Equipación", "Compara cascos, guantes y chaquetas", "../equipacion/", False),
         ("ruedas", "Neumáticos", f"Ruedas para tu {nm}", _amazon(f"neumatico moto {name}"), True),
         ("financ", "Financiación", fin_desc, "../financiacion/", False),
     ]
@@ -473,7 +473,7 @@ def build(listings, history):
     sitemap = ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
                "".join(f"  <url><loc>{e(u)}</loc></url>\n" for u in urls) + "</urlset>\n")
     write(ROOT / "sitemap.xml", sitemap)
-    write(ROOT / "robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\n")
+    write(ROOT / "robots.txt", f"User-agent: *\nAllow: /\n\nSitemap: {SITE}/sitemap.xml\nSitemap: {SITE}/sitemap-equipacion.xml\n")
     return len(groups), len(by_brand), changed
 
 
