@@ -96,7 +96,8 @@ def write(path, text):
 
 # ───────────────────────────── trozos comunes ─────────────────────────────
 
-def head(title, description, canonical, image=None, ld=None, noindex=False):
+def head(title, description, canonical, image=None, ld=None, noindex=False,
+         search_action="../", search_ph="Modelo, marca, provincia…"):
     og_image = f'\n<meta property="og:image" content="{e(image)}">' if image else ""
     robots = '\n<meta name="robots" content="noindex">' if noindex else ""
     ld_tag = f'\n<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>' if ld else ""
@@ -123,8 +124,8 @@ def head(title, description, canonical, image=None, ld=None, noindex=False):
 <main>
   <div class="topbar">
     <a class="logo" aria-label="mootle, inicio" href="../"><img src="../icon.svg" alt=""><span class="stack"><span class="word">m{WHEELS}tle</span><span class="tag">motos de ocasión al mejor precio</span></span></a>
-    <form class="slim" role="search" action="../" method="get">
-      <input name="q" type="search" placeholder="Modelo, marca, provincia…" autocomplete="off" aria-label="Buscar moto">
+    <form class="slim" role="search" action="{search_action}" method="get">
+      <input name="q" type="search" placeholder="{e(search_ph)}" autocomplete="off" aria-label="Buscar">
       <button class="btn" type="submit">Buscar</button>
     </form>
   </div>

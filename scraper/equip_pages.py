@@ -93,7 +93,8 @@ def product_page(g, sources, history):
     <p class="muted" style="margin:0">Precio más barato de {e(name)}, día a día.</p>{chart(history.get(g['mid']))}</div>
   <p class="aff-note" style="max-width:70ch">Enlaces de afiliados: si compras, mootle puede llevarse una pequeña comisión, sin coste para ti. Precios tomados de cada tienda; compruébalos siempre en la tienda.</p>
 """
-    return head(title, desc, f"{SITE}/equipacion/{g['mid']}.html", g["img"], ld) + body + FOOT
+    return head(title, desc, f"{SITE}/equipacion/{g['mid']}.html", g["img"], ld,
+                search_action="./", search_ph="Casco, guantes, chaqueta, marca…") + body + FOOT
 
 
 def category_page(cat, groups):
@@ -108,7 +109,8 @@ def category_page(cat, groups):
   <p class="sub" style="color:var(--text-secondary)">{num(len(groups))} {e(name.lower())} desde {eur(cheapest)}.</p>
   <div class="grid eq">{"".join(_card(g) for g in groups)}</div>
 """
-    return head(title, desc, f"{SITE}/equipacion/{cat}.html") + body + FOOT
+    return head(title, desc, f"{SITE}/equipacion/{cat}.html",
+                search_action="./", search_ph="Casco, guantes, chaqueta, marca…") + body + FOOT
 
 
 def index_page(groups, sources):
@@ -137,16 +139,74 @@ def index_page(groups, sources):
     title = "Equipación de moto al mejor precio: cascos, guantes, chaquetas · mootle"
     desc = (f"Comparador de equipación de moto: {num(total)} productos (cascos, guantes, chaquetas, botas…) "
             "con precios, ofertas e histórico. Encuentra el más barato.")
-    body = f"""  <div class="hero" style="padding:28px 0 8px">
-    <h1 class="display" style="font-size:clamp(30px,5vw,46px);margin:0">Equipación de moto <span style="color:var(--accent)">al mejor precio</span></h1>
-    <p class="sub" style="color:var(--text-muted);margin:8px 0 0">Cascos, guantes, chaquetas, botas y más — comparados entre tiendas, con histórico de precios.</p>
+    cat_chips = '<button class="chip on" data-cat="">Todas</button>' + "".join(
+        f'<button class="chip" data-cat="{cat}">{e(CAT_NAMES.get(cat, cat))}</button>'
+        for cat in sorted(by_cat, key=lambda c: -len(by_cat[c])))
+    body = f"""  <div class="hero" style="padding:26px 0 6px;text-align:center">
+    <h1 class="display" style="font-size:clamp(28px,5vw,44px);margin:0">Equipación de moto <span style="color:var(--accent)">al mejor precio</span></h1>
+    <p class="sub" style="color:var(--text-muted);margin:8px 0 0">Cascos, guantes, chaquetas, botas y más — comparados entre tiendas.</p>
+    <form class="search" id="eq-form" role="search" style="max-width:640px;margin:16px auto 0">
+      <input id="q-eq" type="search" placeholder="Busca: casco ls2, guantes verano, chaqueta…" autocomplete="off" aria-label="Buscar equipación">
+      <button class="btn" type="submit">Buscar</button>
+    </form>
+    <div class="sortbar" id="eq-chips" style="justify-content:center;margin-top:12px">{cat_chips}</div>
   </div>
-  <div class="panel"><h2 class="display">Por categoría</h2><div class="sources">{cats_tiles}</div></div>
-  <section><div class="sec-head"><h2 class="display">Chollos de equipación</h2></div>
-    <p class="sub" style="color:var(--text-muted);margin:0 0 14px">{chollo_note}</p>
-    <div class="grid eq">{"".join(_card(g) for g in featured)}</div></section>
-"""
-    return head(title, desc, f"{SITE}/equipacion/") + body + FOOT
+  <div id="eq-results" hidden><p class="sec-sub" id="eq-count"></p><div class="grid eq" id="eq-grid"></div></div>
+  <div id="eq-browse">
+    <div class="panel"><h2 class="display">Por categoría</h2><div class="sources">{cats_tiles}</div></div>
+    <section><div class="sec-head"><h2 class="display">Chollos de equipación</h2></div>
+      <p class="sub" style="color:var(--text-muted);margin:0 0 14px">{chollo_note}</p>
+      <div class="grid eq">{"".join(_card(g) for g in featured)}</div></section>
+  </div>
+""" + _SEARCH_JS
+    return head(title, desc, f"{SITE}/equipacion/",
+                search_action="./", search_ph="Casco, guantes, chaqueta, marca…") + body + FOOT
+
+
+_SEARCH_JS = """<script>
+(function(){
+  var nf=new Intl.NumberFormat("es-ES");
+  var CN={casco:"Casco",guantes:"Guante",chaqueta:"Chaqueta",botas:"Bota",pantalon:"Pantalón",mono:"Mono"};
+  var fold=function(s){return String(s||"").normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").toLowerCase();};
+  var eur=function(v){return nf.format(v)+" €";};
+  var $=function(id){return document.getElementById(id);};
+  var DATA=[], cat="";
+  function card(g){
+    var img=g.img?'<img src="'+g.img+'" alt="" loading="lazy" referrerpolicy="no-referrer">':'';
+    var foot=(g.n+" oferta"+(g.n>1?"s":""))+(g.w>1?" \\u00b7 "+g.w+" tiendas":"");
+    return '<a class="card eq" href="'+g.mid+'.html"><div class="photo">'+img+'</div><div class="body">'
+      +'<span class="brand">'+g.mk+' \\u00b7 '+(CN[g.cat]||g.cat)+'</span>'
+      +'<span class="name">'+g.md+'</span>'
+      +'<span class="price"><strong>'+eur(g.p)+'</strong></span>'
+      +'<span class="foot">'+foot+'</span></div></a>';
+  }
+  function run(){
+    var qs=fold($("q-eq").value).split(/\\s+/).filter(Boolean);
+    var browsing=!qs.length && !cat;
+    $("eq-browse").hidden=!browsing; $("eq-results").hidden=browsing;
+    if(browsing){history.replaceState(null,"",location.pathname);return;}
+    var r=DATA.filter(function(g){
+      if(cat && g.cat!==cat) return false;
+      var hay=fold(g.mk+" "+g.md+" "+(CN[g.cat]||""));
+      return qs.every(function(w){return hay.indexOf(w)>=0;});
+    });
+    r.sort(function(a,b){return (b.w-a.w)||(b.n-a.n)||(a.p-b.p);});
+    $("eq-count").textContent=nf.format(r.length)+(r.length===1?" producto":" productos");
+    $("eq-grid").innerHTML=r.length?r.slice(0,150).map(card).join(""):'<p class="empty">Nada por aquí. Prueba otra búsqueda.</p>';
+    var p=new URLSearchParams(); if($("q-eq").value.trim())p.set("q",$("q-eq").value.trim()); if(cat)p.set("cat",cat);
+    history.replaceState(null,"","?"+p.toString());
+  }
+  $("eq-form").addEventListener("submit",function(e){e.preventDefault();run();});
+  $("q-eq").addEventListener("input",function(){clearTimeout(window.__t);window.__t=setTimeout(run,180);});
+  $("eq-chips").addEventListener("click",function(e){var b=e.target.closest("[data-cat]");if(!b)return;cat=b.dataset.cat;var cs=document.querySelectorAll("#eq-chips .chip");for(var i=0;i<cs.length;i++)cs[i].classList.toggle("on",cs[i]===b);run();});
+  fetch("buscador.json").then(function(r){return r.json();}).then(function(d){
+    DATA=d; var p=new URLSearchParams(location.search); var q=p.get("q")||""; cat=p.get("cat")||"";
+    $("q-eq").value=q;
+    var cs=document.querySelectorAll("#eq-chips .chip"); for(var i=0;i<cs.length;i++)cs[i].classList.toggle("on",cs[i].dataset.cat===cat);
+    run();
+  }).catch(function(){});
+})();
+</script>"""
 
 
 def build(data, history):
@@ -161,6 +221,11 @@ def build(data, history):
     for cat, gs in by_cat.items():
         changed += write(DIR / f"{cat}.html", category_page(cat, gs))
     changed += write(DIR / "index.html", index_page(groups, sources))
+    # índice ligero para el buscador de equipación (cliente)
+    idx = [{"mid": g["mid"], "mk": g["mk"], "md": g["md"], "cat": g["cat"], "p": g["min"],
+            "n": g["n"], "w": len(g["webs"]), "img": g["img"]} for g in groups.values()]
+    idx.sort(key=lambda x: (-x["w"], -x["n"], x["p"]))
+    write(DIR / "buscador.json", json.dumps(idx, ensure_ascii=False, separators=(",", ":")))
     urls = [f"{SITE}/equipacion/"] + [f"{SITE}/equipacion/{cat}.html" for cat in sorted(by_cat)] + \
            [f"{SITE}/equipacion/{mid}.html" for mid in sorted(groups)]
     sitemap = ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
