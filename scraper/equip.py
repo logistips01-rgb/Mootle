@@ -23,6 +23,9 @@ from .pages import slug
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "equipacion.json"
 HISTORY = ROOT / "data" / "equip_history.json"
+# Productos de Albabike añadidos a mano (datos reales) hasta que llegue su feed. Cada uno
+# lleva el `mid` del grupo de Máximo Moto correspondiente, así se comparan en la misma ficha.
+SEED_FILE = ROOT / "data" / "albabike_seed.json"
 
 # product_type de Shopify → categoría de Mootle (ACCESORIOS se deja fuera: demasiado amplio)
 CATS = {"CASCO": "casco", "GUANTES": "guantes", "CHAQUETA": "chaqueta",
@@ -108,6 +111,23 @@ def run(dry=False):
         sources[store["id"]] = info
         print(f'[{store["name"]}] {info["status"]} · {len(items)} productos')
         for it in items:
+            prev = oldmap.get(it["id"])
+            it["fs"] = prev.get("fs", today) if prev else today
+            it["ls"] = today
+            it["ph"] = price_history(it, prev, today)
+            if prev and prev.get("p") and prev["p"] != it["p"]:
+                it["pa"], it["pc"] = prev["p"], today
+            elif prev and prev.get("pa"):
+                it["pa"], it["pc"] = prev["pa"], prev.get("pc")
+            results.append(it)
+            seen.add(it["id"])
+
+    # Albabike (seed manual con datos reales, hasta tener su feed): mismos campos y merge.
+    seed = load(SEED_FILE, [])
+    if seed:
+        sources["albabike"] = {"name": "Albabike", "home": "https://albabike.com/", "status": "seed", "count": len(seed)}
+        print(f"[Albabike] seed · {len(seed)} productos")
+        for it in seed:
             prev = oldmap.get(it["id"])
             it["fs"] = prev.get("fs", today) if prev else today
             it["ls"] = today
