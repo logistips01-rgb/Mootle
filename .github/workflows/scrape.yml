@@ -12,6 +12,12 @@ on:
       only:
         description: "Solo estas webs, separadas por espacios (vacío = todas)"
         default: ""
+  # Al cambiar el workflow o el scraper se ejecuta una vez para validarlo (como en guitle).
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/scrape.yml"
+      - "scraper/**"
 
 permissions:
   contents: write
