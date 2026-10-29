@@ -205,6 +205,13 @@ def _fuente_badge(f):
     return f'<span class="fbadge {"ok" if f.startswith("oficial") else "soft"}">{e(f)}</span>'
 
 
+def _precio_key(s):
+    """Primer número de un 'desde' ('79,65 €/año', '~6,95 % TAE') para ordenar de menos a más;
+    sin número ('Presupuesto') va al final."""
+    m = re.search(r"(\d+(?:[.,]\d+)?)", s or "")
+    return float(m.group(1).replace(",", ".")) if m else float("inf")
+
+
 def _comp_table(headers, rows):
     th = "".join(f"<th>{e(h)}</th>" for h in headers)
     body = "".join("<tr>" + "".join(f"<td>{c}</td>" for c in r) + "</tr>" for r in rows)
@@ -218,7 +225,7 @@ def seguros_page():
     rows = [[f'<strong>{e(a["nombre"])}</strong>', f'{e(a["desde"])} {_fuente_badge(a["fuente"])}',
              e(a["cobertura"]), e(a["nota"]),
              f'<a class="ext" href="{e(a["url"])}" target="_blank" rel="nofollow noopener noreferrer">Ver ↗</a>']
-            for a in ASEGURADORAS]
+            for a in sorted(ASEGURADORAS, key=lambda a: _precio_key(a["desde"]))]
     body = f"""  <nav class="crumbs" aria-label="Migas"><a href="../">Inicio</a> › Seguro de moto</nav>
   <h1 class="display" style="font-size:clamp(28px,4vw,40px);margin:8px 0 6px">Seguro de moto: compara aseguradoras</h1>
   <p class="sub" style="color:var(--text-secondary);max-width:70ch">El precio depende de tu moto, tu perfil y tu provincia, así que estos son <strong>precios de partida orientativos</strong>, no una cotización. Pide presupuesto en la que te interese.</p>
@@ -239,7 +246,7 @@ def financieras_page():
     rows = [[f'<strong>{e(f["nombre"])}</strong>', f'{e(f["tae"])} {_fuente_badge(f["fuente"])}',
              e(f["plazo"]), e(f["importe"]), e(f["nota"]),
              f'<a class="ext" href="{e(f["url"])}" target="_blank" rel="nofollow noopener noreferrer">Ver ↗</a>']
-            for f in FINANCIERAS]
+            for f in sorted(FINANCIERAS, key=lambda f: _precio_key(f["tae"]))]
     body = f"""  <nav class="crumbs" aria-label="Migas"><a href="../">Inicio</a> › Financiación</nav>
   <h1 class="display" style="font-size:clamp(28px,4vw,40px);margin:8px 0 6px">Financiar tu moto de ocasión</h1>
   <p class="sub" style="color:var(--text-secondary);max-width:70ch">En cada ficha de moto verás la <strong>cuota de ejemplo</strong> ({FINANCIACION_EJEMPLO_MESES} meses, TIN {tin}%). Aquí comparas las financieras; los tipos son <strong>orientativos</strong> y están sujetos a aprobación.</p>
