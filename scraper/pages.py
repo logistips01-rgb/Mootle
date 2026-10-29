@@ -12,6 +12,9 @@ from collections import defaultdict
 from datetime import date
 from pathlib import Path
 
+from .complementos_data import (ASEGURADORAS, FECHA_DATOS, FINANCIACION_EJEMPLO_MESES,
+                                FINANCIACION_EJEMPLO_TIN, FINANCIERAS, SEGURO_DESDE)
+
 ROOT = Path(__file__).resolve().parent.parent
 SITE = "https://mootle.es"  # dominio propio (antes: https://logistips01-rgb.github.io/Mootle)
 MODELS_DIR = ROOT / "m"
@@ -162,24 +165,91 @@ def _amazon(query):
     return f"https://www.amazon.es/s?k={quote(query)}&amp;tag={AMAZON_TAG}"
 
 
-def complementos(name):
+def financiacion_cuota(precio):
+    """Cuota mensual de ejemplo, para el 'desde X €/mes' de la ficha."""
+    if not precio:
+        return None
+    i = FINANCIACION_EJEMPLO_TIN / 100 / 12
+    n = FINANCIACION_EJEMPLO_MESES
+    return int(round(precio * i / (1 - (1 + i) ** -n)))
+
+
+def complementos(name, precio=None):
+    nm = e(name)
+    cuota = financiacion_cuota(precio)
+    fin_desc = (f'Desde ~{num(cuota)} €/mes <small>(ejemplo {FINANCIACION_EJEMPLO_MESES} meses)</small>'
+                if cuota else "Financia tu moto a plazos")
+    # (clave, título, desc-html, url, ¿enlace externo de afiliado?)
     cards = [
-        ("seguro", "Seguro de moto", f"Calcula el seguro de tu {name}", None),
-        ("equip", "Equipación", "Casco, guantes y chaqueta", _amazon("equipacion moto casco")),
-        ("ruedas", "Neumáticos", f"Ruedas para tu {name}", _amazon(f"neumatico moto {name}")),
-        ("financ", "Financiación", "Financia tu moto a plazos", None),
+        ("seguro", "Seguro de moto", f'Compara aseguradoras · desde {e(SEGURO_DESDE)} <small>(orientativo)</small>', "../seguros/", False),
+        ("equip", "Equipación", "Casco, guantes y chaqueta", _amazon("equipacion moto casco"), True),
+        ("ruedas", "Neumáticos", f"Ruedas para tu {nm}", _amazon(f"neumatico moto {name}"), True),
+        ("financ", "Financiación", fin_desc, "../financiacion/", False),
     ]
     out = []
-    for key, title, desc, url in cards:
+    for key, title, desc, url, ext in cards:
         ic = f'<span class="comp-ic"><svg viewBox="0 0 24 24" aria-hidden="true">{_COMP_ICONS[key]}</svg></span>'
         cta = (f'<a class="ext" href="{url}" target="_blank" rel="sponsored nofollow noopener noreferrer">Ver ↗</a>'
-               if url else '<span class="comp-soon">Muy pronto</span>')
+               if ext else f'<a class="ext" href="{url}">Comparar →</a>')
         out.append(f'<div class="comp">{ic}<span class="comp-t">{e(title)}</span>'
-                   f'<span class="comp-d">{e(desc)}</span>{cta}</div>')
-    return (f'<div class="panel"><h2 class="display">Complementos para tu {e(name)}</h2>'
+                   f'<span class="comp-d">{desc}</span>{cta}</div>')
+    return (f'<div class="panel"><h2 class="display">Complementos para tu {nm}</h2>'
             f'<p class="muted" style="margin:0 0 14px">Lo que necesitas al comprar la moto: seguro, equipación y neumáticos.</p>'
             f'<div class="complementos">{"".join(out)}</div>'
-            f'<p class="aff-note">Algunos enlaces son de afiliados: si compras, mootle puede llevarse una pequeña comisión, sin coste para ti.</p></div>')
+            f'<p class="aff-note">Seguros y financiación: datos orientativos. Equipación y neumáticos: enlaces de afiliados (si compras, mootle puede llevarse una pequeña comisión, sin coste para ti).</p></div>')
+
+
+# ───────────────────────────── páginas de seguros y financiación ─────────────────────────────
+
+def _fuente_badge(f):
+    return f'<span class="fbadge {"ok" if f.startswith("oficial") else "soft"}">{e(f)}</span>'
+
+
+def _comp_table(headers, rows):
+    th = "".join(f"<th>{e(h)}</th>" for h in headers)
+    body = "".join("<tr>" + "".join(f"<td>{c}</td>" for c in r) + "</tr>" for r in rows)
+    return f'<div class="tablebox"><table class="ctable"><thead><tr>{th}</tr></thead><tbody>{body}</tbody></table></div>'
+
+
+def seguros_page():
+    title = f"Seguro de moto barato: compara aseguradoras (desde {SEGURO_DESDE}) · mootle"
+    desc = ("Compara el precio de partida de las aseguradoras de moto en España: Mapfre, Qualitas, "
+            "AMV, Verti, Línea Directa y más. Datos orientativos, no es una cotización.")
+    rows = [[f'<strong>{e(a["nombre"])}</strong>', f'{e(a["desde"])} {_fuente_badge(a["fuente"])}',
+             e(a["cobertura"]), e(a["nota"]),
+             f'<a class="ext" href="{e(a["url"])}" target="_blank" rel="nofollow noopener noreferrer">Ver ↗</a>']
+            for a in ASEGURADORAS]
+    body = f"""  <nav class="crumbs" aria-label="Migas"><a href="../">Inicio</a> › Seguro de moto</nav>
+  <h1 class="display" style="font-size:clamp(28px,4vw,40px);margin:8px 0 6px">Seguro de moto: compara aseguradoras</h1>
+  <p class="sub" style="color:var(--text-secondary);max-width:70ch">El precio depende de tu moto, tu perfil y tu provincia, así que estos son <strong>precios de partida orientativos</strong>, no una cotización. Pide presupuesto en la que te interese.</p>
+  <div class="panel">
+    <h2 class="display">Aseguradoras de moto</h2>
+    {_comp_table(["Aseguradora", "Desde", "Coberturas", "Notas", ""], rows)}
+    <p class="aff-note">Datos orientativos recopilados el {FECHA_DATOS} de fuentes públicas (<span class="fbadge ok">oficial</span> = web de la aseguradora · <span class="fbadge soft">comparador</span> = agregadores, a verificar). No constituyen oferta ni cotización.</p>
+  </div>
+"""
+    return head(title, desc, f"{SITE}/seguros/") + body + FOOT
+
+
+def financieras_page():
+    tin = str(FINANCIACION_EJEMPLO_TIN).replace(".", ",")
+    title = "Financiar una moto de ocasión: compara financieras y cuotas · mootle"
+    desc = ("Compara financieras para comprar tu moto de ocasión: Cofidis, Younited, N26, Cetelem y "
+            "CaixaBank. TIN/TAE orientativos y cuota de ejemplo por moto.")
+    rows = [[f'<strong>{e(f["nombre"])}</strong>', f'{e(f["tae"])} {_fuente_badge(f["fuente"])}',
+             e(f["plazo"]), e(f["importe"]), e(f["nota"]),
+             f'<a class="ext" href="{e(f["url"])}" target="_blank" rel="nofollow noopener noreferrer">Ver ↗</a>']
+            for f in FINANCIERAS]
+    body = f"""  <nav class="crumbs" aria-label="Migas"><a href="../">Inicio</a> › Financiación</nav>
+  <h1 class="display" style="font-size:clamp(28px,4vw,40px);margin:8px 0 6px">Financiar tu moto de ocasión</h1>
+  <p class="sub" style="color:var(--text-secondary);max-width:70ch">En cada ficha de moto verás la <strong>cuota de ejemplo</strong> ({FINANCIACION_EJEMPLO_MESES} meses, TIN {tin}%). Aquí comparas las financieras; los tipos son <strong>orientativos</strong> y están sujetos a aprobación.</p>
+  <div class="panel">
+    <h2 class="display">Financieras para moto</h2>
+    {_comp_table(["Entidad", "TAE desde", "Plazo", "Importe", "Notas", ""], rows)}
+    <p class="aff-note">Datos orientativos recopilados el {FECHA_DATOS} de fuentes públicas (<span class="fbadge ok">oficial</span> = web de la entidad · <span class="fbadge soft">comparador</span> = agregadores, a verificar). No constituyen oferta ni cotización. Las promociones al 0% suelen ser solo para moto nueva en concesionario.</p>
+  </div>
+"""
+    return head(title, desc, f"{SITE}/financiacion/") + body + FOOT
 
 
 def chart(series):
@@ -299,7 +369,7 @@ def model_page(g, sources, history, years):
     <p class="muted" style="margin:0">La más barata y el precio mediano de la {e(full)}, día a día.</p>
     {chart(history.get(g['mid']))}
   </div>
-  {complementos(name)}
+  {complementos(name, g["min"])}
   {f'<div class="panel"><h2 class="display">Otros años de la {e(name)}</h2><div class="sortbar">{other_years}</div></div>' if len(years) > 1 else ""}
 """
     return head(title, desc, canonical, g["img"], ld) + body + SORT_SCRIPT + FOOT
@@ -388,7 +458,10 @@ def build(listings, history):
     for mk, gs in by_brand.items():
         changed += write(BRANDS_DIR / f"{slug(mk)}.html", brand_page(mk, gs))
     changed += write(BRANDS_DIR / "index.html", brands_index(by_brand))
-    urls = [f"{SITE}/", f"{SITE}/marca/"] + [f"{SITE}/marca/{slug(mk)}.html" for mk in sorted(by_brand)] + \
+    changed += write(ROOT / "seguros" / "index.html", seguros_page())
+    changed += write(ROOT / "financiacion" / "index.html", financieras_page())
+    urls = [f"{SITE}/", f"{SITE}/marca/", f"{SITE}/seguros/", f"{SITE}/financiacion/"] + \
+           [f"{SITE}/marca/{slug(mk)}.html" for mk in sorted(by_brand)] + \
            [f"{SITE}/m/{mid}.html" for mid in sorted(groups)]
     sitemap = ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
                "".join(f"  <url><loc>{e(u)}</loc></url>\n" for u in urls) + "</urlset>\n")
