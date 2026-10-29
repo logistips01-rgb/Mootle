@@ -49,34 +49,39 @@
   .muted { color: var(--text-muted); }
   .display { font-family: "Inter Tight", Inter, system-ui, sans-serif; font-weight: 800; letter-spacing: -.03em; }
 
-  /* Logo: las dos «o» son ruedas */
-  .logo { display: inline-flex; align-items: center; text-decoration: none; color: var(--text-primary); cursor: pointer;
-          font-family: "Inter Tight", Inter, sans-serif; font-weight: 800; letter-spacing: -.045em; line-height: 1; font-size: 30px; }
+  /* Logo: icono (las dos ruedas) + nombre, cuyas «oo» son ruedas, + lema */
+  .logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-primary); cursor: pointer; }
   .logo:hover { color: var(--text-primary); }
-  .logo svg { width: 1.53em; height: .8em; margin: 0 .03em; position: relative; top: .06em; }
-  .logo svg circle { stroke: var(--logo); }
-  .logo svg circle.hub { fill: var(--logo); stroke: none; }
+  .logo img { width: 38px; height: 38px; flex: none; }
+  .logo .stack { display: flex; flex-direction: column; line-height: 1; }
+  .logo .word { display: inline-flex; align-items: center; font-family: "Inter Tight", Inter, sans-serif; font-weight: 800; letter-spacing: -.045em; line-height: 1; font-size: 1.75rem; }
+  .logo .word svg { width: 1.53em; height: .8em; margin: 0 .03em; position: relative; top: .06em; }
+  .logo .word svg circle { stroke: var(--logo); }
+  .logo .word svg circle.hub { fill: var(--logo); stroke: none; }
+  .logo .tag { font-size: .78rem; font-weight: 600; color: var(--accent); margin-top: 4px; white-space: nowrap; }
+  .logo.mark { gap: 18px; margin-bottom: 18px; }
+  .logo.mark img { width: 88px; height: 88px; }
+  .logo.mark .word { font-size: 5.2rem; }
 
-  .site-head { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; padding: 20px 0; }
-  .site-head nav { display: flex; gap: 20px; flex: 1; flex-wrap: wrap; }
-  .site-head nav a { color: var(--text-secondary); text-decoration: none; }
-  .site-head nav a:hover { color: var(--accent); }
-  .site-head .updated { font-size: 13px; color: var(--text-muted); }
+  /* Cabecera de la portada: cifras a la izquierda, secciones a la derecha */
+  header.top { display: flex; align-items: center; gap: 16px; padding: 16px 0; flex-wrap: wrap; }
+  header.top nav { margin-left: auto; display: flex; gap: 6px; }
+  header.top nav a { text-decoration: none; padding: 6px 12px; border-radius: 999px; color: var(--text-secondary); white-space: nowrap; }
+  header.top nav a:hover { background: var(--surface-1); color: var(--text-primary); }
+  .counts { display: flex; gap: 6px; flex-wrap: wrap; color: var(--text-muted); font-size: .88rem; white-space: nowrap; }
+  .counts span { display: inline-flex; align-items: center; gap: 4px; padding: 4px 11px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface-1); }
+  .counts b { color: var(--text-primary); font-variant-numeric: tabular-nums; }
 
-  /* Hero y buscador */
-  .hero { text-align: center; padding: 48px 0 36px; }
-  .hero h1 { font-size: clamp(34px, 5vw, 60px); line-height: 1.05; margin: 0 0 14px; }
+  /* Hero tipo Google: logo grande, lema y un solo buscador */
+  .hero { text-align: center; padding: 56px 0 32px; }
+  .hero h1 { font-family: Inter, sans-serif; font-size: clamp(1.35rem, 3.6vw, 1.8rem); line-height: 1.2; letter-spacing: -.02em; margin: 0 0 24px; font-weight: 700; }
   .hero h1 span { color: var(--accent); }
-  .hero p { font-size: 18px; color: var(--text-secondary); margin: 0 0 30px; }
-  form.big { max-width: 900px; margin: 0 auto; background: var(--surface-1); border: 1px solid var(--border-strong); border-radius: 20px;
-             padding: 8px; display: flex; flex-wrap: wrap; gap: 4px; box-shadow: var(--shadow); text-align: left; }
-  form.big label { display: flex; flex-direction: column; padding: 10px 16px; border-radius: 14px; min-width: 0; }
-  form.big label span { font-size: 12px; font-weight: 600; color: var(--text-muted); }
-  form.big input, form.big select { border: 0; outline: none; font: inherit; font-size: 17px; padding: 4px 0 0; background: none; color: var(--text-primary); min-width: 0; }
-  form.big label:focus-within { background: var(--surface-0); }
-  form.big .what { flex: 3 1 260px; }
-  form.big .where { flex: 1 1 160px; border-left: 1px solid var(--border); }
-  form.big .max { flex: 1 1 140px; border-left: 1px solid var(--border); }
+  .hero h1 small { display: block; margin-top: 6px; font-size: .98rem; font-weight: 500; color: var(--text-muted); letter-spacing: 0; }
+  form.search { display: flex; max-width: 720px; margin: 0 auto; border: 1px solid var(--border-strong); border-radius: 999px; background: var(--surface-1);
+                padding: 6px; box-shadow: var(--shadow); }
+  form.search:focus-within { border-color: var(--accent); }
+  form.search input { flex: 1; min-width: 0; font: inherit; font-size: 1.1rem; padding: 10px 18px; border: 0; background: none; color: var(--text-primary); outline: none; }
+  form.search .btn { border-radius: 999px; min-height: 48px; padding: 0 26px; font-size: 1rem; }
   .btn { min-height: 52px; border: 0; border-radius: 14px; background: var(--accent); color: var(--on-accent); font: inherit; font-weight: 600; font-size: 17px;
          padding: 0 28px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; text-decoration: none; }
   .btn:hover { background: var(--accent-hover); color: var(--on-accent); }
@@ -86,11 +91,6 @@
   .pill:hover, .pill.on { border-color: var(--accent); color: var(--accent); }
   .pill.on { background: var(--accent-bg); }
 
-  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
-  .stat { background: var(--surface-1); border: 1px solid var(--border); border-radius: 16px; padding: 18px 20px; }
-  .stat b { display: block; font-family: "Inter Tight", Inter, sans-serif; font-size: 30px; font-weight: 800; }
-  .stat b.good { color: var(--good); }
-  .stat span { font-size: 14px; color: var(--text-muted); }
 
   section { margin-top: 48px; }
   .sec-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 6px; }
@@ -119,7 +119,6 @@
 
   /* Barra de resultados */
   .topbar { position: sticky; top: 0; z-index: 5; background: var(--surface-0); padding: 12px 0 10px; border-bottom: 1px solid var(--border); margin-bottom: 14px; }
-  .topbar .logo { font-size: 24px; }
   form.slim { display: flex; margin: 10px 0 8px; border: 1px solid var(--border-strong); border-radius: 999px; background: var(--surface-1); overflow: hidden; }
   form.slim:focus-within { border-color: var(--accent); }
   form.slim input { flex: 1; min-width: 0; font: inherit; font-size: 1.05rem; padding: 11px 18px; border: 0; background: none; color: var(--text-primary); outline: none; }
@@ -155,7 +154,6 @@
   .badge.res { background: var(--warn-bg); color: var(--warning); }
 
   /* Ficha del modelo */
-  .back { display: inline-flex; align-items: center; gap: 6px; font: inherit; font-weight: 600; background: none; border: 0; color: var(--accent); cursor: pointer; padding: 8px 0; min-height: 44px; }
   .ficha-head { display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 1fr); gap: 28px; align-items: start; margin-top: 6px; }
   .ficha-head .photo { border-radius: 18px; border: 1px solid var(--border); }
   .ficha-head h1 { font-size: clamp(30px, 4vw, 44px); margin: 2px 0 4px; line-height: 1.05; }
@@ -207,17 +205,16 @@
     .offer .lbl { display: inline; color: var(--text-muted); font-size: 12px; margin-right: 4px; }
   }
   @media (max-width: 640px) {
-    .site-head nav { display: none; }
-    .hero { text-align: left; padding: 24px 0 24px; }
-    .hero p { font-size: 16px; margin-bottom: 18px; }
-    form.big { flex-direction: column; }
-    form.big .what, form.big .where, form.big .max { flex: none; }
-    form.big .where, form.big .max { border-left: 0; background: var(--surface-0); }
-    form.big .btn { width: 100%; }
+    header.top nav a:last-child { display: none; }
+    .hero { padding: 28px 0 20px; }
+    .logo.mark { gap: 12px; }
+    .logo.mark img { width: 58px; height: 58px; }
+    .logo.mark .word { font-size: 3.4rem; }
+    .logo .tag { display: none; }
+    form.search input { font-size: 1rem; padding: 8px 12px; }
+    form.search .btn { padding: 0 18px; min-height: 44px; }
     .quick { justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
     .quick .pill { flex: none; }
-    .quick > span { display: none; }
-    .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .types { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
     .card .body { padding: 10px 12px 12px; }
@@ -236,25 +233,21 @@
 <main>
   <!-- Portada -->
   <div id="home">
-    <header class="site-head">
-      <a class="logo" data-home aria-label="mootle, inicio" href="./"><span>m</span><svg viewBox="0 0 92 48" aria-hidden="true"><circle cx="22" cy="26" r="16" fill="none" stroke-width="8"/><circle cx="70" cy="26" r="16" fill="none" stroke-width="8"/><circle class="hub" cx="22" cy="26" r="3.5"/><circle class="hub" cx="70" cy="26" r="3.5"/></svg><span>tle</span></a>
-      <nav aria-label="Secciones"><a href="#chollos">Chollos</a><a href="#tipos">Por tipo</a><a href="#webs">Webs</a><a href="#como">Cómo funciona</a></nav>
-      <span class="updated" id="updated-top"></span>
+    <header class="top">
+      <div class="counts" id="stats" aria-label="En cifras"></div>
+      <nav aria-label="Secciones"><a href="#chollos">Chollos</a><a href="#tipos">Por tipo</a><a href="#webs">Webs</a></nav>
     </header>
 
     <div class="hero">
-      <h1 class="display">Tu moto de ocasión,<br><span>al mejor precio</span></h1>
-      <p id="hero-sub">Cada modelo y año, con la más barata de todas las webs y su histórico de precios.</p>
-      <form class="big" id="home-form" role="search">
-        <label class="what"><span>Qué moto buscas</span><input id="q-home" type="search" placeholder="MT-07, Africa Twin, scooter 125…" autocomplete="off"></label>
-        <label class="where"><span>Dónde</span><select id="home-prov"><option value="">Toda España</option></select></label>
-        <label class="max"><span>Hasta</span><select id="home-price"><option value="">Cualquier precio</option></select></label>
-        <button class="btn" type="submit"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>Buscar</button>
+      <a class="logo mark" data-home aria-label="mootle, inicio" href="./"><img src="icon.svg" alt=""><span class="word">m<svg viewBox="0 0 92 48" aria-hidden="true"><circle cx="22" cy="26" r="16" fill="none" stroke-width="8"/><circle cx="70" cy="26" r="16" fill="none" stroke-width="8"/><circle class="hub" cx="22" cy="26" r="3.5"/><circle class="hub" cx="70" cy="26" r="3.5"/></svg>tle</span></a>
+      <h1>Tu moto de ocasión, <span>al mejor precio</span><small>Comparador de precios de motos de segunda mano</small></h1>
+      <form class="search" id="home-form" role="search">
+        <input id="q-home" type="search" placeholder="Busca: mt-07, africa twin, tiger 900, scooter 125…" autocomplete="off" aria-label="Buscar moto">
+        <button class="btn" type="submit">Buscar</button>
       </form>
-      <div class="quick" id="quick"><span class="muted">Lo más buscado:</span></div>
+      <div class="quick" id="quick"></div>
     </div>
 
-    <div class="stats" id="stats" aria-label="En cifras"></div>
 
     <section id="chollos">
       <div class="sec-head"><h2 class="display">Chollos de hoy</h2><a data-go="sort=deal">Ver todos</a></div>
@@ -289,14 +282,14 @@
     </section>
   </div>
 
-  <!-- Resultados: modelos -->
-  <div id="app" hidden>
-    <div class="topbar">
-      <a class="logo" data-home aria-label="mootle, inicio" href="./"><span>m</span><svg viewBox="0 0 92 48" aria-hidden="true"><circle cx="22" cy="26" r="16" fill="none" stroke-width="8"/><circle cx="70" cy="26" r="16" fill="none" stroke-width="8"/><circle class="hub" cx="22" cy="26" r="3.5"/><circle class="hub" cx="70" cy="26" r="3.5"/></svg><span>tle</span></a>
-      <form class="slim" id="top-form" role="search">
-        <input id="q" type="search" placeholder="Modelo, marca, provincia…" autocomplete="off" aria-label="Buscar moto">
-        <button class="btn" type="submit">Buscar</button>
-      </form>
+  <!-- Barra de resultados y ficha -->
+  <div class="topbar" id="topbar" hidden>
+    <a class="logo" data-home aria-label="mootle, inicio" href="./"><img src="icon.svg" alt=""><span class="stack"><span class="word">m<svg viewBox="0 0 92 48" aria-hidden="true"><circle cx="22" cy="26" r="16" fill="none" stroke-width="8"/><circle cx="70" cy="26" r="16" fill="none" stroke-width="8"/><circle class="hub" cx="22" cy="26" r="3.5"/><circle class="hub" cx="70" cy="26" r="3.5"/></svg>tle</span><span class="tag">motos de ocasión al mejor precio</span></span></a>
+    <form class="slim" id="top-form" role="search">
+      <input id="q" type="search" placeholder="Modelo, marca, provincia…" autocomplete="off" aria-label="Buscar moto">
+      <button class="btn" type="submit">Buscar</button>
+    </form>
+    <div id="filters-box">
       <div class="chips" id="types"></div>
       <div class="filters">
         <select id="f-brand" aria-label="Marca"></select>
@@ -309,6 +302,10 @@
         <select id="f-src" aria-label="Web"></select>
       </div>
     </div>
+  </div>
+
+  <!-- Resultados: modelos -->
+  <div id="app" hidden>
     <div class="meta"><span id="count">Cargando…</span>
       <label>Orden <select id="sort">
         <option value="price">Más barata primero</option><option value="deal">Mayor chollo</option>
@@ -323,7 +320,6 @@
 
   <!-- Ficha de un modelo y año -->
   <div id="ficha" hidden>
-    <button class="back" id="back" type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>Volver</button>
     <div id="ficha-body"></div>
   </div>
 
@@ -561,7 +557,12 @@
   }
 
   /* ───────── navegación ───────── */
-  function show(view) { for (const v of ["home", "app", "ficha"]) $(v).hidden = v !== view; window.scrollTo(0, 0); }
+  function show(view) {
+    for (const v of ["home", "app", "ficha"]) $(v).hidden = v !== view;
+    $("topbar").hidden = view === "home";
+    $("filters-box").hidden = view !== "app";
+    window.scrollTo(0, 0);
+  }
   function showApp(params) {
     show("app");
     $("q").value = params.get("q") || "";
@@ -595,8 +596,6 @@
     e.preventDefault();
     const p = new URLSearchParams();
     if ($("q-home").value.trim()) p.set("q", $("q-home").value.trim());
-    if ($("home-prov").value) p.set("prov", $("home-prov").value);
-    if ($("home-price").value) p.set("price", $("home-price").value);
     showApp(p);
   });
   $("top-form").addEventListener("submit", e => { e.preventDefault(); apply(); });
@@ -604,7 +603,6 @@
   document.querySelectorAll(".filters select, #sort").forEach(s => s.addEventListener("change", apply));
   $("types").addEventListener("click", e => { const b = e.target.closest("[data-type]"); if (b) { type = b.dataset.type; renderTypes(); apply(); } });
   $("more").addEventListener("click", () => { shown += PAGE; render(); });
-  $("back").addEventListener("click", () => { if (history.state && history.state.mid) history.back(); else if (lastSearch) go(lastSearch.slice(1)); else showHome(); });
   window.addEventListener("popstate", route);
   document.addEventListener("click", e => {
     const card = e.target.closest("[data-mid]");
@@ -626,29 +624,20 @@
     const thisYear = new Date().getFullYear();
     options("f-brand", "Todas las marcas", brands);
     options("f-prov", "Toda España", provs);
-    options("home-prov", "Toda España", provs);
     options("f-price", "Cualquier precio", PRICES, v => "Hasta " + eur(v));
-    options("home-price", "Cualquier precio", PRICES, v => eur(v));
     options("f-km", "Cualquier km", KMS, v => `Hasta ${num(v)} km`);
     options("f-year", "Cualquier año", [0, 1, 2, 3, 5, 8, 10, 15].map(n => thisYear - n), y => `Desde ${y}`);
     options("f-src", "Todas las webs", Object.keys(SOURCES), id => SOURCES[id].name);
 
     const updated = new Date(data.updated);
-    const sameDay = updated.toDateString() === new Date().toDateString();
-    const when = updated.toLocaleString("es-ES", sameDay ? { timeZone: "Europe/Madrid", hour: "2-digit", minute: "2-digit" } : { timeZone: "Europe/Madrid", day: "numeric", month: "long" });
-    $("updated-top").textContent = sameDay ? `Actualizado hoy a las ${when}` : `Actualizado el ${when}`;
     $("updated").textContent = `${num(bikes)} motos en ${num(groups.length)} modelos · actualizado el ${updated.toLocaleString("es-ES", { timeZone: "Europe/Madrid", dateStyle: "long", timeStyle: "short" })}`;
     const nSources = Object.values(SOURCES).filter(s => s.count).length;
-    $("hero-sub").textContent = `${num(bikes)} motos en ${num(groups.length)} modelos y años: la más barata de todas las webs y su histórico de precios.`;
 
     const deals = groups.filter(g => g.deal != null && g.deal <= -0.12).sort(sorters.deal);
-    const multi = groups.filter(g => g.webs > 1).length;
-    $("stats").innerHTML = [
-      [num(groups.length), "modelos y años"], [num(bikes), "motos a la venta"],
-      [nSources, nSources === 1 ? "web comparada" : "webs comparadas"], [num(multi), "modelos en más de una web"],
-    ].map(([v, l, c]) => `<div class="stat"><b class="${c || ""}">${v}</b><span>${l}</span></div>`).join("");
+    $("stats").innerHTML = [[num(bikes), "motos"], [num(groups.length), "modelos"], [nSources, nSources === 1 ? "web" : "webs"]]
+      .map(([v, l]) => `<span><b>${v}</b>${l}</span>`).join("");
 
-    $("quick").innerHTML += QUICK.map(q => `<button class="pill" data-go="q=${encodeURIComponent(q)}">${esc(q)}</button>`).join("")
+    $("quick").innerHTML = QUICK.map(q => `<button class="pill" data-go="q=${encodeURIComponent(q)}">${esc(q)}</button>`).join("")
       + `<button class="pill" data-go="a2=1">Aptas A2</button>`;
     $("deals").innerHTML = deals.length ? deals.slice(0, 8).map(card).join("") : `<p class="muted">Aún no hay suficientes motos para comparar.</p>`;
     $("popular").innerHTML = [...groups].sort(sorters.count).slice(0, 8).map(card).join("");
