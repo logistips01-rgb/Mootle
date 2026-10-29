@@ -22,6 +22,7 @@ NAME = "motos.net"
 HOME = "https://motos.coches.net/"
 BASE = "https://motos.coches.net"
 SEARCH = BASE + "/segunda-mano/"
+RETRY_PAUSE = 60    # segundos antes de reintentar una página que no trae anuncios
 NEW_MAX_PAGES = 60  # tope de la fase de novedades (con 20 por página, 1.200 anuncios nuevos)
 
 _PROPS = re.compile(r'window\.__INITIAL_PROPS__\s*=\s*JSON\.parse\("((?:[^"\\]|\\.)*)"\)')
@@ -83,15 +84,19 @@ def scrape(fetcher, known, state, deadline, current_year, log):
     pages_read = 0
     total_pages = state.get("total_pages") or 0
 
-    def read(n):
+    def read(n, retry=True):
         nonlocal total_pages, pages_read
         resp = fetcher.get(page_url(n))
-        if resp.status_code != 200 or is_challenge(resp):
-            status = "challenge" if is_challenge(resp) else f"http_{resp.status_code}"
-            raise _Blocked(status, n)
-        parsed = parse_page(resp.text)
+        parsed = parse_page(resp.text) if resp.status_code == 200 and not is_challenge(resp) else None
+        if parsed is None and retry:
+            # A veces la web corta un rato (p. ej. desde las IPs de GitHub): un reintento tras una pausa.
+            log(f"página {n} sin anuncios ({_describe(resp)}); reintento en {RETRY_PAUSE} s")
+            time.sleep(RETRY_PAUSE)
+            return read(n, retry=False)
         if parsed is None:
-            raise _Blocked("sin_json", n)
+            status = "challenge" if is_challenge(resp) else (
+                f"http_{resp.status_code}" if resp.status_code != 200 else "sin_json")
+            raise _Blocked(status, n, _describe(resp))
         items, total = parsed
         total_pages = total or total_pages
         pages_read += 1
@@ -131,7 +136,7 @@ def scrape(fetcher, known, state, deadline, current_year, log):
             cursor += 1
         state["cursor"] = cursor
     except _Blocked as blocked:
-        status, detail = blocked.status, f"página {blocked.page}"
+        status, detail = blocked.status, f"página {blocked.page}: {blocked.what}"
         log(f"⚠ {status} en la página {blocked.page}; se guarda lo leído")
 
     state["total_pages"] = total_pages
@@ -139,7 +144,14 @@ def scrape(fetcher, known, state, deadline, current_year, log):
                                   "total_pages": total_pages, "complete": False}
 
 
+def _describe(resp):
+    """Qué ha devuelto la web en vez de anuncios: código, tamaño, título y principio del texto."""
+    m = re.search(r"<title[^>]*>(.*?)</title>", resp.text[:20000], re.S | re.I)
+    text = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", re.sub(r"<(script|style)\b.*?</\1>", " ", resp.text[:20000], flags=re.S | re.I)))
+    return f"HTTP {resp.status_code}, {len(resp.text)} bytes, título {(m.group(1).strip() if m else '')[:80]!r}, texto {text.strip()[:160]!r}"
+
+
 class _Blocked(Exception):
-    def __init__(self, status, page):
+    def __init__(self, status, page, what=""):
         super().__init__(status)
-        self.status, self.page = status, page
+        self.status, self.page, self.what = status, page, what
