@@ -6,143 +6,237 @@
 <meta name="theme-color" content="#e8590c">
 <meta name="description" content="mootle es un comparador de motos de segunda mano: busca una vez y ve las más baratas de portales y concesionarios de España, con el precio de mercado de cada modelo.">
 <title>mootle · comparador de motos de ocasión</title>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🏍️%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@700;800&display=swap" rel="stylesheet">
 <style>
   :root {
     color-scheme: light;
-    --surface-0: #f4f4f2; --surface-1: #fcfcfb; --border: #e2e1dc;
-    --text-primary: #0b0b0b; --text-secondary: #52514e; --text-muted: #7a7974;
-    --good: #00750a; --good-bg: #e6f4e8; --warning: #9a6400; --warn-bg: #fff1e0;
-    --accent: #e8590c; --accent-bg: #fdeee5; --info: #2a78d6; --info-bg: #e8f1fc;
+    --surface-0: #f6f5f2; --surface-1: #ffffff; --surface-2: #eceae4; --border: #e2e0d9; --border-strong: #dedcd5;
+    --text-primary: #141413; --text-secondary: #3a3935; --text-muted: #5f5e5a;
+    --good: #0a7a2f; --good-bg: #e7f5ec; --warning: #9a6400; --warn-bg: #fff1e0;
+    --logo: #e8590c; --accent: #c2410c; --accent-hover: #9a3412; --accent-bg: #fff4ec; --accent-border: #f4c9ae;
+    --info: #1d5fb4; --info-bg: #e8f1fc; --shadow: 0 10px 30px rgba(20,20,19,.06);
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
       color-scheme: dark;
-      --surface-0: #111110; --surface-1: #1a1a19; --border: #2e2e2c;
-      --text-primary: #f0efec; --text-secondary: #c3c2b7; --text-muted: #8f8e88;
+      --surface-0: #111110; --surface-1: #1a1a19; --surface-2: #262624; --border: #2e2e2c; --border-strong: #3a3a37;
+      --text-primary: #f0efec; --text-secondary: #d5d4cc; --text-muted: #a3a29b;
       --good: #4cc261; --good-bg: #16301b; --warning: #e0a63a; --warn-bg: #3a2a12;
-      --accent: #f07a35; --accent-bg: #3a2014; --info: #3987e5; --info-bg: #172a40;
+      --logo: #f07a35; --accent: #f07a35; --accent-hover: #f59a62; --accent-bg: #2e1a10; --accent-border: #5a321c;
+      --info: #6aa6ef; --info-bg: #172a40; --shadow: none;
     }
   }
   :root[data-theme="dark"] {
     color-scheme: dark;
-    --surface-0: #111110; --surface-1: #1a1a19; --border: #2e2e2c;
-    --text-primary: #f0efec; --text-secondary: #c3c2b7; --text-muted: #8f8e88;
+    --surface-0: #111110; --surface-1: #1a1a19; --surface-2: #262624; --border: #2e2e2c; --border-strong: #3a3a37;
+    --text-primary: #f0efec; --text-secondary: #d5d4cc; --text-muted: #a3a29b;
     --good: #4cc261; --good-bg: #16301b; --warning: #e0a63a; --warn-bg: #3a2a12;
-    --accent: #f07a35; --accent-bg: #3a2014; --info: #3987e5; --info-bg: #172a40;
+    --logo: #f07a35; --accent: #f07a35; --accent-hover: #f59a62; --accent-bg: #2e1a10; --accent-border: #5a321c;
+    --info: #6aa6ef; --info-bg: #172a40; --shadow: none;
   }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--surface-0); color: var(--text-primary); font: 15px/1.45 Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-  a { color: inherit; }
-  main { max-width: 1120px; margin: 0 auto; padding: 0 16px 48px; }
+  a { color: var(--accent); }
+  a:hover { color: var(--accent-hover); }
+  main { max-width: 1200px; margin: 0 auto; padding: 0 16px 48px; }
   [hidden] { display: none !important; }
   .muted { color: var(--text-muted); }
+  .display { font-family: "Inter Tight", Inter, system-ui, sans-serif; font-weight: 800; letter-spacing: -.03em; }
 
-  .logo { display: inline-flex; align-items: baseline; gap: 8px; text-decoration: none; cursor: pointer; }
-  .logo .word { font-weight: 800; letter-spacing: -.03em; }
-  .logo .word b { color: var(--accent); }
-  .logo .tag { font-size: .8rem; font-weight: 400; color: var(--text-muted); }
+  /* Logo: las dos «o» son ruedas */
+  .logo { display: inline-flex; align-items: center; text-decoration: none; color: var(--text-primary); cursor: pointer;
+          font-family: "Inter Tight", Inter, sans-serif; font-weight: 800; letter-spacing: -.045em; line-height: 1; font-size: 30px; }
+  .logo:hover { color: var(--text-primary); }
+  .logo svg { width: 1.53em; height: .8em; margin: 0 .03em; position: relative; top: .06em; }
+  .logo svg circle { stroke: var(--logo); }
+  .logo svg circle.hub { fill: var(--logo); stroke: none; }
 
-  /* Portada */
-  .hero { text-align: center; padding: 56px 0 28px; }
-  .hero .logo .word { font-size: 3rem; }
-  .hero h1 { font-size: 1.6rem; margin: 10px 0 20px; font-weight: 700; }
+  /* Cabecera de la portada */
+  .site-head { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; padding: 20px 0; }
+  .site-head nav { display: flex; gap: 20px; flex: 1; flex-wrap: wrap; }
+  .site-head nav a { color: var(--text-secondary); text-decoration: none; }
+  .site-head nav a:hover { color: var(--accent); }
+  .site-head .updated { font-size: 13px; color: var(--text-muted); }
+
+  /* Hero */
+  .hero { text-align: center; padding: 48px 0 36px; }
+  .hero h1 { font-size: clamp(34px, 5vw, 60px); line-height: 1.05; margin: 0 0 14px; }
   .hero h1 span { color: var(--accent); }
-  .hero h1 small { display: block; font-size: .95rem; font-weight: 400; color: var(--text-muted); margin-top: 4px; }
-  form.search { display: flex; max-width: 620px; margin: 0 auto; border: 1px solid var(--border); border-radius: 999px; background: var(--surface-1); overflow: hidden; }
-  form.search:focus-within { border-color: var(--accent); }
-  form.search input { flex: 1; min-width: 0; font: inherit; font-size: 1.05rem; padding: 12px 18px; border: 0; background: none; color: var(--text-primary); outline: none; }
-  form.search button { font: inherit; font-weight: 600; border: 0; background: var(--accent); color: #fff; padding: 0 22px; cursor: pointer; }
-  .quick { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
-  section { margin-top: 28px; }
-  .sec-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
-  .sec-head h2 { font-size: 1.15rem; margin: 0 0 10px; }
-  .sec-head a { font-size: .9rem; color: var(--text-secondary); cursor: pointer; }
-  .row { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(220px, 1fr); gap: 14px; overflow-x: auto; padding-bottom: 6px; }
-  .sources { display: flex; gap: 8px; flex-wrap: wrap; }
-  .sources a { text-decoration: none; background: var(--surface-1); border: 1px solid var(--border); border-radius: 10px; padding: 8px 12px; font-size: .9rem; }
-  .sources a b { display: block; }
-  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
-  .step { background: var(--surface-1); border: 1px solid var(--border); border-radius: 12px; padding: 14px; font-size: .92rem; color: var(--text-secondary); }
-  .step b { display: block; color: var(--accent); font-size: 1.2rem; }
+  .hero p { font-size: 18px; color: var(--text-secondary); margin: 0 0 30px; }
+  form.big { max-width: 900px; margin: 0 auto; background: var(--surface-1); border: 1px solid var(--border-strong); border-radius: 20px;
+             padding: 8px; display: flex; flex-wrap: wrap; gap: 4px; box-shadow: var(--shadow); text-align: left; }
+  form.big label { display: flex; flex-direction: column; padding: 10px 16px; border-radius: 14px; min-width: 0; }
+  form.big label span { font-size: 12px; font-weight: 600; color: var(--text-muted); }
+  form.big input, form.big select { border: 0; outline: none; font: inherit; font-size: 17px; padding: 4px 0 0; background: none; color: var(--text-primary); min-width: 0; }
+  form.big label:focus-within { background: var(--surface-0); }
+  form.big .what { flex: 3 1 260px; }
+  form.big .where { flex: 1 1 160px; border-left: 1px solid var(--border); }
+  form.big .max { flex: 1 1 140px; border-left: 1px solid var(--border); }
+  .btn { min-height: 52px; border: 0; border-radius: 14px; background: var(--accent); color: #fff; font: inherit; font-weight: 600; font-size: 17px;
+         padding: 0 28px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; }
+  .btn:hover { background: var(--accent-hover); }
+  :root[data-theme="dark"] .btn, .dark-btn { color: #141413; }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn { color: #141413; } }
+  .quick { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 18px; align-items: center; }
+  .pill { font: inherit; font-size: 14px; color: var(--text-secondary); text-decoration: none; background: var(--surface-1); border: 1px solid var(--border-strong);
+          border-radius: 999px; padding: 6px 14px; cursor: pointer; }
+  .pill:hover { border-color: var(--accent); color: var(--accent); }
+
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+  .stat { background: var(--surface-1); border: 1px solid var(--border); border-radius: 16px; padding: 18px 20px; }
+  .stat b { display: block; font-family: "Inter Tight", Inter, sans-serif; font-size: 30px; font-weight: 800; }
+  .stat b.good { color: var(--good); }
+  .stat span { font-size: 14px; color: var(--text-muted); }
+
+  section { margin-top: 48px; }
+  .sec-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 6px; }
+  .sec-head h2 { font-size: 26px; margin: 0; }
+  .sec-head a { font-size: 15px; font-weight: 600; text-decoration: none; cursor: pointer; }
+  .sec-sub { margin: 0 0 18px; color: var(--text-muted); }
+  .types { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+  .type { font: inherit; text-align: left; background: var(--surface-1); border: 1px solid var(--border); border-radius: 16px; padding: 18px; color: var(--text-primary);
+          display: flex; flex-direction: column; gap: 8px; cursor: pointer; }
+  .type:hover { border-color: var(--accent); }
+  .type svg { width: 40px; height: 40px; fill: none; stroke: var(--accent); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+  .type b { font-weight: 600; }
+  .type span { font-size: 13px; color: var(--text-muted); }
+  .type.a2 { background: var(--accent-bg); border-color: var(--accent-border); }
+  .type.a2 .big { font-family: "Inter Tight", Inter, sans-serif; font-weight: 800; font-size: 26px; color: var(--accent); line-height: 40px; }
+  .sources { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+  .source { background: var(--surface-1); border: 1px solid var(--border); border-radius: 16px; padding: 18px 20px; display: flex; justify-content: space-between;
+            align-items: center; text-decoration: none; color: var(--text-primary); gap: 12px; }
+  .source:hover { border-color: var(--accent); color: var(--text-primary); }
+  .source small { display: block; font-size: 13px; color: var(--text-muted); }
+  .source b { font-family: "Inter Tight", Inter, sans-serif; font-weight: 800; font-size: 20px; }
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+  .step { background: var(--surface-1); border: 1px solid var(--border); border-radius: 16px; padding: 20px; color: var(--text-secondary); }
+  .step b { display: block; font-family: "Inter Tight", Inter, sans-serif; font-weight: 800; font-size: 28px; color: var(--accent); }
+  .step p { margin: 6px 0 0; }
 
   /* Resultados */
   .topbar { position: sticky; top: 0; z-index: 5; background: var(--surface-0); padding: 12px 0 10px; border-bottom: 1px solid var(--border); margin-bottom: 14px; }
-  .topbar .logo .word { font-size: 1.4rem; }
-  .topbar form.search { max-width: none; margin: 10px 0 8px; }
+  .topbar .logo { font-size: 24px; }
+  form.slim { display: flex; margin: 10px 0 8px; border: 1px solid var(--border-strong); border-radius: 999px; background: var(--surface-1); overflow: hidden; }
+  form.slim:focus-within { border-color: var(--accent); }
+  form.slim input { flex: 1; min-width: 0; font: inherit; font-size: 1.05rem; padding: 11px 18px; border: 0; background: none; color: var(--text-primary); outline: none; }
+  form.slim .btn { border-radius: 0; min-height: 0; padding: 0 22px; font-size: 15px; }
   .chips { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 2px; scrollbar-width: none; }
   .chip { flex: none; font: inherit; font-size: .88rem; padding: 5px 12px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface-1); color: var(--text-secondary); cursor: pointer; }
   .chip.on { background: var(--accent-bg); border-color: var(--accent); color: var(--accent); }
   .filters { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
-  .filters select { font: inherit; font-size: .88rem; color: var(--text-primary); background: var(--surface-1); border: 1px solid var(--border); border-radius: 8px; padding: 5px 8px; max-width: 100%; }
+  .filters select, .meta select { font: inherit; font-size: .88rem; color: var(--text-primary); background: var(--surface-1); border: 1px solid var(--border); border-radius: 8px; padding: 5px 8px; max-width: 100%; }
   .meta { color: var(--text-muted); font-size: .88rem; margin: 0 0 12px; display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; align-items: center; }
-  .meta select { font: inherit; font-size: .88rem; color: var(--text-primary); background: var(--surface-1); border: 1px solid var(--border); border-radius: 6px; padding: 2px 6px; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
-  @media (max-width: 520px) {
-    .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; } .hero .logo .word { font-size: 2.4rem; } .hero h1 { font-size: 1.3rem; }
-    /* En el móvil los filtros van en una fila deslizable y la cabecera no se queda fija. */
-    .topbar { position: static; } .filters { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; } .filters select { flex: none; }
-    .topbar .logo .tag { display: none; }
-  }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
   .empty { color: var(--text-muted); padding: 24px 0; text-align: center; grid-column: 1 / -1; }
-  .more { display: block; margin: 18px auto 0; font: inherit; border: 1px solid var(--border); background: var(--surface-1); color: var(--text-primary); border-radius: 999px; padding: 8px 22px; cursor: pointer; }
+  .more { display: block; margin: 18px auto 0; font: inherit; border: 1px solid var(--border-strong); background: var(--surface-1); color: var(--text-primary); border-radius: 999px; padding: 10px 24px; cursor: pointer; }
 
-  /* Tarjeta */
-  .tile { position: relative; background: var(--surface-1); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; display: flex; flex-direction: column; text-decoration: none; color: inherit; transition: transform .12s, box-shadow .12s; min-width: 0; }
-  .tile:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.08); }
-  .tile .img { aspect-ratio: 4 / 3; background: var(--border); overflow: hidden; }
+  /* Tarjeta de moto */
+  .tile { position: relative; background: var(--surface-1); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column;
+          text-decoration: none; color: var(--text-primary); transition: transform .12s, box-shadow .12s; min-width: 0; }
+  .tile:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,0,0,.08); color: var(--text-primary); }
+  .tile .img { aspect-ratio: 4 / 3; background: var(--surface-2); overflow: hidden; }
   .tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .tile .body { padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 3px; flex: 1; }
-  .tile .brand { font-size: .74rem; text-transform: uppercase; letter-spacing: .04em; color: var(--text-muted); }
-  .tile .name { font-weight: 600; line-height: 1.25; font-size: .95rem; overflow-wrap: anywhere; }
-  .tile .specs { font-size: .85rem; color: var(--text-secondary); }
-  .tile .price { display: flex; align-items: baseline; gap: 8px; margin-top: auto; padding-top: 4px; flex-wrap: wrap; }
-  .tile .price strong { font-size: 1.25rem; }
-  .tile .price s { color: var(--text-muted); font-size: .85rem; }
-  .tile .mkt { font-size: .8rem; color: var(--text-muted); }
+  .tile .body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 4px; flex: 1; }
+  .tile .brand { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); }
+  .tile .name { font-weight: 600; line-height: 1.25; font-size: 17px; overflow-wrap: anywhere; }
+  .tile .specs { font-size: 14px; color: var(--text-secondary); }
+  .tile .price { display: flex; align-items: baseline; gap: 10px; margin-top: auto; padding-top: 8px; flex-wrap: wrap; }
+  .tile .price strong { font-family: "Inter Tight", Inter, sans-serif; font-size: 24px; font-weight: 800; letter-spacing: -.02em; }
+  .tile .price s { color: var(--text-muted); font-size: 14px; }
+  .tile .mkt { font-size: 13px; color: var(--text-muted); }
   .tile .mkt.good { color: var(--good); font-weight: 600; }
-  .tile .also { font-size: .8rem; color: var(--info); }
-  .tile .foot { display: flex; justify-content: space-between; color: var(--text-muted); font-size: .8rem; gap: 6px; }
+  .tile .also { font-size: 13px; color: var(--info); background: var(--info-bg); border-radius: 8px; padding: 4px 8px; align-self: flex-start; }
+  .tile .foot { display: flex; justify-content: space-between; color: var(--text-muted); font-size: 13px; gap: 6px; margin-top: 6px; }
   .tile .foot span:first-child { font-weight: 600; color: var(--text-secondary); }
-  .tile .badges { position: absolute; top: 8px; left: 8px; display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
-  .badge { display: inline-block; font-size: .74rem; font-weight: 600; padding: 2px 7px; border-radius: 999px; background: var(--good-bg); color: var(--good); }
+  .tile .badges { position: absolute; top: 12px; left: 12px; display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+  .badge { display: inline-block; font-size: 13px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: var(--good-bg); color: var(--good); }
   .badge.drop { background: var(--info-bg); color: var(--info); }
   .badge.res { background: var(--warn-bg); color: var(--warning); }
+  .badge.a2 { background: var(--surface-1); color: var(--text-secondary); }
 
-  footer { margin-top: 40px; padding-top: 14px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: .82rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+  footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 13px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+  @media (max-width: 640px) {
+    .site-head nav { display: none; }
+    .hero { text-align: left; padding: 24px 0 24px; }
+    .hero p { font-size: 16px; margin-bottom: 18px; }
+    form.big { flex-direction: column; }
+    form.big .what, form.big .where, form.big .max { flex: none; }
+    form.big .where, form.big .max { border-left: 0; background: var(--surface-0); }
+    form.big .btn { width: 100%; }
+    .quick { justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+    .quick .pill { flex: none; }
+    .quick > span { display: none; }
+    .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .types { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    .tile .body { padding: 10px 12px 12px; }
+    .tile .name { font-size: 15px; }
+    .tile .price strong { font-size: 20px; }
+    .tile .badges { top: 8px; left: 8px; }
+    .badge { font-size: 12px; padding: 2px 8px; }
+    .topbar { position: static; }
+    .filters { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+    .filters select { flex: none; }
+  }
 </style>
 </head>
 <body>
 <main>
   <!-- Portada -->
   <div id="home">
+    <header class="site-head">
+      <a class="logo" data-home aria-label="mootle, inicio" href="./"><span>m</span><svg viewBox="0 0 92 48" aria-hidden="true"><circle cx="22" cy="26" r="16" fill="none" stroke-width="8"/><circle cx="70" cy="26" r="16" fill="none" stroke-width="8"/><circle class="hub" cx="22" cy="26" r="3.5"/><circle class="hub" cx="70" cy="26" r="3.5"/></svg><span>tle</span></a>
+      <nav aria-label="Secciones"><a href="#chollos">Chollos</a><a href="#tipos">Por tipo</a><a href="#webs">Webs</a><a href="#como">Cómo funciona</a></nav>
+      <span class="updated" id="updated-top"></span>
+    </header>
+
     <div class="hero">
-      <a class="logo" data-home><span class="word">m<b>oo</b>tle</span></a>
-      <h1>Tu moto de ocasión, <span>al mejor precio</span><small>Busca una vez y compara portales y concesionarios de toda España</small></h1>
-      <form class="search" id="home-form" role="search">
-        <input id="q-home" type="search" placeholder="Busca: mt-07, africa twin, scooter 125, a2 madrid…" autocomplete="off" aria-label="Buscar moto">
-        <button type="submit">Buscar</button>
+      <h1 class="display">Tu moto de ocasión,<br><span>al mejor precio</span></h1>
+      <p id="hero-sub">Una búsqueda, todas las webs. Portales y concesionarios, comparados cada día.</p>
+      <form class="big" id="home-form" role="search">
+        <label class="what"><span>Qué moto buscas</span><input id="q-home" type="search" placeholder="MT-07, Africa Twin, scooter 125…" autocomplete="off"></label>
+        <label class="where"><span>Dónde</span><select id="home-prov"><option value="">Toda España</option></select></label>
+        <label class="max"><span>Hasta</span><select id="home-price"><option value="">Cualquier precio</option></select></label>
+        <button class="btn" type="submit"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>Buscar</button>
       </form>
-      <div class="quick" id="quick"></div>
+      <div class="quick" id="quick"><span class="muted">Lo más buscado:</span></div>
     </div>
-    <section>
-      <div class="sec-head"><h2>Chollos de hoy</h2><a data-go="sort=deal">Ver todos →</a></div>
-      <div class="row" id="deals"><p class="muted">Cargando…</p></div>
+
+    <div class="stats" id="stats" aria-label="En cifras"></div>
+
+    <section id="chollos">
+      <div class="sec-head"><h2 class="display">Chollos de hoy</h2><a data-go="sort=deal" id="deals-all">Ver todos</a></div>
+      <p class="sec-sub">Motos bastante por debajo de lo que piden otras del mismo modelo y año.</p>
+      <div class="grid" id="deals"><p class="muted">Cargando…</p></div>
     </section>
+
     <section id="drops-sec" hidden>
-      <div class="sec-head"><h2>Han bajado de precio</h2><a data-go="sort=drop">Ver todas →</a></div>
-      <div class="row" id="drops"></div>
+      <div class="sec-head"><h2 class="display">Han bajado de precio</h2><a data-go="sort=drop">Ver todas</a></div>
+      <p class="sec-sub">Lo que piden hoy es menos que lo que pedían la última vez que lo vimos.</p>
+      <div class="grid" id="drops"></div>
     </section>
-    <section>
-      <div class="sec-head"><h2>Webs que comparamos</h2></div>
+
+    <section id="tipos">
+      <div class="sec-head"><h2 class="display">Busca por tipo</h2></div>
+      <div class="types" id="types-home"></div>
+    </section>
+
+    <section id="webs">
+      <div class="sec-head"><h2 class="display">Webs que comparamos</h2></div>
+      <p class="sec-sub">Cada mañana leemos portales y concesionarios, a ritmo tranquilo. Siempre enlazamos al anuncio original.</p>
       <div class="sources" id="sources"></div>
     </section>
-    <section>
-      <div class="sec-head"><h2>Cómo funciona</h2></div>
+
+    <section id="como">
+      <div class="sec-head"><h2 class="display">Cómo funciona</h2></div>
       <div class="steps">
-        <div class="step"><b>1</b>Cada día leemos los anuncios de portales y concesionarios que lo permiten, a ritmo tranquilo y respetando sus normas.</div>
-        <div class="step"><b>2</b>Juntamos todo en una sola búsqueda, ordenada de la más barata a la más cara.</div>
-        <div class="step"><b>3</b>Comparamos cada moto con otras del mismo modelo y año para que sepas si el precio es bueno de verdad.</div>
+        <div class="step"><b>1</b><p>Cada mañana leemos los anuncios de portales y concesionarios que lo permiten.</p></div>
+        <div class="step"><b>2</b><p>Juntamos todo en una búsqueda, de la más barata a la más cara, y si una moto sale en varias webs te enseñamos dónde cuesta menos.</p></div>
+        <div class="step"><b>3</b><p>Comparamos cada moto con otras del mismo modelo y año para que sepas si el precio es bueno de verdad.</p></div>
       </div>
     </section>
   </div>
@@ -150,21 +244,17 @@
   <!-- Resultados -->
   <div id="app" hidden>
     <div class="topbar">
-      <a class="logo" data-home><span class="word">m<b>oo</b>tle</span><span class="tag">motos de ocasión al mejor precio</span></a>
-      <form class="search" id="top-form" role="search">
+      <a class="logo" data-home aria-label="mootle, inicio" href="./"><span>m</span><svg viewBox="0 0 92 48" aria-hidden="true"><circle cx="22" cy="26" r="16" fill="none" stroke-width="8"/><circle cx="70" cy="26" r="16" fill="none" stroke-width="8"/><circle class="hub" cx="22" cy="26" r="3.5"/><circle class="hub" cx="70" cy="26" r="3.5"/></svg><span>tle</span></a>
+      <form class="slim" id="top-form" role="search">
         <input id="q" type="search" placeholder="Modelo, marca, provincia…" autocomplete="off" aria-label="Buscar moto">
-        <button type="submit">Buscar</button>
+        <button class="btn" type="submit">Buscar</button>
       </form>
       <div class="chips" id="types"></div>
       <div class="filters">
         <select id="f-brand" aria-label="Marca"></select>
-        <select id="f-price" aria-label="Precio máximo">
-          <option value="">Cualquier precio</option><option>1500</option><option>3000</option><option>5000</option><option>8000</option><option>12000</option><option>20000</option>
-        </select>
-        <select id="f-year" aria-label="Año mínimo"><option value="">Cualquier año</option></select>
-        <select id="f-km" aria-label="Kilómetros máximos">
-          <option value="">Cualquier km</option><option>5000</option><option>15000</option><option>30000</option><option>50000</option><option>80000</option>
-        </select>
+        <select id="f-price" aria-label="Precio máximo"></select>
+        <select id="f-year" aria-label="Año mínimo"></select>
+        <select id="f-km" aria-label="Kilómetros máximos"></select>
         <select id="f-prov" aria-label="Provincia"></select>
         <select id="f-a2" aria-label="Carnet"><option value="">Cualquier carnet</option><option value="1">Apta o limitable A2</option></select>
         <select id="f-seller" aria-label="Vendedor"><option value="">Particular y profesional</option><option value="0">Solo particulares</option><option value="1">Solo profesionales</option></select>
@@ -182,24 +272,38 @@
     <button class="more" id="more" hidden>Ver más</button>
   </div>
 
-  <footer><span id="updated"></span><span>mootle enlaza a los anuncios originales: los datos y las fotos son de cada web.</span></footer>
+  <footer><span id="updated"></span><span>Los datos y las fotos son de cada web: siempre enlazamos al anuncio original.</span></footer>
 </main>
 
 <script>
   const PAGE = 48;
+  const PRICES = [1500, 3000, 5000, 8000, 12000, 20000];
+  const KMS = [5000, 15000, 30000, 50000, 80000];
+  // Iconos de línea de cada tipo (viewBox 0 0 40 40).
+  const ICONS = {
+    naked: '<circle cx="9" cy="27" r="7"/><circle cx="31" cy="27" r="7"/><path d="M9 27l7-11h9l6 11M16 16l-2-4"/>',
+    trail: '<circle cx="9" cy="28" r="7"/><circle cx="31" cy="28" r="7"/><path d="M9 28l6-13h11l5 13M15 15l-1-6h5M26 15l4-5"/>',
+    scooter: '<circle cx="9" cy="29" r="5"/><circle cx="31" cy="29" r="5"/><path d="M9 29h22M14 29c0-6 2-10 8-10h4l3-8h-4"/>',
+    deportiva: '<circle cx="9" cy="28" r="7"/><circle cx="31" cy="28" r="7"/><path d="M9 28l9-12 12 2 1 10M18 16l10-4"/>',
+    custom: '<circle cx="8" cy="28" r="7"/><circle cx="32" cy="28" r="7"/><path d="M8 28h24M15 28l3-8h10l4 8M28 20l2-9"/>',
+    turismo: '<rect x="7" y="9" width="26" height="22" rx="4"/><path d="M7 16h26M14 9V6h12v3"/>',
+    campo: '<circle cx="9" cy="29" r="6"/><circle cx="31" cy="29" r="6"/><path d="M9 29l8-14h8l6 14M17 15l-3-5M25 15l5-4"/>',
+  };
   const TYPES = [["", "Todas"], ["naked", "Naked"], ["trail", "Trail"], ["scooter", "Scooter"], ["deportiva", "Deportiva"],
                  ["custom", "Custom"], ["turismo", "Turismo"], ["campo", "Campo"]];
   const QUICK = ["MT-07", "Africa Twin", "R 1250 GS", "Scooter 125", "Tracer", "Z900"];
 
   const $ = id => document.getElementById(id);
   const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-  const eur = v => v == null ? "–" : v.toLocaleString("es-ES", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
-  const num = v => v.toLocaleString("es-ES");
+  // useGrouping "always": en español 7500 sale sin punto si no se fuerza.
+  const eur = v => v == null ? "–" : v.toLocaleString("es-ES", { style: "currency", currency: "EUR", maximumFractionDigits: 0, useGrouping: "always" });
+  const num = v => v.toLocaleString("es-ES", { useGrouping: "always" });
   const fold = s => String(s ?? "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
   const compact = s => fold(s).replace(/[^a-z0-9]/g, "");
   const safeUrl = u => /^https?:\/\//i.test(u || "") ? u : "#";
   // Diferencia con el precio de mercado (negativo = más barata que la mediana).
   const vsMkt = m => m.mkt ? (m.p - m.mkt) / m.mkt : null;
+  const isDeal = m => m.mkt && vsMkt(m) <= -0.15 && !m.res;
 
   let ALL = [], SOURCES = {}, GROUPS = {}, list = [], shown = PAGE, type = "";
 
@@ -218,7 +322,7 @@
     if (m.res) badges.push(`<span class="badge res">Reservada</span>`);
     const specs = [m.y, m.km != null ? `${num(m.km)} km` : null, m.cv ? `${m.cv} CV` : null, m.a2 ? "A2" : null].filter(Boolean).join(" · ");
     const old = m.p0 || (m.pa > m.p ? m.pa : null);
-    const mkt = m.mkt ? `<span class="mkt ${d <= -0.1 ? "good" : ""}">Mercado: ${eur(m.mkt)}</span>` : "";
+    const mkt = m.mkt ? `<span class="mkt ${d <= -0.1 ? "good" : ""}">Mercado ${eur(m.mkt)}</span>` : "";
     const src = SOURCES[m.src]?.name || m.src;
     const also = (GROUPS[m.g] || []).filter(x => x !== m)
       .map(x => `También en ${esc(SOURCES[x.src]?.name || x.src)}: ${eur(x.p)}${x.p > m.p ? ` (ahorras ${eur(x.p - m.p)})` : ""}`);
@@ -229,8 +333,7 @@
         <span class="brand">${esc(m.mk || "")}${m.tp ? " · " + esc(m.tp) : ""}</span>
         <span class="name">${esc(m.t)}</span>
         <span class="specs">${esc(specs)}</span>
-        <span class="price"><strong>${eur(m.p)}</strong>${old ? `<s>${eur(old)}</s>` : ""}</span>
-        ${mkt}
+        <span class="price"><strong>${eur(m.p)}</strong>${old ? `<s>${eur(old)}</s>` : ""}${mkt}</span>
         ${also.map(t => `<span class="also">${t}</span>`).join("")}
         <span class="foot"><span>${esc(src)}</span><span>${esc(m.prov || "")}${m.pro === false ? " · particular" : ""}</span></span>
       </div></a>`;
@@ -300,14 +403,21 @@
     apply();
     window.scrollTo(0, 0);
   }
-  function showHome() { $("app").hidden = true; $("home").hidden = false; $("q-home").value = ""; history.replaceState(null, "", location.pathname); }
+  function showHome() { $("app").hidden = true; $("home").hidden = false; $("q-home").value = ""; history.replaceState(null, "", location.pathname); window.scrollTo(0, 0); }
   const go = query => showApp(new URLSearchParams(query));
 
   function renderTypes() {
     $("types").innerHTML = TYPES.map(([k, l]) => `<button class="chip ${k === type ? "on" : ""}" data-type="${k}">${l}</button>`).join("");
   }
 
-  $("home-form").addEventListener("submit", e => { e.preventDefault(); go("q=" + encodeURIComponent($("q-home").value.trim())); });
+  $("home-form").addEventListener("submit", e => {
+    e.preventDefault();
+    const p = new URLSearchParams();
+    if ($("q-home").value.trim()) p.set("q", $("q-home").value.trim());
+    if ($("home-prov").value) p.set("prov", $("home-prov").value);
+    if ($("home-price").value) p.set("price", $("home-price").value);
+    showApp(p);
+  });
   $("top-form").addEventListener("submit", e => { e.preventDefault(); apply(); });
   $("q").addEventListener("input", () => { clearTimeout(window.__t); window.__t = setTimeout(apply, 250); });
   document.querySelectorAll(".filters select, #sort").forEach(s => s.addEventListener("change", apply));
@@ -323,25 +433,54 @@
     SOURCES = data.sources || {};
     ALL = (data.items || []).filter(m => m.p);
     for (const m of ALL) if (m.g) (GROUPS[m.g] ||= []).push(m);
+    const bikes = collapse(ALL);  // cada moto una vez, aunque salga en varias webs
 
     const brands = [...new Set(ALL.map(m => m.mk).filter(Boolean))].sort((a, b) => a.localeCompare(b, "es"));
     const provs = [...new Set(ALL.map(m => m.prov).filter(Boolean))].sort((a, b) => a.localeCompare(b, "es"));
     const thisYear = new Date().getFullYear();
     options("f-brand", "Todas las marcas", brands);
     options("f-prov", "Toda España", provs);
+    options("home-prov", "Toda España", provs);
+    options("f-price", "Cualquier precio", PRICES, v => "Hasta " + eur(v));
+    options("home-price", "Cualquier precio", PRICES, v => eur(v));
+    options("f-km", "Cualquier km", KMS, v => `Hasta ${num(v)} km`);
     options("f-year", "Cualquier año", [0, 1, 2, 3, 5, 8, 10, 15].map(n => thisYear - n), y => `Desde ${y}`);
     options("f-src", "Todas las webs", Object.keys(SOURCES), id => SOURCES[id].name);
-    for (const sel of ["f-price", "f-km"]) for (const o of $(sel).options) if (o.value) o.textContent = (sel === "f-price" ? "Hasta " + eur(+o.value) : `Hasta ${num(+o.value)} km`);
 
-    $("quick").innerHTML = QUICK.map(q => `<button class="chip" data-go="q=${encodeURIComponent(q)}">${esc(q)}</button>`).join("");
-    const deals = collapse(ALL).filter(m => m.mkt && vsMkt(m) <= -0.15 && !m.res).sort(sorters.deal).slice(0, 12);
-    $("deals").innerHTML = deals.length ? deals.map(tile).join("") : `<p class="muted">Aún no hay suficientes anuncios para comparar con el mercado.</p>`;
-    const drops = collapse(ALL).filter(m => m.pa && m.pa > m.p).sort(sorters.drop).slice(0, 12);
+    const updated = new Date(data.updated);
+    const sameDay = updated.toDateString() === new Date().toDateString();
+    const when = updated.toLocaleString("es-ES", sameDay ? { timeZone: "Europe/Madrid", hour: "2-digit", minute: "2-digit" } : { timeZone: "Europe/Madrid", day: "numeric", month: "long" });
+    $("updated-top").textContent = sameDay ? `Actualizado hoy a las ${when}` : `Actualizado el ${when}`;
+    $("updated").textContent = `${num(bikes.length)} motos · actualizado el ${updated.toLocaleString("es-ES", { timeZone: "Europe/Madrid", dateStyle: "long", timeStyle: "short" })}`;
+    const nSources = Object.values(SOURCES).filter(s => s.count).length;
+    $("hero-sub").textContent = `Una búsqueda, todas las webs. ${num(bikes.length)} motos de portales y concesionarios, comparadas cada día.`;
+
+    const deals = bikes.filter(isDeal).sort(sorters.deal);
+    const best = deals.length ? Math.round(vsMkt(deals[0]) * 100) : null;
+    const multi = Object.keys(GROUPS).length;
+    $("stats").innerHTML = [
+      [num(bikes.length), "motos a la venta"], [nSources, nSources === 1 ? "web comparada" : "webs comparadas"],
+      [num(multi), "motos en más de una web"], best != null ? [`${best} %`, "el mejor chollo de hoy", "good"] : null,
+    ].filter(Boolean).map(([v, l, c]) => `<div class="stat"><b class="${c || ""}">${v}</b><span>${l}</span></div>`).join("");
+
+    $("quick").innerHTML += QUICK.map(q => `<button class="pill" data-go="q=${encodeURIComponent(q)}">${esc(q)}</button>`).join("")
+      + `<button class="pill" data-go="a2=1">Aptas A2</button>`;
+    $("deals-all").textContent = deals.length > 8 ? `Ver los ${num(deals.length)} chollos` : "Ver todos";
+    $("deals").innerHTML = deals.length ? deals.slice(0, 8).map(tile).join("") : `<p class="muted">Aún no hay suficientes anuncios para comparar con el mercado.</p>`;
+    const drops = bikes.filter(m => m.pa && m.pa > m.p).sort(sorters.drop).slice(0, 8);
     $("drops-sec").hidden = !drops.length;
     $("drops").innerHTML = drops.map(tile).join("");
-    $("sources").innerHTML = Object.entries(SOURCES).map(([id, s]) =>
-      `<a href="${esc(safeUrl(s.home))}" target="_blank" rel="noopener"><b>${esc(s.name)}</b><span class="muted">${num(s.count || 0)} motos</span></a>`).join("");
-    $("updated").textContent = `${num(ALL.length)} motos · actualizado el ${new Date(data.updated).toLocaleString("es-ES", { timeZone: "Europe/Madrid", dateStyle: "long", timeStyle: "short" })}`;
+
+    const byType = {};
+    for (const m of bikes) if (m.tp) byType[m.tp] = (byType[m.tp] || 0) + 1;
+    const a2 = bikes.filter(m => m.a2).length;
+    $("types-home").innerHTML = TYPES.filter(([k]) => k && byType[k]).map(([k, l]) =>
+      `<button class="type" data-go="tipo=${k}"><svg viewBox="0 0 40 40" aria-hidden="true">${ICONS[k]}</svg><b>${l}</b><span>${num(byType[k])} motos</span></button>`).join("")
+      + `<button class="type a2" data-go="a2=1"><span class="big">A2</span><b>Aptas o limitables A2</b><span>${num(a2)} motos</span></button>`;
+
+    const KIND = { motosnet: "Portal · toda España", motoocasion: "Concesionario · Mora, Toledo" };
+    $("sources").innerHTML = Object.entries(SOURCES).filter(([, s]) => s.count).map(([id, s]) =>
+      `<a class="source" href="${esc(safeUrl(s.home))}" target="_blank" rel="noopener"><span>${esc(s.name)}<small>${esc(KIND[id] || "")}</small></span><b>${num(s.count)}</b></a>`).join("");
 
     const params = new URLSearchParams(location.search);
     if ([...params.keys()].length) showApp(params);
