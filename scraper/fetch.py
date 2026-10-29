@@ -19,7 +19,8 @@ DELAY = (3.0, 6.0)
 
 # Marcas de páginas anti-bot. "captcha" a secas no vale: muchas tiendas tienen reCAPTCHA en formularios.
 CHALLENGE_MARKERS = ("just a moment", "cf-challenge", "challenge-platform", "verifying your connection",
-                     "captcha-delivery", "datadome", "perimeterx", "access denied", "attention required")
+                     "captcha-delivery", "datadome", "perimeterx", "access denied", "attention required",
+                     "pensar que eres un bot")  # motos.net / coches.net (Adevinta)
 
 
 def is_challenge(resp):
