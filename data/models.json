@@ -46,6 +46,7 @@
 "k1600": "K 1600",
 "k1600gt": "K 1600 GT",
 "k1600gtl": "K 1600 GTL",
+"k75s": "K 75 S",
 "m1000r": "M 1000 R",
 "m1000xr": "M 1000 XR",
 "r1150r": "R 1150 R",
@@ -54,6 +55,7 @@
 "r1200cclassic": "R 1200 C Classic",
 "r1200gs": "R 1200 GS",
 "r1200gs105cv": "R 1200 GS 105CV",
+"r1200gs98cv": "R 1200 GS 98CV",
 "r1200gsadventure": "R 1200 GS Adventure",
 "r1200gstripleblack": "R 1200 GS Triple Black",
 "r1200r": "R 1200 R",
@@ -165,6 +167,7 @@
 "sportster883": "Sportster 883",
 "sportster883iron": "Sportster 883 Iron",
 "sportster883low": "Sportster 883 LOW",
+"sportster883roadster": "Sportster 883 Roadster",
 "sportsterfortyeight": "Sportster Forty Eight",
 "sportsters": "Sportster S",
 "sportstersuperlow": "Sportster Superlow",
@@ -419,6 +422,7 @@
 "mp3": "MP3",
 "mp3300yourbanltsport": "MP3 300 Yourban LT Sport",
 "mp3exclusive530": "MP3 Exclusive 530",
+"mp3sport500hpe": "MP3 Sport 500 HPE",
 "x10350executive": "X10 350 Executive"
 },
 "QJMotor": {
@@ -509,6 +513,7 @@
 "scrambler900": "Scrambler 900",
 "speed400": "Speed 400",
 "speedtriple": "Speed Triple",
+"speedtwin1200": "Speed Twin 1200",
 "speedtwin900": "Speed Twin 900",
 "street": "Street",
 "streetscrambler": "Street Scrambler",
@@ -519,6 +524,7 @@
 "thruxtonefi": "Thruxton EFI",
 "thunderbird1600": "Thunderbird 1600",
 "tiger1050": "Tiger 1050",
+"tiger1200": "Tiger 1200",
 "tiger1200gt": "Tiger 1200 GT",
 "tiger1200rally": "Tiger 1200 Rally",
 "tiger800": "Tiger 800",
@@ -528,6 +534,7 @@
 "tiger850sport": "Tiger 850 Sport",
 "tiger900": "Tiger 900",
 "tigerexplorer1200": "Tiger Explorer 1200",
+"tigerexplorer1200xc": "Tiger Explorer 1200 XC",
 "tigersport660": "Tiger Sport 660",
 "tigersport800": "Tiger Sport 800",
 "trident660": "Trident 660",
@@ -539,7 +546,9 @@
 "renegadevegas300": "Renegade Vegas 300"
 },
 "Vespa": {
+"gts125": "GTS 125",
 "gts300": "GTS 300",
+"gts300iesuper": "GTS 300 IE Super",
 "primavera": "Primavera",
 "seigiorni300": "SEI Giorni 300",
 "sprint125ie3v": "Sprint 125 IE 3V"
@@ -595,6 +604,7 @@
 "tracer700": "Tracer 700",
 "tracer9": "Tracer 9",
 "tracer900": "Tracer 900",
+"tracer92021enmadrid10218985htm": "Tracer 9 2021 EN Madrid 10218985.HTM",
 "tricity": "Tricity",
 "tricity125": "Tricity 125",
 "xjr1300": "XJR 1300",
