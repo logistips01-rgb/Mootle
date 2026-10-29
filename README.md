@@ -33,7 +33,7 @@ sitemap.xml, robots.txt
 
 Cada ejecución, por web:
 
-- **motos.net** (~35.000 motos, ~1.730 páginas): **como mucho 4 páginas al día**, para no cargar la
+- **motos.net** (~35.000 motos, ~1.730 páginas): **como mucho 16 páginas al día**, para no cargar la
   web. Primero las novedades (páginas 1, 2… hasta una sin anuncios nuevos); si sobra cupo, sigue el
   barrido donde lo dejó el día anterior (`cursor` en `data/state.json`). Si responde con su página
   anti-bot, para ese día sin reintentar. Un anuncio que no se ve en 14 días se da por vendido.
