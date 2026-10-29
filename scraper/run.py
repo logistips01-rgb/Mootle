@@ -83,7 +83,8 @@ def link_duplicates(items):
         candidates = []
         for a in bikes:
             for b in bikes:
-                score = _same_model(a.get("md"), b.get("md")) if a["src"] < b["src"] else 0
+                # `mn`: el modelo ya completado y unificado ("RC" + título → "RC 390").
+                score = _same_model(a.get("mn") or a.get("md"), b.get("mn") or b.get("md")) if a["src"] < b["src"] else 0
                 gap = abs(a["p"] - b["p"]) / min(a["p"], b["p"])
                 if score and gap <= 0.3:
                     candidates.append((-score, gap, a["id"], b["id"], a, b))
@@ -99,6 +100,33 @@ def link_duplicates(items):
             a["g"] = b["g"] = g
             pairs += 1
     return pairs
+
+
+def drop_portal_copies(items, portal="motosnet"):
+    """Quita los anuncios del portal que son copia de los de un concesionario que ya leemos: muchos
+    concesionarios publican también en motos.net, y nos quedamos con el de su propia web. Es copia si
+    es la misma moto (grupo `g`: marca, año, km exactos, modelo compatible y precio parecido) y en el
+    portal la anuncia un profesional, aunque el precio no sea el mismo."""
+    by_group = defaultdict(list)
+    for it in items:
+        if it.get("g"):
+            by_group[it["g"]].append(it)
+    drop = set()
+    for bikes in by_group.values():
+        if not any(b["src"] != portal for b in bikes):
+            continue
+        for b in bikes:
+            if b["src"] == portal and b.get("pro"):
+                drop.add(b["id"])
+    kept = [it for it in items if it["id"] not in drop]
+    groups = defaultdict(list)
+    for it in kept:
+        if it.get("g"):
+            groups[it["g"]].append(it)
+    for bikes in groups.values():  # un grupo de una sola moto ya no es "la misma moto en varias webs"
+        if len(bikes) == 1:
+            bikes[0].pop("g")
+    return kept, len(drop)
 
 
 def merge(old_items, results, today):
@@ -162,9 +190,18 @@ def main(argv=None):
     items = merge(data["items"], results, today)
     catalog = load(MODELS, {})
     assign(items, catalog)
+    # El emparejamiento es de uno en uno y un concesionario puede tener la misma moto dos veces en
+    # motos.net: se repite hasta que no quede ninguna copia.
+    copies = 0
+    for _ in range(5):
+        dups = link_duplicates(items)
+        items, dropped = drop_portal_copies(items)
+        copies += dropped
+        if not dropped:
+            break
+    dups = len({it["g"] for it in items if it.get("g")})
     history = group_history(items, load(HISTORY, {}), today)
     market_prices(items)
-    dups = link_duplicates(items)
     items.sort(key=lambda it: (it.get("p") or 10**9, it["id"]))
 
     sources = data.get("sources", {})
@@ -184,7 +221,7 @@ def main(argv=None):
               f"{sources[src_id]['count']} en total")
     print(f"Modelos: {len({it['mid'] for it in items if it.get('mid')})} grupos marca-modelo-año")
     print(f"Total: {len(items)} motos · {sum(1 for it in items if 'mkt' in it)} con precio de mercado · "
-          f"{dups} anunciadas en más de una web")
+          f"{dups} anunciadas en más de una web · {copies} copias de motos.net quitadas")
 
     if args.dry_run:
         return

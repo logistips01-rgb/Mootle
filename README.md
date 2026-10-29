@@ -15,6 +15,7 @@ scraper/
   sources/        un módulo por web (scrape → anuncios + estado)
     motosnet.py     motos.net: JSON incrustado en cada página de resultados (20 anuncios/página)
     motoocasion.py  Moto Ocasión (Mora, Toledo): API pública de WooCommerce (100 motos/petición)
+    maquinamotors.py Máquina Motors (Barcelona y Valencia): listado de su tienda Magento
   models.py       grupos marca-modelo-año, color e histórico de precios
   run.py          lee todas las webs en paralelo y actualiza data/
 data/
@@ -33,6 +34,9 @@ Cada ejecución, por web:
   barrido donde lo dejó el día anterior (`cursor` en `data/state.json`). Si responde con su página
   anti-bot, para ese día sin reintentar. Un anuncio que no se ve en 14 días se da por vendido.
 - **Moto Ocasión**: se lee entera (~9 peticiones); lo que no aparece, o está agotado, se ha vendido.
+- **Máquina Motors** (tiendas en Barcelona y Valencia, ~480 motos): se lee entera (~25 páginas, con
+  los 3 s entre peticiones que pide su robots.txt).
+- **Wallapop y Milanuncios** (particulares) no se leen: la web abre allí la misma búsqueda.
 
 Después, `run.py`:
 
@@ -43,6 +47,9 @@ Después, `run.py`:
   del catálogo de motos.net ("TIGER 900 RALLY PRO" → "Tiger 900"); si motos.net da un modelo genérico
   ("890"), se completa con el título ("890 Duke" / "890 Adventure");
 - guarda el **histórico de precios** de cada anuncio (`ph`) y de cada grupo (`data/history.json`);
+- **quita de motos.net las copias de los concesionarios que ya leemos**: si un anuncio profesional de
+  motos.net es la misma moto que una de su web (marca, año, km exactos, modelo compatible y precio
+  parecido), se queda solo el de la web del concesionario, tenga el precio que tenga;
 - **agrupa la misma moto en varias webs** (misma marca, año y km, modelo compatible, precio parecido):
   la web muestra la más barata y el resto como "también en…".
 
