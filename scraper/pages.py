@@ -131,7 +131,7 @@ def head(title, description, canonical, image=None, ld=None, noindex=False):
 """
 
 
-FOOT = """  <footer><span>mootle · comparador de motos de ocasión</span><span>Los datos y las fotos son de cada web: siempre enlazamos al anuncio original.</span></footer>
+FOOT = """  <footer><span>mootle · comparador de motos de ocasión</span><nav class="foot-links"><a href="../">Inicio</a> · <a href="../marca/">Marcas</a> · <a href="../seguros/">Seguro</a> · <a href="../financiacion/">Financiación</a></nav><span>Los datos y las fotos son de cada web: siempre enlazamos al anuncio original.</span></footer>
 </main>
 </body>
 </html>
