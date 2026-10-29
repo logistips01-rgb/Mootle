@@ -10,224 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@700;800&display=swap" rel="stylesheet">
-<style>
-  :root {
-    color-scheme: light;
-    --surface-0: #f6f5f2; --surface-1: #ffffff; --surface-2: #eceae4; --border: #e2e0d9; --border-strong: #dedcd5;
-    --text-primary: #141413; --text-secondary: #3a3935; --text-muted: #5f5e5a;
-    --good: #0a7a2f; --good-bg: #e7f5ec; --warning: #9a6400; --warn-bg: #fff1e0;
-    --logo: #e8590c; --accent: #c2410c; --accent-hover: #9a3412; --accent-bg: #fff4ec; --accent-border: #f4c9ae; --on-accent: #ffffff;
-    --info: #1d5fb4; --info-bg: #e8f1fc; --shadow: 0 10px 30px rgba(20,20,19,.06);
-    --line-min: #c2410c; --line-med: #8a8984; --grid: #ecebe7;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      color-scheme: dark;
-      --surface-0: #111110; --surface-1: #1a1a19; --surface-2: #262624; --border: #2e2e2c; --border-strong: #3a3a37;
-      --text-primary: #f0efec; --text-secondary: #d5d4cc; --text-muted: #a3a29b;
-      --good: #4cc261; --good-bg: #16301b; --warning: #e0a63a; --warn-bg: #3a2a12;
-      --logo: #f07a35; --accent: #f07a35; --accent-hover: #f59a62; --accent-bg: #2e1a10; --accent-border: #5a321c; --on-accent: #141413;
-      --info: #6aa6ef; --info-bg: #172a40; --shadow: none;
-      --line-min: #f07a35; --line-med: #8f8e88; --grid: #262624;
-    }
-  }
-  :root[data-theme="dark"] {
-    color-scheme: dark;
-    --surface-0: #111110; --surface-1: #1a1a19; --surface-2: #262624; --border: #2e2e2c; --border-strong: #3a3a37;
-    --text-primary: #f0efec; --text-secondary: #d5d4cc; --text-muted: #a3a29b;
-    --good: #4cc261; --good-bg: #16301b; --warning: #e0a63a; --warn-bg: #3a2a12;
-    --logo: #f07a35; --accent: #f07a35; --accent-hover: #f59a62; --accent-bg: #2e1a10; --accent-border: #5a321c; --on-accent: #141413;
-    --info: #6aa6ef; --info-bg: #172a40; --shadow: none;
-    --line-min: #f07a35; --line-med: #8f8e88; --grid: #262624;
-  }
-  * { box-sizing: border-box; }
-  body { margin: 0; background: var(--surface-0); color: var(--text-primary); font: 15px/1.45 Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
-  a { color: var(--accent); }
-  a:hover { color: var(--accent-hover); }
-  main { max-width: 1200px; margin: 0 auto; padding: 0 16px 48px; }
-  [hidden] { display: none !important; }
-  .muted { color: var(--text-muted); }
-  .display { font-family: "Inter Tight", Inter, system-ui, sans-serif; font-weight: 800; letter-spacing: -.03em; }
-
-  /* Logo: icono (las dos ruedas) + nombre, cuyas «oo» son ruedas, + lema */
-  .logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: var(--text-primary); cursor: pointer; }
-  .logo:hover { color: var(--text-primary); }
-  .logo img { width: 38px; height: 38px; flex: none; }
-  .logo .stack { display: flex; flex-direction: column; line-height: 1; }
-  .logo .word { display: inline-flex; align-items: center; font-family: "Inter Tight", Inter, sans-serif; font-weight: 800; letter-spacing: -.045em; line-height: 1; font-size: 1.75rem; }
-  .logo .word svg { width: 1.53em; height: .8em; margin: 0 .03em; position: relative; top: .06em; }
-  .logo .word svg circle { stroke: var(--logo); }
-  .logo .word svg circle.hub { fill: var(--logo); stroke: none; }
-  .logo .tag { font-size: .78rem; font-weight: 600; color: var(--accent); margin-top: 4px; white-space: nowrap; }
-  .logo.mark { gap: 18px; margin-bottom: 18px; }
-  .logo.mark img { width: 88px; height: 88px; }
-  .logo.mark .word { font-size: 5.2rem; }
-
-  /* Cabecera de la portada: cifras a la izquierda, secciones a la derecha */
-  header.top { display: flex; align-items: center; gap: 16px; padding: 16px 0; flex-wrap: wrap; }
-  header.top nav { margin-left: auto; display: flex; gap: 6px; }
-  header.top nav a { text-decoration: none; padding: 6px 12px; border-radius: 999px; color: var(--text-secondary); white-space: nowrap; }
-  header.top nav a:hover { background: var(--surface-1); color: var(--text-primary); }
-  .counts { display: flex; gap: 6px; flex-wrap: wrap; color: var(--text-muted); font-size: .88rem; white-space: nowrap; }
-  .counts span { display: inline-flex; align-items: center; gap: 4px; padding: 4px 11px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface-1); }
-  .counts b { color: var(--text-primary); font-variant-numeric: tabular-nums; }
-
-  /* Hero tipo Google: logo grande, lema y un solo buscador */
-  .hero { text-align: center; padding: 56px 0 32px; }
-  .hero h1 { font-family: Inter, sans-serif; font-size: clamp(1.35rem, 3.6vw, 1.8rem); line-height: 1.2; letter-spacing: -.02em; margin: 0 0 24px; font-weight: 700; }
-  .hero h1 span { color: var(--accent); }
-  .hero h1 small { display: block; margin-top: 6px; font-size: .98rem; font-weight: 500; color: var(--text-muted); letter-spacing: 0; }
-  form.search { display: flex; max-width: 720px; margin: 0 auto; border: 1px solid var(--border-strong); border-radius: 999px; background: var(--surface-1);
-                padding: 6px; box-shadow: var(--shadow); }
-  form.search:focus-within { border-color: var(--accent); }
-  form.search input { flex: 1; min-width: 0; font: inherit; font-size: 1.1rem; padding: 10px 18px; border: 0; background: none; color: var(--text-primary); outline: none; }
-  form.search .btn { border-radius: 999px; min-height: 48px; padding: 0 26px; font-size: 1rem; }
-  .btn { min-height: 52px; border: 0; border-radius: 14px; background: var(--accent); color: var(--on-accent); font: inherit; font-weight: 600; font-size: 17px;
-         padding: 0 28px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; text-decoration: none; }
-  .btn:hover { background: var(--accent-hover); color: var(--on-accent); }
-  .quick { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 18px; align-items: center; }
-  .pill { font: inherit; font-size: 14px; color: var(--text-secondary); text-decoration: none; background: var(--surface-1); border: 1px solid var(--border-strong);
-          border-radius: 999px; padding: 6px 14px; cursor: pointer; }
-  .pill:hover, .pill.on { border-color: var(--accent); color: var(--accent); }
-  .pill.on { background: var(--accent-bg); }
-
-
-  section { margin-top: 48px; }
-  .sec-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 6px; }
-  .sec-head h2 { font-size: 26px; margin: 0; }
-  .sec-head a { font-size: 15px; font-weight: 600; text-decoration: none; cursor: pointer; }
-  .sec-sub { margin: 0 0 18px; color: var(--text-muted); }
-  .types { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
-  .type { font: inherit; text-align: left; background: var(--surface-1); border: 1px solid var(--border); border-radius: 16px; padding: 18px; color: var(--text-primary);
-          display: flex; flex-direction: column; gap: 8px; cursor: pointer; }
-  .type:hover { border-color: var(--accent); }
-  .type svg { width: 40px; height: 40px; fill: none; stroke: var(--accent); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
-  .type b { font-weight: 600; }
-  .type span { font-size: 13px; color: var(--text-muted); }
-  .type.a2 { background: var(--accent-bg); border-color: var(--accent-border); }
-  .type.a2 .big { font-family: "Inter Tight", Inter, sans-serif; font-weight: 800; font-size: 26px; color: var(--accent); line-height: 40px; }
-  .sources { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
-  .source { background: var(--surface-1); border: 1px solid var(--border); border-radius: 16px; padding: 18px 20px; display: flex; justify-content: space-between;
-            align-items: center; text-decoration: none; color: var(--text-primary); gap: 12px; }
-  .source:hover { border-color: var(--accent); color: var(--text-primary); }
-  .source small { display: block; font-size: 13px; color: var(--text-muted); }
-  .source b { font-family: "Inter Tight", Inter, sans-serif; font-weight: 800; font-size: 20px; }
-  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
-  .step { background: var(--surface-1); border: 1px solid var(--border); border-radius: 16px; padding: 20px; color: var(--text-secondary); }
-  .step b { display: block; font-family: "Inter Tight", Inter, sans-serif; font-weight: 800; font-size: 28px; color: var(--accent); }
-  .step p { margin: 6px 0 0; }
-
-  /* Barra de resultados */
-  .topbar { position: sticky; top: 0; z-index: 5; background: var(--surface-0); padding: 12px 0 10px; border-bottom: 1px solid var(--border); margin-bottom: 14px; }
-  form.slim { display: flex; margin: 10px 0 8px; border: 1px solid var(--border-strong); border-radius: 999px; background: var(--surface-1); overflow: hidden; }
-  form.slim:focus-within { border-color: var(--accent); }
-  form.slim input { flex: 1; min-width: 0; font: inherit; font-size: 1.05rem; padding: 11px 18px; border: 0; background: none; color: var(--text-primary); outline: none; }
-  form.slim .btn { border-radius: 0; min-height: 0; padding: 0 22px; font-size: 15px; }
-  .chips { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 2px; scrollbar-width: none; }
-  .chip { flex: none; font: inherit; font-size: .88rem; padding: 5px 12px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface-1); color: var(--text-secondary); cursor: pointer; }
-  .chip.on { background: var(--accent-bg); border-color: var(--accent); color: var(--accent); }
-  .filters { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
-  .filters select, .meta select { font: inherit; font-size: .88rem; color: var(--text-primary); background: var(--surface-1); border: 1px solid var(--border); border-radius: 8px; padding: 5px 8px; max-width: 100%; }
-  .meta { color: var(--text-muted); font-size: .88rem; margin: 0 0 12px; display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; align-items: center; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; }
-  .empty { color: var(--text-muted); padding: 24px 0; text-align: center; grid-column: 1 / -1; }
-  .more { display: block; margin: 18px auto 0; font: inherit; border: 1px solid var(--border-strong); background: var(--surface-1); color: var(--text-primary); border-radius: 999px; padding: 10px 24px; cursor: pointer; }
-
-  /* Tarjeta de modelo */
-  .card { position: relative; background: var(--surface-1); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column;
-          text-decoration: none; color: var(--text-primary); transition: transform .12s, box-shadow .12s; min-width: 0; }
-  .card:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,0,0,.08); color: var(--text-primary); }
-  .photo { aspect-ratio: 4 / 3; background: var(--surface-2); overflow: hidden; display: flex; align-items: center; justify-content: center; color: var(--text-muted); }
-  .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .card .body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 3px; flex: 1; }
-  .card .brand { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); }
-  .card .name { font-weight: 700; line-height: 1.2; font-size: 18px; overflow-wrap: anywhere; }
-  .card .name span { color: var(--text-muted); font-weight: 600; }
-  .card .from { margin-top: auto; padding-top: 10px; font-size: 13px; color: var(--text-muted); }
-  .card .price { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
-  .card .price strong { font-family: "Inter Tight", Inter, sans-serif; font-size: 26px; font-weight: 800; letter-spacing: -.02em; }
-  .card .price small { font-size: 14px; color: var(--text-secondary); }
-  .card .foot { font-size: 13px; color: var(--text-muted); margin-top: 6px; }
-  .badges { position: absolute; top: 12px; left: 12px; display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
-  .badge { display: inline-block; font-size: 13px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: var(--good-bg); color: var(--good); }
-  .badge.info { background: var(--info-bg); color: var(--info); }
-  .badge.res { background: var(--warn-bg); color: var(--warning); }
-
-  /* Ficha del modelo */
-  .ficha-head { display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 1fr); gap: 28px; align-items: start; margin-top: 6px; }
-  .ficha-head .photo { border-radius: 18px; border: 1px solid var(--border); }
-  .ficha-head h1 { font-size: clamp(30px, 4vw, 44px); margin: 2px 0 4px; line-height: 1.05; }
-  .ficha-head .kicker { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); }
-  .ficha-head .sub { color: var(--text-secondary); margin: 0 0 18px; }
-  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
-  .kpi { background: var(--surface-1); border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; }
-  .kpi span { display: block; font-size: 13px; color: var(--text-muted); }
-  .kpi b { font-family: "Inter Tight", Inter, sans-serif; font-size: 24px; font-weight: 800; }
-  .kpi small { display: block; font-size: 13px; color: var(--text-secondary); }
-  .kpi.best { border-color: var(--accent); background: var(--accent-bg); }
-  .kpi.best b { color: var(--accent); }
-  .panel { background: var(--surface-1); border: 1px solid var(--border); border-radius: 18px; padding: 20px; margin-top: 24px; }
-  .panel h2 { font-size: 22px; margin: 0 0 4px; }
-  .chart { width: 100%; height: 220px; display: block; margin-top: 10px; }
-  .chart text { font: 12px Inter, system-ui, sans-serif; fill: var(--text-muted); }
-  .legend { display: flex; gap: 16px; font-size: 13px; color: var(--text-secondary); flex-wrap: wrap; margin-top: 6px; }
-  .legend i { display: inline-block; width: 18px; height: 3px; border-radius: 2px; vertical-align: middle; margin-right: 6px; }
-  .sortbar { display: flex; gap: 6px; flex-wrap: wrap; margin: 12px 0 14px; }
-  .offers { display: flex; flex-direction: column; }
-  .offer { display: grid; grid-template-columns: 120px 110px 90px minmax(0, 1fr) 150px 120px auto; gap: 12px; align-items: center; padding: 12px 4px; border-top: 1px solid var(--border); }
-  .offer.head { border-top: 0; font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: .04em; padding-top: 0; }
-  .offer .p { font-family: "Inter Tight", Inter, sans-serif; font-weight: 800; font-size: 20px; }
-  .offer .p small { display: block; font-family: Inter, sans-serif; font-weight: 600; font-size: 12px; color: var(--good); }
-  .offer .p small.up { color: var(--warning); }
-  .offer .v { font-size: 14px; color: var(--text-secondary); overflow-wrap: anywhere; }
-  .offer .v em { font-style: normal; font-size: 12px; color: var(--info); display: block; }
-  .offer .w { font-weight: 600; font-size: 14px; }
-  .offer .go { white-space: nowrap; font-weight: 600; text-decoration: none; padding: 10px 14px; border: 1px solid var(--border-strong); border-radius: 10px; color: var(--text-primary); }
-  .offer .go:hover { border-color: var(--accent); color: var(--accent); }
-  .offer.first { background: var(--accent-bg); border-radius: 12px; border-top-color: transparent; }
-  .offer .lbl { display: none; }
-
-  .elsewhere { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; background: var(--surface-1); border: 1px dashed var(--border-strong); border-radius: 16px; padding: 16px 18px; margin-top: 20px; }
-  .elsewhere p { margin: 0; flex: 1 1 260px; color: var(--text-secondary); }
-  .elsewhere p b { color: var(--text-primary); }
-  .ext { font: inherit; font-weight: 600; font-size: 14px; text-decoration: none; color: var(--text-primary); border: 1px solid var(--border-strong); border-radius: 10px; padding: 10px 14px; background: var(--surface-0); white-space: nowrap; }
-  .ext:hover { border-color: var(--accent); color: var(--accent); }
-
-  footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 13px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
-
-  @media (max-width: 860px) {
-    .ficha-head { grid-template-columns: 1fr; }
-    .offer.head { display: none; }
-    .offer { grid-template-columns: 1fr 1fr; gap: 4px 12px; padding: 14px 12px; }
-    .offer .p { grid-column: 1; }
-    .offer .go { grid-column: 2; grid-row: 1; justify-self: end; }
-    .offer .v { grid-column: 1 / -1; }
-    .offer .lbl { display: inline; color: var(--text-muted); font-size: 12px; margin-right: 4px; }
-  }
-  @media (max-width: 640px) {
-    header.top nav a:last-child { display: none; }
-    .hero { padding: 28px 0 20px; }
-    .logo.mark { gap: 12px; }
-    .logo.mark img { width: 58px; height: 58px; }
-    .logo.mark .word { font-size: 3.4rem; }
-    .logo .tag { display: none; }
-    form.search input { font-size: 1rem; padding: 8px 12px; }
-    form.search .btn { padding: 0 18px; min-height: 44px; }
-    .quick { justify-content: flex-start; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
-    .quick .pill { flex: none; }
-    .types { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-    .card .body { padding: 10px 12px 12px; }
-    .card .name { font-size: 15px; }
-    .card .price strong { font-size: 21px; }
-    .badges { top: 8px; left: 8px; }
-    .badge { font-size: 12px; padding: 2px 8px; }
-    .topbar { position: static; }
-    .filters { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
-    .filters select { flex: none; }
-    .panel { padding: 14px; }
-  }
-</style>
+<link rel="stylesheet" href="mootle.css">
 </head>
 <body>
 <main>
@@ -235,7 +18,7 @@
   <div id="home">
     <header class="top">
       <div class="counts" id="stats" aria-label="En cifras"></div>
-      <nav aria-label="Secciones"><a href="#chollos">Chollos</a><a href="#tipos">Por tipo</a><a href="#webs">Webs</a></nav>
+      <nav aria-label="Secciones"><a href="#chollos">Chollos</a><a href="marca/">Marcas</a><a href="#tipos">Por tipo</a><a href="#webs">Webs</a></nav>
     </header>
 
     <div class="hero">
@@ -318,11 +101,6 @@
     <div class="elsewhere" id="elsewhere"></div>
   </div>
 
-  <!-- Ficha de un modelo y año -->
-  <div id="ficha" hidden>
-    <div id="ficha-body"></div>
-  </div>
-
   <footer><span id="updated"></span><span>Los datos y las fotos son de cada web: siempre enlazamos al anuncio original.</span></footer>
 </main>
 
@@ -356,7 +134,7 @@
   const median = a => { const s = [...a].sort((x, y) => x - y), h = s.length >> 1; return s.length % 2 ? s[h] : Math.round((s[h - 1] + s[h]) / 2); };
   const fecha = d => new Date(d + "T12:00:00").toLocaleDateString("es-ES", { day: "numeric", month: "short" });
 
-  let ALL = [], SOURCES = {}, HISTORY = null, list = [], shown = PAGE, type = "", lastSearch = "";
+  let ALL = [], SOURCES = {}, list = [], shown = PAGE, type = "";
 
   /* ───────── grupos marca + modelo + año ───────── */
   // La misma moto en varias webs (campo `g`) cuenta una vez: la más barata.
@@ -389,7 +167,7 @@
     if (g.best.pa && g.best.pa > g.best.p) badges.push(`<span class="badge info">Bajó ${eur(g.best.pa - g.best.p)}</span>`);
     const km = g.best.km != null ? `con ${num(g.best.km)} km` : "";
     const foot = [`${num(g.n)} ${g.n === 1 ? "moto" : "motos"}`, g.webs > 1 ? `${g.webs} webs` : null, g.n > 1 ? `hasta ${eur(g.max)}` : null].filter(Boolean).join(" · ");
-    return `<a class="card" href="?m=${encodeURIComponent(g.mid)}" data-mid="${esc(g.mid)}">
+    return `<a class="card" href="m/${encodeURIComponent(g.mid)}.html">
       <div class="photo">${g.img ? `<img src="${esc(g.img)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.replaceWith(document.createRange().createContextualFragment(BIKE))">` : BIKE}</div>
       ${badges.length ? `<div class="badges">${badges.join("")}</div>` : ""}
       <div class="body">
@@ -449,8 +227,7 @@
     if (type) params.set("tipo", type);
     for (const [k, v] of Object.entries(f)) if (v && k !== "sort") params.set(k, v);
     if (f.sort !== "price") params.set("sort", f.sort);
-    lastSearch = "?" + params.toString();
-    history.replaceState(null, "", lastSearch);
+    history.replaceState(null, "", "?" + params.toString());
   }
 
   function render() {
@@ -469,98 +246,10 @@
     $(id).innerHTML = `<option value="">${label}</option>` + values.map(v => `<option value="${esc(v)}">${esc(fmt(v))}</option>`).join("");
   }
 
-  /* ───────── ficha del modelo ───────── */
-  let fichaSort = "asc";
-
-  function offerRow(m, i, g) {
-    const ph = m.ph || [];
-    const first = ph.length ? ph[0][1] : m.p;
-    const diff = m.p - first;
-    const trend = ph.length > 1 && diff ? `<small class="${diff > 0 ? "up" : ""}">${diff < 0 ? "Bajó" : "Subió"} ${eur(Math.abs(diff))}</small>` : "";
-    const also = m.g ? (g.offers.filter(x => x.g === m.g && x !== m).map(x => SOURCES[x.src]?.name || x.src)) : [];
-    const where = [m.city, m.prov].filter(Boolean).filter((v, k, a) => a.indexOf(v) === k).join(", ");
-    return `<div class="offer ${i === 0 && fichaSort === "asc" ? "first" : ""}">
-      <span class="p">${eur(m.p)}${trend}</span>
-      <span><span class="lbl">Km</span>${m.km != null ? num(m.km) + " km" : "—"}</span>
-      <span><span class="lbl">Color</span>${esc(m.col || "—")}</span>
-      <span class="v">${esc(m.t)}${m.res ? " · <strong>reservada</strong>" : ""}${also.length ? `<em>Misma moto que en ${esc(also.join(", "))}</em>` : ""}</span>
-      <span><span class="lbl">Dónde</span>${esc(where || "—")}</span>
-      <span class="w">${esc(SOURCES[m.src]?.name || m.src)}<span class="muted" style="font-weight:400"> · ${m.pro === false ? "particular" : "profesional"}</span></span>
-      <a class="go" href="${esc(safeUrl(m.url))}" target="_blank" rel="noopener noreferrer">Ver anuncio ↗</a>
-    </div>`;
-  }
-
-  function chart(series) {
-    if (!series || series.length < 2) {
-      const since = series && series.length ? fecha(series[0][0]) : "hoy";
-      return `<p class="muted">Empezamos a guardar el precio de este modelo el ${since}. La gráfica se irá llenando cada día.</p>`;
-    }
-    const W = 800, H = 220, L = 64, R = 12, T = 12, B = 28;
-    const xs = series.map(p => new Date(p[0]).getTime()), ys = series.flatMap(p => [p[1], p[2]]);
-    const x0 = Math.min(...xs), x1 = Math.max(...xs), lo = Math.min(...ys) * 0.95, hi = Math.max(...ys) * 1.05;
-    const X = t => L + (W - L - R) * (x1 === x0 ? 0.5 : (t - x0) / (x1 - x0));
-    const Y = v => T + (H - T - B) * (1 - (v - lo) / (hi - lo || 1));
-    const path = k => series.map((p, i) => `${i ? "L" : "M"}${X(xs[i]).toFixed(1)},${Y(p[k]).toFixed(1)}`).join("");
-    const ticks = [lo, (lo + hi) / 2, hi].map(v => `<line x1="${L}" x2="${W - R}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--grid)"/><text x="${L - 8}" y="${Y(v) + 4}" text-anchor="end">${eur(Math.round(v / 50) * 50)}</text>`).join("");
-    const dates = [0, series.length - 1].map(i => `<text x="${X(xs[i])}" y="${H - 6}" text-anchor="${i ? "end" : "start"}">${fecha(series[i][0])}</text>`).join("");
-    return `<svg class="chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="Histórico de precios: la más barata y la mediana de cada día">
-      ${ticks}${dates}
-      <path d="${path(2)}" fill="none" stroke="var(--line-med)" stroke-width="2" stroke-dasharray="5 4" vector-effect="non-scaling-stroke"/>
-      <path d="${path(1)}" fill="none" stroke="var(--line-min)" stroke-width="3" vector-effect="non-scaling-stroke"/>
-    </svg>
-    <div class="legend"><span><i style="background:var(--line-min)"></i>La más barata</span><span><i style="background:var(--line-med)"></i>Precio mediano</span></div>`;
-  }
-
-  function renderFicha(mid) {
-    const g = groupsOf(ALL.filter(m => m.mid === mid))[0];
-    if (!g) { $("ficha-body").innerHTML = `<p class="empty">Este modelo ya no tiene motos a la venta.</p>`; return; }
-    document.title = `${g.mk} ${g.mn} ${g.y} · mootle`;
-    const offers = [...g.offers].sort(fichaSort === "asc" ? (a, b) => a.p - b.p : fichaSort === "desc" ? (a, b) => b.p - a.p : (a, b) => (a.km ?? 1e9) - (b.km ?? 1e9));
-    const save = g.n > 1 ? `Ahorras ${eur(g.max - g.min)} frente a la más cara` : "";
-    $("ficha-body").innerHTML = `
-      <div class="ficha-head">
-        <div class="photo">${g.img ? `<img src="${esc(g.img)}" alt="" referrerpolicy="no-referrer">` : BIKE}</div>
-        <div>
-          <span class="kicker">${esc(g.mk)}${g.tp ? " · " + esc(g.tp) : ""}</span>
-          <h1 class="display">${esc(g.mk)} ${esc(g.mn)} <span class="muted">${g.y}</span></h1>
-          <p class="sub">${num(g.n)} ${g.n === 1 ? "moto a la venta" : "motos a la venta"}${g.webs > 1 ? ` en ${g.webs} webs` : ""}. ${save}</p>
-          <div class="kpis">
-            <div class="kpi best"><span>La más barata</span><b>${eur(g.min)}</b><small>${g.best.km != null ? num(g.best.km) + " km · " : ""}${esc(SOURCES[g.best.src]?.name || g.best.src)}</small></div>
-            ${g.n > 1 ? `<div class="kpi"><span>Precio mediano</span><b>${eur(g.med)}</b></div><div class="kpi"><span>La más cara</span><b>${eur(g.max)}</b></div>` : ""}
-          </div>
-          <p style="margin-top:16px"><a class="btn" href="${esc(safeUrl(g.best.url))}" target="_blank" rel="noopener noreferrer">Ver la más barata ↗</a></p>
-        </div>
-      </div>
-      <div class="panel">
-        <h2 class="display">Todas las ofertas</h2>
-        <div class="sortbar" role="group" aria-label="Ordenar ofertas">
-          <button class="pill ${fichaSort === "asc" ? "on" : ""}" data-fsort="asc">Más barata primero</button>
-          <button class="pill ${fichaSort === "desc" ? "on" : ""}" data-fsort="desc">Más cara primero</button>
-          <button class="pill ${fichaSort === "km" ? "on" : ""}" data-fsort="km">Menos km</button>
-        </div>
-        <div class="offers">
-          <div class="offer head"><span>Precio</span><span>Km</span><span>Color</span><span>Versión</span><span>Dónde</span><span>Web</span><span></span></div>
-          ${offers.map((m, i) => offerRow(m, i, g)).join("")}
-        </div>
-      </div>
-      <div class="elsewhere">${elsewhere(`${g.mk} ${g.mn}`, `<b>¿Y de particular?</b> Mira también la ${esc(g.mk)} ${esc(g.mn)} en Wallapop y Milanuncios (comprueba allí el año).`)}</div>
-      <div class="panel">
-        <h2 class="display">Histórico de precios</h2>
-        <p class="muted" style="margin:0">La más barata y el precio mediano de este modelo y año, día a día.</p>
-        <div id="chart">${HISTORY ? chart(HISTORY[mid]) : `<p class="muted">Cargando…</p>`}</div>
-      </div>`;
-    if (!HISTORY) loadHistory().then(() => { const c = $("chart"); if (c) c.innerHTML = chart(HISTORY[mid]); });
-  }
-
-  function loadHistory() {
-    return fetch("data/history.json", { cache: "no-cache" }).then(r => r.ok ? r.json() : {}).catch(() => ({})).then(h => { HISTORY = h; });
-  }
-
   /* ───────── navegación ───────── */
   function show(view) {
-    for (const v of ["home", "app", "ficha"]) $(v).hidden = v !== view;
+    for (const v of ["home", "app"]) $(v).hidden = v !== view;
     $("topbar").hidden = view === "home";
-    $("filters-box").hidden = view !== "app";
     window.scrollTo(0, 0);
   }
   function showApp(params) {
@@ -572,18 +261,12 @@
     renderTypes();
     apply();
   }
-  function showFicha(mid, push = true) {
-    show("ficha");
-    fichaSort = "asc";
-    if (push) history.pushState({ mid }, "", "?m=" + encodeURIComponent(mid));
-    renderFicha(mid);
-  }
   function showHome() { show("home"); $("q-home").value = ""; document.title = "mootle · comparador de motos de ocasión"; history.replaceState(null, "", location.pathname); }
   const go = query => showApp(new URLSearchParams(query));
 
   function route() {
     const params = new URLSearchParams(location.search);
-    if (params.get("m")) showFicha(params.get("m"), false);
+    if (params.get("m")) location.replace("m/" + encodeURIComponent(params.get("m")) + ".html");  // enlaces antiguos
     else if ([...params.keys()].length) showApp(params);
     else showHome();
   }
@@ -605,11 +288,8 @@
   $("more").addEventListener("click", () => { shown += PAGE; render(); });
   window.addEventListener("popstate", route);
   document.addEventListener("click", e => {
-    const card = e.target.closest("[data-mid]");
-    if (card && !e.metaKey && !e.ctrlKey) { e.preventDefault(); showFicha(card.dataset.mid); return; }
     if (e.target.closest("[data-home]")) { e.preventDefault(); showHome(); }
     const g = e.target.closest("[data-go]"); if (g) { e.preventDefault(); go(g.dataset.go); }
-    const fs = e.target.closest("[data-fsort]"); if (fs) { fichaSort = fs.dataset.fsort; renderFicha(new URLSearchParams(location.search).get("m")); }
   });
 
   /* ───────── carga ───────── */

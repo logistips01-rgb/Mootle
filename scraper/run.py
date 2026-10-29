@@ -16,6 +16,7 @@ from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 from .common import key
+from . import pages
 from .fetch import Fetcher
 from .models import assign, group_history, price_history
 from .sources import SOURCES
@@ -231,6 +232,8 @@ def main(argv=None):
     STATE.write_text(json.dumps(state, ensure_ascii=False, indent=1), encoding="utf-8")
     MODELS.write_text(json.dumps(catalog, ensure_ascii=False, indent=0, sort_keys=True), encoding="utf-8")
     HISTORY.write_text(json.dumps(history, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
+    models, brands, changed = pages.build(out, history)
+    print(f"Páginas: {models} modelos y años · {brands} marcas · {changed} ficheros nuevos o cambiados")
 
 
 if __name__ == "__main__":

@@ -23,7 +23,11 @@ data/
   state.json      por dónde va cada web que se lee por partes (cursor de motos.net)
   models.json     catálogo de modelos base por marca (de motos.net), para agrupar
   history.json    por grupo, un punto diario: [fecha, más barata, mediana, nº de anuncios]
-index.html        la web: portada (chollos, bajadas, webs) y buscador con filtros
+index.html        la web: portada y buscador con filtros (agrupa por modelo y año)
+mootle.css        estilos comunes de la portada y de las páginas generadas
+m/<modelo-año>.html   una página por marca + modelo + año, para Google (scraper/pages.py)
+marca/<marca>.html    una página por marca, y marca/index.html con todas
+sitemap.xml, robots.txt
 .github/workflows/scrape.yml   cron diario que ejecuta el rastreador y commitea data/
 ```
 
@@ -91,6 +95,19 @@ en la página, feed) antes de leer HTML. Concesionarios con WordPress + WooComme
 | `res` | reservada | | `g` | la misma moto en varias webs |
 | `mid`, `mn` | grupo marca-modelo-año y nombre del modelo | | `col` | color (si la web lo dice) |
 | `ph` | histórico del anuncio: `[[fecha, precio], …]` | | | |
+
+## Páginas para Google
+
+Como en guitle, cada ficha es una página propia con todo escrito en el HTML (título con el precio,
+ofertas, km, enlaces, histórico como SVG y datos estructurados `Product` + `AggregateOffer`), para que
+Google la lea sin JavaScript. `scraper/pages.py` las genera al final de cada ejecución; un fichero solo
+se reescribe si cambia. Un modelo y año sin motos se queda con su histórico y `noindex`.
+
+```sh
+python -m scraper.pages   # regenera las páginas con los datos de data/, sin leer ninguna web
+```
+
+La dirección base está en `SITE` (scraper/pages.py): al pasar a dominio propio se cambia ahí.
 
 ## Publicar la web
 
