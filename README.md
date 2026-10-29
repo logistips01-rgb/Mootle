@@ -24,9 +24,10 @@ index.html        la web: portada (chollos, bajadas, webs) y buscador con filtro
 
 Cada ejecución, por web:
 
-- **motos.net** (~35.000 motos, ~1.730 páginas): primero las novedades (páginas 1, 2… hasta una sin
-  anuncios nuevos) y luego sigue el barrido donde lo dejó la vez anterior, hasta agotar el tiempo.
-  Un anuncio que no se ve en 7 días se da por vendido.
+- **motos.net** (~35.000 motos, ~1.730 páginas): **como mucho 4 páginas al día**, para no cargar la
+  web. Primero las novedades (páginas 1, 2… hasta una sin anuncios nuevos); si sobra cupo, sigue el
+  barrido donde lo dejó el día anterior (`cursor` en `data/state.json`). Si responde con su página
+  anti-bot, para ese día sin reintentar. Un anuncio que no se ve en 14 días se da por vendido.
 - **Moto Ocasión**: se lee entera (~9 peticiones); lo que no aparece, o está agotado, se ha vendido.
 
 Después, `run.py`:

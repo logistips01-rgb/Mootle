@@ -22,7 +22,7 @@ from .sources import SOURCES
 ROOT = Path(__file__).resolve().parent.parent
 LISTINGS = ROOT / "data" / "listings.json"
 STATE = ROOT / "data" / "state.json"
-DROP_AFTER_DAYS = 7    # anuncios de fuentes que se leen por partes y no se han vuelto a ver
+DROP_AFTER_DAYS = 7    # anuncios de fuentes que se leen por partes y no se han vuelto a ver (cada fuente puede cambiarlo)
 MARKET_MIN = 5         # anuncios del mismo modelo y año para dar precio de mercado
 MARKET_YEARS = 1       # ± años que entran en la comparación
 
@@ -112,14 +112,14 @@ def merge(old_items, results, today):
             elif prev and prev.get("pa"):
                 it["pa"], it["pc"] = prev["pa"], prev.get("pc")
             out[it["id"]] = {k: v for k, v in it.items() if v is not None}
-    limit = (date.fromisoformat(today) - timedelta(days=DROP_AFTER_DAYS)).isoformat()
     for it in old_items:
         if it["id"] in out:
             continue
         found, info = results.get(it["src"], (None, None))
         if info and info.get("complete") and info.get("status") == "ok":
             continue  # la fuente se ha leído entera y ya no está: vendida
-        if it.get("ls", today) >= limit:
+        days = getattr(SOURCES.get(it["src"]), "DROP_AFTER_DAYS", DROP_AFTER_DAYS)
+        if it.get("ls", today) >= (date.fromisoformat(today) - timedelta(days=days)).isoformat():
             out[it["id"]] = it
     return list(out.values())
 

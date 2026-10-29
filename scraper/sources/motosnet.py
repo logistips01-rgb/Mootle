@@ -5,10 +5,12 @@ Cada página de resultados trae sus 20 anuncios completos en un JSON incrustado
 CV, foto... No hace falta leer las tarjetas del HTML (solo pinta 8 de 20).
 
 La paginación es `?pg=N` (con `?page=N` devuelve siempre la primera) y el orden por
-defecto pone primero lo más reciente. En cada ejecución:
+defecto pone primero lo más reciente. Para no cargar la web, cada día se leen como
+mucho MAX_PAGES_PER_RUN páginas:
   1. Novedades: páginas 1, 2... hasta una página sin anuncios nuevos.
-  2. Barrido: sigue desde donde lo dejó la ejecución anterior (`cursor` en el estado)
-     hasta agotar el tiempo, para refrescar precios y ver qué anuncios siguen vivos.
+  2. Si sobra cupo, barrido: sigue desde donde lo dejó el día anterior (`cursor` en
+     data/state.json) para refrescar precios y ver qué anuncios siguen vivos.
+Si la web responde con su página anti-bot, se para ese día sin reintentar.
 """
 import json
 import re
@@ -22,8 +24,8 @@ NAME = "motos.net"
 HOME = "https://motos.coches.net/"
 BASE = "https://motos.coches.net"
 SEARCH = BASE + "/segunda-mano/"
-RETRY_PAUSE = 60    # segundos antes de reintentar una página que no trae anuncios
-NEW_MAX_PAGES = 60  # tope de la fase de novedades (con 20 por página, 1.200 anuncios nuevos)
+MAX_PAGES_PER_RUN = 4  # páginas al día (20 anuncios cada una)
+DROP_AFTER_DAYS = 14   # a este ritmo un anuncio tarda en volver a verse: se guarda más tiempo
 
 _PROPS = re.compile(r'window\.__INITIAL_PROPS__\s*=\s*JSON\.parse\("((?:[^"\\]|\\.)*)"\)')
 
@@ -84,16 +86,11 @@ def scrape(fetcher, known, state, deadline, current_year, log):
     pages_read = 0
     total_pages = state.get("total_pages") or 0
 
-    def read(n, retry=True):
+    def read(n):
         nonlocal total_pages, pages_read
         resp = fetcher.get(page_url(n))
         parsed = parse_page(resp.text) if resp.status_code == 200 and not is_challenge(resp) else None
-        if parsed is None and retry:
-            # A veces la web corta un rato (p. ej. desde las IPs de GitHub): un reintento tras una pausa.
-            log(f"página {n} sin anuncios ({_describe(resp)}); reintento en {RETRY_PAUSE} s")
-            time.sleep(RETRY_PAUSE)
-            return read(n, retry=False)
-        if parsed is None:
+        if parsed is None:  # sin reintentos: si la web dice que no, se para hasta mañana
             status = "challenge" if is_challenge(resp) else (
                 f"http_{resp.status_code}" if resp.status_code != 200 else "sin_json")
             raise _Blocked(status, n, _describe(resp))
@@ -114,26 +111,22 @@ def scrape(fetcher, known, state, deadline, current_year, log):
     try:
         # 1) Novedades.
         n = 1
-        while n <= NEW_MAX_PAGES and time.monotonic() < deadline:
+        while pages_read < MAX_PAGES_PER_RUN and time.monotonic() < deadline:
             count, new = read(n)
-            if count == 0 or (new == 0 and n > 1):
+            n += 1  # siguiente página sin leer
+            if count == 0 or (new == 0 and n > 2):
                 break
-            n += 1
-        log(f"novedades: {n} páginas, {len(found)} anuncios")
+        log(f"novedades: {pages_read} páginas, {len(found)} anuncios")
 
-        # 2) Barrido desde el cursor.
-        cursor = max(state.get("cursor") or n + 1, n + 1)
-        while time.monotonic() < deadline:
+        # 2) Barrido desde el cursor, con el cupo que quede.
+        cursor = max(state.get("cursor") or 0, n)
+        while pages_read < MAX_PAGES_PER_RUN and time.monotonic() < deadline:
             if total_pages and cursor > total_pages:
-                cursor = 1
+                cursor = 2
                 state["sweeps"] = (state.get("sweeps") or 0) + 1
                 log("barrido completo, vuelta a empezar")
-                break  # la vuelta se retoma en la siguiente ejecución
             count, _ = read(cursor)
-            if count == 0:
-                cursor = total_pages + 1 if total_pages else cursor + 1
-                continue
-            cursor += 1
+            cursor = cursor + 1 if count else (total_pages or cursor) + 1
         state["cursor"] = cursor
     except _Blocked as blocked:
         status, detail = blocked.status, f"página {blocked.page}: {blocked.what}"
