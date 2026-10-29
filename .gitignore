@@ -23,8 +23,5 @@ ui-debug.log
 .DS_Store
 Thumbs.db
 
-# Datos generados por foodle/extract.js
-foodle/data/
-
 # Config web de Firebase (claves del navegador, local)
 firebase-config.js
