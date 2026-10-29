@@ -98,7 +98,8 @@ def product_page(g, sources, history):
 
 def category_page(cat, groups):
     name = CAT_NAMES.get(cat, cat)
-    groups = sorted(groups, key=lambda g: g["min"])
+    # Orden: primero por presencia de ofertas (nº de tiendas y de ofertas); el precio desempata.
+    groups = sorted(groups, key=lambda g: (-len(g["webs"]), -g["n"], g["min"]))
     cheapest = groups[0]["min"] if groups else 0
     title = f"{name} de moto baratos: {num(len(groups))} desde {eur(cheapest)} · mootle"
     desc = f"Compara {num(len(groups))} {name.lower()} de moto desde {eur(cheapest)}. Precios, ofertas e histórico."
