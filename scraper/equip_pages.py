@@ -119,9 +119,17 @@ def index_page(groups, sources):
     # chollos: bajadas de precio reales; si no hay aún, destacados por categoría
     drops = sorted([g for g in gl if g["best"].get("pa") and g["best"]["pa"] > g["min"]],
                    key=lambda g: g["min"] - g["best"]["pa"])
-    featured = drops[:8] if drops else sorted(gl, key=lambda g: g["min"])[:8]
-    chollo_note = ("Equipación que ha bajado de precio." if drops else
-                   "Las bajadas de precio aparecerán aquí según vayamos guardando el histórico cada día. De momento, una muestra del catálogo.")
+    multi = sorted([g for g in gl if len(g["webs"]) > 1], key=lambda g: g["max"] - g["min"], reverse=True)
+    seen_mid, featured = set(), []
+    for g in drops + multi + sorted(gl, key=lambda g: g["min"]):
+        if g["mid"] in seen_mid:
+            continue
+        seen_mid.add(g["mid"])
+        featured.append(g)
+        if len(featured) >= 12:
+            break
+    chollo_note = ("Equipación que ha bajado de precio y productos comparados en varias tiendas." if drops else
+                   f"{len(multi)} productos ya se comparan entre tiendas. Las bajadas de precio irán apareciendo según guardamos el histórico cada día.")
     cats_tiles = "".join(
         f'<a class="source" href="{cat}.html"><span>{e(CAT_NAMES.get(cat, cat))}<small>desde {eur(min(g["min"] for g in gs))}</small></span>'
         f'<b>{num(len(gs))}</b></a>' for cat, gs in sorted(by_cat.items(), key=lambda kv: -len(kv[1])))
