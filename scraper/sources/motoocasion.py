@@ -6,6 +6,7 @@ atributos. Se lee entero en cada ejecución (~9 peticiones), así que lo que no 
 se ha vendido.
 """
 from ..common import brand, clean_title, is_a2, model, moto_type, to_int, year
+from ..models import color
 from ..fetch import is_challenge
 
 ID = "motoocasion"
@@ -61,6 +62,7 @@ def to_listing(raw, current_year):
         "cc": to_int(attrs.get("Cilindrada")),
         "tp": moto_type(cats[0] if cats else None, f"{title} {md or ''}"),
         "a2": is_a2(raw.get("name"), hp, attrs.get("Carnet")),
+        "col": color(attrs.get("Color"), raw.get("name")),
         "pro": True,
         "res": attrs.get("Disponibilidad", "").lower().startswith("reserv") or None,
     }

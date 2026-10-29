@@ -17,6 +17,7 @@ import re
 import time
 
 from ..common import brand, clean_title, is_a2, model, moto_type, province, to_int, year
+from ..models import color
 from ..fetch import is_challenge
 
 ID = "motosnet"
@@ -72,6 +73,7 @@ def to_listing(raw, current_year):
         "tp": moto_type(None, f"{title} {md or ''}"),
         "a2": is_a2(title, hp),
         "pro": bool(raw.get("isProfessional")),
+        "col": color(title),
         "pub": (raw.get("publicationDate") or raw.get("creationDate") or "")[:10] or None,
     }
 

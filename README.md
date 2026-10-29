@@ -1,8 +1,9 @@
 # mootle — comparador de motos de ocasión
 
-Una sola búsqueda y ves las motos de segunda mano más baratas de portales y concesionarios de
-España, con el **precio de mercado** de cada modelo y la **misma moto en varias webs** agrupada
-("también en… por X €"). Misma línea que [guitle](https://guitle.com): rastreador diario en Python,
+Comparador por **modelo y año**: cada tarjeta es una marca + modelo + año (p. ej. Triumph Tiger 900
+2021) con la foto, el precio y los km de **la más barata de todas las webs**. Al abrir la ficha salen
+todas las ofertas, ordenables de más barata a más cara (o al revés, o por km), con km, color,
+versión, dónde, vendedor y el enlace a cada anuncio, y el **histórico de precios** del modelo. Misma línea que [guitle](https://guitle.com): rastreador diario en Python,
 datos en JSON dentro del repo y una web estática que los lee.
 
 ## Cómo funciona
@@ -14,10 +15,13 @@ scraper/
   sources/        un módulo por web (scrape → anuncios + estado)
     motosnet.py     motos.net: JSON incrustado en cada página de resultados (20 anuncios/página)
     motoocasion.py  Moto Ocasión (Mora, Toledo): API pública de WooCommerce (100 motos/petición)
-  run.py          lee todas las webs en paralelo y actualiza data/listings.json
+  models.py       grupos marca-modelo-año, color e histórico de precios
+  run.py          lee todas las webs en paralelo y actualiza data/
 data/
   listings.json   lo que carga la web: fuentes + anuncios (claves cortas, ver abajo)
   state.json      por dónde va cada web que se lee por partes (cursor de motos.net)
+  models.json     catálogo de modelos base por marca (de motos.net), para agrupar
+  history.json    por grupo, un punto diario: [fecha, más barata, mediana, nº de anuncios]
 index.html        la web: portada (chollos, bajadas, webs) y buscador con filtros
 .github/workflows/scrape.yml   cron diario que ejecuta el rastreador y commitea data/
 ```
@@ -35,6 +39,10 @@ Después, `run.py`:
 - conserva la fecha en que se vio cada anuncio por primera vez y el **precio anterior** si cambia;
 - calcula el **precio de mercado**: mediana de las motos de la misma marca, modelo y año (±1),
   si hay 5 o más;
+- **agrupa por marca + modelo + año** (`mid`, `mn`): el modelo de cada web se lleva al modelo base
+  del catálogo de motos.net ("TIGER 900 RALLY PRO" → "Tiger 900"); si motos.net da un modelo genérico
+  ("890"), se completa con el título ("890 Duke" / "890 Adventure");
+- guarda el **histórico de precios** de cada anuncio (`ph`) y de cada grupo (`data/history.json`);
 - **agrupa la misma moto en varias webs** (misma marca, año y km, modelo compatible, precio parecido):
   la web muestra la más barata y el resto como "también en…".
 
@@ -73,7 +81,9 @@ en la página, feed) antes de leer HTML. Concesionarios con WordPress + WooComme
 | `p` | precio (€) | | `pub` | fecha de publicación en la web |
 | `p0` | precio tachado en la web | | `fs`, `ls` | primera y última vez visto |
 | `pa`, `pc` | precio anterior y día del cambio | | `mkt` | precio de mercado (mediana) |
-| `res` | reservada | | `g` | grupo: la misma moto en varias webs |
+| `res` | reservada | | `g` | la misma moto en varias webs |
+| `mid`, `mn` | grupo marca-modelo-año y nombre del modelo | | `col` | color (si la web lo dice) |
+| `ph` | histórico del anuncio: `[[fecha, precio], …]` | | | |
 
 ## Publicar la web
 

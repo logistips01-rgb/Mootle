@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#e8590c">
-<meta name="description" content="mootle es un comparador de motos de segunda mano: busca una vez y ve las más baratas de portales y concesionarios de España, con el precio de mercado de cada modelo.">
+<meta name="description" content="mootle compara motos de ocasión por modelo y año: la más barata de todas las webs, todas las ofertas ordenadas por precio y el histórico de precios de cada modelo.">
 <title>mootle · comparador de motos de ocasión</title>
 <link rel="icon" type="image/svg+xml" href="icon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -16,8 +16,9 @@
     --surface-0: #f6f5f2; --surface-1: #ffffff; --surface-2: #eceae4; --border: #e2e0d9; --border-strong: #dedcd5;
     --text-primary: #141413; --text-secondary: #3a3935; --text-muted: #5f5e5a;
     --good: #0a7a2f; --good-bg: #e7f5ec; --warning: #9a6400; --warn-bg: #fff1e0;
-    --logo: #e8590c; --accent: #c2410c; --accent-hover: #9a3412; --accent-bg: #fff4ec; --accent-border: #f4c9ae;
+    --logo: #e8590c; --accent: #c2410c; --accent-hover: #9a3412; --accent-bg: #fff4ec; --accent-border: #f4c9ae; --on-accent: #ffffff;
     --info: #1d5fb4; --info-bg: #e8f1fc; --shadow: 0 10px 30px rgba(20,20,19,.06);
+    --line-min: #c2410c; --line-med: #8a8984; --grid: #ecebe7;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
@@ -25,8 +26,9 @@
       --surface-0: #111110; --surface-1: #1a1a19; --surface-2: #262624; --border: #2e2e2c; --border-strong: #3a3a37;
       --text-primary: #f0efec; --text-secondary: #d5d4cc; --text-muted: #a3a29b;
       --good: #4cc261; --good-bg: #16301b; --warning: #e0a63a; --warn-bg: #3a2a12;
-      --logo: #f07a35; --accent: #f07a35; --accent-hover: #f59a62; --accent-bg: #2e1a10; --accent-border: #5a321c;
+      --logo: #f07a35; --accent: #f07a35; --accent-hover: #f59a62; --accent-bg: #2e1a10; --accent-border: #5a321c; --on-accent: #141413;
       --info: #6aa6ef; --info-bg: #172a40; --shadow: none;
+      --line-min: #f07a35; --line-med: #8f8e88; --grid: #262624;
     }
   }
   :root[data-theme="dark"] {
@@ -34,8 +36,9 @@
     --surface-0: #111110; --surface-1: #1a1a19; --surface-2: #262624; --border: #2e2e2c; --border-strong: #3a3a37;
     --text-primary: #f0efec; --text-secondary: #d5d4cc; --text-muted: #a3a29b;
     --good: #4cc261; --good-bg: #16301b; --warning: #e0a63a; --warn-bg: #3a2a12;
-    --logo: #f07a35; --accent: #f07a35; --accent-hover: #f59a62; --accent-bg: #2e1a10; --accent-border: #5a321c;
+    --logo: #f07a35; --accent: #f07a35; --accent-hover: #f59a62; --accent-bg: #2e1a10; --accent-border: #5a321c; --on-accent: #141413;
     --info: #6aa6ef; --info-bg: #172a40; --shadow: none;
+    --line-min: #f07a35; --line-med: #8f8e88; --grid: #262624;
   }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--surface-0); color: var(--text-primary); font: 15px/1.45 Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
@@ -54,14 +57,13 @@
   .logo svg circle { stroke: var(--logo); }
   .logo svg circle.hub { fill: var(--logo); stroke: none; }
 
-  /* Cabecera de la portada */
   .site-head { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; padding: 20px 0; }
   .site-head nav { display: flex; gap: 20px; flex: 1; flex-wrap: wrap; }
   .site-head nav a { color: var(--text-secondary); text-decoration: none; }
   .site-head nav a:hover { color: var(--accent); }
   .site-head .updated { font-size: 13px; color: var(--text-muted); }
 
-  /* Hero */
+  /* Hero y buscador */
   .hero { text-align: center; padding: 48px 0 36px; }
   .hero h1 { font-size: clamp(34px, 5vw, 60px); line-height: 1.05; margin: 0 0 14px; }
   .hero h1 span { color: var(--accent); }
@@ -75,15 +77,14 @@
   form.big .what { flex: 3 1 260px; }
   form.big .where { flex: 1 1 160px; border-left: 1px solid var(--border); }
   form.big .max { flex: 1 1 140px; border-left: 1px solid var(--border); }
-  .btn { min-height: 52px; border: 0; border-radius: 14px; background: var(--accent); color: #fff; font: inherit; font-weight: 600; font-size: 17px;
-         padding: 0 28px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; }
-  .btn:hover { background: var(--accent-hover); }
-  :root[data-theme="dark"] .btn, .dark-btn { color: #141413; }
-  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn { color: #141413; } }
+  .btn { min-height: 52px; border: 0; border-radius: 14px; background: var(--accent); color: var(--on-accent); font: inherit; font-weight: 600; font-size: 17px;
+         padding: 0 28px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; text-decoration: none; }
+  .btn:hover { background: var(--accent-hover); color: var(--on-accent); }
   .quick { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 18px; align-items: center; }
   .pill { font: inherit; font-size: 14px; color: var(--text-secondary); text-decoration: none; background: var(--surface-1); border: 1px solid var(--border-strong);
           border-radius: 999px; padding: 6px 14px; cursor: pointer; }
-  .pill:hover { border-color: var(--accent); color: var(--accent); }
+  .pill:hover, .pill.on { border-color: var(--accent); color: var(--accent); }
+  .pill.on { background: var(--accent-bg); }
 
   .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
   .stat { background: var(--surface-1); border: 1px solid var(--border); border-radius: 16px; padding: 18px 20px; }
@@ -116,7 +117,7 @@
   .step b { display: block; font-family: "Inter Tight", Inter, sans-serif; font-weight: 800; font-size: 28px; color: var(--accent); }
   .step p { margin: 6px 0 0; }
 
-  /* Resultados */
+  /* Barra de resultados */
   .topbar { position: sticky; top: 0; z-index: 5; background: var(--surface-0); padding: 12px 0 10px; border-bottom: 1px solid var(--border); margin-bottom: 14px; }
   .topbar .logo { font-size: 24px; }
   form.slim { display: flex; margin: 10px 0 8px; border: 1px solid var(--border-strong); border-radius: 999px; background: var(--surface-1); overflow: hidden; }
@@ -133,32 +134,72 @@
   .empty { color: var(--text-muted); padding: 24px 0; text-align: center; grid-column: 1 / -1; }
   .more { display: block; margin: 18px auto 0; font: inherit; border: 1px solid var(--border-strong); background: var(--surface-1); color: var(--text-primary); border-radius: 999px; padding: 10px 24px; cursor: pointer; }
 
-  /* Tarjeta de moto */
-  .tile { position: relative; background: var(--surface-1); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column;
+  /* Tarjeta de modelo */
+  .card { position: relative; background: var(--surface-1); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; display: flex; flex-direction: column;
           text-decoration: none; color: var(--text-primary); transition: transform .12s, box-shadow .12s; min-width: 0; }
-  .tile:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,0,0,.08); color: var(--text-primary); }
-  .tile .img { aspect-ratio: 4 / 3; background: var(--surface-2); overflow: hidden; }
-  .tile img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .tile .body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 4px; flex: 1; }
-  .tile .brand { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); }
-  .tile .name { font-weight: 600; line-height: 1.25; font-size: 17px; overflow-wrap: anywhere; }
-  .tile .specs { font-size: 14px; color: var(--text-secondary); }
-  .tile .price { display: flex; align-items: baseline; gap: 10px; margin-top: auto; padding-top: 8px; flex-wrap: wrap; }
-  .tile .price strong { font-family: "Inter Tight", Inter, sans-serif; font-size: 24px; font-weight: 800; letter-spacing: -.02em; }
-  .tile .price s { color: var(--text-muted); font-size: 14px; }
-  .tile .mkt { font-size: 13px; color: var(--text-muted); }
-  .tile .mkt.good { color: var(--good); font-weight: 600; }
-  .tile .also { font-size: 13px; color: var(--info); background: var(--info-bg); border-radius: 8px; padding: 4px 8px; align-self: flex-start; }
-  .tile .foot { display: flex; justify-content: space-between; color: var(--text-muted); font-size: 13px; gap: 6px; margin-top: 6px; }
-  .tile .foot span:first-child { font-weight: 600; color: var(--text-secondary); }
-  .tile .badges { position: absolute; top: 12px; left: 12px; display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 8px 22px rgba(0,0,0,.08); color: var(--text-primary); }
+  .photo { aspect-ratio: 4 / 3; background: var(--surface-2); overflow: hidden; display: flex; align-items: center; justify-content: center; color: var(--text-muted); }
+  .photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .card .body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 3px; flex: 1; }
+  .card .brand { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); }
+  .card .name { font-weight: 700; line-height: 1.2; font-size: 18px; overflow-wrap: anywhere; }
+  .card .name span { color: var(--text-muted); font-weight: 600; }
+  .card .from { margin-top: auto; padding-top: 10px; font-size: 13px; color: var(--text-muted); }
+  .card .price { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .card .price strong { font-family: "Inter Tight", Inter, sans-serif; font-size: 26px; font-weight: 800; letter-spacing: -.02em; }
+  .card .price small { font-size: 14px; color: var(--text-secondary); }
+  .card .foot { font-size: 13px; color: var(--text-muted); margin-top: 6px; }
+  .badges { position: absolute; top: 12px; left: 12px; display: flex; flex-direction: column; gap: 6px; align-items: flex-start; }
   .badge { display: inline-block; font-size: 13px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: var(--good-bg); color: var(--good); }
-  .badge.drop { background: var(--info-bg); color: var(--info); }
+  .badge.info { background: var(--info-bg); color: var(--info); }
   .badge.res { background: var(--warn-bg); color: var(--warning); }
-  .badge.a2 { background: var(--surface-1); color: var(--text-secondary); }
+
+  /* Ficha del modelo */
+  .back { display: inline-flex; align-items: center; gap: 6px; font: inherit; font-weight: 600; background: none; border: 0; color: var(--accent); cursor: pointer; padding: 8px 0; min-height: 44px; }
+  .ficha-head { display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 1fr); gap: 28px; align-items: start; margin-top: 6px; }
+  .ficha-head .photo { border-radius: 18px; border: 1px solid var(--border); }
+  .ficha-head h1 { font-size: clamp(30px, 4vw, 44px); margin: 2px 0 4px; line-height: 1.05; }
+  .ficha-head .kicker { font-size: 13px; text-transform: uppercase; letter-spacing: .06em; color: var(--text-muted); }
+  .ficha-head .sub { color: var(--text-secondary); margin: 0 0 18px; }
+  .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
+  .kpi { background: var(--surface-1); border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; }
+  .kpi span { display: block; font-size: 13px; color: var(--text-muted); }
+  .kpi b { font-family: "Inter Tight", Inter, sans-serif; font-size: 24px; font-weight: 800; }
+  .kpi small { display: block; font-size: 13px; color: var(--text-secondary); }
+  .kpi.best { border-color: var(--accent); background: var(--accent-bg); }
+  .kpi.best b { color: var(--accent); }
+  .panel { background: var(--surface-1); border: 1px solid var(--border); border-radius: 18px; padding: 20px; margin-top: 24px; }
+  .panel h2 { font-size: 22px; margin: 0 0 4px; }
+  .chart { width: 100%; height: 220px; display: block; margin-top: 10px; }
+  .chart text { font: 12px Inter, system-ui, sans-serif; fill: var(--text-muted); }
+  .legend { display: flex; gap: 16px; font-size: 13px; color: var(--text-secondary); flex-wrap: wrap; margin-top: 6px; }
+  .legend i { display: inline-block; width: 18px; height: 3px; border-radius: 2px; vertical-align: middle; margin-right: 6px; }
+  .sortbar { display: flex; gap: 6px; flex-wrap: wrap; margin: 12px 0 14px; }
+  .offers { display: flex; flex-direction: column; }
+  .offer { display: grid; grid-template-columns: 120px 110px 90px minmax(0, 1fr) 150px 120px auto; gap: 12px; align-items: center; padding: 12px 4px; border-top: 1px solid var(--border); }
+  .offer.head { border-top: 0; font-size: 12px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: .04em; padding-top: 0; }
+  .offer .p { font-family: "Inter Tight", Inter, sans-serif; font-weight: 800; font-size: 20px; }
+  .offer .p small { display: block; font-family: Inter, sans-serif; font-weight: 600; font-size: 12px; color: var(--good); }
+  .offer .p small.up { color: var(--warning); }
+  .offer .v { font-size: 14px; color: var(--text-secondary); overflow-wrap: anywhere; }
+  .offer .v em { font-style: normal; font-size: 12px; color: var(--info); display: block; }
+  .offer .w { font-weight: 600; font-size: 14px; }
+  .offer .go { white-space: nowrap; font-weight: 600; text-decoration: none; padding: 10px 14px; border: 1px solid var(--border-strong); border-radius: 10px; color: var(--text-primary); }
+  .offer .go:hover { border-color: var(--accent); color: var(--accent); }
+  .offer.first { background: var(--accent-bg); border-radius: 12px; border-top-color: transparent; }
+  .offer .lbl { display: none; }
 
   footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 13px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
 
+  @media (max-width: 860px) {
+    .ficha-head { grid-template-columns: 1fr; }
+    .offer.head { display: none; }
+    .offer { grid-template-columns: 1fr 1fr; gap: 4px 12px; padding: 14px 12px; }
+    .offer .p { grid-column: 1; }
+    .offer .go { grid-column: 2; grid-row: 1; justify-self: end; }
+    .offer .v { grid-column: 1 / -1; }
+    .offer .lbl { display: inline; color: var(--text-muted); font-size: 12px; margin-right: 4px; }
+  }
   @media (max-width: 640px) {
     .site-head nav { display: none; }
     .hero { text-align: left; padding: 24px 0 24px; }
@@ -173,14 +214,15 @@
     .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .types { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-    .tile .body { padding: 10px 12px 12px; }
-    .tile .name { font-size: 15px; }
-    .tile .price strong { font-size: 20px; }
-    .tile .badges { top: 8px; left: 8px; }
+    .card .body { padding: 10px 12px 12px; }
+    .card .name { font-size: 15px; }
+    .card .price strong { font-size: 21px; }
+    .badges { top: 8px; left: 8px; }
     .badge { font-size: 12px; padding: 2px 8px; }
     .topbar { position: static; }
     .filters { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
     .filters select { flex: none; }
+    .panel { padding: 14px; }
   }
 </style>
 </head>
@@ -196,7 +238,7 @@
 
     <div class="hero">
       <h1 class="display">Tu moto de ocasión,<br><span>al mejor precio</span></h1>
-      <p id="hero-sub">Una búsqueda, todas las webs. Portales y concesionarios, comparados cada día.</p>
+      <p id="hero-sub">Cada modelo y año, con la más barata de todas las webs y su histórico de precios.</p>
       <form class="big" id="home-form" role="search">
         <label class="what"><span>Qué moto buscas</span><input id="q-home" type="search" placeholder="MT-07, Africa Twin, scooter 125…" autocomplete="off"></label>
         <label class="where"><span>Dónde</span><select id="home-prov"><option value="">Toda España</option></select></label>
@@ -209,15 +251,15 @@
     <div class="stats" id="stats" aria-label="En cifras"></div>
 
     <section id="chollos">
-      <div class="sec-head"><h2 class="display">Chollos de hoy</h2><a data-go="sort=deal" id="deals-all">Ver todos</a></div>
-      <p class="sec-sub">Motos bastante por debajo de lo que piden otras del mismo modelo y año.</p>
+      <div class="sec-head"><h2 class="display">Chollos de hoy</h2><a data-go="sort=deal">Ver todos</a></div>
+      <p class="sec-sub">Modelos cuya moto más barata está muy por debajo de lo que piden las demás del mismo año.</p>
       <div class="grid" id="deals"><p class="muted">Cargando…</p></div>
     </section>
 
-    <section id="drops-sec" hidden>
-      <div class="sec-head"><h2 class="display">Han bajado de precio</h2><a data-go="sort=drop">Ver todas</a></div>
-      <p class="sec-sub">Lo que piden hoy es menos que lo que pedían la última vez que lo vimos.</p>
-      <div class="grid" id="drops"></div>
+    <section id="populares">
+      <div class="sec-head"><h2 class="display">Más ofertas para comparar</h2><a data-go="sort=count">Ver todos</a></div>
+      <p class="sec-sub">Los modelos y años con más motos a la venta: donde más se nota elegir bien.</p>
+      <div class="grid" id="popular"></div>
     </section>
 
     <section id="tipos">
@@ -235,13 +277,13 @@
       <div class="sec-head"><h2 class="display">Cómo funciona</h2></div>
       <div class="steps">
         <div class="step"><b>1</b><p>Cada mañana leemos los anuncios de portales y concesionarios que lo permiten.</p></div>
-        <div class="step"><b>2</b><p>Juntamos todo en una búsqueda, de la más barata a la más cara, y si una moto sale en varias webs te enseñamos dónde cuesta menos.</p></div>
-        <div class="step"><b>3</b><p>Comparamos cada moto con otras del mismo modelo y año para que sepas si el precio es bueno de verdad.</p></div>
+        <div class="step"><b>2</b><p>Agrupamos las motos por marca, modelo y año, y te enseñamos la más barata de todas las webs.</p></div>
+        <div class="step"><b>3</b><p>En cada modelo ves todas las ofertas con sus km y enlaces, y cómo ha ido cambiando el precio.</p></div>
       </div>
     </section>
   </div>
 
-  <!-- Resultados -->
+  <!-- Resultados: modelos -->
   <div id="app" hidden>
     <div class="topbar">
       <a class="logo" data-home aria-label="mootle, inicio" href="./"><span>m</span><svg viewBox="0 0 92 48" aria-hidden="true"><circle cx="22" cy="26" r="16" fill="none" stroke-width="8"/><circle cx="70" cy="26" r="16" fill="none" stroke-width="8"/><circle class="hub" cx="22" cy="26" r="3.5"/><circle class="hub" cx="70" cy="26" r="3.5"/></svg><span>tle</span></a>
@@ -263,13 +305,19 @@
     </div>
     <div class="meta"><span id="count">Cargando…</span>
       <label>Orden <select id="sort">
-        <option value="price">Más baratas</option><option value="deal">Mejor precio frente al mercado</option>
-        <option value="new">Recién publicadas</option><option value="drop">Bajadas de precio</option>
-        <option value="km">Menos km</option><option value="year">Más nuevas</option><option value="price-desc">Más caras</option>
+        <option value="price">Más barata primero</option><option value="deal">Mayor chollo</option>
+        <option value="count">Más ofertas</option><option value="spread">Mayor diferencia de precio</option>
+        <option value="year">Año más nuevo</option><option value="price-desc">Más cara primero</option>
       </select></label>
     </div>
     <div class="grid" id="grid"></div>
     <button class="more" id="more" hidden>Ver más</button>
+  </div>
+
+  <!-- Ficha de un modelo y año -->
+  <div id="ficha" hidden>
+    <button class="back" id="back" type="button"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>Volver</button>
+    <div id="ficha-body"></div>
   </div>
 
   <footer><span id="updated"></span><span>Los datos y las fotos son de cada web: siempre enlazamos al anuncio original.</span></footer>
@@ -289,9 +337,10 @@
     turismo: '<rect x="7" y="9" width="26" height="22" rx="4"/><path d="M7 16h26M14 9V6h12v3"/>',
     campo: '<circle cx="9" cy="29" r="6"/><circle cx="31" cy="29" r="6"/><path d="M9 29l8-14h8l6 14M17 15l-3-5M25 15l5-4"/>',
   };
+  const BIKE = '<svg width="96" height="56" viewBox="0 0 96 56" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="20" cy="38" r="14"/><circle cx="76" cy="38" r="14"/><path d="M20 38l16-20h18l10 20M36 18l-6-8h-8M54 18l8-6h10"/></svg>';
   const TYPES = [["", "Todas"], ["naked", "Naked"], ["trail", "Trail"], ["scooter", "Scooter"], ["deportiva", "Deportiva"],
                  ["custom", "Custom"], ["turismo", "Turismo"], ["campo", "Campo"]];
-  const QUICK = ["MT-07", "Africa Twin", "R 1250 GS", "Scooter 125", "Tracer", "Z900"];
+  const QUICK = ["MT-07", "Africa Twin", "R 1250 GS", "Tiger 900", "Tracer", "Z 900"];
 
   const $ = id => document.getElementById(id);
   const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -301,73 +350,86 @@
   const fold = s => String(s ?? "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
   const compact = s => fold(s).replace(/[^a-z0-9]/g, "");
   const safeUrl = u => /^https?:\/\//i.test(u || "") ? u : "#";
-  // Diferencia con el precio de mercado (negativo = más barata que la mediana).
-  const vsMkt = m => m.mkt ? (m.p - m.mkt) / m.mkt : null;
-  const isDeal = m => m.mkt && vsMkt(m) <= -0.15 && !m.res;
+  const median = a => { const s = [...a].sort((x, y) => x - y), h = s.length >> 1; return s.length % 2 ? s[h] : Math.round((s[h - 1] + s[h]) / 2); };
+  const fecha = d => new Date(d + "T12:00:00").toLocaleDateString("es-ES", { day: "numeric", month: "short" });
 
-  let ALL = [], SOURCES = {}, GROUPS = {}, list = [], shown = PAGE, type = "";
+  let ALL = [], SOURCES = {}, HISTORY = null, list = [], shown = PAGE, type = "", lastSearch = "";
 
-  // La misma moto en varias webs (campo `g`): se queda la más barata de las que pasan los filtros.
-  function collapse(arr) {
+  /* ───────── grupos marca + modelo + año ───────── */
+  // La misma moto en varias webs (campo `g`) cuenta una vez: la más barata.
+  function uniqueBikes(arr) {
     const best = {};
     for (const m of arr) if (m.g && (!best[m.g] || m.p < best[m.g].p)) best[m.g] = m;
     return arr.filter(m => !m.g || best[m.g] === m);
   }
+  function groupsOf(arr) {
+    const by = {};
+    for (const m of arr) if (m.mid) (by[m.mid] ||= []).push(m);
+    return Object.entries(by).map(([mid, offers]) => {
+      offers.sort((a, b) => a.p - b.p);
+      const bikes = uniqueBikes(offers);
+      const prices = bikes.map(m => m.p);
+      const best = offers[0];
+      const withImg = offers.find(m => m.img);
+      return {
+        mid, mk: best.mk, mn: best.mn, y: best.y, tp: offers.find(m => m.tp)?.tp, offers, best,
+        img: (best.img ? best : withImg)?.img, n: bikes.length, webs: new Set(offers.map(m => m.src)).size,
+        min: best.p, max: Math.max(...prices), med: median(prices),
+        deal: bikes.length >= 3 ? (best.p - median(prices)) / median(prices) : null,
+      };
+    });
+  }
 
-  function tile(m) {
-    const d = vsMkt(m);
+  function card(g) {
     const badges = [];
-    if (d != null && d <= -0.15) badges.push(`<span class="badge">${Math.round(d * 100)} % vs mercado</span>`);
-    if (m.pa && m.pa > m.p) badges.push(`<span class="badge drop">Bajó ${eur(m.pa - m.p)}</span>`);
-    if (m.res) badges.push(`<span class="badge res">Reservada</span>`);
-    const specs = [m.y, m.km != null ? `${num(m.km)} km` : null, m.cv ? `${m.cv} CV` : null, m.a2 ? "A2" : null].filter(Boolean).join(" · ");
-    const old = m.p0 || (m.pa > m.p ? m.pa : null);
-    const mkt = m.mkt ? `<span class="mkt ${d <= -0.1 ? "good" : ""}">Mercado ${eur(m.mkt)}</span>` : "";
-    const src = SOURCES[m.src]?.name || m.src;
-    const also = (GROUPS[m.g] || []).filter(x => x !== m)
-      .map(x => `También en ${esc(SOURCES[x.src]?.name || x.src)}: ${eur(x.p)}${x.p > m.p ? ` (ahorras ${eur(x.p - m.p)})` : ""}`);
-    return `<a class="tile" href="${esc(safeUrl(m.url))}" target="_blank" rel="noopener noreferrer">
-      <div class="img">${m.img ? `<img src="${esc(m.img)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ""}</div>
+    if (g.deal != null && g.deal <= -0.12) badges.push(`<span class="badge">${Math.round(g.deal * 100)} % vs la media</span>`);
+    if (g.best.pa && g.best.pa > g.best.p) badges.push(`<span class="badge info">Bajó ${eur(g.best.pa - g.best.p)}</span>`);
+    const km = g.best.km != null ? `con ${num(g.best.km)} km` : "";
+    const foot = [`${num(g.n)} ${g.n === 1 ? "moto" : "motos"}`, g.webs > 1 ? `${g.webs} webs` : null, g.n > 1 ? `hasta ${eur(g.max)}` : null].filter(Boolean).join(" · ");
+    return `<a class="card" href="?m=${encodeURIComponent(g.mid)}" data-mid="${esc(g.mid)}">
+      <div class="photo">${g.img ? `<img src="${esc(g.img)}" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.replaceWith(document.createRange().createContextualFragment(BIKE))">` : BIKE}</div>
       ${badges.length ? `<div class="badges">${badges.join("")}</div>` : ""}
       <div class="body">
-        <span class="brand">${esc(m.mk || "")}${m.tp ? " · " + esc(m.tp) : ""}</span>
-        <span class="name">${esc(m.t)}</span>
-        <span class="specs">${esc(specs)}</span>
-        <span class="price"><strong>${eur(m.p)}</strong>${old ? `<s>${eur(old)}</s>` : ""}${mkt}</span>
-        ${also.map(t => `<span class="also">${t}</span>`).join("")}
-        <span class="foot"><span>${esc(src)}</span><span>${esc(m.prov || "")}${m.pro === false ? " · particular" : ""}</span></span>
+        <span class="brand">${esc(g.mk)}${g.tp ? " · " + esc(g.tp) : ""}</span>
+        <span class="name">${esc(g.mn)} <span>· ${g.y}</span></span>
+        <span class="from">${g.n > 1 ? "La más barata" : "Precio"}</span>
+        <span class="price"><strong>${eur(g.min)}</strong><small>${esc(km)}</small></span>
+        <span class="foot">${foot}</span>
       </div></a>`;
   }
 
   /* ───────── búsqueda y filtros ───────── */
   function matches(m, words) {
     if (!words.length) return true;
-    if (!m._h) { m._h = fold(`${m.mk} ${m.md} ${m.t} ${m.prov} ${m.city} ${m.tp} ${m.a2 ? "a2" : ""}`); m._c = compact(m._h); }
+    if (!m._h) { m._h = fold(`${m.mk} ${m.mn} ${m.md} ${m.t} ${m.y} ${m.prov} ${m.city} ${m.tp} ${m.a2 ? "a2" : ""}`); m._c = compact(m._h); }
     // "mt07" encuentra "MT-07" y "africa twin" encuentra "Africa Twin".
     return words.every(w => m._h.includes(w) || m._c.includes(compact(w)));
   }
 
   const sorters = {
-    price: (a, b) => a.p - b.p,
-    "price-desc": (a, b) => b.p - a.p,
-    deal: (a, b) => (vsMkt(a) ?? 9) - (vsMkt(b) ?? 9) || a.p - b.p,
-    new: (a, b) => (b.pub || b.fs || "").localeCompare(a.pub || a.fs || "") || a.p - b.p,
-    drop: (a, b) => ((b.pa || 0) - b.p) / (b.pa || 1) - ((a.pa || 0) - a.p) / (a.pa || 1),
-    km: (a, b) => (a.km ?? 1e9) - (b.km ?? 1e9),
-    year: (a, b) => (b.y || 0) - (a.y || 0) || a.p - b.p,
+    price: (a, b) => a.min - b.min,
+    "price-desc": (a, b) => b.min - a.min,
+    deal: (a, b) => (a.deal ?? 9) - (b.deal ?? 9) || a.min - b.min,
+    count: (a, b) => b.n - a.n || a.min - b.min,
+    spread: (a, b) => (b.max - b.min) - (a.max - a.min),
+    year: (a, b) => b.y - a.y || a.min - b.min,
   };
 
-  function apply() {
-    const words = fold($("q").value).split(/\s+/).filter(Boolean);
-    const f = {
+  function filters() {
+    return {
       brand: $("f-brand").value, price: +$("f-price").value || 0, year: +$("f-year").value || 0, km: +$("f-km").value || 0,
       prov: $("f-prov").value, a2: $("f-a2").value, seller: $("f-seller").value, src: $("f-src").value, sort: $("sort").value,
     };
-    list = collapse(ALL.filter(m =>
+  }
+
+  function apply() {
+    const words = fold($("q").value).split(/\s+/).filter(Boolean);
+    const f = filters();
+    const offers = ALL.filter(m =>
       (!type || m.tp === type) && (!f.brand || m.mk === f.brand) && (!f.price || m.p <= f.price) &&
       (!f.year || (m.y || 0) >= f.year) && (!f.km || (m.km ?? 1e9) <= f.km) && (!f.prov || m.prov === f.prov) &&
-      (!f.a2 || m.a2) && (f.seller === "" || String(+!!m.pro) === f.seller) && (!f.src || m.src === f.src) &&
-      (f.sort !== "drop" || (m.pa && m.pa > m.p)) && (f.sort !== "deal" || m.mkt) && matches(m, words)));
+      (!f.a2 || m.a2) && (f.seller === "" || String(+!!m.pro) === f.seller) && (!f.src || m.src === f.src) && matches(m, words));
+    list = groupsOf(offers).filter(g => f.sort !== "deal" || g.deal != null);
     list.sort(sorters[f.sort] || sorters.price);
     shown = PAGE;
     render();
@@ -376,14 +438,15 @@
     if (type) params.set("tipo", type);
     for (const [k, v] of Object.entries(f)) if (v && k !== "sort") params.set(k, v);
     if (f.sort !== "price") params.set("sort", f.sort);
-    history.replaceState(null, "", "?" + params.toString());
+    lastSearch = "?" + params.toString();
+    history.replaceState(null, "", lastSearch);
   }
 
   function render() {
-    const cheapest = list.length ? ` · desde ${eur(Math.min(...list.map(m => m.p)))}` : "";
-    $("count").textContent = list.length ? `${num(list.length)} motos${cheapest}` : "Sin resultados";
+    const bikes = list.reduce((s, g) => s + g.n, 0);
+    $("count").textContent = list.length ? `${num(list.length)} modelos · ${num(bikes)} motos · desde ${eur(Math.min(...list.map(g => g.min)))}` : "Sin resultados";
     $("grid").innerHTML = list.length
-      ? list.slice(0, shown).map(tile).join("")
+      ? list.slice(0, shown).map(card).join("")
       : `<p class="empty">No hay motos con esa búsqueda. Prueba con menos palabras o quita algún filtro.</p>`;
     $("more").hidden = shown >= list.length;
   }
@@ -392,19 +455,118 @@
     $(id).innerHTML = `<option value="">${label}</option>` + values.map(v => `<option value="${esc(v)}">${esc(fmt(v))}</option>`).join("");
   }
 
+  /* ───────── ficha del modelo ───────── */
+  let fichaSort = "asc";
+
+  function offerRow(m, i, g) {
+    const ph = m.ph || [];
+    const first = ph.length ? ph[0][1] : m.p;
+    const diff = m.p - first;
+    const trend = ph.length > 1 && diff ? `<small class="${diff > 0 ? "up" : ""}">${diff < 0 ? "Bajó" : "Subió"} ${eur(Math.abs(diff))}</small>` : "";
+    const also = m.g ? (g.offers.filter(x => x.g === m.g && x !== m).map(x => SOURCES[x.src]?.name || x.src)) : [];
+    const where = [m.city, m.prov].filter(Boolean).filter((v, k, a) => a.indexOf(v) === k).join(", ");
+    return `<div class="offer ${i === 0 && fichaSort === "asc" ? "first" : ""}">
+      <span class="p">${eur(m.p)}${trend}</span>
+      <span><span class="lbl">Km</span>${m.km != null ? num(m.km) + " km" : "—"}</span>
+      <span><span class="lbl">Color</span>${esc(m.col || "—")}</span>
+      <span class="v">${esc(m.t)}${m.res ? " · <strong>reservada</strong>" : ""}${also.length ? `<em>Misma moto que en ${esc(also.join(", "))}</em>` : ""}</span>
+      <span><span class="lbl">Dónde</span>${esc(where || "—")}</span>
+      <span class="w">${esc(SOURCES[m.src]?.name || m.src)}<span class="muted" style="font-weight:400"> · ${m.pro === false ? "particular" : "profesional"}</span></span>
+      <a class="go" href="${esc(safeUrl(m.url))}" target="_blank" rel="noopener noreferrer">Ver anuncio ↗</a>
+    </div>`;
+  }
+
+  function chart(series) {
+    if (!series || series.length < 2) {
+      const since = series && series.length ? fecha(series[0][0]) : "hoy";
+      return `<p class="muted">Empezamos a guardar el precio de este modelo el ${since}. La gráfica se irá llenando cada día.</p>`;
+    }
+    const W = 800, H = 220, L = 64, R = 12, T = 12, B = 28;
+    const xs = series.map(p => new Date(p[0]).getTime()), ys = series.flatMap(p => [p[1], p[2]]);
+    const x0 = Math.min(...xs), x1 = Math.max(...xs), lo = Math.min(...ys) * 0.95, hi = Math.max(...ys) * 1.05;
+    const X = t => L + (W - L - R) * (x1 === x0 ? 0.5 : (t - x0) / (x1 - x0));
+    const Y = v => T + (H - T - B) * (1 - (v - lo) / (hi - lo || 1));
+    const path = k => series.map((p, i) => `${i ? "L" : "M"}${X(xs[i]).toFixed(1)},${Y(p[k]).toFixed(1)}`).join("");
+    const ticks = [lo, (lo + hi) / 2, hi].map(v => `<line x1="${L}" x2="${W - R}" y1="${Y(v)}" y2="${Y(v)}" stroke="var(--grid)"/><text x="${L - 8}" y="${Y(v) + 4}" text-anchor="end">${eur(Math.round(v / 50) * 50)}</text>`).join("");
+    const dates = [0, series.length - 1].map(i => `<text x="${X(xs[i])}" y="${H - 6}" text-anchor="${i ? "end" : "start"}">${fecha(series[i][0])}</text>`).join("");
+    return `<svg class="chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="Histórico de precios: la más barata y la mediana de cada día">
+      ${ticks}${dates}
+      <path d="${path(2)}" fill="none" stroke="var(--line-med)" stroke-width="2" stroke-dasharray="5 4" vector-effect="non-scaling-stroke"/>
+      <path d="${path(1)}" fill="none" stroke="var(--line-min)" stroke-width="3" vector-effect="non-scaling-stroke"/>
+    </svg>
+    <div class="legend"><span><i style="background:var(--line-min)"></i>La más barata</span><span><i style="background:var(--line-med)"></i>Precio mediano</span></div>`;
+  }
+
+  function renderFicha(mid) {
+    const g = groupsOf(ALL.filter(m => m.mid === mid))[0];
+    if (!g) { $("ficha-body").innerHTML = `<p class="empty">Este modelo ya no tiene motos a la venta.</p>`; return; }
+    document.title = `${g.mk} ${g.mn} ${g.y} · mootle`;
+    const offers = [...g.offers].sort(fichaSort === "asc" ? (a, b) => a.p - b.p : fichaSort === "desc" ? (a, b) => b.p - a.p : (a, b) => (a.km ?? 1e9) - (b.km ?? 1e9));
+    const save = g.n > 1 ? `Ahorras ${eur(g.max - g.min)} frente a la más cara` : "";
+    $("ficha-body").innerHTML = `
+      <div class="ficha-head">
+        <div class="photo">${g.img ? `<img src="${esc(g.img)}" alt="" referrerpolicy="no-referrer">` : BIKE}</div>
+        <div>
+          <span class="kicker">${esc(g.mk)}${g.tp ? " · " + esc(g.tp) : ""}</span>
+          <h1 class="display">${esc(g.mk)} ${esc(g.mn)} <span class="muted">${g.y}</span></h1>
+          <p class="sub">${num(g.n)} ${g.n === 1 ? "moto a la venta" : "motos a la venta"}${g.webs > 1 ? ` en ${g.webs} webs` : ""}. ${save}</p>
+          <div class="kpis">
+            <div class="kpi best"><span>La más barata</span><b>${eur(g.min)}</b><small>${g.best.km != null ? num(g.best.km) + " km · " : ""}${esc(SOURCES[g.best.src]?.name || g.best.src)}</small></div>
+            ${g.n > 1 ? `<div class="kpi"><span>Precio mediano</span><b>${eur(g.med)}</b></div><div class="kpi"><span>La más cara</span><b>${eur(g.max)}</b></div>` : ""}
+          </div>
+          <p style="margin-top:16px"><a class="btn" href="${esc(safeUrl(g.best.url))}" target="_blank" rel="noopener noreferrer">Ver la más barata ↗</a></p>
+        </div>
+      </div>
+      <div class="panel">
+        <h2 class="display">Todas las ofertas</h2>
+        <div class="sortbar" role="group" aria-label="Ordenar ofertas">
+          <button class="pill ${fichaSort === "asc" ? "on" : ""}" data-fsort="asc">Más barata primero</button>
+          <button class="pill ${fichaSort === "desc" ? "on" : ""}" data-fsort="desc">Más cara primero</button>
+          <button class="pill ${fichaSort === "km" ? "on" : ""}" data-fsort="km">Menos km</button>
+        </div>
+        <div class="offers">
+          <div class="offer head"><span>Precio</span><span>Km</span><span>Color</span><span>Versión</span><span>Dónde</span><span>Web</span><span></span></div>
+          ${offers.map((m, i) => offerRow(m, i, g)).join("")}
+        </div>
+      </div>
+      <div class="panel">
+        <h2 class="display">Histórico de precios</h2>
+        <p class="muted" style="margin:0">La más barata y el precio mediano de este modelo y año, día a día.</p>
+        <div id="chart">${HISTORY ? chart(HISTORY[mid]) : `<p class="muted">Cargando…</p>`}</div>
+      </div>`;
+    if (!HISTORY) loadHistory().then(() => { const c = $("chart"); if (c) c.innerHTML = chart(HISTORY[mid]); });
+  }
+
+  function loadHistory() {
+    return fetch("data/history.json", { cache: "no-cache" }).then(r => r.ok ? r.json() : {}).catch(() => ({})).then(h => { HISTORY = h; });
+  }
+
   /* ───────── navegación ───────── */
+  function show(view) { for (const v of ["home", "app", "ficha"]) $(v).hidden = v !== view; window.scrollTo(0, 0); }
   function showApp(params) {
-    $("home").hidden = true; $("app").hidden = false;
+    show("app");
     $("q").value = params.get("q") || "";
     type = params.get("tipo") || "";
     const map = { brand: "f-brand", price: "f-price", year: "f-year", km: "f-km", prov: "f-prov", a2: "f-a2", seller: "f-seller", src: "f-src", sort: "sort" };
     for (const [k, id] of Object.entries(map)) $(id).value = params.get(k) || (k === "sort" ? "price" : "");
     renderTypes();
     apply();
-    window.scrollTo(0, 0);
   }
-  function showHome() { $("app").hidden = true; $("home").hidden = false; $("q-home").value = ""; history.replaceState(null, "", location.pathname); window.scrollTo(0, 0); }
+  function showFicha(mid, push = true) {
+    show("ficha");
+    fichaSort = "asc";
+    if (push) history.pushState({ mid }, "", "?m=" + encodeURIComponent(mid));
+    renderFicha(mid);
+  }
+  function showHome() { show("home"); $("q-home").value = ""; document.title = "mootle · comparador de motos de ocasión"; history.replaceState(null, "", location.pathname); }
   const go = query => showApp(new URLSearchParams(query));
+
+  function route() {
+    const params = new URLSearchParams(location.search);
+    if (params.get("m")) showFicha(params.get("m"), false);
+    else if ([...params.keys()].length) showApp(params);
+    else showHome();
+  }
 
   function renderTypes() {
     $("types").innerHTML = TYPES.map(([k, l]) => `<button class="chip ${k === type ? "on" : ""}" data-type="${k}">${l}</button>`).join("");
@@ -423,17 +585,22 @@
   document.querySelectorAll(".filters select, #sort").forEach(s => s.addEventListener("change", apply));
   $("types").addEventListener("click", e => { const b = e.target.closest("[data-type]"); if (b) { type = b.dataset.type; renderTypes(); apply(); } });
   $("more").addEventListener("click", () => { shown += PAGE; render(); });
+  $("back").addEventListener("click", () => { if (history.state && history.state.mid) history.back(); else if (lastSearch) go(lastSearch.slice(1)); else showHome(); });
+  window.addEventListener("popstate", route);
   document.addEventListener("click", e => {
+    const card = e.target.closest("[data-mid]");
+    if (card && !e.metaKey && !e.ctrlKey) { e.preventDefault(); showFicha(card.dataset.mid); return; }
     if (e.target.closest("[data-home]")) { e.preventDefault(); showHome(); }
     const g = e.target.closest("[data-go]"); if (g) { e.preventDefault(); go(g.dataset.go); }
+    const fs = e.target.closest("[data-fsort]"); if (fs) { fichaSort = fs.dataset.fsort; renderFicha(new URLSearchParams(location.search).get("m")); }
   });
 
   /* ───────── carga ───────── */
   fetch("data/listings.json", { cache: "no-cache" }).then(r => r.ok ? r.json() : Promise.reject(new Error(r.status))).then(data => {
     SOURCES = data.sources || {};
-    ALL = (data.items || []).filter(m => m.p);
-    for (const m of ALL) if (m.g) (GROUPS[m.g] ||= []).push(m);
-    const bikes = collapse(ALL);  // cada moto una vez, aunque salga en varias webs
+    ALL = (data.items || []).filter(m => m.p && m.mid);
+    const groups = groupsOf(ALL);
+    const bikes = groups.reduce((s, g) => s + g.n, 0);
 
     const brands = [...new Set(ALL.map(m => m.mk).filter(Boolean))].sort((a, b) => a.localeCompare(b, "es"));
     const provs = [...new Set(ALL.map(m => m.prov).filter(Boolean))].sort((a, b) => a.localeCompare(b, "es"));
@@ -451,39 +618,34 @@
     const sameDay = updated.toDateString() === new Date().toDateString();
     const when = updated.toLocaleString("es-ES", sameDay ? { timeZone: "Europe/Madrid", hour: "2-digit", minute: "2-digit" } : { timeZone: "Europe/Madrid", day: "numeric", month: "long" });
     $("updated-top").textContent = sameDay ? `Actualizado hoy a las ${when}` : `Actualizado el ${when}`;
-    $("updated").textContent = `${num(bikes.length)} motos · actualizado el ${updated.toLocaleString("es-ES", { timeZone: "Europe/Madrid", dateStyle: "long", timeStyle: "short" })}`;
+    $("updated").textContent = `${num(bikes)} motos en ${num(groups.length)} modelos · actualizado el ${updated.toLocaleString("es-ES", { timeZone: "Europe/Madrid", dateStyle: "long", timeStyle: "short" })}`;
     const nSources = Object.values(SOURCES).filter(s => s.count).length;
-    $("hero-sub").textContent = `Una búsqueda, todas las webs. ${num(bikes.length)} motos de portales y concesionarios, comparadas cada día.`;
+    $("hero-sub").textContent = `${num(bikes)} motos en ${num(groups.length)} modelos y años: la más barata de todas las webs y su histórico de precios.`;
 
-    const deals = bikes.filter(isDeal).sort(sorters.deal);
-    const best = deals.length ? Math.round(vsMkt(deals[0]) * 100) : null;
-    const multi = Object.keys(GROUPS).length;
+    const deals = groups.filter(g => g.deal != null && g.deal <= -0.12).sort(sorters.deal);
+    const multi = groups.filter(g => g.webs > 1).length;
     $("stats").innerHTML = [
-      [num(bikes.length), "motos a la venta"], [nSources, nSources === 1 ? "web comparada" : "webs comparadas"],
-      [num(multi), "motos en más de una web"], best != null ? [`${best} %`, "el mejor chollo de hoy", "good"] : null,
-    ].filter(Boolean).map(([v, l, c]) => `<div class="stat"><b class="${c || ""}">${v}</b><span>${l}</span></div>`).join("");
+      [num(groups.length), "modelos y años"], [num(bikes), "motos a la venta"],
+      [nSources, nSources === 1 ? "web comparada" : "webs comparadas"], [num(multi), "modelos en más de una web"],
+    ].map(([v, l, c]) => `<div class="stat"><b class="${c || ""}">${v}</b><span>${l}</span></div>`).join("");
 
     $("quick").innerHTML += QUICK.map(q => `<button class="pill" data-go="q=${encodeURIComponent(q)}">${esc(q)}</button>`).join("")
       + `<button class="pill" data-go="a2=1">Aptas A2</button>`;
-    $("deals-all").textContent = deals.length > 8 ? `Ver los ${num(deals.length)} chollos` : "Ver todos";
-    $("deals").innerHTML = deals.length ? deals.slice(0, 8).map(tile).join("") : `<p class="muted">Aún no hay suficientes anuncios para comparar con el mercado.</p>`;
-    const drops = bikes.filter(m => m.pa && m.pa > m.p).sort(sorters.drop).slice(0, 8);
-    $("drops-sec").hidden = !drops.length;
-    $("drops").innerHTML = drops.map(tile).join("");
+    $("deals").innerHTML = deals.length ? deals.slice(0, 8).map(card).join("") : `<p class="muted">Aún no hay suficientes motos para comparar.</p>`;
+    $("popular").innerHTML = [...groups].sort(sorters.count).slice(0, 8).map(card).join("");
 
     const byType = {};
-    for (const m of bikes) if (m.tp) byType[m.tp] = (byType[m.tp] || 0) + 1;
-    const a2 = bikes.filter(m => m.a2).length;
+    for (const g of groups) if (g.tp) byType[g.tp] = (byType[g.tp] || 0) + 1;
+    const a2 = groups.filter(g => g.offers.some(m => m.a2)).length;
     $("types-home").innerHTML = TYPES.filter(([k]) => k && byType[k]).map(([k, l]) =>
-      `<button class="type" data-go="tipo=${k}"><svg viewBox="0 0 40 40" aria-hidden="true">${ICONS[k]}</svg><b>${l}</b><span>${num(byType[k])} motos</span></button>`).join("")
-      + `<button class="type a2" data-go="a2=1"><span class="big">A2</span><b>Aptas o limitables A2</b><span>${num(a2)} motos</span></button>`;
+      `<button class="type" data-go="tipo=${k}"><svg viewBox="0 0 40 40" aria-hidden="true">${ICONS[k]}</svg><b>${l}</b><span>${num(byType[k])} modelos</span></button>`).join("")
+      + `<button class="type a2" data-go="a2=1"><span class="big">A2</span><b>Aptas o limitables A2</b><span>${num(a2)} modelos</span></button>`;
 
     const KIND = { motosnet: "Portal · toda España", motoocasion: "Concesionario · Mora, Toledo" };
     $("sources").innerHTML = Object.entries(SOURCES).filter(([, s]) => s.count).map(([id, s]) =>
       `<a class="source" href="${esc(safeUrl(s.home))}" target="_blank" rel="noopener"><span>${esc(s.name)}<small>${esc(KIND[id] || "")}</small></span><b>${num(s.count)}</b></a>`).join("");
 
-    const params = new URLSearchParams(location.search);
-    if ([...params.keys()].length) showApp(params);
+    route();
   }).catch(() => {
     $("deals").innerHTML = `<p class="muted">No se han podido cargar los anuncios (data/listings.json). Ejecuta <code>python -m scraper.run</code> y sirve la carpeta con <code>python -m http.server</code>.</p>`;
   });

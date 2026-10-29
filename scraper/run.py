@@ -17,11 +17,14 @@ from pathlib import Path
 
 from .common import key
 from .fetch import Fetcher
+from .models import assign, group_history, price_history
 from .sources import SOURCES
 
 ROOT = Path(__file__).resolve().parent.parent
 LISTINGS = ROOT / "data" / "listings.json"
 STATE = ROOT / "data" / "state.json"
+MODELS = ROOT / "data" / "models.json"    # catálogo de modelos base por marca (de motos.net)
+HISTORY = ROOT / "data" / "history.json"  # por grupo marca-modelo-año: [fecha, más barata, mediana, anuncios]
 DROP_AFTER_DAYS = 7    # anuncios de fuentes que se leen por partes y no se han vuelto a ver (cada fuente puede cambiarlo)
 MARKET_MIN = 5         # anuncios del mismo modelo y año para dar precio de mercado
 MARKET_YEARS = 1       # ± años que entran en la comparación
@@ -107,6 +110,7 @@ def merge(old_items, results, today):
             prev = old.get(it["id"])
             it["fs"] = prev.get("fs", today) if prev else today
             it["ls"] = today
+            it["ph"] = price_history(it, prev, today)
             if prev and prev.get("p") and it.get("p") and prev["p"] != it["p"]:
                 it["pa"], it["pc"] = prev["p"], today  # precio anterior y día del cambio
             elif prev and prev.get("pa"):
@@ -156,6 +160,9 @@ def main(argv=None):
         results = dict(pool.map(run_source, chosen))
 
     items = merge(data["items"], results, today)
+    catalog = load(MODELS, {})
+    assign(items, catalog)
+    history = group_history(items, load(HISTORY, {}), today)
     market_prices(items)
     dups = link_duplicates(items)
     items.sort(key=lambda it: (it.get("p") or 10**9, it["id"]))
@@ -175,6 +182,7 @@ def main(argv=None):
         extra = f" · {info['pages']} páginas" if info.get("pages") else ""
         print(f"[{SOURCES[src_id].NAME}] {info.get('status')} · {len(found)} leídos{extra} · "
               f"{sources[src_id]['count']} en total")
+    print(f"Modelos: {len({it['mid'] for it in items if it.get('mid')})} grupos marca-modelo-año")
     print(f"Total: {len(items)} motos · {sum(1 for it in items if 'mkt' in it)} con precio de mercado · "
           f"{dups} anunciadas en más de una web")
 
@@ -184,6 +192,8 @@ def main(argv=None):
     out = {"updated": now.isoformat(timespec="seconds"), "sources": sources, "items": items}
     LISTINGS.write_text(json.dumps(out, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
     STATE.write_text(json.dumps(state, ensure_ascii=False, indent=1), encoding="utf-8")
+    MODELS.write_text(json.dumps(catalog, ensure_ascii=False, indent=0, sort_keys=True), encoding="utf-8")
+    HISTORY.write_text(json.dumps(history, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 
 
 if __name__ == "__main__":
