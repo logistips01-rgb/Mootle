@@ -45,11 +45,40 @@ def load(path, default):
         return default
 
 
-def _model(title, brand):
+# accesorios que NO son la prenda/casco y ensucian el feed (se descartan)
+_ACC = re.compile(r"\b(visor|pantalla|recambio|repuesto|spoiler|bolsa|funda|soporte|mentonera|"
+                  r"tornill\w*|adhesiv\w*|pegatina|gafas|c[aá]mara|estuche|spray|limpiador|"
+                  r"deflector|carrillera|almohad\w*|interiores?)\b", re.I)
+# relleno de categoría en el título de la tienda ("CASCO INTEGRAL DE MOTO", "GUANTES DE MOTO"…)
+_FILLER = re.compile(r"\b(cascos?|guantes?|chaquetas?|botas?|pantal[oó]n(?:es)?|monos?)\b"
+                     r"(\s+(integral\w*|modular\w*|jet|abierto\w*|trail|cross|infantil\w*))*", re.I)
+
+
+def _is_accessory(title):
+    t = (title or "").lower()
+    if "pinlock" in t and "incl" not in t:   # "pinlock included" sí es un casco; un pinlock suelto no
+        return True
+    return bool(_ACC.search(t))
+
+
+def _tok(w):
+    return w if (any(c.isdigit() for c in w) or len(w) <= 3) else w.capitalize()
+
+
+def _disp(s):
+    return " ".join(_tok(w) for w in s.split())
+
+
+def _clean_model(title, vendor):
     t = re.sub(r"\s+", " ", _html.unescape(title or "")).strip()
-    if brand and t.upper().startswith(brand.upper()):
-        t = t[len(brand):].strip(" -·")
-    return t
+    for pref in filter(None, [vendor, (vendor or "").split(" ")[0]]):  # "MT HELMETS" y "MT"
+        if t.upper().startswith(pref.upper() + " "):
+            t = t[len(pref):].strip()
+            break
+    t = _FILLER.sub(" ", t)
+    t = re.sub(r"\bde\s+moto\b", " ", t, flags=re.I)
+    t = re.sub(r"\s+", " ", t).strip(" -·,")
+    return _disp(t)
 
 
 def read_shopify(fetcher, store):
@@ -82,14 +111,20 @@ def read_shopify(fetcher, store):
                 comp = float(v.get("compare_at_price") or 0)
             except (TypeError, ValueError):
                 comp = 0
-            brand = (p.get("vendor") or "").strip()
-            model = _model(p.get("title"), brand)
+            raw_title = p.get("title") or ""
+            if _is_accessory(raw_title):   # fuera pinlocks, visores, recambios…
+                continue
+            vendor = (p.get("vendor") or "").strip()
+            brand = _disp(vendor)
+            model = _clean_model(raw_title, vendor)
+            if not model:
+                continue
             img = (p.get("images") or [{}])[0].get("src")
             listing = {
                 "id": f'{store["id"]}:{p["id"]}',
                 "src": store["id"],
                 "url": store["home"].rstrip("/") + "/products/" + (p.get("handle") or ""),
-                "t": _html.unescape(p.get("title", "")).strip(),
+                "t": f"{brand} {model}".strip(),
                 "mk": brand, "md": model, "cat": cat,
                 "p": price, "p0": int(round(comp)) if comp > price else None,
                 "img": img,
