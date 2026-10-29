@@ -209,6 +209,7 @@ form.slim .btn { border-radius: 0; min-height: 0; padding: 0 22px; font-size: 15
 .comp-chip svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex: none; }
 .elsewhere-lite { color: var(--text-secondary); margin: 18px 0; }
 .elsewhere-lite a { font-weight: 600; text-decoration: none; }
+.eq-price { font: inherit; font-size: .9rem; color: var(--text-primary); background: var(--surface-1); border: 1px solid var(--border-strong); border-radius: 999px; padding: 8px 16px; cursor: pointer; }
 
 /* Tablas comparativas (seguros / financiación) */
 .tablebox { overflow-x: auto; }

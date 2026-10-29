@@ -150,6 +150,16 @@ def index_page(groups, sources):
       <button class="btn" type="submit">Buscar</button>
     </form>
     <div class="sortbar" id="eq-chips" style="justify-content:center;margin-top:12px">{cat_chips}</div>
+    <div style="margin-top:10px">
+      <select id="eq-price" class="eq-price" aria-label="Precio">
+        <option value="">Precio: cualquiera</option>
+        <option value="0-50">Menos de 50 €</option>
+        <option value="50-100">50 - 100 €</option>
+        <option value="100-200">100 - 200 €</option>
+        <option value="200-400">200 - 400 €</option>
+        <option value="400-">Más de 400 €</option>
+      </select>
+    </div>
   </div>
   <div id="eq-results" hidden><p class="sec-sub" id="eq-count"></p><div class="grid eq" id="eq-grid"></div></div>
   <div id="eq-browse">
@@ -182,26 +192,30 @@ _SEARCH_JS = """<script>
   }
   function run(){
     var qs=fold($("q-eq").value).split(/\\s+/).filter(Boolean);
-    var browsing=!qs.length && !cat;
+    var pv=$("eq-price").value, lo=0, hi=Infinity;
+    if(pv){var pp=pv.split("-"); lo=+pp[0]||0; hi=(pp[1]==="")?Infinity:(+pp[1]||Infinity);}
+    var browsing=!qs.length && !cat && !pv;
     $("eq-browse").hidden=!browsing; $("eq-results").hidden=browsing;
     if(browsing){history.replaceState(null,"",location.pathname);return;}
     var r=DATA.filter(function(g){
       if(cat && g.cat!==cat) return false;
+      if(g.p<lo || g.p>hi) return false;
       var hay=fold(g.mk+" "+g.md+" "+(CN[g.cat]||""));
       return qs.every(function(w){return hay.indexOf(w)>=0;});
     });
     r.sort(function(a,b){return (b.w-a.w)||(b.n-a.n)||(a.p-b.p);});
     $("eq-count").textContent=nf.format(r.length)+(r.length===1?" producto":" productos");
     $("eq-grid").innerHTML=r.length?r.slice(0,150).map(card).join(""):'<p class="empty">Nada por aquí. Prueba otra búsqueda.</p>';
-    var p=new URLSearchParams(); if($("q-eq").value.trim())p.set("q",$("q-eq").value.trim()); if(cat)p.set("cat",cat);
+    var p=new URLSearchParams(); if($("q-eq").value.trim())p.set("q",$("q-eq").value.trim()); if(cat)p.set("cat",cat); if(pv)p.set("precio",pv);
     history.replaceState(null,"","?"+p.toString());
   }
   $("eq-form").addEventListener("submit",function(e){e.preventDefault();run();});
   $("q-eq").addEventListener("input",function(){clearTimeout(window.__t);window.__t=setTimeout(run,180);});
+  $("eq-price").addEventListener("change",run);
   $("eq-chips").addEventListener("click",function(e){var b=e.target.closest("[data-cat]");if(!b)return;cat=b.dataset.cat;var cs=document.querySelectorAll("#eq-chips .chip");for(var i=0;i<cs.length;i++)cs[i].classList.toggle("on",cs[i]===b);run();});
   fetch("buscador.json").then(function(r){return r.json();}).then(function(d){
     DATA=d; var p=new URLSearchParams(location.search); var q=p.get("q")||""; cat=p.get("cat")||"";
-    $("q-eq").value=q;
+    $("q-eq").value=q; $("eq-price").value=p.get("precio")||"";
     var cs=document.querySelectorAll("#eq-chips .chip"); for(var i=0;i<cs.length;i++)cs[i].classList.toggle("on",cs[i].dataset.cat===cat);
     run();
   }).catch(function(){});
