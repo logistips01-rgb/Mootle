@@ -32,6 +32,8 @@ STORES = [
      "cats": ["usado-certificado"], "ykm": "name"},
     {"id": "motosmadriddakar", "name": "Motos Madrid Dakar", "home": "https://motosmadriddakar.com/", "city": "Madrid", "prov": "Madrid",
      "cats": [], "ykm": "auto"},
+    {"id": "motorboxgijon", "name": "Motor Box Gijón", "home": "https://www.motorboxgijon.es/", "city": "Gijón", "prov": "Asturias",
+     "cats": ["motos-de-ocasion"], "ykm": "desc"},  # año y km en la descripción: "AÑO: 2017 KMS: 17.939"
     # Ojo al añadir: algunas tiendas (p.ej. Motocircuit Castellón) ponen la CUOTA MENSUAL en el campo
     # de precio de la API, no el precio de venta: comprobar siempre un par de precios antes de activarlas.
     # BCN Motorbikes (Yamaha oficial): su API es casi toda moto nueva con precio 0, no sirve para ocasión.
@@ -89,6 +91,8 @@ def _to_listing(raw, store, current_year):
     # El nombre sin los adornos de año/km ("BMW GS 650 -AÑO 2005- 61.937 KM" → "BMW GS 650").
     clean_name = re.sub(r"[*\-·|]*\s*a[nñ]o\b.*$", "", name, flags=re.I).strip() if store.get("ykm") == "name" else name
     clean_name = re.sub(r"[\d.]{2,}\s*km\b.*$", "", clean_name, flags=re.I).strip()
+    if store.get("ykm") == "name":  # un año suelto al final no es parte del modelo ("PEGASO 650 1993" → "PEGASO 650")
+        clean_name = re.sub(r"\s*\b(19[5-9]\d|20[0-4]\d)\b\s*$", "", clean_name).strip()
     md = attrs.get("modelo")
     if not md:
         md = clean_name[len(mk):] if mk and clean_name.lower().startswith(mk.lower()) else clean_name

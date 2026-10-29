@@ -13,7 +13,7 @@ from datetime import date
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SITE = "https://logistips01-rgb.github.io/Mootle"  # con dominio propio: "https://mootle.es"
+SITE = "https://mootle.es"  # dominio propio (antes: https://logistips01-rgb.github.io/Mootle)
 MODELS_DIR = ROOT / "m"
 BRANDS_DIR = ROOT / "marca"
 MONTHS = ("ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic")

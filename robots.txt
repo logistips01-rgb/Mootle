@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://logistips01-rgb.github.io/Mootle/sitemap.xml
+Sitemap: https://mootle.es/sitemap.xml
