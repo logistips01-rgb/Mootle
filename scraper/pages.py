@@ -151,7 +151,7 @@ def elsewhere(query, intro):
 # Todo lo "monetizable" (seguro, equipación, neumáticos, financiación) sale de aquí.
 # AMAZON_TAG: ID de afiliado de Amazon para mootle (p. ej. "mootle-21"). Se cambia SOLO aquí
 # y lo cogen todas las fichas. Una tarjeta con url=None sale como "Muy pronto" (programa sin dar de alta).
-AMAZON_TAG = "TU-TAG"
+AMAZON_TAG = "mootle-21"
 
 _COMP_ICONS = {
     "seguro": '<path d="M12 3l7 2.5V11c0 4.2-2.9 7.4-7 8.8C7.9 18.4 5 15.2 5 11V5.5z"/>',
