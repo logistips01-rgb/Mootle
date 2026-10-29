@@ -1,11 +1,13 @@
 {
 "Aprilia": {
 "pegaso650": "Pegaso 650",
+"rs457": "RS 457",
 "rs660": "RS 660",
 "rsv4": "RSV4",
 "rsv4factory": "RSV4 Factory",
 "rsv4rf": "RSV4 RF",
 "rx125": "RX 125",
+"shiver900": "Shiver 900",
 "srgt125": "SR GT 125",
 "srgt400": "SR GT 400",
 "tuareg660": "Tuareg 660",
@@ -107,6 +109,7 @@
 "899panigale": "899 Panigale",
 "desertx": "Desertx",
 "diavel": "Diavel",
+"diaveldark": "Diavel Dark",
 "hypermotard": "Hypermotard",
 "hypermotard698mono": "Hypermotard 698 Mono",
 "hypermotard939": "Hypermotard 939",
@@ -187,6 +190,7 @@
 "cb500x": "CB 500 X",
 "cb600fhornet": "CB 600F Hornet",
 "cb650f": "CB650F",
+"cb650f2014entoledo10214651htm": "CB 650F 2014 EN Toledo 10214651.HTM",
 "cb650r": "CB 650 R",
 "cb750hornet": "CB 750 Hornet",
 "cbf1000c": "CBF 1000 C",
@@ -201,6 +205,7 @@
 "cmx500rebel": "CMX500 Rebel",
 "crf1000lafricatwin": "CRF1000L Africa Twin",
 "crf1100lafricatwin": "CRF1100L Africa Twin",
+"crf300l": "CRF 300 L",
 "crf300rally": "CRF 300 Rally",
 "crf50f": "CRF 50F",
 "forza": "Forza",
@@ -217,6 +222,7 @@
 "nc750x": "NC 750 X",
 "nssjazz250": "NSS Jazz 250",
 "nt1100": "NT1100",
+"nt650vdeauville": "NT 650 V Deauville",
 "nx500": "NX 500",
 "paneuropeanst1300": "PAN European ST 1300",
 "pcx125": "PCX 125",
@@ -276,6 +282,7 @@
 "1290superduker": "1290 Super Duke R",
 "390adventure": "390 Adventure",
 "390duke": "390 Duke",
+"390smc": "390 SMC",
 "450rallyreplica": "450 Rally Replica",
 "690duke": "690 Duke",
 "690smcr": "690 SMC R",
@@ -298,6 +305,7 @@
 "kle500": "KLE 500",
 "ninja1000sx": "Ninja 1000 SX",
 "ninja125": "Ninja 125",
+"ninja650": "Ninja 650",
 "versys": "Versys",
 "versys1000": "Versys 1000",
 "vulcans": "Vulcan S",
@@ -308,6 +316,7 @@
 "z1000sx": "Z 1000 SX",
 "z1100": "Z 1100",
 "z125": "Z 125",
+"z500": "Z 500",
 "z650": "Z 650",
 "z750": "Z 750",
 "z800": "Z 800",
@@ -346,7 +355,10 @@
 "pilder125": "Pilder 125"
 },
 "Letbe": {
-"aurora125": "Aurora 125"
+"aurora125": "Aurora 125",
+"island125": "Island 125",
+"letbeneon1252025enguipuzcoa8712776htm": "Letbe Neon 125 2025 EN Guipuzcoa 8712776.HTM",
+"velocity125": "Velocity 125"
 },
 "Linhai": {
 "advbuck125": "ADV Buck 125"
@@ -357,6 +369,7 @@
 "brutale800eas": "Brutale 800 EAS",
 "f3": "F3",
 "f3675": "F3 675",
+"superveloce": "Superveloce",
 "superveloces": "Superveloce S",
 "turismoveloce": "Turismo Veloce"
 },
@@ -378,6 +391,7 @@
 },
 "Moto Guzzi": {
 "california1100": "California 1100",
+"v100mandello": "V100 Mandello",
 "v7cafeclassic": "V7 Cafe Classic",
 "v7iii": "V7 III",
 "v85": "V85",
@@ -516,7 +530,8 @@
 "tigerexplorer1200": "Tiger Explorer 1200",
 "tigersport660": "Tiger Sport 660",
 "tigersport800": "Tiger Sport 800",
-"trident660": "Trident 660"
+"trident660": "Trident 660",
+"trophy1200": "Trophy 1200"
 },
 "UM": {
 "dsradventure": "DSR Adventure",
@@ -598,7 +613,8 @@
 "ypmajesty400": "YP Majesty 400",
 "yz250f": "YZ 250 F",
 "yzfr1": "YZF R1",
-"yzfr125": "YZF R 125"
+"yzfr125": "YZF R 125",
+"yzfr3": "YZF R3"
 },
 "Zontes": {
 "350t": "350 T",
