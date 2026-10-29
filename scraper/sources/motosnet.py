@@ -25,7 +25,8 @@ NAME = "motos.net"
 HOME = "https://motos.coches.net/"
 BASE = "https://motos.coches.net"
 SEARCH = BASE + "/segunda-mano/"
-MAX_PAGES_PER_RUN = 4  # páginas al día (20 anuncios cada una)
+MAX_PAGES_PER_RUN = 16  # páginas al día (20 anuncios cada una). Subido de 4 tras ver que no bloquea;
+#                         si algún día devuelve su página anti-bot, el lector se para solo y bajamos esto.
 DROP_AFTER_DAYS = 14   # a este ritmo un anuncio tarda en volver a verse: se guarda más tiempo
 
 _PROPS = re.compile(r'window\.__INITIAL_PROPS__\s*=\s*JSON\.parse\("((?:[^"\\]|\\.)*)"\)')
