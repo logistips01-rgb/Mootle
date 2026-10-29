@@ -1,8 +1,9 @@
 """Registro de fuentes. Para añadir una web: un módulo con ID, NAME, HOME y
 scrape(fetcher, known, state, deadline, current_year, log) → (anuncios, info), y añadirlo aquí."""
-from . import benigar, box77, bymotors, indalmar, maquinamotors, motoocasion, motoreestreno, motosnet
+from . import (benigar, box77, bymotors, indalmar, jademotor, maquinamotors,
+               motoocasion, motoreestreno, motosnet)
 from .shopify import SOURCES as SHOPIFY
 from .woocommerce import SOURCES as WOO
 
 SOURCES = {s.ID: s for s in (motosnet, motoocasion, maquinamotors, box77, indalmar, benigar,
-                             motoreestreno, bymotors, *WOO, *SHOPIFY)}
+                             motoreestreno, bymotors, jademotor, *WOO, *SHOPIFY)}
