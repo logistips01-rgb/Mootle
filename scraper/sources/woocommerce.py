@@ -37,7 +37,7 @@ STORES = [
 
 _YEAR = re.compile(r"\b(19[5-9]\d|20[0-4]\d)\b")
 _KM = re.compile(r"([\d.]{2,})\s*(?:km|kms|kilómetros|kilometros)\b", re.I)
-_KM_LABEL = re.compile(r"(?:kms?|kilómetros|kilometros)\s*[:;.\-]?\s*([\d.]+)", re.I)
+_KM_LABEL = re.compile(r"(?:kms?|kilómetros|kilometros)\s*[:=]\s*([\d.]+)", re.I)
 _YEAR_LABEL = re.compile(r"(?:año|anio|a[nñ]o)\s*[:;.\-]?\s*((?:19|20)\d{2})", re.I)
 
 
