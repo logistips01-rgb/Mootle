@@ -298,6 +298,12 @@ def build(data, history):
     for cat, gs in by_cat.items():
         changed += write(DIR / f"{cat}.html", category_page(cat, gs))
     changed += write(DIR / "index.html", index_page(groups, sources))
+    # Poda: borra las fichas de productos que ya no están en el catálogo (dejar solo lo vigente).
+    keep = {f'{g["mid"]}.html' for g in groups.values()} | {f"{cat}.html" for cat in by_cat} | {"index.html"}
+    for old in DIR.glob("*.html"):
+        if old.name not in keep:
+            old.unlink()
+            changed += 1
     # índice ligero para el buscador de equipación (cliente)
     idx = [{"mid": g["mid"], "mk": g["mk"], "md": g["md"], "cat": g["cat"], "p": g["min"],
             "n": g["n"], "w": len(g["webs"]), "img": g["img"]} for g in groups.values()]
