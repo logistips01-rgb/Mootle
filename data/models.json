@@ -94,6 +94,9 @@
 "trk702": "TRK 702",
 "trk702x": "TRK 702 X"
 },
+"Brixton": {
+"felsberg250": "Felsberg 250"
+},
 "CFMoto": {
 "1000mtx": "1000 MT X",
 "450mt": "450 MT",
@@ -441,6 +444,7 @@
 "mrpro300i": "MR PRO 300I",
 "mrt50": "MRT 50",
 "nkd125": "NKD 125",
+"tango": "Tango",
 "xplora707x": "Xplora 707 X"
 },
 "Royal Alloy": {
@@ -571,6 +575,7 @@
 },
 "Wottan": {
 "gt2125": "GT2 125",
+"storm125": "Storm 125",
 "stormr300": "Storm R 300"
 },
 "Yamaha": {
@@ -586,6 +591,7 @@
 "mt09tracer": "MT 09 Tracer",
 "mt10": "MT10",
 "mt125": "MT 125",
+"niken": "Niken",
 "nmax": "Nmax",
 "r125": "R 125",
 "r7": "R7",
