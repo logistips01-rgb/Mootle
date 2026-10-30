@@ -30,6 +30,7 @@
 "f750": "F 750",
 "f800gs": "F 800 GS",
 "f800gsadventure": "F 800 GS Adventure",
+"f800gstripleblack": "F 800 GS Triple Black",
 "f800r": "F 800 R",
 "f800s": "F 800 S",
 "f800st": "F 800 ST",
@@ -49,6 +50,7 @@
 "k75s": "K 75 S",
 "m1000r": "M 1000 R",
 "m1000xr": "M 1000 XR",
+"r1150gs": "R 1150 GS",
 "r1150r": "R 1150 R",
 "r1150rrockster": "R 1150 R Rockster",
 "r12": "R 12",
@@ -143,6 +145,7 @@
 "e3eviball": "E3 E Viball"
 },
 "Fb Mondial": {
+"hps125": "HPS 125",
 "piega125": "Piega 125"
 },
 "GasGas": {
@@ -309,6 +312,7 @@
 "gtr1400": "GTR 1400",
 "j300": "J 300",
 "kle500": "KLE 500",
+"kx450": "KX 450",
 "ninja1000sx": "Ninja 1000 SX",
 "ninja125": "Ninja 125",
 "ninja650": "Ninja 650",
@@ -333,6 +337,7 @@
 "zx10r": "ZX 10R"
 },
 "Keeway": {
+"rks125": "RKS 125",
 "vcruise125": "V Cruise 125",
 "vieste125": "Vieste 125",
 "xdv125evopro": "XDV 125 EVO PRO",
@@ -380,6 +385,7 @@
 "turismoveloce": "Turismo Veloce"
 },
 "Macbor": {
+"lordmartin125": "Lord Martin 125",
 "montanaxr5": "Montana XR5",
 "montanaxr5510": "Montana XR5 510",
 "rockster125evo": "Rockster 125 EVO",
@@ -475,6 +481,9 @@
 "symphony125": "Symphony 125",
 "symphony125sr": "Symphony 125 SR",
 "symphonystlc125": "Symphony ST LC 125"
+},
+"Segway": {
+"e300se": "E 300 SE"
 },
 "Sherco": {
 "50ser": "50 SE R"
