@@ -42,6 +42,7 @@
 "g310gs": "G 310 GS",
 "g310r": "G 310 R",
 "g650gs": "G 650 GS",
+"g650xcountry": "G 650 Xcountry",
 "k1200lt": "K 1200 LT",
 "k1200r": "K 1200 R",
 "k1300gt": "K 1300 GT",
@@ -108,6 +109,7 @@
 "450nk": "450 NK",
 "650mt": "650 MT",
 "700clxsport": "700 CL X Sport",
+"700mt": "700 MT",
 "800mt": "800 MT",
 "800mtx": "800 MT X"
 },
@@ -121,6 +123,7 @@
 "1199panigales": "1199 Panigale S",
 "848superbike": "848 Superbike",
 "899panigale": "899 Panigale",
+"999biposto2005envalencia10215892htm": "999 Biposto 2005 EN Valencia 10215892.HTM",
 "desertx": "Desertx",
 "diavel": "Diavel",
 "diaveldark": "Diavel Dark",
@@ -227,6 +230,7 @@
 "crf300l": "CRF 300 L",
 "crf300rally": "CRF 300 Rally",
 "crf50f": "CRF 50F",
+"crosstourer": "Crosstourer",
 "forza": "Forza",
 "forza125": "Forza 125",
 "forza250x": "Forza 250 X",
@@ -255,6 +259,7 @@
 "sh350i": "SH 350I",
 "shmode125": "SH Mode 125",
 "supercubc125": "Super CUB C 125",
+"varaderoxl1000v": "Varadero XL1000V",
 "varaderoxl1000vc": "Varadero XL1000V C",
 "vfr1200f": "VFR 1200 F",
 "vfr750f": "VFR 750 F",
@@ -333,6 +338,7 @@
 "versys": "Versys",
 "versys1000": "Versys 1000",
 "versys1100": "Versys 1100",
+"vn900classic": "VN 900 Classic",
 "vulcans": "Vulcan S",
 "vulcans2016engranada10151514htm": "Vulcan S 2016 EN Granada 10151514.HTM",
 "vulcans2017enmadrid10169759htm": "Vulcan S 2017 EN Madrid 10169759.HTM",
@@ -350,7 +356,8 @@
 "z900rs": "Z 900 RS",
 "zh2": "Z H2",
 "zx10r": "ZX 10R",
-"zx6r": "ZX 6R"
+"zx6r": "ZX 6R",
+"zzr1400": "ZZR 1400"
 },
 "Keeway": {
 "rks125": "RKS 125",
@@ -372,6 +379,7 @@
 "kxct125i": "K XCT 125I",
 "miler125": "Miler 125",
 "skytown125": "SKY Town 125",
+"superdink125": "Super Dink 125",
 "superdink125i": "Super Dink 125I",
 "superdink300i": "Super Dink 300I",
 "superdink350i": "Super Dink 350I",
@@ -413,6 +421,7 @@
 },
 "Mitt": {
 "808big": "808 BIG",
+"desert125": "Desert 125",
 "tt555": "TT 555"
 },
 "Morbidelli Mbp": {
@@ -543,6 +552,8 @@
 "bonnevillet100": "Bonneville T100",
 "bonnevillet120": "Bonneville T120",
 "rocket": "Rocket",
+"rocket3": "Rocket 3",
+"rocketiii": "Rocket III",
 "rocketiiitouring": "Rocket III Touring",
 "scrambler1200": "Scrambler 1200",
 "scrambler400x": "Scrambler 400 X",
