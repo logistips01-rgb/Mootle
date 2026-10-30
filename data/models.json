@@ -172,6 +172,7 @@
 "dynalowrider": "Dyna LOW Rider",
 "dynasuperglide": "Dyna Super Glide",
 "dynasuperglidecustom": "Dyna Super Glide Custom",
+"fatbob": "FAT BOB",
 "fxdr114": "Fxdr 114",
 "heritageclassic": "Heritage Classic",
 "nightster": "Nightster",
@@ -179,6 +180,7 @@
 "roadglide": "Road Glide",
 "softail1340softailcustom": "Softail 1340 Softail Custom",
 "softailslim": "Softail Slim",
+"softailstandard": "Softail Standard",
 "sportglide": "Sport Glide",
 "sportster1200": "Sportster 1200",
 "sportster1200custom": "Sportster 1200 Custom",
@@ -231,6 +233,7 @@
 "crf300rally": "CRF 300 Rally",
 "crf50f": "CRF 50F",
 "crosstourer": "Crosstourer",
+"fmx650": "FMX 650",
 "forza": "Forza",
 "forza125": "Forza 125",
 "forza250x": "Forza 250 X",
@@ -247,6 +250,7 @@
 "nssjazz250": "NSS Jazz 250",
 "nt1100": "NT1100",
 "nt650vdeauville": "NT 650 V Deauville",
+"nt700vdeauville": "NT 700 V Deauville",
 "nx500": "NX 500",
 "paneuropeanst1300": "PAN European ST 1300",
 "pcx125": "PCX 125",
@@ -422,6 +426,7 @@
 "Mitt": {
 "808big": "808 BIG",
 "desert125": "Desert 125",
+"legend301": "Legend 301",
 "tt555": "TT 555"
 },
 "Morbidelli Mbp": {
@@ -453,6 +458,7 @@
 "beverly": "Beverly",
 "beverly300": "Beverly 300",
 "liberty": "Liberty",
+"liberty1254t": "Liberty 125 4T",
 "liberty50": "Liberty 50",
 "medley": "Medley",
 "mp3": "MP3",
@@ -460,6 +466,7 @@
 "mp3exclusive530": "MP3 Exclusive 530",
 "mp3sport500hpe": "MP3 Sport 500 HPE",
 "x10350executive": "X10 350 Executive",
+"x7evo300ie": "X7 EVO 300 IE",
 "x9125": "X9 125"
 },
 "QJMotor": {
@@ -686,6 +693,7 @@
 "703rr": "703 RR",
 "703tetc": "703 T ETC",
 "g1125": "G1 125",
+"gk125": "GK 125",
 "gk350": "GK 350",
 "m310": "M 310",
 "t310": "T 310"
