@@ -33,8 +33,8 @@
 
 
     <section id="chollos">
-      <div class="sec-head"><h2 class="display">Chollos de hoy</h2><a data-go="sort=deal">Ver todos</a></div>
-      <p class="sec-sub">Modelos cuya moto más barata está muy por debajo de lo que piden las demás del mismo año.</p>
+      <div class="sec-head"><h2 class="display">Chollos de hoy</h2><a data-go="sort=drop">Ver todos</a></div>
+      <p class="sec-sub">Motos que han bajado de precio: las rebajas más recientes primero. La lista cambia según detectamos bajadas.</p>
       <div class="grid" id="deals"><p class="muted">Cargando…</p></div>
     </section>
 
@@ -91,7 +91,7 @@
   <div id="app" hidden>
     <div class="meta"><span id="count">Cargando…</span>
       <label>Orden <select id="sort">
-        <option value="price">Más barata primero</option><option value="deal">Mayor chollo</option>
+        <option value="price">Más barata primero</option><option value="drop">Bajó de precio</option><option value="deal">Mayor chollo</option>
         <option value="count">Más ofertas</option><option value="spread">Mayor diferencia de precio</option>
         <option value="year">Año más nuevo</option><option value="price-desc">Más cara primero</option>
       </select></label>
@@ -199,6 +199,8 @@
     price: (a, b) => a.min - b.min,
     "price-desc": (a, b) => b.min - a.min,
     deal: (a, b) => (a.deal ?? 9) - (b.deal ?? 9) || a.min - b.min,
+    // Bajadas reales: primero las más recientes (día del cambio), luego la mayor rebaja.
+    drop: (a, b) => (b.best.pc || "").localeCompare(a.best.pc || "") || ((b.best.pa - b.best.p) || 0) - ((a.best.pa - a.best.p) || 0) || a.min - b.min,
     count: (a, b) => b.n - a.n || a.min - b.min,
     spread: (a, b) => (b.max - b.min) - (a.max - a.min),
     year: (a, b) => b.y - a.y || a.min - b.min,
@@ -218,7 +220,7 @@
       (!type || m.tp === type) && (!f.brand || m.mk === f.brand) && (!f.price || m.p <= f.price) &&
       (!f.year || (m.y || 0) >= f.year) && (!f.km || (m.km ?? 1e9) <= f.km) && (!f.prov || m.prov === f.prov) &&
       (!f.a2 || m.a2) && (f.seller === "" || String(+!!m.pro) === f.seller) && (!f.src || m.src === f.src) && matches(m, words));
-    list = groupsOf(offers).filter(g => f.sort !== "deal" || g.deal != null);
+    list = groupsOf(offers).filter(g => (f.sort !== "deal" || g.deal != null) && (f.sort !== "drop" || (g.best.pa && g.best.pa > g.best.p)));
     list.sort(sorters[f.sort] || sorters.price);
     shown = PAGE;
     render();
@@ -313,13 +315,13 @@
     $("updated").textContent = `${num(bikes)} motos en ${num(groups.length)} modelos · actualizado el ${updated.toLocaleString("es-ES", { timeZone: "Europe/Madrid", dateStyle: "long", timeStyle: "short" })}`;
     const nSources = Object.values(SOURCES).filter(s => s.count).length;
 
-    const deals = groups.filter(g => g.deal != null && g.deal <= -0.12).sort(sorters.deal);
+    const deals = groups.filter(g => g.best.pa && g.best.pa > g.best.p).sort(sorters.drop);
     $("stats").innerHTML = [[num(bikes), "motos"], [num(groups.length), "modelos"], [nSources, nSources === 1 ? "web" : "webs"]]
       .map(([v, l]) => `<span><b>${v}</b>${l}</span>`).join("");
 
     $("quick").innerHTML = QUICK.map(q => `<button class="pill" data-go="q=${encodeURIComponent(q)}">${esc(q)}</button>`).join("")
       + `<button class="pill" data-go="a2=1">Aptas A2</button>`;
-    $("deals").innerHTML = deals.length ? deals.slice(0, 8).map(card).join("") : `<p class="muted">Aún no hay suficientes motos para comparar.</p>`;
+    $("deals").innerHTML = deals.length ? deals.slice(0, 8).map(card).join("") : `<p class="muted">Hoy no ha bajado de precio ninguna moto. En cuanto alguna baje, aparecerá aquí.</p>`;
     $("popular").innerHTML = [...groups].sort(sorters.count).slice(0, 8).map(card).join("");
 
     const byType = {};

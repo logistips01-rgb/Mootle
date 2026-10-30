@@ -119,20 +119,20 @@ def index_page(groups, sources):
     by_cat = defaultdict(list)
     for g in gl:
         by_cat[g["cat"]].append(g)
-    # chollos: bajadas de precio reales; si no hay aún, destacados por categoría
+    # Chollos de hoy = SOLO bajadas de precio reales (histórico), las más recientes primero.
+    # Si un día no ha bajado nada, la sección sale vacía (es intencionado).
     drops = sorted([g for g in gl if g["best"].get("pa") and g["best"]["pa"] > g["min"]],
-                   key=lambda g: g["min"] - g["best"]["pa"])
-    multi = sorted([g for g in gl if len(g["webs"]) > 1], key=lambda g: g["max"] - g["min"], reverse=True)
+                   key=lambda g: (g["best"].get("pc") or "", g["best"]["pa"] - g["min"]), reverse=True)
     seen_mid, featured = set(), []
-    for g in drops + multi + sorted(gl, key=lambda g: g["min"]):
+    for g in drops:
         if g["mid"] in seen_mid:
             continue
         seen_mid.add(g["mid"])
         featured.append(g)
         if len(featured) >= 12:
             break
-    chollo_note = ("Equipación que ha bajado de precio y productos comparados en varias tiendas." if drops else
-                   f"{len(multi)} productos ya se comparan entre tiendas. Las bajadas de precio irán apareciendo según guardamos el histórico cada día.")
+    chollo_note = ("Equipación que ha bajado de precio: las rebajas más recientes primero. La lista cambia según detectamos bajadas." if featured else
+                   "Hoy no ha bajado de precio ningún producto. En cuanto una tienda baje un precio, aparecerá aquí.")
     cats_tiles = "".join(
         f'<a class="source" href="{cat}.html"><span>{e(CAT_NAMES.get(cat, cat))}<small>desde {eur(min(g["min"] for g in gs))}</small></span>'
         f'<b>{num(len(gs))}</b></a>' for cat, gs in sorted(by_cat.items(), key=lambda kv: -len(kv[1])))
