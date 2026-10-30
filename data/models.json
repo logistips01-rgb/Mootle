@@ -1,6 +1,7 @@
 {
 "Aprilia": {
 "pegaso650": "Pegaso 650",
+"rs125": "RS 125",
 "rs457": "RS 457",
 "rs660": "RS 660",
 "rsv4": "RSV4",
@@ -73,6 +74,7 @@
 "r12gs": "R 12 GS",
 "r12ninet": "R 12 Ninet",
 "r1300gs": "R 1300 GS",
+"r1300r": "R 1300 R",
 "r1300rs": "R 1300 RS",
 "r1300rt": "R 1300 RT",
 "r18": "R 18",
@@ -129,6 +131,7 @@
 "monster": "Monster",
 "monster1200": "Monster 1200",
 "monster1200s": "Monster 1200 S",
+"monster696": "Monster 696",
 "monster796": "Monster 796",
 "monster797": "Monster 797",
 "monster821": "Monster 821",
@@ -191,6 +194,7 @@
 "street750": "Street 750",
 "streetbob": "Street BOB",
 "touringelectraglideultraclassic2008envalencia8923831htm": "Touring Electra Glide Ultra Classic 2008 EN Valencia 8923831.HTM",
+"touringelectraglideultraclassicscreamineagle2006enzaragoza10147936htm": "Touring Electra Glide Ultra Classic Screamin Eagle 2006 EN Zaragoza 10147936.HTM",
 "touringroadking": "Touring Road King",
 "ultralimited": "Ultra Limited"
 },
@@ -235,6 +239,7 @@
 "nc750": "NC 750",
 "nc750s": "NC 750 S",
 "nc750x": "NC 750 X",
+"nss300forza": "NSS 300 Forza",
 "nssjazz250": "NSS Jazz 250",
 "nt1100": "NT1100",
 "nt650vdeauville": "NT 650 V Deauville",
@@ -270,6 +275,7 @@
 "norden901": "Norden 901",
 "nuda900": "Nuda 900",
 "svartpilen125": "Svartpilen 125",
+"svartpilen401": "Svartpilen 401",
 "svartpilen801": "Svartpilen 801",
 "te250i": "TE 250I",
 "te300": "TE 300"
@@ -343,7 +349,8 @@
 "z900": "Z 900",
 "z900rs": "Z 900 RS",
 "zh2": "Z H2",
-"zx10r": "ZX 10R"
+"zx10r": "ZX 10R",
+"zx6r": "ZX 6R"
 },
 "Keeway": {
 "rks125": "RKS 125",
@@ -414,6 +421,7 @@
 "Moto Guzzi": {
 "california1100": "California 1100",
 "v100mandello": "V100 Mandello",
+"v7": "V7",
 "v7cafeclassic": "V7 Cafe Classic",
 "v7iii": "V7 III",
 "v85": "V85",
@@ -518,6 +526,7 @@
 "gsx8s": "GSX 8S",
 "gsxs": "GSX S",
 "gsxs125": "GSX S 125",
+"hayabusa1300": "Hayabusa 1300",
 "hayabusa13002003enhuelva10221203htm": "Hayabusa 1300 2003 EN Huelva 10221203.HTM",
 "inazuma250": "Inazuma 250",
 "intruderc800": "Intruder C800",
@@ -536,6 +545,7 @@
 "rocket": "Rocket",
 "rocketiiitouring": "Rocket III Touring",
 "scrambler1200": "Scrambler 1200",
+"scrambler400x": "Scrambler 400 X",
 "scrambler900": "Scrambler 900",
 "speed400": "Speed 400",
 "speedtriple": "Speed Triple",
@@ -641,6 +651,7 @@
 "xmax250": "Xmax 250",
 "xmax300": "Xmax 300",
 "xmax400": "Xmax 400",
+"xp500tmax": "XP 500 T MAX",
 "xsr125": "XSR 125",
 "xsr700": "XSR700",
 "xsr900": "XSR900",
