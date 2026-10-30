@@ -34,7 +34,7 @@ CAT_NAMES = {"casco": "Cascos", "guantes": "Guantes", "chaqueta": "Chaquetas",
              "botas": "Botas", "pantalon": "Pantalones", "mono": "Monos"}
 
 SHOPIFY_STORES = [
-    {"id": "maximomoto", "name": "Máximo Moto", "home": "https://www.maximomoto.es/"},
+    {"id": "maximomoto", "name": "Máximo Moto", "home": "https://maximo-moto.com/"},
 ]
 
 
