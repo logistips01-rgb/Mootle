@@ -119,6 +119,7 @@ def head(title, description, canonical, image=None, ld=None, noindex=False,
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../mootle.css">{ld_tag}
+<script src="/c.js" defer></script>
 </head>
 <body>
 <main>

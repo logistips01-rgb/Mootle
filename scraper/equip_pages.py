@@ -255,6 +255,7 @@ _SEARCH_JS = """<script>
     var browsing=!qs.length && !cat && !pv;
     $("eq-browse").hidden=!browsing; $("eq-results").hidden=browsing;
     if(browsing){history.replaceState(null,"",location.pathname);return;}
+    if(window.mootleSearch) window.mootleSearch($("q-eq").value);
     var r=DATA.filter(function(g){
       if(cat && g.cat!==cat) return false;
       if(g.p<lo || g.p>hi) return false;
