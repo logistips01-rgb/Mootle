@@ -83,6 +83,7 @@
         <select id="f-a2" aria-label="Carnet"><option value="">Cualquier carnet</option><option value="1">Apta o limitable A2</option></select>
         <select id="f-seller" aria-label="Vendedor"><option value="">Particular y profesional</option><option value="0">Solo particulares</option><option value="1">Solo profesionales</option></select>
         <select id="f-src" aria-label="Web"></select>
+        <button type="button" id="f-reset" class="f-reset" hidden>Quitar filtros</button>
       </div>
     </div>
   </div>
@@ -230,6 +231,18 @@
     for (const [k, v] of Object.entries(f)) if (v && k !== "sort") params.set(k, v);
     if (f.sort !== "price") params.set("sort", f.sort);
     history.replaceState(null, "", "?" + params.toString());
+    // El botón "Quitar filtros" solo aparece si hay algo que quitar.
+    const active = !!($("q").value.trim() || type || f.brand || f.price || f.year || f.km || f.prov || f.a2 || f.seller !== "" || f.src || f.sort !== "price");
+    $("f-reset").hidden = !active;
+  }
+
+  function resetFilters() {
+    $("q").value = "";
+    type = "";
+    for (const s of document.querySelectorAll(".filters select")) s.value = "";
+    $("sort").value = "price";
+    renderTypes();
+    apply();
   }
 
   function render() {
@@ -286,6 +299,7 @@
   $("top-form").addEventListener("submit", e => { e.preventDefault(); apply(); });
   $("q").addEventListener("input", () => { clearTimeout(window.__t); window.__t = setTimeout(apply, 250); });
   document.querySelectorAll(".filters select, #sort").forEach(s => s.addEventListener("change", apply));
+  $("f-reset").addEventListener("click", resetFilters);
   $("types").addEventListener("click", e => { const b = e.target.closest("[data-type]"); if (b) { type = b.dataset.type; renderTypes(); apply(); } });
   $("more").addEventListener("click", () => { shown += PAGE; render(); });
   window.addEventListener("popstate", route);

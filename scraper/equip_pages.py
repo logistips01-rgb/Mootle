@@ -56,7 +56,54 @@ def _card(g):
             f'{" · " + str(len(g["webs"])) + " tiendas" if len(g["webs"]) > 1 else ""}</span></div></a>')
 
 
-def product_page(g, sources, history):
+def _sim_card(it, ref, sources):
+    img = f'<img src="{e(it["img"])}" alt="" loading="lazy" referrerpolicy="no-referrer">' if it.get("img") else GEAR
+    d = it["p"] - ref
+    diff = (f'<span class="simdiff up">+{eur(d)}</span>' if d > 0 else
+            f'<span class="simdiff down">−{eur(-d)}</span>' if d < 0 else
+            '<span class="simdiff">mismo precio</span>')
+    sh = sources.get(it["src"], {}).get("name", it["src"])
+    return (f'<a class="card eq" href="{e(it["mid"])}.html"><div class="photo">{img}{diff}</div><div class="body">'
+            f'<span class="brand">{e(it["mk"])} · {e(CAT_NAMES.get(it["cat"], it["cat"]).rstrip("s"))}</span>'
+            f'<span class="name">{e(it["md"])[:60]}</span>'
+            f'<span class="price"><strong>{eur(it["p"])}</strong></span>'
+            f'<span class="foot">en {e(sh)}</span></div></a>')
+
+
+def _similars(g, cat_items, limit=8):
+    """Alternativas de la misma categoría en OTRAS tiendas, en un rango de precio similar.
+
+    Da igual que no sea el mismo producto: así un airbag de la marca X (solo en una
+    tienda) se compara con un airbag de la marca Z de otra tienda a precio parecido.
+    Primero una por cada tienda ajena (la más cercana en precio); luego se rellena con
+    las siguientes más cercanas hasta `limit`.
+    """
+    ref = g["min"]
+    own = set(g["webs"])
+    lo, hi = ref * 0.5, ref * 1.8   # "rango de precios" para que la comparación tenga sentido
+    cand = [it for it in cat_items
+            if it["src"] not in own and it["mid"] != g["mid"] and lo <= it["p"] <= hi]
+    per_shop = {}
+    for it in cand:
+        cur = per_shop.get(it["src"])
+        if cur is None or abs(it["p"] - ref) < abs(cur["p"] - ref):
+            per_shop[it["src"]] = it
+    picks, seen = [], {g["mid"]}
+    for it in sorted(per_shop.values(), key=lambda it: abs(it["p"] - ref)):
+        if it["mid"] not in seen:
+            picks.append(it)
+            seen.add(it["mid"])
+    for it in sorted(cand, key=lambda it: abs(it["p"] - ref)):
+        if len(picks) >= limit:
+            break
+        if it["mid"] not in seen:
+            picks.append(it)
+            seen.add(it["mid"])
+    picks.sort(key=lambda it: abs(it["p"] - ref))
+    return picks[:limit]
+
+
+def product_page(g, sources, history, cat_items=()):
     name = _name(g)
     catn = CAT_NAMES.get(g["cat"], g["cat"]).rstrip("s")
     title = f"{name} al mejor precio · equipación · mootle"
@@ -78,6 +125,17 @@ def product_page(g, sources, history):
                  f'<span class="w">{e(sh)}</span>'
                  f'<a class="go" href="{e(m["url"])}" target="_blank" rel="sponsored nofollow noopener noreferrer">Ver en la tienda ↗</a></div>')
     img = f'<img src="{e(g["img"])}" alt="{e(name)}" referrerpolicy="no-referrer">' if g["img"] else GEAR
+    # Alternativas en otras tiendas: SOLO cuando el producto está en una única tienda
+    # (si el mismo producto está en varias, ya se compara mismo-contra-mismo en "Ofertas").
+    sim_html = ""
+    if len(g["webs"]) == 1:
+        sims = _similars(g, cat_items)
+        if sims:
+            cards = "".join(_sim_card(it, g["min"], sources) for it in sims)
+            sim_html = (f'  <div class="panel"><h2 class="display">Alternativas en otras tiendas</h2>\n'
+                        f'    <p class="muted" style="margin:0 0 12px">No hemos encontrado este {catn.lower()} exacto en otras tiendas. '
+                        f'Estos son parecidos, de la misma categoría y en un rango de precio similar.</p>\n'
+                        f'    <div class="grid eq">{cards}</div></div>\n')
     body = f"""  <nav class="crumbs" aria-label="Migas"><a href="../">Inicio</a> › <a href="./">Equipación</a> › <a href="{g['cat']}.html">{e(CAT_NAMES.get(g['cat'], g['cat']))}</a> › {e(name)}</nav>
   <div class="ficha-head">
     <div class="photo eq">{img}</div>
@@ -91,7 +149,7 @@ def product_page(g, sources, history):
   <div class="panel"><h2 class="display">Ofertas</h2><div class="offers eq">{rows}</div></div>
   <div class="panel"><h2 class="display">Histórico de precios</h2>
     <p class="muted" style="margin:0">Precio más barato de {e(name)}, día a día.</p>{chart(history.get(g['mid']))}</div>
-  <p class="aff-note" style="max-width:70ch">Enlaces de afiliados: si compras, mootle puede llevarse una pequeña comisión, sin coste para ti. Precios tomados de cada tienda; compruébalos siempre en la tienda.</p>
+{sim_html}  <p class="aff-note" style="max-width:70ch">Enlaces de afiliados: si compras, mootle puede llevarse una pequeña comisión, sin coste para ti. Precios tomados de cada tienda; compruébalos siempre en la tienda.</p>
 """
     return head(title, desc, f"{SITE}/equipacion/{g['mid']}.html", g["img"], ld,
                 search_action="./", search_ph="Casco, guantes, chaqueta, marca…") + body + FOOT
@@ -226,9 +284,13 @@ _SEARCH_JS = """<script>
 def build(data, history):
     items, sources = data.get("items", []), data.get("sources", {})
     groups = groups_of(items)
+    items_by_cat = defaultdict(list)
+    for it in items:
+        if it.get("mid") and it.get("p") and it.get("cat"):
+            items_by_cat[it["cat"]].append(it)
     changed = 0
     for g in groups.values():
-        changed += write(DIR / f'{g["mid"]}.html', product_page(g, sources, history))
+        changed += write(DIR / f'{g["mid"]}.html', product_page(g, sources, history, items_by_cat.get(g["cat"], ())))
     by_cat = defaultdict(list)
     for g in groups.values():
         by_cat[g["cat"]].append(g)
