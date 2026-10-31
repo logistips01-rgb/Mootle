@@ -27,6 +27,8 @@ BASE = "https://motos.coches.net"
 SEARCH = BASE + "/segunda-mano/"
 MAX_PAGES_PER_RUN = 4  # páginas por lectura (20 anuncios cada una). Se lee cada hora (scrape-motosnet.yml),
 #                        ~96 páginas/día. Si motos.net devuelve su página anti-bot, el lector se para solo.
+NOV_MAX = 2            # tope de "novedades" por ejecución: así el barrido profundo siempre tiene cupo
+#                        (si novedades se comiera las 4, el cursor nunca avanzaría por el catálogo).
 DROP_AFTER_DAYS = 14   # a este ritmo un anuncio tarda en volver a verse: se guarda más tiempo
 
 _PROPS = re.compile(r'window\.__INITIAL_PROPS__\s*=\s*JSON\.parse\("((?:[^"\\]|\\.)*)"\)')
@@ -112,9 +114,9 @@ def scrape(fetcher, known, state, deadline, current_year, log):
 
     status, detail = "ok", None
     try:
-        # 1) Novedades.
+        # 1) Novedades (con tope propio para no agotar el cupo y dejar sitio al barrido).
         n = 1
-        while pages_read < MAX_PAGES_PER_RUN and time.monotonic() < deadline:
+        while pages_read < NOV_MAX and time.monotonic() < deadline:
             count, new = read(n)
             n += 1  # siguiente página sin leer
             if count == 0 or (new == 0 and n > 2):
