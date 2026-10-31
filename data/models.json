@@ -157,6 +157,7 @@
 "e3eviball": "E3 E Viball"
 },
 "Fb Mondial": {
+"flattrack125": "Flat Track 125",
 "hps125": "HPS 125",
 "piega125": "Piega 125"
 },
@@ -267,6 +268,7 @@
 "supercubc125": "Super CUB C 125",
 "varaderoxl1000v": "Varadero XL1000V",
 "varaderoxl1000vc": "Varadero XL1000V C",
+"vf750": "VF 750",
 "vfr1200f": "VFR 1200 F",
 "vfr750f": "VFR 750 F",
 "vfr800": "VFR 800",
@@ -391,6 +393,7 @@
 "superdink300i": "Super Dink 300I",
 "superdink350i": "Super Dink 350I",
 "xciting400i": "Xciting 400I",
+"xcitings400": "Xciting S 400",
 "xcitingvs400": "Xciting VS 400",
 "xtownct125": "X Town CT 125"
 },
@@ -452,6 +455,9 @@
 "Motron Motorcycles": {
 "xnord125": "X Nord 125"
 },
+"NIU": {
+"mqigt": "MQI GT"
+},
 "Peugeot": {
 "metropolis400": "Metropolis 400",
 "tweet125": "Tweet 125"
@@ -509,6 +515,9 @@
 "shotgun650": "Shotgun 650",
 "supermeteor650": "Super Meteor 650"
 },
+"SWM": {
+"aceofspades125": "ACE OF Spades 125"
+},
 "SYM": {
 "adx300": "ADX 300",
 "cruisym": "Cruisym",
@@ -563,6 +572,7 @@
 "bonnevillebobber": "Bonneville Bobber",
 "bonnevillet100": "Bonneville T100",
 "bonnevillet120": "Bonneville T120",
+"daytona660": "Daytona 660",
 "rocket": "Rocket",
 "rocket3": "Rocket 3",
 "rocketiii": "Rocket III",
@@ -638,6 +648,7 @@
 "Yamaha": {
 "bt1100bulldog": "BT 1100 Bulldog",
 "delight125": "Delight 125",
+"fjr1300": "FJR 1300",
 "fz1sfazer": "FZ1 S Fazer",
 "fz6n": "FZ6 N",
 "fz6ns2": "FZ6 N S2",
