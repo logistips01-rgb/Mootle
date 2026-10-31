@@ -51,6 +51,7 @@
 "g310r": "G 310 R",
 "g650gs": "G 650 GS",
 "g650xcountry": "G 650 Xcountry",
+"k100": "K 100",
 "k1200lt": "K 1200 LT",
 "k1200r": "K 1200 R",
 "k1200rsport": "K 1200 R Sport",
@@ -59,6 +60,7 @@
 "k1600": "K 1600",
 "k1600gt": "K 1600 GT",
 "k1600gtl": "K 1600 GTL",
+"k75rt": "K 75 RT",
 "k75s": "K 75 S",
 "m1000r": "M 1000 R",
 "m1000xr": "M 1000 XR",
@@ -141,24 +143,28 @@
 },
 "CFMoto": {
 "1000mtx": "1000 MT X",
+"300clx": "300 CL X",
 "450mt": "450 MT",
 "450nk": "450 NK",
 "650mt": "650 MT",
 "700clxsport": "700 CL X Sport",
 "700mt": "700 MT",
 "800mt": "800 MT",
-"800mtx": "800 MT X"
+"800mtx": "800 MT X",
+"800nkadvanced": "800 NK Advanced"
 },
 "Cagiva": {
 "freccia125": "Freccia 125"
 },
 "Can-Am": {
+"origin": "Origin",
 "ryker": "Ryker",
 "spyder": "Spyder",
 "spyderf3s": "Spyder F3S"
 },
 "Cyclone": {
 "ra600": "RA 600",
+"rx2": "RX2",
 "rx4": "RX4",
 "rx600": "RX 600"
 },
@@ -241,6 +247,7 @@
 "fatboy": "FAT BOY",
 "fxdr114": "Fxdr 114",
 "heritageclassic": "Heritage Classic",
+"hydragliderevival": "Hydra Glide Revival",
 "lowrider": "LOW Rider",
 "nightster": "Nightster",
 "panamerica1250": "PAN America 1250",
@@ -256,6 +263,7 @@
 "sportster883custom": "Sportster 883 Custom",
 "sportster883iron": "Sportster 883 Iron",
 "sportster883low": "Sportster 883 LOW",
+"sportster883r": "Sportster 883R",
 "sportster883roadster": "Sportster 883 Roadster",
 "sportsterfortyeight": "Sportster Forty Eight",
 "sportsternightster": "Sportster Nightster",
@@ -270,6 +278,7 @@
 "street7502016enmadrid10222354htm": "Street 750 2016 EN Madrid 10222354.HTM",
 "streetbob": "Street BOB",
 "touringelectraglideultra": "Touring Electra Glide Ultra",
+"touringelectraglideultraclassic": "Touring Electra Glide Ultra Classic",
 "touringelectraglideultraclassic2008envalencia8923831htm": "Touring Electra Glide Ultra Classic 2008 EN Valencia 8923831.HTM",
 "touringelectraglideultraclassicscreamineagle2006enzaragoza10147936htm": "Touring Electra Glide Ultra Classic Screamin Eagle 2006 EN Zaragoza 10147936.HTM",
 "touringroadking": "Touring Road King",
@@ -339,6 +348,7 @@
 "nssjazz250": "NSS Jazz 250",
 "nt1100": "NT1100",
 "nt650vdeauville": "NT 650 V Deauville",
+"nt700deauville": "NT 700 Deauville",
 "nt700vdeauville": "NT 700 V Deauville",
 "nx500": "NX 500",
 "nx650dominator": "NX 650 Dominator",
@@ -393,7 +403,8 @@
 "Hyosung": {
 "bobbergv125s": "Bobber GV 125 S",
 "gt650r": "GT 650 R",
-"gv125aquila": "GV 125 Aquila"
+"gv125aquila": "GV 125 Aquila",
+"gv250aquila": "GV 250 Aquila"
 },
 "Indian": {
 "challenger": "Challenger",
@@ -424,6 +435,8 @@
 "1290superduker": "1290 Super Duke R",
 "1390superadventures": "1390 Super Adventure S",
 "250excf": "250 EXC F",
+"300exc": "300 EXC",
+"300exctpi": "300 EXC TPI",
 "350excf": "350 EXC F",
 "350excfsixdays": "350 EXC F SIX Days",
 "390adventure": "390 Adventure",
@@ -431,6 +444,8 @@
 "390smc": "390 SMC",
 "450rallyreplica": "450 Rally Replica",
 "690duke": "690 Duke",
+"690enduro": "690 Enduro",
+"690enduror": "690 Enduro R",
 "690smcr": "690 SMC R",
 "790adventure": "790 Adventure",
 "790duke": "790 Duke",
@@ -440,9 +455,11 @@
 "990adventure": "990 Adventure",
 "990adventurer": "990 Adventure R",
 "990duke": "990 Duke",
+"exc350f": "EXC 350 F",
 "rc125": "RC 125",
 "rc390": "RC 390",
-"sx125": "SX 125"
+"sx125": "SX 125",
+"sx450f": "SX 450 F"
 },
 "Kawasaki": {
 "eliminator500": "Eliminator 500",
@@ -494,12 +511,15 @@
 "zx4rr": "ZX 4RR",
 "zx6r": "ZX 6R",
 "zx6r636": "ZX 6R 636",
+"zzr1200": "ZZR 1200",
 "zzr1400": "ZZR 1400"
 },
 "Keeway": {
+"klight125": "K Light 125",
 "rkf125": "RKF 125",
 "rks125": "RKS 125",
 "tx125s": "TX 125 S",
+"v302c": "V 302 C",
 "vcruise125": "V Cruise 125",
 "vieste125": "Vieste 125",
 "vieste300xdv": "Vieste 300 XDV",
@@ -529,6 +549,7 @@
 "superdink125i": "Super Dink 125I",
 "superdink300i": "Super Dink 300I",
 "superdink350i": "Super Dink 350I",
+"venox250": "Venox 250",
 "xciting400i": "Xciting 400I",
 "xcitings400": "Xciting S 400",
 "xcitingvs400": "Xciting VS 400",
@@ -539,6 +560,7 @@
 "rigger": "Rigger"
 },
 "Letbe": {
+"arthur700": "Arthur 700",
 "aurora125": "Aurora 125",
 "island125": "Island 125",
 "letbeneon1252025enguipuzcoa8712776htm": "Letbe Neon 125 2025 EN Guipuzcoa 8712776.HTM",
@@ -552,6 +574,7 @@
 "brutale800": "Brutale 800",
 "brutale800eas": "Brutale 800 EAS",
 "dragster": "Dragster",
+"dragster800": "Dragster 800",
 "enduroveloce": "Enduro Veloce",
 "f3": "F3",
 "f3675": "F3 675",
@@ -582,9 +605,12 @@
 },
 "Mitt": {
 "125gtmax": "125 GT MAX",
+"775r": "775 R",
 "808big": "808 BIG",
+"advpro125": "ADV PRO 125",
 "advxtreme125": "ADV Xtreme 125",
 "desert125": "Desert 125",
+"gp2125": "GP2 125",
 "gtmax125": "GT MAX 125",
 "gts125": "GTS 125",
 "joy125": "JOY 125",
@@ -596,6 +622,7 @@
 },
 "Morbidelli Mbp": {
 "c1002v": "C 1002 V",
+"nr125x": "NR 125 X",
 "t1002vx": "T1002VX"
 },
 "Moto Guzzi": {
@@ -608,7 +635,8 @@
 "v7iii": "V7 III",
 "v85": "V85",
 "v85strada": "V 85 Strada",
-"v85tt": "V 85 TT"
+"v85tt": "V 85 TT",
+"v9": "V9"
 },
 "Moto Morini": {
 "xcape": "X Cape",
@@ -633,6 +661,7 @@
 "beverly300": "Beverly 300",
 "beverly300ie": "Beverly 300 IE",
 "beverly400": "Beverly 400",
+"beverly500": "Beverly 500",
 "beverlys310": "Beverly S 310",
 "beverlysporttouring350ie": "Beverly Sport Touring 350 IE",
 "liberty": "Liberty",
@@ -641,6 +670,7 @@
 "medley": "Medley",
 "mp3": "MP3",
 "mp3300yourbanltsport": "MP3 300 Yourban LT Sport",
+"mp3500business": "MP3 500 Business",
 "mp3business500hpe": "MP3 Business 500 HPE",
 "mp3exclusive530": "MP3 Exclusive 530",
 "mp3sport400": "MP3 Sport 400",
@@ -670,6 +700,7 @@
 "srt700x": "SRT 700 X",
 "srt800": "SRT 800",
 "srt900sx": "SRT 900 SX",
+"srv12": "SRV 12",
 "srv125": "SRV 125",
 "srv600v": "SRV 600 V",
 "trx125": "TRX 125"
@@ -708,10 +739,12 @@
 "scram411": "Scram 411",
 "shotgun650": "Shotgun 650",
 "shotgun6502024enbarcelona10199667htm": "Shotgun 650 2024 EN Barcelona 10199667.HTM",
+"shotgun6502026entoledo10210195htm": "Shotgun 650 2026 EN Toledo 10210195.HTM",
 "supermeteor650": "Super Meteor 650"
 },
 "SWM": {
-"aceofspades125": "ACE OF Spades 125"
+"aceofspades125": "ACE OF Spades 125",
+"silvervaset650": "Silver Vase T 650"
 },
 "SYM": {
 "adx300": "ADX 300",
@@ -747,6 +780,7 @@
 "lightbeehomologada": "Lightbee Homologada"
 },
 "Suzuki": {
+"bandit650s": "Bandit 650 S",
 "burgman125": "Burgman 125",
 "burgman200": "Burgman 200",
 "burgman400": "Burgman 400",
@@ -756,6 +790,7 @@
 "dr350se": "DR 350 SE",
 "gladius650": "Gladius 650",
 "gs500": "GS 500",
+"gsf600bandits": "GSF 600 Bandit S",
 "gsfbandit650": "GSF Bandit 650",
 "gsr600": "GSR 600",
 "gsr750": "GSR 750",
@@ -780,6 +815,7 @@
 "sv1000s": "SV 1000 S",
 "sv650": "SV 650",
 "vl1500intruder": "VL 1500 Intruder",
+"vl800intrudervolusia": "VL 800 Intruder Volusia",
 "vstrom1000": "V Strom 1000",
 "vstrom1000xt": "V Strom 1000XT",
 "vstrom1050": "V Strom 1050",
@@ -835,6 +871,7 @@
 "tigersport800": "Tiger Sport 800",
 "tracker400": "Tracker 400",
 "trident660": "Trident 660",
+"trident800": "Trident 800",
 "trophy1200": "Trophy 1200"
 },
 "UM": {
@@ -850,6 +887,7 @@
 "gts300": "GTS 300",
 "gts300iesuper": "GTS 300 IE Super",
 "gts310e5": "GTS 310 E5",
+"gtv310officina8euro5": "GTV 310 Officina 8 Euro 5",
 "pk75xl": "PK 75 XL",
 "primavera": "Primavera",
 "seigiorni300": "SEI Giorni 300",
@@ -879,6 +917,7 @@
 "Wottan": {
 "gt2125": "GT2 125",
 "storm125": "Storm 125",
+"stormr125sport": "Storm R 125 Sport",
 "stormr300": "Storm R 300",
 "storms300": "Storm S 300"
 },
@@ -897,6 +936,7 @@
 "fz6ss2": "FZ6 S S2",
 "fz8n": "FZ8 N",
 "fz8s": "FZ8 S",
+"fzs1000fazer": "FZS 1000 Fazer",
 "mt01": "MT 01",
 "mt03": "MT 03",
 "mt07": "MT 07",
@@ -928,6 +968,7 @@
 "tracer9": "Tracer 9",
 "tracer900": "Tracer 900",
 "tracer92021enmadrid10218985htm": "Tracer 9 2021 EN Madrid 10218985.HTM",
+"tracer92023enmadrid10195045htm": "Tracer 9 2023 EN Madrid 10195045.HTM",
 "tracer92024enbarcelona10215977htm": "Tracer 9 2024 EN Barcelona 10215977.HTM",
 "tricity": "Tricity",
 "tricity125": "Tricity 125",
@@ -942,10 +983,13 @@
 "xsr900": "XSR900",
 "xt1200zsupertenere": "XT 1200 Z Super Tenere",
 "xt1200zsupertenereworldcrosser": "XT 1200 Z Super Tenere Worldcrosser",
+"xv1100virago": "XV 1100 Virago",
 "xv1600wildstar": "XV 1600 Wild Star",
 "xv1900amidnightstar": "XV 1900 A Midnight Star",
+"xv250virago": "XV 250 Virago",
 "xv950boltracer": "XV950 Bolt Racer",
 "xv950r": "XV 950R",
+"xvs1100adragstarclassic": "XVS 1100 A Drag Star Classic",
 "xvs1300amidnightstar": "XVS 1300 A Midnight Star",
 "xvs650dragstarclassic": "XVS 650 Drag Star Classic",
 "xvs950amidnightstar": "XVS 950 A Midnight Star",
@@ -967,6 +1011,7 @@
 "350s": "350 S",
 "350t": "350 T",
 "350tx": "350 T X",
+"350x": "350 X",
 "368d": "368 D",
 "368detc": "368 D ETC",
 "368e": "368 E",
@@ -985,6 +1030,7 @@
 "m310": "M 310",
 "t310": "T 310",
 "u1125": "U1 125",
-"u125": "U 125"
+"u125": "U 125",
+"z2125": "Z2 125"
 }
 }
