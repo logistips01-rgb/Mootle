@@ -15,6 +15,8 @@
 "shiver900": "Shiver 900",
 "srgt125": "SR GT 125",
 "srgt400": "SR GT 400",
+"sx125": "SX 125",
+"sxr50": "SXR 50",
 "tuareg660": "Tuareg 660",
 "tuono125": "Tuono 125",
 "tuono457": "Tuono 457",
@@ -34,6 +36,7 @@
 "cevolution": "C Evolution",
 "f450gs": "F 450 GS",
 "f650gs": "F 650 GS",
+"f650gs30yearsgs": "F 650 GS 30 Years GS",
 "f700gs": "F 700 GS",
 "f750": "F 750",
 "f800gs": "F 800 GS",
@@ -63,7 +66,9 @@
 "k75rt": "K 75 RT",
 "k75s": "K 75 S",
 "m1000r": "M 1000 R",
+"m1000rr": "M 1000 RR",
 "m1000xr": "M 1000 XR",
+"r100s": "R 100 S",
 "r1100gs": "R 1100 GS",
 "r1100rt": "R 1100 RT",
 "r1100s": "R 1100 S",
@@ -77,6 +82,7 @@
 "r1200gs105cv": "R 1200 GS 105CV",
 "r1200gs2017entoledo10218664htm": "R 1200 GS 2017 EN Toledo 10218664.HTM",
 "r1200gs2017entoledo10221806htm": "R 1200 GS 2017 EN Toledo 10221806.HTM",
+"r1200gs2018enmadrid10220562htm": "R 1200 GS 2018 EN Madrid 10220562.HTM",
 "r1200gs2018entarragona10221898htm": "R 1200 GS 2018 EN Tarragona 10221898.HTM",
 "r1200gs2018entoledo10221657htm": "R 1200 GS 2018 EN Toledo 10221657.HTM",
 "r1200gs98cv": "R 1200 GS 98CV",
@@ -88,6 +94,8 @@
 "r1200rs": "R 1200 RS",
 "r1200rt": "R 1200 RT",
 "r1200rt110cv": "R 1200 RT 110CV",
+"r1200rt2015envalencia10220689htm": "R 1200 RT 2015 EN Valencia 10220689.HTM",
+"r1200rt2018envalencia10220669htm": "R 1200 RT 2018 EN Valencia 10220669.HTM",
 "r1200rt98cv": "R 1200 RT 98CV",
 "r1200st": "R 1200 ST",
 "r1250gs": "R 1250 GS",
@@ -120,6 +128,9 @@
 },
 "Benelli": {
 "502c": "502 C",
+"654t": "654 T",
+"752s": "752 S",
+"bkx125s": "BKX 125 S",
 "bn125": "BN 125",
 "imperiale": "Imperiale",
 "leoncino": "Leoncino",
@@ -127,10 +138,12 @@
 "leoncino500": "Leoncino 500",
 "leoncino500trail": "Leoncino 500 Trail",
 "leoncino800": "Leoncino 800",
+"leoncinobobber400": "Leoncino Bobber 400",
 "tornado500": "Tornado 500",
 "trk502": "TRK 502",
 "trk702": "TRK 702",
-"trk702x": "TRK 702 X"
+"trk702x": "TRK 702 X",
+"trl902xplorer": "TRL 902 Xplorer"
 },
 "Brixton": {
 "crossfire125xs": "Crossfire 125 XS",
@@ -143,6 +156,7 @@
 },
 "CFMoto": {
 "1000mtx": "1000 MT X",
+"125nk": "125 NK",
 "300clx": "300 CL X",
 "450mt": "450 MT",
 "450nk": "450 NK",
@@ -194,6 +208,7 @@
 "monster796": "Monster 796",
 "monster797": "Monster 797",
 "monster821": "Monster 821",
+"monsters2r1000": "Monster S2R 1000",
 "multistrada": "Multistrada",
 "multistrada1200": "Multistrada 1200",
 "multistrada1200stouring": "Multistrada 1200 S Touring",
@@ -217,7 +232,8 @@
 },
 "Fantic": {
 "caballero": "Caballero",
-"caballeroscrambler500": "Caballero Scrambler 500"
+"caballeroscrambler500": "Caballero Scrambler 500",
+"xef450": "XEF 450"
 },
 "Fb Mondial": {
 "flattrack125": "Flat Track 125",
@@ -225,7 +241,8 @@
 "piega125": "Piega 125"
 },
 "GasGas": {
-"es700": "ES 700"
+"es700": "ES 700",
+"txtracing300": "TXT Racing 300"
 },
 "Gilera": {
 "fuoco500ie": "Fuoco 500 IE"
@@ -283,7 +300,9 @@
 "touringelectraglideultraclassicscreamineagle2006enzaragoza10147936htm": "Touring Electra Glide Ultra Classic Screamin Eagle 2006 EN Zaragoza 10147936.HTM",
 "touringroadking": "Touring Road King",
 "touringroadkingclassic": "Touring Road King Classic",
+"touringstreetglide": "Touring Street Glide",
 "ultralimited": "Ultra Limited",
+"vrscnightrod": "Vrsc Night ROD",
 "vrscvrodmuscle": "Vrsc V ROD Muscle"
 },
 "Honda": {
@@ -304,6 +323,7 @@
 "cb650r": "CB 650 R",
 "cb650recluth": "CB 650 R E Cluth",
 "cb750hornet": "CB 750 Hornet",
+"cb750hornetecluth": "CB 750 Hornet E Cluth",
 "cbf1000c": "CBF 1000 C",
 "cbf125": "CBF 125",
 "cbf600n": "CBF 600N",
@@ -311,6 +331,8 @@
 "cbr1000rrfireblade": "CBR 1000 RR Fireblade",
 "cbr1000rrrfireblade": "CBR 1000 RR R Fireblade",
 "cbr1000rrrfirebladesp": "CBR 1000 RR R Fireblade SP",
+"cbr1100xx": "CBR 1100 XX",
+"cbr125r": "CBR 125R",
 "cbr500r": "CBR 500 R",
 "cbr600f": "CBR 600F",
 "cbr600rr": "CBR 600 RR",
@@ -335,7 +357,9 @@
 "forza250x": "Forza 250 X",
 "forza350": "Forza 350",
 "forza750": "Forza 750",
+"gb350s": "GB 350 S",
 "gl1800goldwing": "GL 1800 Goldwing",
+"goldwing": "Gold Wing",
 "integra": "Integra",
 "integras": "Integra S",
 "monkey125": "Monkey 125",
@@ -376,6 +400,7 @@
 "vfr800": "VFR 800",
 "vfr800fi": "VFR 800 FI",
 "vision110": "Vision 110",
+"vt750c2shadow": "VT 750 C2 Shadow",
 "vt750cshadow": "VT 750 C Shadow",
 "vt750s": "VT 750 S",
 "vtx1800": "VTX 1800",
@@ -390,6 +415,7 @@
 "701enduro": "701 Enduro",
 "701supermoto": "701 Supermoto",
 "fe350": "FE 350",
+"fe450": "FE 450",
 "norden901": "Norden 901",
 "nuda900": "Nuda 900",
 "svartpilen125": "Svartpilen 125",
@@ -429,11 +455,13 @@
 "1190adventurer": "1190 Adventure R",
 "125duke": "125 Duke",
 "125enduror": "125 Enduro R",
+"125smcr": "125 SMC R",
 "125sx": "125 SX",
 "1290superadventure": "1290 Super Adventure",
 "1290superdukegt": "1290 Super Duke GT",
 "1290superduker": "1290 Super Duke R",
 "1390superadventures": "1390 Super Adventure S",
+"1390superduke": "1390 Super Duke",
 "250excf": "250 EXC F",
 "300exc": "300 EXC",
 "300exctpi": "300 EXC TPI",
@@ -479,6 +507,7 @@
 "ninja500": "Ninja 500",
 "ninja650": "Ninja 650",
 "ninjah2": "Ninja H2",
+"ninjazx6r636ktr": "Ninja ZX 6R 636 KTR",
 "versys": "Versys",
 "versys1000": "Versys 1000",
 "versys1100": "Versys 1100",
@@ -506,6 +535,7 @@
 "z900rs": "Z 900 RS",
 "zh2": "Z H2",
 "zx10r": "ZX 10R",
+"zx10r2018enbarcelona10220650htm": "ZX 10R 2018 EN Barcelona 10220650.HTM",
 "zx10rr": "ZX 10RR",
 "zx4r": "ZX 4R",
 "zx4rr": "ZX 4RR",
@@ -515,6 +545,7 @@
 "zzr1400": "ZZR 1400"
 },
 "Keeway": {
+"aventerra125": "Aventerra 125",
 "klight125": "K Light 125",
 "rkf125": "RKF 125",
 "rks125": "RKS 125",
@@ -536,6 +567,7 @@
 },
 "Kymco": {
 "agilitycity125": "Agility City 125",
+"agilitycityplus125": "Agility City Plus 125",
 "agilitys125": "Agility S 125",
 "ak550": "AK 550",
 "dtx125": "DTX 125",
@@ -592,10 +624,12 @@
 "montanaxr5510": "Montana XR5 510",
 "rockster": "Rockster",
 "rockster125evo": "Rockster 125 EVO",
+"rockster125flat": "Rockster 125 Flat",
 "rockster410": "Rockster 410",
 "shifter125evo": "Shifter 125 EVO"
 },
 "Malaguti": {
+"drakon125": "Drakon 125",
 "spidermaxgt500": "Spidermax GT 500",
 "xtm125": "XTM 125"
 },
@@ -619,6 +653,9 @@
 "rt50": "RT 50",
 "trox125": "T ROX 125",
 "tt555": "TT 555"
+},
+"Montesa": {
+"4ride": "4RIDE"
 },
 "Morbidelli Mbp": {
 "c1002v": "C 1002 V",
@@ -646,11 +683,17 @@
 "xnord125": "X Nord 125"
 },
 "NIU": {
-"mqigt": "MQI GT"
+"mqigt": "MQI GT",
+"n1": "N 1"
+},
+"Next": {
+"mojito": "Mojito"
 },
 "Peugeot": {
 "eludix": "E Ludix",
 "metropolis400": "Metropolis 400",
+"pm01125": "PM 01 125",
+"pulsion": "Pulsion",
 "tweet125": "Tweet 125",
 "tweet125i": "Tweet 125 I",
 "xp400": "XP 400"
@@ -670,6 +713,7 @@
 "medley": "Medley",
 "mp3": "MP3",
 "mp3300yourbanltsport": "MP3 300 Yourban LT Sport",
+"mp3300yourbansport": "MP3 300 Yourban Sport",
 "mp3500business": "MP3 500 Business",
 "mp3business500hpe": "MP3 Business 500 HPE",
 "mp3exclusive530": "MP3 Exclusive 530",
@@ -760,6 +804,7 @@
 "maxsymgt400": "Maxsym GT 400",
 "maxsymtl500": "Maxsym TL 500",
 "maxsymtl508": "Maxsym TL 508",
+"symphony": "Symphony",
 "symphony125": "Symphony 125",
 "symphony125sr": "Symphony 125 SR",
 "symphonystlc125": "Symphony ST LC 125"
@@ -774,7 +819,8 @@
 "50ser": "50 SE R"
 },
 "Silence": {
-"s01": "S 01"
+"s01": "S 01",
+"s02": "S 02"
 },
 "Sur-Ron": {
 "lightbeehomologada": "Lightbee Homologada"
@@ -787,6 +833,7 @@
 "burgman400a": "Burgman 400 A",
 "burgman400a2011envalencia10032408htm": "Burgman 400 A 2011 EN Valencia 10032408.HTM",
 "burgman650executive": "Burgman 650 Executive",
+"burgmanstreet125": "Burgman Street 125",
 "dr350se": "DR 350 SE",
 "gladius650": "Gladius 650",
 "gs500": "GS 500",
@@ -803,6 +850,7 @@
 "gsxs": "GSX S",
 "gsxs125": "GSX S 125",
 "gsxs750": "GSX S 750",
+"gsxs7502017enbarcelona10209695htm": "GSX S 750 2017 EN Barcelona 10209695.HTM",
 "gsxs7502018enalicante10222103htm": "GSX S 750 2018 EN Alicante 10222103.HTM",
 "hayabusa1300": "Hayabusa 1300",
 "hayabusa13002003enhuelva10221203htm": "Hayabusa 1300 2003 EN Huelva 10221203.HTM",
@@ -812,6 +860,7 @@
 "intruderc800": "Intruder C800",
 "intruderm1800r": "Intruder M1800R",
 "intruderm800": "Intruder M800",
+"marauder250": "Marauder 250",
 "sv1000s": "SV 1000 S",
 "sv650": "SV 650",
 "vl1500intruder": "VL 1500 Intruder",
@@ -825,8 +874,10 @@
 },
 "Triumph": {
 "america900": "America 900",
+"boneville": "Boneville",
 "bonneville900": "Bonneville 900",
 "bonnevillebobber": "Bonneville Bobber",
+"bonnevillestevemcqueen": "Bonneville Steve Mcqueen",
 "bonnevillet100": "Bonneville T100",
 "bonnevillet120": "Bonneville T120",
 "daytona660": "Daytona 660",
@@ -834,6 +885,7 @@
 "rocket": "Rocket",
 "rocket3": "Rocket 3",
 "rocketiii": "Rocket III",
+"rocketiiiclassic": "Rocket III Classic",
 "rocketiiitouring": "Rocket III Touring",
 "scrambler1200": "Scrambler 1200",
 "scrambler400x": "Scrambler 400 X",
@@ -841,6 +893,7 @@
 "speed400": "Speed 400",
 "speedfour": "Speed Four",
 "speedtriple": "Speed Triple",
+"speedtwin": "Speed Twin",
 "speedtwin1200": "Speed Twin 1200",
 "speedtwin900": "Speed Twin 900",
 "sprintst": "Sprint ST",
@@ -855,11 +908,13 @@
 "thruxtonefi": "Thruxton EFI",
 "thunderbird1600": "Thunderbird 1600",
 "tiger1050": "Tiger 1050",
+"tiger1050sport": "Tiger 1050 Sport",
 "tiger1200": "Tiger 1200",
 "tiger1200gt": "Tiger 1200 GT",
 "tiger1200rally": "Tiger 1200 Rally",
 "tiger800": "Tiger 800",
 "tiger800xc": "Tiger 800 XC",
+"tiger800xcx": "Tiger 800 XCX",
 "tiger800xcx2015envizcaya10222122htm": "Tiger 800 XCX 2015 EN Vizcaya 10222122.HTM",
 "tiger800xr": "Tiger 800 XR",
 "tiger800xrt": "Tiger 800 XRT",
@@ -936,6 +991,7 @@
 "fz6ss2": "FZ6 S S2",
 "fz8n": "FZ8 N",
 "fz8s": "FZ8 S",
+"fzr600rgenesis": "FZR 600 R Genesis",
 "fzs1000fazer": "FZS 1000 Fazer",
 "mt01": "MT 01",
 "mt03": "MT 03",
@@ -972,6 +1028,8 @@
 "tracer92024enbarcelona10215977htm": "Tracer 9 2024 EN Barcelona 10215977.HTM",
 "tricity": "Tricity",
 "tricity125": "Tricity 125",
+"tricker250": "Tricker 250",
+"wr250r": "WR 250 R",
 "xjr1300": "XJR 1300",
 "xmax125": "Xmax 125",
 "xmax250": "Xmax 250",
