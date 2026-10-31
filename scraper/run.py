@@ -130,6 +130,24 @@ def drop_portal_copies(items, portal="motosnet"):
     return kept, len(drop)
 
 
+def drop_same_ad_copies(items):
+    """Colapsa anuncios idénticos dentro de la misma web: mismo modelo y año (mid), mismo precio y
+    mismos km. Es el mismo anuncio repetido en varias provincias (típico en motos.net: el mismo
+    concesionario publica su moto en Valencia, Madrid, Sevilla… para salir más), no motos distintas.
+    Se queda uno. Exige km y precio para no juntar por error (una coincidencia exacta de modelo+año+
+    precio+km es, en la práctica, el mismo anuncio)."""
+    seen, kept, dropped = set(), [], 0
+    for it in items:
+        if it.get("mid") and it.get("p") and it.get("km"):
+            key = (it["src"], it["mid"], it["p"], it["km"])
+            if key in seen:
+                dropped += 1
+                continue
+            seen.add(key)
+        kept.append(it)
+    return kept, dropped
+
+
 def merge(old_items, results, today):
     """Junta lo leído con lo que había. results: {fuente: (anuncios, info)}."""
     old = {it["id"]: it for it in old_items}
@@ -191,6 +209,8 @@ def main(argv=None):
     items = merge(data["items"], results, today)
     catalog = load(MODELS, {})
     assign(items, catalog)
+    # Mismo anuncio repetido en varias provincias dentro de una web (mismo modelo+año+precio+km): uno.
+    items, same_ad = drop_same_ad_copies(items)
     # El emparejamiento es de uno en uno y un concesionario puede tener la misma moto dos veces en
     # motos.net: se repite hasta que no quede ninguna copia.
     copies = 0
@@ -222,7 +242,8 @@ def main(argv=None):
               f"{sources[src_id]['count']} en total")
     print(f"Modelos: {len({it['mid'] for it in items if it.get('mid')})} grupos marca-modelo-año")
     print(f"Total: {len(items)} motos · {sum(1 for it in items if 'mkt' in it)} con precio de mercado · "
-          f"{dups} anunciadas en más de una web · {copies} copias de motos.net quitadas")
+          f"{dups} anunciadas en más de una web · {copies} copias de motos.net quitadas · "
+          f"{same_ad} anuncios duplicados (mismo modelo+precio+km) quitados")
 
     if args.dry_run:
         return
