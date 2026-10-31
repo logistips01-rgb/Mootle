@@ -33,7 +33,7 @@ jobs:
       - name: Instalar dependencias
         run: pip install -r requirements.txt
 
-      - name: Leer motos.net (4 páginas)
+      - name: Leer motos.net (32 páginas)
         run: python -m scraper.run --only motosnet --minutes 10
 
       - name: Commit de datos
