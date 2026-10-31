@@ -42,12 +42,24 @@ def _name(g):
     return f'{g["mk"]} {g["md"]}'.strip()
 
 
+def _ref_price(g):
+    """Precio de referencia para calcular la rebaja: el mayor entre nuestra bajada
+    detectada (pa) y el precio anterior tachado de la tienda (p0)."""
+    b = g["best"]
+    return max(b.get("pa") or 0, b.get("p0") or 0)
+
+
+def _saving(g):
+    ref = _ref_price(g)
+    return ref - g["min"] if ref > g["min"] else 0
+
+
 def _card(g):
     img = f'<img src="{e(g["img"])}" alt="" loading="lazy" referrerpolicy="no-referrer">' if g["img"] else GEAR
     drop = ""
-    pa = g["best"].get("pa")
-    if pa and pa > g["min"]:
-        drop = f'<span class="drop">−{eur(pa - g["min"])}</span>'
+    s = _saving(g)
+    if s > 0:
+        drop = f'<span class="drop">−{eur(s)}</span>'
     return (f'<a class="card eq" href="{g["mid"]}.html"><div class="photo">{img}{drop}</div><div class="body">'
             f'<span class="brand">{e(g["mk"])} · {e(CAT_NAMES.get(g["cat"], g["cat"]).rstrip("s"))}</span>'
             f'<span class="name">{e(g["md"])[:60]}</span>'
@@ -177,20 +189,14 @@ def index_page(groups, sources):
     by_cat = defaultdict(list)
     for g in gl:
         by_cat[g["cat"]].append(g)
-    # Chollos de hoy = SOLO bajadas de precio reales (histórico), las más recientes primero.
-    # Si un día no ha bajado nada, la sección sale vacía (es intencionado).
-    drops = sorted([g for g in gl if g["best"].get("pa") and g["best"]["pa"] > g["min"]],
-                   key=lambda g: (g["best"].get("pc") or "", g["best"]["pa"] - g["min"]), reverse=True)
-    seen_mid, featured = set(), []
-    for g in drops:
-        if g["mid"] in seen_mid:
-            continue
-        seen_mid.add(g["mid"])
-        featured.append(g)
-        if len(featured) >= 12:
-            break
-    chollo_note = ("Equipación que ha bajado de precio: las rebajas más recientes primero. La lista cambia según detectamos bajadas." if featured else
-                   "Hoy no ha bajado de precio ningún producto. En cuanto una tienda baje un precio, aparecerá aquí.")
+    # Chollos: equipación rebajada = precio actual por debajo del de referencia (nuestra
+    # bajada detectada pa, o el precio anterior tachado de la tienda p0). Orden: mayor % de
+    # descuento primero. Así se nutre de las ofertas reales de hoy y se mantiene vivo.
+    chollos = sorted([g for g in gl if _saving(g) > 0],
+                     key=lambda g: (_saving(g) / (_ref_price(g) or 1), _saving(g)), reverse=True)
+    featured = chollos[:12]
+    chollo_note = ("Equipación rebajada ahora mismo: los mayores descuentos primero." if featured else
+                   "Ahora mismo no hay equipación rebajada. En cuanto baje algún precio, aparecerá aquí.")
     cats_tiles = "".join(
         f'<a class="source" href="{cat}.html"><span>{e(CAT_NAMES.get(cat, cat))}<small>desde {eur(min(g["min"] for g in gs))}</small></span>'
         f'<b>{num(len(gs))}</b></a>' for cat, gs in sorted(by_cat.items(), key=lambda kv: -len(kv[1])))
