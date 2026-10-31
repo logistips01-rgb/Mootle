@@ -25,6 +25,7 @@
 "c650": "C 650",
 "c650gt": "C 650 GT",
 "c650sport": "C 650 Sport",
+"ce02": "CE 02",
 "ce04": "CE 04",
 "f450gs": "F 450 GS",
 "f650gs": "F 650 GS",
@@ -115,6 +116,7 @@
 "800mtx": "800 MT X"
 },
 "Can-Am": {
+"ryker": "Ryker",
 "spyder": "Spyder"
 },
 "Daelim": {
@@ -222,6 +224,7 @@
 "cbf1000c": "CBF 1000 C",
 "cbf125": "CBF 125",
 "cbr1000rrfireblade": "CBR 1000 RR Fireblade",
+"cbr1000rrrfireblade": "CBR 1000 RR R Fireblade",
 "cbr500r": "CBR 500 R",
 "cbr600rr": "CBR 600 RR",
 "cbr650r": "CBR 650 R",
@@ -235,6 +238,7 @@
 "crf300l": "CRF 300 L",
 "crf300rally": "CRF 300 Rally",
 "crf50f": "CRF 50F",
+"crossrunnervfr800x": "Crossrunner VFR800X",
 "crosstourer": "Crosstourer",
 "fmx650": "FMX 650",
 "forza": "Forza",
@@ -266,6 +270,7 @@
 "sh350i": "SH 350I",
 "shmode125": "SH Mode 125",
 "supercubc125": "Super CUB C 125",
+"transalpxl700v": "Transalp XL 700 V",
 "varaderoxl1000v": "Varadero XL1000V",
 "varaderoxl1000vc": "Varadero XL1000V C",
 "vf750": "VF 750",
@@ -299,7 +304,8 @@
 "ftr1200": "FTR 1200",
 "pursuit": "Pursuit",
 "roadmaster": "Roadmaster",
-"scout": "Scout"
+"scout": "Scout",
+"sportchief": "Sport Chief"
 },
 "Italjet": {
 "dragster125": "Dragster 125",
@@ -424,7 +430,8 @@
 "montanaxr5": "Montana XR5",
 "montanaxr5510": "Montana XR5 510",
 "rockster125evo": "Rockster 125 EVO",
-"rockster410": "Rockster 410"
+"rockster410": "Rockster 410",
+"shifter125evo": "Shifter 125 EVO"
 },
 "Malaguti": {
 "xtm125": "XTM 125"
@@ -440,6 +447,7 @@
 },
 "Moto Guzzi": {
 "california1100": "California 1100",
+"stelvio": "Stelvio",
 "v100mandello": "V100 Mandello",
 "v7": "V7",
 "v7cafeclassic": "V7 Cafe Classic",
@@ -528,6 +536,7 @@
 "maxsym400": "Maxsym 400",
 "maxsym400i": "Maxsym 400I",
 "maxsym600i": "Maxsym 600I",
+"maxsymtl500": "Maxsym TL 500",
 "symphony125": "Symphony 125",
 "symphony125sr": "Symphony 125 SR",
 "symphonystlc125": "Symphony ST LC 125"
@@ -560,6 +569,7 @@
 "hayabusa13002003enhuelva10221203htm": "Hayabusa 1300 2003 EN Huelva 10221203.HTM",
 "inazuma250": "Inazuma 250",
 "intruderc800": "Intruder C800",
+"intruderm1800r": "Intruder M1800R",
 "sv650": "SV 650",
 "vstrom1000": "V Strom 1000",
 "vstrom1050": "V Strom 1050",
@@ -704,7 +714,9 @@
 "yzfr3": "YZF R3"
 },
 "Zontes": {
+"125c": "125 C",
 "350t": "350 T",
+"368e": "368 E",
 "368g": "368 G",
 "368getc": "368 G ETC",
 "703f": "703 F",
