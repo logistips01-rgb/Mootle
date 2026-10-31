@@ -119,6 +119,7 @@
 "r1200rt2015enmadrid10219293htm": "R 1200 RT 2015 EN Madrid 10219293.HTM",
 "r1200rt2015envalencia10220689htm": "R 1200 RT 2015 EN Valencia 10220689.HTM",
 "r1200rt2018envalencia10220669htm": "R 1200 RT 2018 EN Valencia 10220669.HTM",
+"r1200rt2020encordoba10223346htm": "R 1200 RT 2020 EN Cordoba 10223346.HTM",
 "r1200rt98cv": "R 1200 RT 98CV",
 "r1200st": "R 1200 ST",
 "r1250gs": "R 1250 GS",
@@ -412,6 +413,7 @@
 "cbf500": "CBF 500",
 "cbf600n": "CBF 600N",
 "cbf600na": "CBF 600 NA",
+"cbf600nc": "CBF 600N C",
 "cbf600s": "CBF 600S",
 "cbr1000rr": "CBR 1000RR",
 "cbr1000rrfireblade": "CBR 1000 RR Fireblade",
@@ -716,6 +718,8 @@
 "agilitycityplus125": "Agility City Plus 125",
 "agilitys125": "Agility S 125",
 "ak550": "AK 550",
+"betwin250": "BET WIN 250",
+"betwin50": "BET WIN 50",
 "dtx125": "DTX 125",
 "dtx350": "DTX 350",
 "dtx3602023enmadrid10220280htm": "DTX 360 2023 EN Madrid 10220280.HTM",
@@ -742,6 +746,7 @@
 "xtownct300": "X Town CT 300"
 },
 "Leonart": {
+"daytona125": "Daytona 125",
 "pilder125": "Pilder 125",
 "rigger": "Rigger",
 "tracker": "Tracker"
@@ -962,6 +967,7 @@
 "mrt50pro": "MRT 50 PRO",
 "mrt50sm": "MRT 50 SM",
 "nkd125": "NKD 125",
+"strada125": "Strada 125",
 "tango": "Tango",
 "xplora557": "Xplora 557",
 "xplora707x": "Xplora 707 X"
@@ -1055,6 +1061,7 @@
 "burgman650executive": "Burgman 650 Executive",
 "burgmanstreet125": "Burgman Street 125",
 "dr350se": "DR 350 SE",
+"dr600djebel": "DR 600 Djebel",
 "gladius650": "Gladius 650",
 "gs500": "GS 500",
 "gsf600bandit": "GSF 600 Bandit",
@@ -1077,6 +1084,7 @@
 "gsxs125": "GSX S 125",
 "gsxs750": "GSX S 750",
 "gsxs7502017enbarcelona10209695htm": "GSX S 750 2017 EN Barcelona 10209695.HTM",
+"gsxs7502017enbarcelona10223315htm": "GSX S 750 2017 EN Barcelona 10223315.HTM",
 "gsxs7502018enalicante10222103htm": "GSX S 750 2018 EN Alicante 10222103.HTM",
 "gsxs7502019enmadrid10218669htm": "GSX S 750 2019 EN Madrid 10218669.HTM",
 "hayabusa1300": "Hayabusa 1300",
@@ -1182,6 +1190,7 @@
 "Vespa": {
 "94610aniversario": "946 10 Aniversario",
 "elettrica": "Elettrica",
+"et4125": "ET4 125",
 "gts125": "GTS 125",
 "gts300": "GTS 300",
 "gts300iesuper": "GTS 300 IE Super",
@@ -1192,6 +1201,7 @@
 "pk75elestar": "PK 75 Elestar",
 "pk75xl": "PK 75 XL",
 "primavera": "Primavera",
+"px200iris": "PX 200 Iris",
 "seigiorni300": "SEI Giorni 300",
 "sprint125ie3v": "Sprint 125 IE 3V",
 "sprints125ie3v": "Sprint S 125 IE 3V"
