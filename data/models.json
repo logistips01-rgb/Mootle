@@ -188,6 +188,7 @@
 "300clx": "300 CL X",
 "450mt": "450 MT",
 "450nk": "450 NK",
+"650gt": "650 GT",
 "650mt": "650 MT",
 "675nk": "675 NK",
 "700clxadventure": "700 CL X Adventure",
@@ -309,6 +310,7 @@
 "breakout": "Breakout",
 "cvoelectraglideultralimited": "CVO Electra Glide Ultra Limited",
 "cvoroadglideultra": "CVO Road Glide Ultra",
+"cvosoftailspringer": "CVO Softail Springer",
 "cvoultraclassicelectraglide": "CVO Ultra Classic Electra Glide",
 "dynafatbob": "Dyna FAT BOB",
 "dynalowrider": "Dyna LOW Rider",
@@ -338,6 +340,7 @@
 "softailheritagesoftailclassic": "Softail Heritage Softail Classic",
 "softailnighttrain": "Softail Night Train",
 "softailslim": "Softail Slim",
+"softailsoftaildeluxe": "Softail Softail Deluxe",
 "softailsoftaildeuce": "Softail Softail Deuce",
 "softailstandard": "Softail Standard",
 "sportglide": "Sport Glide",
@@ -373,6 +376,7 @@
 "touringroadkingclassic": "Touring Road King Classic",
 "touringstreetglide": "Touring Street Glide",
 "ultralimited": "Ultra Limited",
+"vrscavrod": "Vrsca V ROD",
 "vrscnightrod": "Vrsc Night ROD",
 "vrscvrod": "Vrsc V ROD",
 "vrscvrod10aniversario": "Vrsc V ROD 10 Aniversario",
@@ -393,6 +397,7 @@
 "cb500f": "CB 500 F",
 "cb500hornet": "CB 500 Hornet",
 "cb500x": "CB 500 X",
+"cb600f": "CB 600 F",
 "cb600fchornet": "CB 600F C Hornet",
 "cb600fhornet": "CB 600F Hornet",
 "cb650f": "CB650F",
@@ -584,6 +589,7 @@
 "390duke": "390 Duke",
 "390smc": "390 SMC",
 "450excf": "450 EXC F",
+"450excfsixdays": "450 EXC F SIX Days",
 "450rallyreplica": "450 Rally Replica",
 "690duke": "690 Duke",
 "690enduro": "690 Enduro",
@@ -627,6 +633,7 @@
 "ninja1100sx": "Ninja 1100 SX",
 "ninja125": "Ninja 125",
 "ninja250r": "Ninja 250 R",
+"ninja300": "Ninja 300",
 "ninja400": "Ninja 400",
 "ninja500": "Ninja 500",
 "ninja650": "Ninja 650",
@@ -653,6 +660,7 @@
 "z1000sxtourer": "Z 1000 SX Tourer",
 "z1100": "Z 1100",
 "z125": "Z 125",
+"z250sl": "Z 250 SL",
 "z300": "Z 300",
 "z400": "Z 400",
 "z500": "Z 500",
@@ -730,7 +738,8 @@
 "xciting500": "Xciting 500",
 "xcitings400": "Xciting S 400",
 "xcitingvs400": "Xciting VS 400",
-"xtownct125": "X Town CT 125"
+"xtownct125": "X Town CT 125",
+"xtownct300": "X Town CT 300"
 },
 "Leonart": {
 "pilder125": "Pilder 125",
@@ -828,11 +837,13 @@
 "Moto Guzzi": {
 "california1100": "California 1100",
 "california1400touring": "California 1400 Touring",
+"griso8v": "Griso 8 V",
 "stelvio": "Stelvio",
 "v100mandello": "V100 Mandello",
 "v7": "V7",
 "v7cafeclassic": "V7 Cafe Classic",
 "v7classic": "V7 Classic",
+"v7ii": "V7 II",
 "v7iii": "V7 III",
 "v85": "V85",
 "v85strada": "V 85 Strada",
@@ -846,6 +857,7 @@
 "xcape700": "X Cape 700"
 },
 "Motron Motorcycles": {
+"vizion": "Vizion",
 "xnord125": "X Nord 125"
 },
 "NIU": {
@@ -868,6 +880,7 @@
 "tweet125": "Tweet 125",
 "tweet125i": "Tweet 125 I",
 "tweet50": "Tweet 50",
+"vclic50": "V Clic 50",
 "xp400": "XP 400"
 },
 "Piaggio": {
@@ -881,6 +894,7 @@
 "beverlys310": "Beverly S 310",
 "beverlys400": "Beverly S 400",
 "beverlysporttouring350ie": "Beverly Sport Touring 350 IE",
+"fly125": "FLY 125",
 "liberty": "Liberty",
 "liberty125": "Liberty 125",
 "liberty1254t": "Liberty 125 4T",
@@ -1226,6 +1240,7 @@
 "y1s": "Y1S"
 },
 "Yamaha": {
+"aerox50": "Aerox 50",
 "bt1100bulldog": "BT 1100 Bulldog",
 "delight125": "Delight 125",
 "dt125x": "DT 125 X",
@@ -1244,6 +1259,7 @@
 "fzr1000genesis": "FZR 1000 Genesis",
 "fzr600rgenesis": "FZR 600 R Genesis",
 "fzs1000fazer": "FZS 1000 Fazer",
+"majesty250": "Majesty 250",
 "mt01": "MT 01",
 "mt03": "MT 03",
 "mt07": "MT 07",
