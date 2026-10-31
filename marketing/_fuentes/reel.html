@@ -1,0 +1,51 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@800;900&family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--o:#e8590c;--ink:#16150f;--bg:#faf9f6;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{width:1080px;height:1920px;overflow:hidden;background:var(--ink);}
+  .stage{position:relative;width:1080px;height:1920px;font-family:"Inter Tight",sans-serif;}
+  .scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 90px;opacity:0;will-change:opacity,transform;}
+  .scene.o{background:var(--o);color:#fff;} .scene.l{background:var(--bg);color:var(--ink);} .scene.d{background:var(--ink);color:#fff;}
+  .kick{font-weight:800;font-size:38px;letter-spacing:.1em;text-transform:uppercase;color:var(--o);margin-bottom:26px;}
+  .o .kick{color:#ffe3cf;}
+  h1{font-weight:900;letter-spacing:-.03em;line-height:1.03;font-size:122px;}
+  h1 em{font-style:normal;color:var(--o);} .o h1 em{color:#fff;} .d h1 em{color:var(--o);}
+  .sub{font-family:Inter;font-weight:600;font-size:46px;margin-top:34px;opacity:.85;max-width:16ch;}
+  .ico{width:190px;height:190px;color:var(--o);margin-bottom:40px;} .o .ico,.d .ico{color:#fff;}
+  .mark{width:300px;height:300px;border-radius:22%;background:#fff;display:flex;align-items:center;justify-content:center;margin-bottom:50px;}
+  .mark svg{width:62%;height:62%;} .mark svg circle{stroke:var(--o);} .mark svg circle.h{fill:var(--o);stroke:none;}
+  .pill{font-weight:800;font-size:52px;background:#fff;color:var(--o);padding:28px 60px;border-radius:999px;margin-top:46px;}
+  .bar{position:absolute;left:0;bottom:0;height:14px;background:var(--o);width:0;}
+</style></head>
+<body><div class="stage" id="st">
+  <div class="scene o"><div class="mark"><svg viewBox="0 0 92 48"><circle cx="22" cy="26" r="16" fill="none" stroke-width="8"/><circle cx="70" cy="26" r="16" fill="none" stroke-width="8"/><circle class="h" cx="22" cy="26" r="4"/><circle class="h" cx="70" cy="26" r="4"/></svg></div><h1>¿Moto de<br><em>2ª mano</em>?</h1><p class="sub">Deja de mirar 10 webs.</p></div>
+  <div class="scene l"><div class="kick">Paso 1</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><h1>Buscas<br><em>una vez</em></h1></div>
+  <div class="scene l"><div class="kick">Y listo</div><h1>La <em>más barata</em> de toda España</h1><p class="sub">precio, km y enlace al anuncio</p></div>
+  <div class="scene d"><div class="kick">Histórico</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M7 14l4-4 3 3 5-6"/></svg><h1>¿Cara o <em>chollo</em>?</h1><p class="sub">el precio, día a día</p></div>
+  <div class="scene l"><div class="kick">Cada día</div><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M6 13l6 6 6-6"/></svg><h1>Chollos<br><em>del día</em></h1></div>
+  <div class="scene o"><div class="mark"><svg viewBox="0 0 92 48"><circle cx="22" cy="26" r="16" fill="none" stroke-width="8"/><circle cx="70" cy="26" r="16" fill="none" stroke-width="8"/><circle class="h" cx="22" cy="26" r="4"/><circle class="h" cx="70" cy="26" r="4"/></svg></div><h1>mootle<em>.es</em></h1><p class="sub">Gratis. Sin registro.</p><div class="pill">Entra ya →</div></div>
+  <div class="bar" id="bar"></div>
+</div>
+<script>
+  const scenes=[...document.querySelectorAll('.scene')];
+  const START=[0,2.2,4.4,6.6,8.8,11.0], DUR=[2.4,2.4,2.4,2.4,2.4,2.3], TOTAL=13.3;
+  function ease(x){return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;}
+  window.setTime=function(t){
+    scenes.forEach((el,i)=>{
+      const s=START[i], d=DUR[i], loc=(t-s)/d; // 0..1 dentro de su ventana
+      let op=0, ty=40, sc=.97;
+      if(loc>=0 && loc<=1){
+        if(loc<.14){const p=ease(loc/.14);op=p;ty=40*(1-p);sc=.97+.03*p;}
+        else if(loc>.9){const p=ease((loc-.9)/.1);op=1-p;ty=-26*p;sc=1-.01*p;}
+        else {op=1;ty=0;sc=1;}
+      }
+      el.style.opacity=op; el.style.transform=`translateY(${ty}px) scale(${sc})`;
+      el.style.zIndex = (loc>=0&&loc<=1)?2:1;
+    });
+    document.getElementById('bar').style.width=(1080*Math.min(1,t/TOTAL))+'px';
+  };
+  window.setTime(0);
+  window.__ready=true;
+</script></body></html>

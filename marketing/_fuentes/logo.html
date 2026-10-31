@@ -1,0 +1,37 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@700;800&family=Inter:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;height:100%;}
+  :root{--logo:#e8590c;--accent:#c2410c;}
+  body{display:flex;align-items:center;justify-content:center;font-family:"Inter Tight",Inter,sans-serif;}
+  .stage{width:100vw;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--gap,2.2vw);}
+  .word{display:inline-flex;align-items:center;font-weight:800;letter-spacing:-.045em;line-height:1;font-size:var(--fs,12vw);color:var(--fg,#16150f);}
+  .word svg{width:1.53em;height:.8em;margin:0 .03em;position:relative;top:.06em;}
+  .word svg circle{stroke:var(--wheel,#e8590c);}
+  .word svg circle.hub{fill:var(--wheel,#e8590c);stroke:none;}
+  .tag{font-family:Inter,sans-serif;font-weight:700;color:var(--tag,#c2410c);letter-spacing:-.01em;font-size:var(--tfs,2.4vw);}
+  .mark{border-radius:22%;background:#e8590c;display:flex;align-items:center;justify-content:center;width:var(--ms,60vmin);height:var(--ms,60vmin);}
+  .mark svg{width:62%;height:62%;}
+  .mark svg circle{stroke:#fff;}.mark svg circle.hub{fill:#fff;stroke:none;}
+  [hidden]{display:none!important;}
+</style></head><body>
+<div class="stage" id="stage">
+  <div id="mark" class="mark" hidden><svg viewBox="0 0 92 48"><circle cx="22" cy="26" r="16" fill="none" stroke-width="8"/><circle cx="70" cy="26" r="16" fill="none" stroke-width="8"/><circle class="hub" cx="22" cy="26" r="4"/><circle class="hub" cx="70" cy="26" r="4"/></svg></div>
+  <div id="word" class="word">m<svg viewBox="0 0 92 48" aria-hidden="true"><circle cx="22" cy="26" r="16" fill="none" stroke-width="8"/><circle cx="70" cy="26" r="16" fill="none" stroke-width="8"/><circle class="hub" cx="22" cy="26" r="4"/><circle class="hub" cx="70" cy="26" r="4"/></svg>tle</div>
+  <div id="tag" class="tag">motos de ocasión al mejor precio</div>
+</div>
+<script>
+  const q=new URLSearchParams(location.search), r=document.documentElement.style, b=document.body.style;
+  if(q.get("bg"))b.background=q.get("bg");
+  if(q.get("fg"))r.setProperty("--fg",q.get("fg"));
+  if(q.get("wheel"))r.setProperty("--wheel",q.get("wheel"));
+  if(q.get("tagc"))r.setProperty("--tag",q.get("tagc"));
+  if(q.get("fs"))r.setProperty("--fs",q.get("fs"));
+  if(q.get("tfs"))r.setProperty("--tfs",q.get("tfs"));
+  if(q.get("ms"))r.setProperty("--ms",q.get("ms"));
+  if(q.get("notag")) document.getElementById("tag").hidden=true;
+  if(q.get("markonly")){document.getElementById("word").hidden=true;document.getElementById("tag").hidden=true;document.getElementById("mark").hidden=false;}
+  if(q.get("showmark")) document.getElementById("mark").hidden=false;
+</script></body></html>
