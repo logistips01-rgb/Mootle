@@ -77,6 +77,7 @@
   <url><loc>https://mootle.es/marca/next.html</loc></url>
   <url><loc>https://mootle.es/marca/orcal.html</loc></url>
   <url><loc>https://mootle.es/marca/origin.html</loc></url>
+  <url><loc>https://mootle.es/marca/oxwin.html</loc></url>
   <url><loc>https://mootle.es/marca/peugeot.html</loc></url>
   <url><loc>https://mootle.es/marca/piaggio.html</loc></url>
   <url><loc>https://mootle.es/marca/polaris.html</loc></url>
@@ -176,6 +177,7 @@
   <url><loc>https://mootle.es/m/aprilia-tuono-125-2026.html</loc></url>
   <url><loc>https://mootle.es/m/aprilia-tuono-457-2025.html</loc></url>
   <url><loc>https://mootle.es/m/aprilia-tuono-660-2021.html</loc></url>
+  <url><loc>https://mootle.es/m/aprilia-tuono-660-2022.html</loc></url>
   <url><loc>https://mootle.es/m/aprilia-tuono-660-2023.html</loc></url>
   <url><loc>https://mootle.es/m/aprilia-tuono-660-2024.html</loc></url>
   <url><loc>https://mootle.es/m/aprilia-tuono-660-2025.html</loc></url>
@@ -506,6 +508,7 @@
   <url><loc>https://mootle.es/m/bmw-r-12-2006.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-r-12-2024.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-r-12-2025.html</loc></url>
+  <url><loc>https://mootle.es/m/bmw-r-12-2026.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-r-12-gs-2025.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-r-12-gs-2026.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-r-12-ninet-2024.html</loc></url>
@@ -757,6 +760,7 @@
   <url><loc>https://mootle.es/m/ducati-698-mono-2024.html</loc></url>
   <url><loc>https://mootle.es/m/ducati-848-superbike-2008.html</loc></url>
   <url><loc>https://mootle.es/m/ducati-899-panigale-2015.html</loc></url>
+  <url><loc>https://mootle.es/m/ducati-959-panigale-2018.html</loc></url>
   <url><loc>https://mootle.es/m/ducati-999-biposto-2005-en-valencia-10215892-htm-2005.html</loc></url>
   <url><loc>https://mootle.es/m/ducati-desertx-2022.html</loc></url>
   <url><loc>https://mootle.es/m/ducati-desertx-2023.html</loc></url>
@@ -845,6 +849,7 @@
   <url><loc>https://mootle.es/m/ducati-multistrada-1200-s-touring-2013.html</loc></url>
   <url><loc>https://mootle.es/m/ducati-multistrada-1260-2018.html</loc></url>
   <url><loc>https://mootle.es/m/ducati-multistrada-1260-enduro-2019.html</loc></url>
+  <url><loc>https://mootle.es/m/ducati-multistrada-1260-s-2018.html</loc></url>
   <url><loc>https://mootle.es/m/ducati-multistrada-1260-s-2019.html</loc></url>
   <url><loc>https://mootle.es/m/ducati-multistrada-2018.html</loc></url>
   <url><loc>https://mootle.es/m/ducati-multistrada-2019.html</loc></url>
@@ -1601,7 +1606,6 @@
   <url><loc>https://mootle.es/m/husqvarna-701-supermoto-2022.html</loc></url>
   <url><loc>https://mootle.es/m/husqvarna-701-supermoto-2023.html</loc></url>
   <url><loc>https://mootle.es/m/husqvarna-701-supermoto-2024.html</loc></url>
-  <url><loc>https://mootle.es/m/husqvarna-701-supermoto-2026.html</loc></url>
   <url><loc>https://mootle.es/m/husqvarna-fe-350-2016.html</loc></url>
   <url><loc>https://mootle.es/m/husqvarna-fe-350-2024.html</loc></url>
   <url><loc>https://mootle.es/m/husqvarna-fe-350-2025.html</loc></url>
@@ -2452,6 +2456,7 @@
   <url><loc>https://mootle.es/m/niu-n-1-2018.html</loc></url>
   <url><loc>https://mootle.es/m/orcal-sk-01-2021.html</loc></url>
   <url><loc>https://mootle.es/m/origin-origin-2025.html</loc></url>
+  <url><loc>https://mootle.es/m/oxwin-es1-pro-2024.html</loc></url>
   <url><loc>https://mootle.es/m/peugeot-50-speedfight-4t-2026.html</loc></url>
   <url><loc>https://mootle.es/m/peugeot-citystar-125-2015.html</loc></url>
   <url><loc>https://mootle.es/m/peugeot-citystar-125i-2014.html</loc></url>
@@ -3528,6 +3533,7 @@
   <url><loc>https://mootle.es/m/yamaha-tmax-560-2020.html</loc></url>
   <url><loc>https://mootle.es/m/yamaha-tmax-560-2021.html</loc></url>
   <url><loc>https://mootle.es/m/yamaha-tmax-560-2022.html</loc></url>
+  <url><loc>https://mootle.es/m/yamaha-tmax-560-2024.html</loc></url>
   <url><loc>https://mootle.es/m/yamaha-tmax-560-tech-max-2020.html</loc></url>
   <url><loc>https://mootle.es/m/yamaha-tmax-560-tech-max-2021.html</loc></url>
   <url><loc>https://mootle.es/m/yamaha-tmax-560-tech-max-2022.html</loc></url>
