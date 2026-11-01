@@ -572,6 +572,7 @@
 "gv125aquila": "GV 125 Aquila",
 "gv250aquila": "GV 250 Aquila",
 "gv250i": "GV 250I",
+"gv650aquila": "GV 650 Aquila",
 "gv650iaquilahyperblack": "GV 650I Aquila Hyperblack"
 },
 "Indian": {
@@ -1433,6 +1434,7 @@
 "125c2": "125 C2",
 "125d": "125 D",
 "125e": "125 E",
+"125v": "125 V",
 "125x": "125 X",
 "350d": "350 D",
 "350e": "350 E",
