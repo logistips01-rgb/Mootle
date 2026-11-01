@@ -412,6 +412,7 @@
 "cb125r": "CB 125 R",
 "cb1300": "CB 1300",
 "cb300r": "CB 300 R",
+"cb450": "CB 450",
 "cb500f": "CB 500 F",
 "cb500hornet": "CB 500 Hornet",
 "cb500x": "CB 500 X",
@@ -624,6 +625,7 @@
 "450rallyreplica": "450 Rally Replica",
 "450sxf": "450 SX F",
 "690duke": "690 Duke",
+"690duker": "690 Duke R",
 "690enduro": "690 Enduro",
 "690enduror": "690 Enduro R",
 "690smcr": "690 SMC R",
@@ -809,6 +811,7 @@
 },
 "MV Agusta": {
 "brutale": "Brutale",
+"brutale1090": "Brutale 1090",
 "brutale750s2005envalencia10070122htm": "Brutale 750S 2005 EN Valencia 10070122.HTM",
 "brutale800": "Brutale 800",
 "brutale800eas": "Brutale 800 EAS",
@@ -1314,12 +1317,14 @@
 },
 "Yadea": {
 "c1spro": "C1S PRO",
+"g5s": "G5S",
 "y1s": "Y1S"
 },
 "Yamaha": {
 "aerox50": "Aerox 50",
 "bt1100bulldog": "BT 1100 Bulldog",
 "delight125": "Delight 125",
+"dt125": "DT 125",
 "dt125x": "DT 125 X",
 "fjr1300": "FJR 1300",
 "fjr1300a": "FJR 1300 A",
