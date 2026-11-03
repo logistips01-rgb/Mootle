@@ -564,7 +564,6 @@
   <url><loc>https://mootle.es/m/bmw-r-1200-r-2015.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-r-1200-r-2016.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-r-1200-r-2017.html</loc></url>
-  <url><loc>https://mootle.es/m/bmw-r-1200-r-2018.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-r-1200-r-2019.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-r-1200-r-90-aniversario-2013.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-r-1200-r-classic-2011.html</loc></url>
@@ -623,6 +622,7 @@
   <url><loc>https://mootle.es/m/bmw-r-1250-rt-2022.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-r-1250-rt-2023.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-r-1250-rt-2024.html</loc></url>
+  <url><loc>https://mootle.es/m/bmw-r-1250-rt-2025.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-r-1300-gs-2023.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-r-1300-gs-2024.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-r-1300-gs-2025.html</loc></url>
@@ -952,6 +952,7 @@
   <url><loc>https://mootle.es/m/fb-mondial-piega-125-2024.html</loc></url>
   <url><loc>https://mootle.es/m/gasgas-contact-txt-249-2000.html</loc></url>
   <url><loc>https://mootle.es/m/gasgas-ec-125-2006.html</loc></url>
+  <url><loc>https://mootle.es/m/gasgas-ec-350-f-2022.html</loc></url>
   <url><loc>https://mootle.es/m/gasgas-es-700-2024.html</loc></url>
   <url><loc>https://mootle.es/m/gasgas-sm-700-2022.html</loc></url>
   <url><loc>https://mootle.es/m/gasgas-tx-200-2015.html</loc></url>
@@ -1315,7 +1316,6 @@
   <url><loc>https://mootle.es/m/honda-cmx500-rebel-2024.html</loc></url>
   <url><loc>https://mootle.es/m/honda-cmx500-rebel-2025.html</loc></url>
   <url><loc>https://mootle.es/m/honda-crf-1000-l-2017.html</loc></url>
-  <url><loc>https://mootle.es/m/honda-crf-1100-africa-twin-2020.html</loc></url>
   <url><loc>https://mootle.es/m/honda-crf-1100-africa-twin-2026.html</loc></url>
   <url><loc>https://mootle.es/m/honda-crf-1100-africa-twin-adventure-sports-2020.html</loc></url>
   <url><loc>https://mootle.es/m/honda-crf-1100-africa-twin-adventure-sports-2021.html</loc></url>
@@ -1764,7 +1764,6 @@
   <url><loc>https://mootle.es/m/kawasaki-ninja-1100-sx-2025.html</loc></url>
   <url><loc>https://mootle.es/m/kawasaki-ninja-1100-sx-2026.html</loc></url>
   <url><loc>https://mootle.es/m/kawasaki-ninja-125-2019.html</loc></url>
-  <url><loc>https://mootle.es/m/kawasaki-ninja-125-2020.html</loc></url>
   <url><loc>https://mootle.es/m/kawasaki-ninja-125-2021.html</loc></url>
   <url><loc>https://mootle.es/m/kawasaki-ninja-125-2023.html</loc></url>
   <url><loc>https://mootle.es/m/kawasaki-ninja-125-2024.html</loc></url>
@@ -1796,10 +1795,8 @@
   <url><loc>https://mootle.es/m/kawasaki-ninja-zx-10r-2023.html</loc></url>
   <url><loc>https://mootle.es/m/kawasaki-ninja-zx-10r-40th-anniversary-2024.html</loc></url>
   <url><loc>https://mootle.es/m/kawasaki-ninja-zx-10r-40th-anniversary-akrapovic-2024.html</loc></url>
-  <url><loc>https://mootle.es/m/kawasaki-ninja-zx-6r-2010.html</loc></url>
   <url><loc>https://mootle.es/m/kawasaki-ninja-zx-6r-2018.html</loc></url>
   <url><loc>https://mootle.es/m/kawasaki-ninja-zx-6r-2023.html</loc></url>
-  <url><loc>https://mootle.es/m/kawasaki-ninja-zx-6r-2024.html</loc></url>
   <url><loc>https://mootle.es/m/kawasaki-ninja-zx-6r-636-ktr-2019.html</loc></url>
   <url><loc>https://mootle.es/m/kawasaki-ninja-zx6r-40-aniversario-2024.html</loc></url>
   <url><loc>https://mootle.es/m/kawasaki-versys-1000-2013.html</loc></url>
@@ -2009,6 +2006,7 @@
   <url><loc>https://mootle.es/m/keeway-vieste-125-2024.html</loc></url>
   <url><loc>https://mootle.es/m/keeway-vieste-300-2022.html</loc></url>
   <url><loc>https://mootle.es/m/keeway-vieste-300-2024.html</loc></url>
+  <url><loc>https://mootle.es/m/keeway-vieste-300-xdv-2023.html</loc></url>
   <url><loc>https://mootle.es/m/keeway-vieste-300-xdv-2024.html</loc></url>
   <url><loc>https://mootle.es/m/keeway-vieste-300-xdv-2025.html</loc></url>
   <url><loc>https://mootle.es/m/keeway-xdv-125-evo-pro-2025.html</loc></url>
@@ -2212,7 +2210,6 @@
   <url><loc>https://mootle.es/m/kymco-ak-550-2025.html</loc></url>
   <url><loc>https://mootle.es/m/kymco-bet-win-250-2008.html</loc></url>
   <url><loc>https://mootle.es/m/kymco-bet-win-50-2005.html</loc></url>
-  <url><loc>https://mootle.es/m/kymco-cv3-2026.html</loc></url>
   <url><loc>https://mootle.es/m/kymco-dtx-125-2023.html</loc></url>
   <url><loc>https://mootle.es/m/kymco-dtx-125-2024.html</loc></url>
   <url><loc>https://mootle.es/m/kymco-dtx-125-2025.html</loc></url>
@@ -3176,7 +3173,6 @@
   <url><loc>https://mootle.es/m/triumph-street-twin-2021.html</loc></url>
   <url><loc>https://mootle.es/m/triumph-street-twin-2022.html</loc></url>
   <url><loc>https://mootle.es/m/triumph-street-twin-2023.html</loc></url>
-  <url><loc>https://mootle.es/m/triumph-street-twin-900-2018.html</loc></url>
   <url><loc>https://mootle.es/m/triumph-street-twin-900-2019.html</loc></url>
   <url><loc>https://mootle.es/m/triumph-street-twin-900-2021.html</loc></url>
   <url><loc>https://mootle.es/m/triumph-tf-450-e-2026.html</loc></url>
@@ -3830,7 +3826,6 @@
   <url><loc>https://mootle.es/m/zontes-368-g-etc-2026.html</loc></url>
   <url><loc>https://mootle.es/m/zontes-368-k-2026.html</loc></url>
   <url><loc>https://mootle.es/m/zontes-368-k-etc-2026.html</loc></url>
-  <url><loc>https://mootle.es/m/zontes-368-m-2026.html</loc></url>
   <url><loc>https://mootle.es/m/zontes-703-f-2025.html</loc></url>
   <url><loc>https://mootle.es/m/zontes-703-f-2026.html</loc></url>
   <url><loc>https://mootle.es/m/zontes-703-r-etc-2026.html</loc></url>
@@ -3872,7 +3867,6 @@
   <url><loc>https://mootle.es/m/zontes-u1-125-2024.html</loc></url>
   <url><loc>https://mootle.es/m/zontes-v-310-2019.html</loc></url>
   <url><loc>https://mootle.es/m/zontes-v-310-2022.html</loc></url>
-  <url><loc>https://mootle.es/m/zontes-vzt-310-2020.html</loc></url>
   <url><loc>https://mootle.es/m/zontes-x-310-2022.html</loc></url>
   <url><loc>https://mootle.es/m/zontes-x-350-2022.html</loc></url>
   <url><loc>https://mootle.es/m/zontes-z2-125-2022.html</loc></url>
