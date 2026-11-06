@@ -466,7 +466,7 @@ def build(listings, history):
     changed += write(BRANDS_DIR / "index.html", brands_index(by_brand))
     changed += write(ROOT / "seguros" / "index.html", seguros_page())
     changed += write(ROOT / "financiacion" / "index.html", financieras_page())
-    urls = [f"{SITE}/", f"{SITE}/marca/", f"{SITE}/seguros/", f"{SITE}/financiacion/"] + \
+    urls = [f"{SITE}/", f"{SITE}/multibuscador.html", f"{SITE}/marca/", f"{SITE}/seguros/", f"{SITE}/financiacion/"] + \
            [f"{SITE}/marca/{slug(mk)}.html" for mk in sorted(by_brand)] + \
            [f"{SITE}/m/{mid}.html" for mid in sorted(groups)]
     sitemap = ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +

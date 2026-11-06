@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#e8590c">
+<title>Multibuscador de mootle · motos y equipación</title>
+<meta name="description" content="Busca a la vez motos de ocasión y equipación de moto (cascos, guantes, chaquetas…) en mootle. Dos buscadores, una sola web.">
+<link rel="canonical" href="https://mootle.es/multibuscador.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="mootle">
+<meta property="og:title" content="Multibuscador de mootle">
+<meta property="og:description" content="Motos de ocasión y equipación de moto, lado a lado.">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="mootle.css">
+<script src="/c.js" defer></script>
+<style>
+  .mb-top { display:flex; align-items:center; gap:12px; padding:14px 0; }
+  .mb-top .logo .word { font-size:1.5rem; }
+  .mb-sub { color:var(--text-muted); font-size:.9rem; margin:0 0 14px; }
+  /* Conmutador solo visible en móvil */
+  .mb-tabs { display:none; gap:8px; margin:0 0 14px; }
+  .mb-tab { flex:1; font:inherit; font-weight:700; font-size:1rem; padding:12px; border-radius:12px;
+            border:1px solid var(--border); background:var(--surface-1); color:var(--text-secondary); cursor:pointer; }
+  .mb-tab.on { background:var(--accent); color:var(--on-accent); border-color:var(--accent); }
+  /* Escritorio: dos paneles a la vez */
+  .mb-wrap { overflow:hidden; }
+  .mb-panes { display:flex; gap:18px; align-items:flex-start; }
+  .pane { flex:1 1 0; min-width:0; }
+  .pane > h2 { font-family:"Inter Tight",sans-serif; font-weight:800; font-size:1.25rem; letter-spacing:-.02em;
+               margin:0 0 10px; display:flex; align-items:center; gap:8px; }
+  .pane .search { display:flex; gap:8px; margin:0 0 12px; }
+  .pane .search input { flex:1; min-width:0; }
+  .pane .count { color:var(--text-muted); font-size:.82rem; margin:0 0 10px; }
+  .pane .grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .mb-ico { width:26px; height:26px; color:var(--accent); }
+  @media (max-width:860px) {
+    .mb-tabs { display:flex; }
+    .mb-panes { flex-wrap:nowrap; transition:transform .3s ease; width:200%; }
+    .pane { flex:0 0 50%; }          /* cada panel ocupa media pista (=100% de pantalla) */
+    .mb-panes.show-eq { transform:translateX(calc(-50% - 9px)); }
+    .pane .grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  }
+  @media (max-width:420px){ .pane .grid { grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<main>
+  <header class="mb-top">
+    <a class="logo" aria-label="mootle, inicio" href="./"><img src="icon.svg" alt=""><span class="stack"><span class="word">m<svg viewBox="0 0 92 48" aria-hidden="true"><circle cx="22" cy="26" r="16" fill="none" stroke-width="8"/><circle cx="70" cy="26" r="16" fill="none" stroke-width="8"/><circle class="hub" cx="22" cy="26" r="3.5"/><circle class="hub" cx="70" cy="26" r="3.5"/></svg>tle</span></span></a>
+  </header>
+  <h1 class="display" style="font-size:clamp(24px,4vw,34px);margin:4px 0 2px">Multibuscador</h1>
+  <p class="mb-sub">Busca <strong>motos de ocasión</strong> y <strong>equipación</strong> a la vez.</p>
+
+  <div class="mb-tabs" role="tablist">
+    <button class="mb-tab on" id="tab-motos" role="tab">🏍️ Motos</button>
+    <button class="mb-tab" id="tab-equip" role="tab">🪖 Equipación</button>
+  </div>
+
+  <div class="mb-wrap">
+    <div class="mb-panes" id="panes">
+      <section class="pane" id="pane-motos" aria-label="Buscar motos">
+        <h2><svg class="mb-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5.5" cy="17" r="3.5"/><circle cx="18.5" cy="17" r="3.5"/><path d="M5.5 17l4-7h6l3 7M9.5 10l-1.5-3H6"/></svg>Motos de ocasión</h2>
+        <form class="search" id="form-motos" role="search">
+          <input id="q-motos" type="search" placeholder="Modelo, marca, provincia…" autocomplete="off" aria-label="Buscar moto">
+          <button class="btn" type="submit">Buscar</button>
+        </form>
+        <p class="count" id="count-motos">Cargando…</p>
+        <div class="grid" id="grid-motos"></div>
+        <button class="more" id="more-motos" hidden>Ver más</button>
+      </section>
+
+      <section class="pane" id="pane-equip" aria-label="Buscar equipación">
+        <h2><svg class="mb-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a8 8 0 1116 0v2H4z"/><path d="M4 16h11"/></svg>Equipación</h2>
+        <form class="search" id="form-equip" role="search">
+          <input id="q-equip" type="search" placeholder="Casco, guantes, chaqueta, marca…" autocomplete="off" aria-label="Buscar equipación">
+          <button class="btn" type="submit">Buscar</button>
+        </form>
+        <p class="count" id="count-equip">Cargando…</p>
+        <div class="grid" id="grid-equip"></div>
+        <button class="more" id="more-equip" hidden>Ver más</button>
+      </section>
+    </div>
+  </div>
+
+  <footer><nav class="foot-links"><a href="./">Inicio</a> · <a href="marca/">Marcas</a> · <a href="equipacion/">Equipación</a> · <a href="seguros/">Seguro</a> · <a href="financiacion/">Financiación</a></nav><span>Los datos y las fotos son de cada web: siempre enlazamos al anuncio original.</span></footer>
+</main>
+
+<script>
+  var PAGE = 24;
+  var $ = function(id){ return document.getElementById(id); };
+  var eur = function(v){ return v==null ? "–" : v.toLocaleString("es-ES",{style:"currency",currency:"EUR",maximumFractionDigits:0,useGrouping:"always"}); };
+  var num = function(v){ return (v||0).toLocaleString("es-ES",{useGrouping:"always"}); };
+  var esc = function(s){ return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];}); };
+  var fold = function(s){ return String(s||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase(); };
+  var compact = function(s){ return s.replace(/[^a-z0-9]/g,""); };
+  var CN = {casco:"Casco",guantes:"Guante",chaqueta:"Chaqueta",botas:"Bota",pantalon:"Pantalón",mono:"Mono"};
+  var BIKE = '<svg width="80" height="48" viewBox="0 0 96 56" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="20" cy="38" r="14"/><circle cx="76" cy="38" r="14"/><path d="M20 38l16-20h18l10 20M36 18l-6-8h-8"/></svg>';
+  var GEAR = '<svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 14a8 8 0 1116 0v2H4z"/><path d="M4 16h11"/></svg>';
+
+  /* ---------- MOTOS ---------- */
+  var MOTOS = null, motosShown = PAGE, motosList = [];
+  function motosGroups(arr){
+    var by = {};
+    for (var i=0;i<arr.length;i++){ var m=arr[i]; if(m.mid){ (by[m.mid]=by[m.mid]||[]).push(m); } }
+    var out = [];
+    for (var mid in by){
+      var offers = by[mid].slice().sort(function(a,b){return a.p-b.p;});
+      // misma moto en varias webs (campo g): cuenta una vez, la más barata
+      var best = {}; for (var j=0;j<offers.length;j++){ var o=offers[j]; if(o.g){ if(!best[o.g]||o.p<best[o.g].p) best[o.g]=o; } }
+      var uniq = offers.filter(function(o){ return !o.g || best[o.g]===o; });
+      var prices = uniq.map(function(o){return o.p;});
+      var b0 = offers[0], withImg = offers.find(function(o){return o.img;});
+      out.push({ mid:mid, mk:b0.mk, mn:b0.mn, y:b0.y, tp:(offers.find(function(o){return o.tp;})||{}).tp,
+        img:((b0.img?b0:withImg)||{}).img, best:b0, n:uniq.length,
+        webs:(function(){var s={};offers.forEach(function(o){s[o.src]=1;});return Object.keys(s).length;})(),
+        min:b0.p, max:Math.max.apply(null,prices) });
+    }
+    return out;
+  }
+  function motoCard(g){
+    var km = g.best.km!=null ? ("con "+num(g.best.km)+" km") : "";
+    var foot = [num(g.n)+(g.n===1?" moto":" motos"), g.webs>1?(g.webs+" webs"):null, g.n>1?("hasta "+eur(g.max)):null].filter(Boolean).join(" · ");
+    var img = g.img ? ('<img src="'+esc(g.img)+'" alt="" loading="lazy" referrerpolicy="no-referrer">') : BIKE;
+    return '<a class="card" href="m/'+encodeURIComponent(g.mid)+'.html"><div class="photo">'+img+'</div><div class="body">'
+      +'<span class="brand">'+esc(g.mk)+(g.tp?(" · "+esc(g.tp)):"")+'</span>'
+      +'<span class="name">'+esc(g.mn)+' <span>· '+g.y+'</span></span>'
+      +'<span class="from">'+(g.n>1?"La más barata":"Precio")+'</span>'
+      +'<span class="price"><strong>'+eur(g.min)+'</strong><small>'+esc(km)+'</small></span>'
+      +'<span class="foot">'+foot+'</span></div></a>';
+  }
+  function motoMatch(m, words){
+    if(!words.length) return true;
+    if(!m._h){ m._h = fold((m.mk||"")+" "+(m.mn||"")+" "+(m.y||"")+" "+(m.prov||"")+" "+(m.tp||"")); m._c = compact(m._h); }
+    return words.every(function(w){ return m._h.indexOf(w)>=0 || m._c.indexOf(compact(w))>=0; });
+  }
+  function runMotos(){
+    if(!MOTOS) return;
+    var q = $("q-motos").value.trim();
+    if(window.mootleSearch) window.mootleSearch(q);
+    var words = fold(q).split(/\s+/).filter(Boolean);
+    var offers = MOTOS.filter(function(m){ return motoMatch(m, words); });
+    var groups = motosGroups(offers);
+    // con búsqueda: más barata primero; sin búsqueda: más ofertas (destacados)
+    groups.sort(words.length ? function(a,b){return a.min-b.min;} : function(a,b){return b.n-a.n || a.min-b.min;});
+    motosList = groups; motosShown = PAGE; renderMotos();
+  }
+  function renderMotos(){
+    var bikes = motosList.reduce(function(s,g){return s+g.n;},0);
+    $("count-motos").textContent = motosList.length ? (num(motosList.length)+" modelos · "+num(bikes)+" motos") : "Sin resultados";
+    $("grid-motos").innerHTML = motosList.length ? motosList.slice(0,motosShown).map(motoCard).join("")
+      : '<p class="empty">No hay motos con esa búsqueda.</p>';
+    $("more-motos").hidden = motosShown >= motosList.length;
+  }
+  function ensureMotos(){
+    if(MOTOS) return Promise.resolve();
+    return fetch("data/listings.json").then(function(r){return r.json();}).then(function(d){
+      MOTOS = d.listings || d.items || []; runMotos();
+    }).catch(function(){ $("count-motos").textContent="No se pudieron cargar las motos."; });
+  }
+
+  /* ---------- EQUIPACIÓN ---------- */
+  var EQUIP = null, equipShown = PAGE, equipList = [];
+  function equipCard(g){
+    var img = g.img ? ('<img src="'+esc(g.img)+'" alt="" loading="lazy" referrerpolicy="no-referrer">') : GEAR;
+    var foot = (g.n+" oferta"+(g.n>1?"s":""))+(g.w>1?(" · "+g.w+" tiendas"):"");
+    return '<a class="card eq" href="equipacion/'+encodeURIComponent(g.mid)+'.html"><div class="photo">'+img+'</div><div class="body">'
+      +'<span class="brand">'+esc(g.mk)+' · '+esc(CN[g.cat]||g.cat)+'</span>'
+      +'<span class="name">'+esc(g.md)+'</span>'
+      +'<span class="price"><strong>'+eur(g.p)+'</strong></span>'
+      +'<span class="foot">'+foot+'</span></div></a>';
+  }
+  function runEquip(){
+    if(!EQUIP) return;
+    var q = $("q-equip").value.trim();
+    if(window.mootleSearch) window.mootleSearch(q);
+    var words = fold(q).split(/\s+/).filter(Boolean);
+    var r = EQUIP.filter(function(g){
+      if(!g._h) g._h = fold(g.mk+" "+g.md+" "+(CN[g.cat]||""));
+      return words.every(function(w){ return g._h.indexOf(w)>=0; });
+    });
+    // presencia de ofertas primero (nº tiendas, nº ofertas), luego precio
+    r.sort(function(a,b){ return (b.w-a.w)||(b.n-a.n)||(a.p-b.p); });
+    equipList = r; equipShown = PAGE; renderEquip();
+  }
+  function renderEquip(){
+    $("count-equip").textContent = equipList.length ? (num(equipList.length)+(equipList.length===1?" producto":" productos")) : "Sin resultados";
+    $("grid-equip").innerHTML = equipList.length ? equipList.slice(0,equipShown).map(equipCard).join("")
+      : '<p class="empty">Nada por aquí. Prueba otra búsqueda.</p>';
+    $("more-equip").hidden = equipShown >= equipList.length;
+  }
+  function ensureEquip(){
+    if(EQUIP) return Promise.resolve();
+    return fetch("equipacion/buscador.json").then(function(r){return r.json();}).then(function(d){
+      EQUIP = d; runEquip();
+    }).catch(function(){ $("count-equip").textContent="No se pudo cargar la equipación."; });
+  }
+
+  /* ---------- eventos ---------- */
+  var debMotos, debEquip;
+  $("form-motos").addEventListener("submit", function(e){ e.preventDefault(); runMotos(); });
+  $("q-motos").addEventListener("input", function(){ clearTimeout(debMotos); debMotos=setTimeout(runMotos,200); });
+  $("more-motos").addEventListener("click", function(){ motosShown+=PAGE; renderMotos(); });
+  $("form-equip").addEventListener("submit", function(e){ e.preventDefault(); runEquip(); });
+  $("q-equip").addEventListener("input", function(){ clearTimeout(debEquip); debEquip=setTimeout(runEquip,200); });
+  $("more-equip").addEventListener("click", function(){ equipShown+=PAGE; renderEquip(); });
+
+  /* móvil: conmutador + slide */
+  var isMobile = function(){ return window.matchMedia("(max-width:860px)").matches; };
+  function showPane(which){
+    var panes = $("panes");
+    var eq = which==="equip";
+    panes.classList.toggle("show-eq", eq);
+    $("tab-motos").classList.toggle("on", !eq);
+    $("tab-equip").classList.toggle("on", eq);
+    if(eq) ensureEquip(); else ensureMotos();
+  }
+  $("tab-motos").addEventListener("click", function(){ showPane("motos"); });
+  $("tab-equip").addEventListener("click", function(){ showPane("equip"); });
+  // swipe en móvil
+  var tx=null;
+  $("panes").addEventListener("touchstart", function(e){ tx=e.touches[0].clientX; }, {passive:true});
+  $("panes").addEventListener("touchend", function(e){
+    if(tx==null||!isMobile()) return;
+    var dx=e.changedTouches[0].clientX - tx; tx=null;
+    if(dx<-45) showPane("equip"); else if(dx>45) showPane("motos");
+  }, {passive:true});
+
+  /* arranque: escritorio carga ambos; móvil solo el activo (motos) */
+  (function(){
+    var p = new URLSearchParams(location.search);
+    if(p.get("q")) $("q-motos").value = p.get("q");
+    if(p.get("eq")) $("q-equip").value = p.get("eq");
+    if(isMobile()){
+      if(p.get("tab")==="equip"){ showPane("equip"); } else { ensureMotos(); }
+    } else {
+      ensureMotos(); ensureEquip();
+    }
+  })();
+</script>
+</body>
+</html>
