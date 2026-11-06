@@ -95,6 +95,21 @@ def run():
         print("eBay: no hay catálogo de equipación todavía.")
         return
 
+    # Modo diagnóstico: para los primeros productos, imprime qué devuelve eBay y por qué se
+    # descarta cada resultado. No guarda nada. Útil para ver si el problema es nuestro filtro.
+    if os.environ.get("EBAY_DEBUG"):
+        counter = {"calls": 0}
+        n = _envi("EBAY_DEBUG_N", 8)
+        print(f"eBay DEBUG · {n} productos · mercados {markets} · feedback min {min_pct}%/{min_score}")
+        for mid in sorted(catalog)[:n]:
+            if counter["calls"] >= budget:
+                break
+            g = catalog[mid]
+            ebay.diagnose(g["mk"], g["md"], markets=markets, min_pct=min_pct,
+                          min_score=min_score, counter=counter)
+        print(f"eBay DEBUG: {counter['calls']} llamadas")
+        return
+
     offers = _load(OFFERS, {})
     state = _load(STATE, {})
     misses = state.get("misses", {})

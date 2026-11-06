@@ -190,6 +190,45 @@ def best_offer(ean=None, text=None, marketplace="EBAY_ES"):
     return lookup(ean=ean, text=text, markets=[marketplace])
 
 
+def _why(it, cur, min_pct, min_score, brand, model):
+    """Motivo por el que se descarta un resultado (o None si vale)."""
+    price = it.get("price") or {}
+    if price.get("currency") != cur:
+        return f"moneda {price.get('currency')}"
+    seller = it.get("seller") or {}
+    if (seller.get("sellerAccountType") or "BUSINESS") != "BUSINESS":
+        return "no-profesional"
+    try:
+        pct = float(seller.get("feedbackPercentage") or 0)
+        score = int(seller.get("feedbackScore") or 0)
+    except (TypeError, ValueError):
+        pct, score = 0, 0
+    if pct < min_pct or score < min_score:
+        return f"feedback {pct}%/{score}"
+    if brand is not None and not match_ok(brand, model or "", it.get("title") or ""):
+        return "no-casa-titulo"
+    return None
+
+
+def diagnose(brand, model, markets=None, min_pct=97.0, min_score=100, counter=None):
+    """Imprime, por mercado, cuántos resultados devuelve eBay y por qué se descartan.
+    Sirve para ver si el problema es que eBay no tiene el producto o que lo filtramos."""
+    markets = markets or DEFAULT_MARKETS
+    print(f"· {brand} {model}")
+    for mp in markets:
+        cur = MARKETS.get(mp, "EUR")
+        items, st = _search({"q": f"{brand} {model}".strip()}, mp)
+        if counter is not None:
+            counter["calls"] = counter.get("calls", 0) + 1
+        print(f"  [{mp}] http={st} resultados={len(items)}")
+        for it in items[:4]:
+            why = _why(it, cur, min_pct, min_score, brand, model)
+            tag = "OK ✓" if not why else f"✗ {why}"
+            pr = (it.get("price") or {}).get("value")
+            sc = (it.get("seller") or {}).get("feedbackScore")
+            print(f"     {tag} · {pr} {cur} · feedback={sc} · {str(it.get('title'))[:70]}")
+
+
 def main():
     q = " ".join(sys.argv[1:]).strip()
     if not q:

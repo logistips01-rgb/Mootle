@@ -13,6 +13,9 @@ on:
       max_calls:
         description: "Tope de llamadas a eBay en esta ejecución"
         default: "800"
+      debug:
+        description: "Diagnóstico: escribe 'si' para ver qué devuelve eBay y por qué se descarta (no guarda nada)"
+        default: ""
 
 permissions:
   contents: write
@@ -43,6 +46,7 @@ jobs:
           EBAY_MAX_CALLS: ${{ inputs.max_calls || vars.EBAY_MAX_CALLS || '400' }}
           EBAY_MARKETS: ${{ vars.EBAY_MARKETS }}
           EBAY_SELLERS: ${{ vars.EBAY_SELLERS }}
+          EBAY_DEBUG: ${{ inputs.debug }}
         run: python -m scraper.ebay_offers
 
       - name: Regenerar equipación (mezcla eBay)
