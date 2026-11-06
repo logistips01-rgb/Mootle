@@ -18,6 +18,8 @@ Variables de entorno (todas opcionales salvo las credenciales):
   EBAY_SELLERS       whitelist de vendedores (usernames) separada por coma (def. vacío = cualquiera que cumpla feedback)
   EBAY_STALE_DAYS    caduca una oferta no refrescada en tantos días (def. 30)
   EBAY_MISS_DAYS     no reintenta un "sin resultado" hasta pasados tantos días (def. 12)
+  EBAY_REFRESH_DAYS  no vuelve a refrescar una oferta buena hasta pasados tantos días (def. 7).
+                     Así, una vez barrido todo, el gasto baja solo aunque el tope sea alto.
   EBAY_PRICEY_DAYS   si eBay salió mucho más caro, no lo revisa hasta pasados tantos días (def. 45)
   EBAY_COMP_MARGIN   margen sobre nuestro mejor precio para considerar eBay "competitivo", en % (def. 10)
 
@@ -83,6 +85,7 @@ def run():
     min_score = _envi("EBAY_MIN_SCORE", 100)
     stale = _envi("EBAY_STALE_DAYS", 30)
     miss_days = _envi("EBAY_MISS_DAYS", 12)
+    refresh_days = _envi("EBAY_REFRESH_DAYS", 7)
     pricey_days = _envi("EBAY_PRICEY_DAYS", 45)
     comp_margin = (float(os.environ.get("EBAY_COMP_MARGIN", "") or 10)) / 100.0
     sellers = [s.strip() for s in os.environ.get("EBAY_SELLERS", "").split(",") if s.strip()] or None
@@ -112,11 +115,12 @@ def run():
         return o.get("p", 10**9) <= catalog[mid]["p"] * (1 + comp_margin)
 
     def skip(mid):
-        """¿No gastar llamada en este producto ahora mismo?"""
+        """¿No gastar llamada en este producto ahora mismo? Esto hace que, una vez barrido
+        todo, el gasto baje solo: una oferta buena no se re-pregunta hasta pasados
+        refresh_days, y una cara hasta pricey_days; lo nuevo siempre pasa."""
         if mid in offers:
             age = _days_since(offers[mid].get("ts", ""))
-            # eBay mucho más caro: solo se revisa muy de vez en cuando
-            return (not competitive(mid)) and age < pricey_days
+            return age < (refresh_days if competitive(mid) else pricey_days)
         # sin oferta: respeta el "miss" reciente
         return mid in misses and _days_since(misses[mid]) < miss_days
 

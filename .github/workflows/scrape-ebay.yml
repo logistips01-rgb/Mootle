@@ -12,7 +12,7 @@ on:
     inputs:
       max_calls:
         description: "Tope de llamadas a eBay en esta ejecución"
-        default: "400"
+        default: "800"
 
 permissions:
   contents: write

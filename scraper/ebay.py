@@ -31,8 +31,10 @@ SCOPE = "https://api.ebay.com/oauth/api_scope"
 
 # Marketplace -> moneda esperada (para descartar resultados en otra moneda del país).
 MARKETS = {"EBAY_ES": "EUR", "EBAY_FR": "EUR", "EBAY_IT": "EUR", "EBAY_DE": "EUR", "EBAY_GB": "GBP"}
-# Mercados por defecto (todos EUR, envían a España). ES primero.
-DEFAULT_MARKETS = ["EBAY_ES", "EBAY_DE", "EBAY_IT", "EBAY_FR"]
+# Mercados por defecto (todos EUR, envían a España). ES primero, luego DE (FC-Moto y el
+# grueso del catálogo de marcas). IT/FR se añaden con EBAY_MARKETS cuando haya más cupo:
+# buscar en 4 mercados multiplica las llamadas en los productos que eBay no tiene.
+DEFAULT_MARKETS = ["EBAY_ES", "EBAY_DE"]
 
 _token = {"value": None, "exp": 0}
 
