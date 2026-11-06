@@ -186,6 +186,9 @@
 "trk902stradale": "TRK 902 Stradale",
 "trl902xplorer": "TRL 902 Xplorer"
 },
+"Beta": {
+"rrracing4t": "RR Racing 4T"
+},
 "Bimota": {
 "kb4": "KB4"
 },
@@ -529,6 +532,7 @@
 "rebel500": "Rebel 500",
 "scoopysh125": "Scoopy SH125",
 "scoopysh125i": "Scoopy SH125I",
+"scoopysh125itopbox": "Scoopy SH125I TOP BOX",
 "scoopysh150i": "Scoopy SH150I",
 "scoopysh300i": "Scoopy SH300I",
 "scoopysh300isporttopbox": "Scoopy SH300I Sport Topbox",
@@ -928,6 +932,7 @@
 "california1100": "California 1100",
 "california1400touring": "California 1400 Touring",
 "griso8v": "Griso 8 V",
+"grisov1100": "Griso V1100",
 "stelvio": "Stelvio",
 "v100mandello": "V100 Mandello",
 "v65650": "V 65 650",
@@ -1172,6 +1177,7 @@
 "drz4s": "DR Z4S",
 "gladius650": "Gladius 650",
 "gs500": "GS 500",
+"gsf1250bandit": "GSF 1250 Bandit",
 "gsf600bandit": "GSF 600 Bandit",
 "gsf600bandits": "GSF 600 Bandit S",
 "gsf600nbandit": "GSF 600 N Bandit",
@@ -1463,6 +1469,7 @@
 "xvs1100adragstarclassic": "XVS 1100 A Drag Star Classic",
 "xvs1100dragstar": "XVS 1100 Drag Star",
 "xvs1300amidnightstar": "XVS 1300 A Midnight Star",
+"xvs535virago": "XVS 535 Virago",
 "xvs650dragstarclassic": "XVS 650 Drag Star Classic",
 "xvs950amidnightstar": "XVS 950 A Midnight Star",
 "xvz1300royalstar": "XVZ 1300 Royal Star",
