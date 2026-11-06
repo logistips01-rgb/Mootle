@@ -97,6 +97,17 @@ _NOISE = {"casco", "guantes", "guante", "chaqueta", "botas", "bota", "pantalon",
           "hombre", "mujer", "unisex", "negro", "blanco", "rojo", "azul", "gris", "verde",
           "amarillo", "naranja", "rosa", "talla", "nuevo", "new", "integral", "modular", "jet"}
 
+# accesorios/recambios que NO son la prenda o el casco: colarlos daría un precio falso (suelen
+# ser lo más barato). Se descartan aunque el título lleve la marca y el modelo.
+_ACCESSORY = re.compile(
+    r"\b(frontal|visor|visera|pantalla|recambio|repuesto|kit|hebilla\w*|cinturon\w*|correa\w*|"
+    r"funda|bolsa|soporte|mentonera|tornillo\w*|adhesivo\w*|pegatina|gafas|estuche|spray|"
+    r"limpiador|deflector|carrillera|almohad\w*|pinlock)\b|\bpara\s+(casco|botas?|guantes?)\b")
+
+
+def _is_accessory(title):
+    return bool(_ACCESSORY.search(_fold(title)))
+
 
 def match_ok(brand, model, title):
     """¿El resultado de eBay es de verdad este producto? Exige la marca y los códigos de
@@ -124,6 +135,8 @@ def _pick(items, cur, min_pct, min_score, brand=None, model=None):
     for it in items:
         price = it.get("price") or {}
         if price.get("currency") != cur:
+            continue
+        if _is_accessory(it.get("title") or ""):
             continue
         seller = it.get("seller") or {}
         if (seller.get("sellerAccountType") or "BUSINESS") != "BUSINESS":
@@ -195,6 +208,8 @@ def _why(it, cur, min_pct, min_score, brand, model):
     price = it.get("price") or {}
     if price.get("currency") != cur:
         return f"moneda {price.get('currency')}"
+    if _is_accessory(it.get("title") or ""):
+        return "accesorio"
     seller = it.get("seller") or {}
     if (seller.get("sellerAccountType") or "BUSINESS") != "BUSINESS":
         return "no-profesional"
