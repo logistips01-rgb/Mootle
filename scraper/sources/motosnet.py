@@ -1,8 +1,9 @@
 """motos.net (motos.coches.net): portal de particulares y profesionales, ~35.000 motos.
 
 Cada página de resultados trae sus 20 anuncios completos en un JSON incrustado
-(`window.__INITIAL_PROPS__` → `initialResults.items`): precio, km, año, provincia,
-CV, foto... No hace falta leer las tarjetas del HTML (solo pinta 8 de 20).
+(`window.__staticRouterHydrationData` → loaderData → `initialResults.items`): precio,
+km, año, provincia, CV, foto... No hace falta leer las tarjetas del HTML (solo pinta 8).
+(Nov-2026 motos.net cambió de `window.__INITIAL_PROPS__` a React Router hydration data.)
 
 La paginación es `?pg=N` (con `?page=N` devuelve siempre la primera) y el orden por
 defecto pone primero lo más reciente. Para no cargar la web, cada día se leen como
@@ -33,11 +34,30 @@ NOV_MAX = 6             # tope de "novedades" por ejecución (prioridad a lo nue
 #                         del catálogo en nov-2026; ya no se fuerza: lo viejo que no se re-ve caduca solo.)
 DROP_AFTER_DAYS = 14   # a este ritmo un anuncio tarda en volver a verse: se guarda más tiempo
 
-_PROPS = re.compile(r'window\.__INITIAL_PROPS__\s*=\s*JSON\.parse\("((?:[^"\\]|\\.)*)"\)')
+_PROPS = re.compile(r'window\.__staticRouterHydrationData\s*=\s*JSON\.parse\("((?:[^"\\]|\\.)*)"\)')
 
 
 def page_url(n):
     return SEARCH if n <= 1 else f"{SEARCH}?pg={n}"
+
+
+def _find_results(o):
+    """Busca `initialResults` a cualquier profundidad (la clave de ruta de loaderData
+    varía entre páginas, p. ej. "0-103"), así que no la fijamos."""
+    if isinstance(o, dict):
+        r = o.get("initialResults")
+        if isinstance(r, dict):
+            return r
+        for v in o.values():
+            found = _find_results(v)
+            if found is not None:
+                return found
+    elif isinstance(o, list):
+        for v in o:
+            found = _find_results(v)
+            if found is not None:
+                return found
+    return None
 
 
 def parse_page(html):
@@ -45,8 +65,10 @@ def parse_page(html):
     m = _PROPS.search(html)
     if not m:
         return None
-    props = json.loads(json.loads('"' + m.group(1) + '"'))
-    results = props.get("initialResults") or {}
+    data = json.loads(json.loads('"' + m.group(1) + '"'))
+    results = _find_results(data)
+    if results is None:
+        return None
     return results.get("items") or [], results.get("totalPages") or 0
 
 
