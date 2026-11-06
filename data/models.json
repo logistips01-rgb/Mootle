@@ -103,8 +103,10 @@
 "r1150rt": "R 1150 RT",
 "r12": "R 12",
 "r1200cclassic": "R 1200 C Classic",
+"r1200cl": "R 1200 CL",
 "r1200gs": "R 1200 GS",
 "r1200gs105cv": "R 1200 GS 105CV",
+"r1200gs2017enalava10227505htm": "R 1200 GS 2017 EN Alava 10227505.HTM",
 "r1200gs2017entarragona10217296htm": "R 1200 GS 2017 EN Tarragona 10217296.HTM",
 "r1200gs2017entoledo10218664htm": "R 1200 GS 2017 EN Toledo 10218664.HTM",
 "r1200gs2017entoledo10221806htm": "R 1200 GS 2017 EN Toledo 10221806.HTM",
@@ -585,6 +587,7 @@
 "gt125rcomet": "GT 125R Comet",
 "gt650r": "GT 650 R",
 "gv125aquila": "GV 125 Aquila",
+"gv125aquila2022enmadrid10228010htm": "GV 125 Aquila 2022 EN Madrid 10228010.HTM",
 "gv250aquila": "GV 250 Aquila",
 "gv250i": "GV 250I",
 "gv650aquila": "GV 650 Aquila",
@@ -666,6 +669,7 @@
 "sx450f": "SX 450 F"
 },
 "Kawasaki": {
+"eliminator125": "Eliminator 125",
 "eliminator500": "Eliminator 500",
 "er5": "ER 5",
 "er6f": "ER 6F",
@@ -768,6 +772,7 @@
 "Kymco": {
 "agility125": "Agility 125",
 "agilitycity125": "Agility City 125",
+"agilitycity50": "Agility City 50",
 "agilitycityplus125": "Agility City Plus 125",
 "agilitys125": "Agility S 125",
 "ak550": "AK 550",

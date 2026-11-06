@@ -76,8 +76,17 @@ def to_listing(raw, current_year):
     url = raw.get("url") or ""
     parts = [p for p in url.split("/") if p]  # ['ocasion', 'yamaha', 'tracer_7', 'version_...-2021-en-valencia-1021.htm']
     mk = brand(raw.get("make") or (parts[1] if len(parts) > 2 else None))
-    md = model(parts[2], dashes=True) if len(parts) > 2 else None
-    title = clean_title(raw.get("title") or " ".join(filter(None, [mk, md])), mk)
+    title = clean_title(raw.get("title") or "", mk)
+    if len(parts) > 3:
+        # URL normal: /ocasion/{marca}/{modelo}/{version...htm} → el modelo es el 3er segmento.
+        md = model(parts[2], dashes=True)
+    else:
+        # URL "semántica" (todo junto en el último segmento, p. ej. /ocasion/kymco/gt-300i-2014-en-
+        # barcelona-10144241.htm): el modelo no está aislado, se saca del título ya limpio menos la marca.
+        rest = title[len(mk):].strip() if (mk and title.lower().startswith(mk.lower())) else title
+        md = model(rest) if rest else None
+    if not title:
+        title = clean_title(" ".join(filter(None, [mk, md])), mk)
     hp = to_int(raw.get("hp"))
     price = to_int(raw.get("price"))
     original = to_int(raw.get("originalPrice"))
