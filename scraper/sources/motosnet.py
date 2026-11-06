@@ -25,13 +25,12 @@ NAME = "motos.net"
 HOME = "https://motos.coches.net/"
 BASE = "https://motos.coches.net"
 SEARCH = BASE + "/segunda-mano/"
-MAX_PAGES_PER_RUN = 50  # páginas por lectura (20 anuncios cada una). GitHub ejecuta ~5 veces/día (el cron
-#                         horario se retrasa/salta), así que leemos más por ejecución: ~240 páginas de
-#                         barrido/día → catálogo (~1.723 págs) en ~7-8 días. A 3-6 s/página son ~3,7 min por
-#                         ejecución, dentro de la ventana de 10 min (probado: aguanta 1 s/página sin
-#                         bloqueo, así que 3-6 s tiene margen de sobra). Si sale la anti-bot, se para solo.
-NOV_MAX = 2             # tope de "novedades" por ejecución: así el barrido profundo siempre tiene cupo
-#                         (si novedades se comiera todo el cupo, el cursor nunca avanzaría por el catálogo).
+MAX_PAGES_PER_RUN = 10  # páginas por lectura (20 anuncios cada una). Foco en actualizaciones diarias:
+#                         damos prioridad a las novedades (anuncios nuevos) y dejamos un barrido de refresco
+#                         suave. Lectura corta y gentil; si sale la anti-bot, se para solo.
+NOV_MAX = 6             # tope de "novedades" por ejecución (prioridad a lo nuevo del día); el barrido se
+#                         queda con el resto del cupo como refresco. (Se hizo un barrido profundo completo
+#                         del catálogo en nov-2026; ya no se fuerza: lo viejo que no se re-ve caduca solo.)
 DROP_AFTER_DAYS = 14   # a este ritmo un anuncio tarda en volver a verse: se guarda más tiempo
 
 _PROPS = re.compile(r'window\.__INITIAL_PROPS__\s*=\s*JSON\.parse\("((?:[^"\\]|\\.)*)"\)')
