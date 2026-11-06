@@ -152,7 +152,8 @@
 },
 "Bajaj": {
 "ns400z": "NS 400 Z",
-"pulsarns125": "Pulsar NS 125"
+"pulsarns125": "Pulsar NS 125",
+"pulsarns400z": "Pulsar NS400Z"
 },
 "Benda": {
 "lfc700": "LFC 700",
@@ -664,6 +665,7 @@
 "990adventure": "990 Adventure",
 "990adventurer": "990 Adventure R",
 "990duke": "990 Duke",
+"990supermoto": "990 Supermoto",
 "990supermotot": "990 Supermoto T",
 "exc125": "EXC 125",
 "exc250": "EXC 250",
