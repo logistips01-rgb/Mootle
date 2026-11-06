@@ -1,0 +1,67 @@
+name: albabike
+
+# Refresca el catálogo de equipación de Albabike (precios y stock) una vez por semana.
+# Su web es Vue, así que hay que renderizar con Playwright: lee las páginas de listado
+# (rápido, ~95% de precios correctos) y reconstruye el seed, que luego mezcla scraper.equip.
+# Los cascos emparejados a mano (data/albabike_curated.json) se conservan siempre.
+
+on:
+  schedule:
+    - cron: "23 3 * * 1"   # lunes, 03:23 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: scrape
+  cancel-in-progress: false
+
+jobs:
+  albabike:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Instalar dependencias Python
+        run: pip install -r requirements.txt
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Instalar Playwright
+        run: |
+          npm init -y >/dev/null 2>&1 || true
+          npm install playwright@1.47.2
+          npx playwright install --with-deps chromium
+
+      - name: Leer Albabike (listados)
+        run: node scraper/albabike_scrape.cjs
+
+      - name: Reconstruir seed de Albabike
+        run: python -m scraper.albabike_build
+
+      - name: Regenerar equipación
+        run: python -m scraper.equip
+
+      - name: Commit de datos
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          rm -f data/albabike_raw.json
+          git add data/ equipacion/ sitemap-equipacion.xml
+          if git diff --cached --quiet; then echo "Sin cambios"; exit 0; fi
+          git commit -q -m "data: equipación Albabike (refresco semanal)"
+          for attempt in 1 2 3 4 5; do
+            if git push -q origin "HEAD:${GITHUB_REF_NAME}"; then exit 0; fi
+            echo "push rechazado, reintento $attempt"; sleep $((attempt * 5))
+            git pull -q --rebase origin "${GITHUB_REF_NAME}"
+          done
+          exit 1

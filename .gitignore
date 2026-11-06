@@ -6,3 +6,7 @@ __pycache__/
 # Sistema
 .DS_Store
 Thumbs.db
+
+data/albabike_raw.json
+node_modules/
+package*.json
