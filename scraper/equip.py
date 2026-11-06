@@ -26,6 +26,8 @@ HISTORY = ROOT / "data" / "equip_history.json"
 # Productos de Albabike añadidos a mano (datos reales) hasta que llegue su feed. Cada uno
 # lleva el `mid` del grupo de Máximo Moto correspondiente, así se comparan en la misma ficha.
 SEED_FILE = ROOT / "data" / "albabike_seed.json"
+# Ofertas de eBay por producto (las refresca scraper.ebay_offers con enlace de afiliado).
+EBAY_OFFERS = ROOT / "data" / "ebay_offers.json"
 
 # product_type de Shopify → categoría de Mootle (ACCESORIOS se deja fuera: demasiado amplio)
 CATS = {"CASCO": "casco", "GUANTES": "guantes", "CHAQUETA": "chaqueta",
@@ -173,6 +175,35 @@ def run(dry=False):
                 it["pa"], it["pc"] = prev["pa"], prev.get("pc")
             results.append(it)
             seen.add(it["id"])
+
+    # eBay: una oferta más por producto (con enlace de afiliado). Solo para productos que ya
+    # tenemos en el catálogo (empareja por `mid`); así es una oferta extra del mismo producto.
+    ebay_offers = load(EBAY_OFFERS, {})
+    if ebay_offers:
+        info = {m["mid"]: (m["mk"], m["md"], m["cat"], m.get("img")) for m in results}
+        n_ebay = 0
+        for mid, o in ebay_offers.items():
+            ref = info.get(mid)
+            if not ref or not o.get("p") or not o.get("url"):
+                continue
+            mk, md, cat, img = ref
+            it = {"id": f"ebay:{mid}", "src": "ebay", "url": o["url"],
+                  "t": o.get("title") or f"{mk} {md}".strip(), "mk": mk, "md": md, "cat": cat,
+                  "p": int(o["p"]), "p0": o.get("p0"), "img": o.get("img") or img, "mid": mid}
+            prev = oldmap.get(it["id"])
+            it["fs"] = prev.get("fs", today) if prev else today
+            it["ls"] = today
+            it["ph"] = price_history(it, prev, today)
+            if prev and prev.get("p") and prev["p"] != it["p"]:
+                it["pa"], it["pc"] = prev["p"], today
+            elif prev and prev.get("pa"):
+                it["pa"], it["pc"] = prev["pa"], prev.get("pc")
+            results.append(it)
+            seen.add(it["id"])
+            n_ebay += 1
+        if n_ebay:
+            sources["ebay"] = {"name": "eBay", "home": "https://www.ebay.es/", "status": "api", "count": n_ebay}
+            print(f"[eBay] {n_ebay} ofertas emparejadas")
 
     # precio de mercado (mediana del grupo) para detectar chollos cuando hay varias ofertas
     by_mid = {}

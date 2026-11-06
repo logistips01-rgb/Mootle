@@ -15,8 +15,10 @@ Prueba rápida:
 """
 import base64
 import os
+import re
 import sys
 import time
+import unicodedata
 
 import requests
 
@@ -29,6 +31,8 @@ SCOPE = "https://api.ebay.com/oauth/api_scope"
 
 # Marketplace -> moneda esperada (para descartar resultados en otra moneda del país).
 MARKETS = {"EBAY_ES": "EUR", "EBAY_FR": "EUR", "EBAY_IT": "EUR", "EBAY_DE": "EUR", "EBAY_GB": "GBP"}
+# Mercados por defecto (todos EUR, envían a España). ES primero.
+DEFAULT_MARKETS = ["EBAY_ES", "EBAY_DE", "EBAY_IT", "EBAY_FR"]
 
 _token = {"value": None, "exp": 0}
 
@@ -57,46 +61,131 @@ def get_token():
     return _token["value"]
 
 
-def _search(params, marketplace):
+def _search(params, marketplace, sellers=None):
+    """Una llamada a item_summary/search. Devuelve (itemSummaries, status_code)."""
     headers = {
         "Authorization": f"Bearer {get_token()}",
         "X-EBAY-C-MARKETPLACE-ID": marketplace,
         "X-EBAY-C-ENDUSERCTX": f"affiliateCampaignId={CAMPID},affiliateReferenceId={CUSTOMID}",
     }
-    base = {"filter": "buyingOptions:{FIXED_PRICE},conditionIds:{1000}", "sort": "price", "limit": "5"}
+    filt = "buyingOptions:{FIXED_PRICE},conditionIds:{1000}"
+    if sellers:
+        filt += ",sellers:{" + "|".join(sellers) + "}"
+    base = {"filter": filt, "sort": "price", "limit": "10"}
     base.update(params)
-    r = requests.get(SEARCH_URL, headers=headers, params=base, timeout=30)
+    try:
+        r = requests.get(SEARCH_URL, headers=headers, params=base, timeout=30)
+    except requests.RequestException:
+        return [], 0
     if r.status_code != 200:
-        return []
-    return (r.json() or {}).get("itemSummaries") or []
+        return [], r.status_code
+    return ((r.json() or {}).get("itemSummaries") or []), 200
 
 
-def best_offer(ean=None, text=None, marketplace="EBAY_ES"):
-    """Oferta más barata (nuevo, precio fijo, profesional) para un producto. EAN primero;
-    si no hay o no devuelve nada, por texto. Devuelve dict o None."""
-    cur = MARKETS.get(marketplace, "EUR")
-    items = []
-    if ean:
-        items = _search({"gtin": str(ean)}, marketplace)
-    if not items and text:
-        items = _search({"q": text}, marketplace)
+# --- emparejamiento por texto: evitar que un resultado cualquiera se cuele como "el mismo" ---
+
+def _fold(s):
+    s = unicodedata.normalize("NFKD", str(s or "").lower())
+    s = "".join(c for c in s if not unicodedata.combining(c))
+    return re.sub(r"\s+", " ", re.sub(r"[^a-z0-9]+", " ", s)).strip()
+
+
+# palabras de color / talla / relleno que no identifican el modelo
+_NOISE = {"casco", "guantes", "guante", "chaqueta", "botas", "bota", "pantalon", "mono", "moto",
+          "hombre", "mujer", "unisex", "negro", "blanco", "rojo", "azul", "gris", "verde",
+          "amarillo", "naranja", "rosa", "talla", "nuevo", "new", "integral", "modular", "jet"}
+
+
+def match_ok(brand, model, title):
+    """¿El resultado de eBay es de verdad este producto? Exige la marca y los códigos de
+    modelo (p. ej. "FF808"); si el modelo no tiene código, pide al menos dos palabras suyas."""
+    t = _fold(title)
+    if not t:
+        return False
+    b = _fold(brand)
+    if b and b.split(" ")[0] not in t:
+        return False
+    toks = [w for w in _fold(model).split(" ") if len(w) >= 2 and w not in _NOISE]
+    codes = [w for w in toks if any(c.isdigit() for c in w)]
+    if codes:
+        return all(c in t for c in codes)
+    sig = [w for w in toks if len(w) >= 3]
+    if not sig:
+        return bool(b)          # modelo sin nada distintivo: basta con que coincida la marca
+    hits = sum(1 for w in sig if w in t)
+    return hits >= min(2, len(sig))
+
+
+def _pick(items, cur, min_pct, min_score, brand=None, model=None):
+    """Primera oferta válida: moneda del país, vendedor profesional con buen feedback y,
+    si se pasan marca/modelo, que el título case de verdad. items ya viene de barato a caro."""
     for it in items:
         price = it.get("price") or {}
-        seller = it.get("seller") or {}
-        # moneda del país y, si eBay lo indica, vendedor profesional (business)
         if price.get("currency") != cur:
             continue
-        acct = seller.get("sellerAccountType")
-        if acct and acct != "BUSINESS":
+        seller = it.get("seller") or {}
+        if (seller.get("sellerAccountType") or "BUSINESS") != "BUSINESS":
+            continue
+        try:
+            pct = float(seller.get("feedbackPercentage") or 0)
+            score = int(seller.get("feedbackScore") or 0)
+        except (TypeError, ValueError):
+            pct, score = 0, 0
+        if pct < min_pct or score < min_score:
+            continue
+        if brand is not None and not match_ok(brand, model or "", it.get("title") or ""):
             continue
         try:
             value = int(round(float(price.get("value"))))
         except (TypeError, ValueError):
             continue
-        return {"p": value, "currency": cur, "url": it.get("itemAffiliateWebUrl") or it.get("itemWebUrl"),
-                "title": it.get("title"), "market": marketplace,
-                "matched": "ean" if ean and items else "texto"}
+        mp = it.get("marketingPrice") or {}
+        try:
+            p0 = int(round(float((mp.get("originalPrice") or {}).get("value"))))
+        except (TypeError, ValueError):
+            p0 = None
+        return {"p": value, "p0": p0 if (p0 and p0 > value) else None, "currency": cur,
+                "url": it.get("itemAffiliateWebUrl") or it.get("itemWebUrl"),
+                "title": it.get("title"),
+                "seller": seller.get("username"), "feedback_pct": pct, "feedback_score": score,
+                "img": ((it.get("image") or {}).get("imageUrl"))}
     return None
+
+
+def lookup(brand=None, model=None, ean=None, text=None, markets=None,
+           min_pct=97.0, min_score=100, sellers=None, counter=None):
+    """Mejor oferta (nuevo, precio fijo, profesional) recorriendo los mercados en orden y
+    parando en el primero con coincidencia válida. `counter` (dict con "calls") suma las
+    llamadas HTTP hechas. Devuelve dict (con `market` y `matched`) o None."""
+    markets = markets or DEFAULT_MARKETS
+
+    def bump(n=1):
+        if counter is not None:
+            counter["calls"] = counter.get("calls", 0) + n
+
+    for mp in markets:
+        cur = MARKETS.get(mp, "EUR")
+        if ean:
+            items, st = _search({"gtin": str(ean)}, mp, sellers)
+            bump()
+            o = _pick(items, cur, min_pct, min_score)   # por EAN no hace falta guard de texto
+            if o:
+                o.update({"market": mp, "matched": "ean"})
+                return o
+        q = text or f"{brand or ''} {model or ''}".strip()
+        if q:
+            items, st = _search({"q": q}, mp, sellers)
+            bump()
+            o = _pick(items, cur, min_pct, min_score, brand=brand, model=model)
+            if o:
+                o.update({"market": mp, "matched": "texto"})
+                return o
+    return None
+
+
+def best_offer(ean=None, text=None, marketplace="EBAY_ES"):
+    """Compatibilidad / CLI: una sola búsqueda en un mercado."""
+    return lookup(ean=ean, text=text, markets=[marketplace])
 
 
 def main():
@@ -105,7 +194,13 @@ def main():
         print("uso: python -m scraper.ebay \"<EAN>\" | \"<texto>\"")
         return
     is_ean = q.isdigit() and 8 <= len(q) <= 14
-    o = best_offer(ean=q if is_ean else None, text=None if is_ean else q)
+    cnt = {"calls": 0}
+    o = lookup(ean=q if is_ean else None,
+               text=None if is_ean else q,
+               brand=None if is_ean else q.split(" ")[0],
+               model=None if is_ean else " ".join(q.split(" ")[1:]),
+               counter=cnt)
+    print(f"llamadas: {cnt['calls']}")
     print(o if o else "sin resultados (o claves no válidas)")
 
 

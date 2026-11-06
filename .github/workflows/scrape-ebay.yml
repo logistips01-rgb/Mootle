@@ -1,0 +1,63 @@
+name: scrape-ebay
+
+# Refresca las ofertas de eBay para la equipación (un lote al día) y republica las páginas.
+# Usa la Browse API con enlace de afiliado (campaña mootle). Gasta como mucho EBAY_MAX_CALLS
+# llamadas, para no pasarse del cupo compartido de la cuenta de desarrollador. Si faltan los
+# secretos EBAY_CLIENT_ID / EBAY_CLIENT_SECRET, no hace nada (no falla).
+
+on:
+  schedule:
+    - cron: "41 5 * * *"   # a diario, 05:41 UTC (tras el scrape general de las 04:23)
+  workflow_dispatch:
+    inputs:
+      max_calls:
+        description: "Tope de llamadas a eBay en esta ejecución"
+        default: "400"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: scrape
+  cancel-in-progress: false
+
+jobs:
+  scrape-ebay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Refrescar ofertas de eBay
+        env:
+          EBAY_CLIENT_ID: ${{ secrets.EBAY_CLIENT_ID }}
+          EBAY_CLIENT_SECRET: ${{ secrets.EBAY_CLIENT_SECRET }}
+          EBAY_MAX_CALLS: ${{ inputs.max_calls || vars.EBAY_MAX_CALLS || '400' }}
+          EBAY_MARKETS: ${{ vars.EBAY_MARKETS }}
+          EBAY_SELLERS: ${{ vars.EBAY_SELLERS }}
+        run: python -m scraper.ebay_offers
+
+      - name: Regenerar equipación (mezcla eBay)
+        run: python -m scraper.equip
+
+      - name: Commit de datos
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/ equipacion/ sitemap-equipacion.xml
+          if git diff --cached --quiet; then echo "Sin cambios"; exit 0; fi
+          git commit -q -m "data: ofertas eBay equipación $(TZ=Europe/Madrid date '+%F')"
+          for attempt in 1 2 3 4 5; do
+            if git push -q origin "HEAD:${GITHUB_REF_NAME}"; then exit 0; fi
+            echo "push rechazado, reintento $attempt"; sleep $((attempt * 5))
+            git pull -q --rebase origin "${GITHUB_REF_NAME}"
+          done
+          exit 1
