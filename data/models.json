@@ -1,5 +1,6 @@
 {
 "125_Nk": {
+"125nk": "125 NK",
 "2026entarragona10219660htm": "2026 EN Tarragona 10219660.HTM"
 },
 "390": {
@@ -251,6 +252,7 @@
 "748sport": "748 Sport",
 "848superbike": "848 Superbike",
 "899panigale": "899 Panigale",
+"999biposto": "999 Biposto",
 "999biposto2005envalencia10215892htm": "999 Biposto 2005 EN Valencia 10215892.HTM",
 "desertx": "Desertx",
 "diavel": "Diavel",
@@ -298,7 +300,8 @@
 "e3eviball": "E3 E Viball"
 },
 "F_800_Gt": {
-"2013enmadrid10123302htm": "2013 EN Madrid 10123302.HTM"
+"2013enmadrid10123302htm": "2013 EN Madrid 10123302.HTM",
+"f800gt": "F 800 GT"
 },
 "Fantic": {
 "caballero": "Caballero",
@@ -350,6 +353,10 @@
 "fatboy": "FAT BOY",
 "freewheeler": "Freewheeler",
 "fxdr114": "Fxdr 114",
+"harleydavidsonsoftaildeluxe": "Harley Davidson Softail Deluxe",
+"harleydavidsonsoftailfatboy": "Harley Davidson Softail FAT BOY",
+"harleydavidsonstreet750": "Harley Davidson Street 750",
+"harleydavidsontouringelectraglideultraclassicscreamineagle": "Harley Davidson Touring Electra Glide Ultra Classic Screamin Eagle",
 "heritageclassic": "Heritage Classic",
 "hydragliderevival": "Hydra Glide Revival",
 "lowrider": "LOW Rider",
@@ -675,6 +682,7 @@
 "er6f": "ER 6F",
 "er6n": "ER 6N",
 "er6n35kw": "ER 6N 35KW",
+"gpx600r": "GPX 600 R",
 "gtr1400": "GTR 1400",
 "j125": "J 125",
 "j300": "J 300",
@@ -780,9 +788,11 @@
 "betwin50": "BET WIN 50",
 "dtx125": "DTX 125",
 "dtx350": "DTX 350",
+"dtx360": "DTX 360",
 "dtx3602023enmadrid10220280htm": "DTX 360 2023 EN Madrid 10220280.HTM",
 "granddink125": "Grand Dink 125",
 "granddink300": "Grand Dink 300",
+"gt300i": "GT 300I",
 "gt300i2014enbarcelona10144241htm": "GT 300I 2014 EN Barcelona 10144241.HTM",
 "kxct125i": "K XCT 125I",
 "kxct300i": "K XCT 300I",
@@ -822,6 +832,7 @@
 "aurora125": "Aurora 125",
 "flygon125": "Flygon 125",
 "island125": "Island 125",
+"letbeneon125": "Letbe Neon 125",
 "letbeneon1252025enguipuzcoa8712776htm": "Letbe Neon 125 2025 EN Guipuzcoa 8712776.HTM",
 "neon125": "Neon 125",
 "velocity125": "Velocity 125"
@@ -832,6 +843,7 @@
 "MV Agusta": {
 "brutale": "Brutale",
 "brutale1090": "Brutale 1090",
+"brutale750s": "Brutale 750S",
 "brutale750s2005envalencia10070122htm": "Brutale 750S 2005 EN Valencia 10070122.HTM",
 "brutale800": "Brutale 800",
 "brutale800eas": "Brutale 800 EAS",
@@ -1192,6 +1204,7 @@
 "marauder250": "Marauder 250",
 "sv1000s": "SV 1000 S",
 "sv650": "SV 650",
+"sv650s": "SV 650 S",
 "sv650s2004envalencia10193393htm": "SV 650 S 2004 EN Valencia 10193393.HTM",
 "vanvan125": "Vanvan 125",
 "vl1500intruder": "VL 1500 Intruder",
@@ -1260,6 +1273,7 @@
 "tiger1200rally": "Tiger 1200 Rally",
 "tiger800": "Tiger 800",
 "tiger800xc": "Tiger 800 XC",
+"tiger800xcse": "Tiger 800 XC SE",
 "tiger800xcse2014ennavarra10217955htm": "Tiger 800 XC SE 2014 EN Navarra 10217955.HTM",
 "tiger800xcx": "Tiger 800 XCX",
 "tiger800xcx2015envizcaya10222122htm": "Tiger 800 XCX 2015 EN Vizcaya 10222122.HTM",
@@ -1461,7 +1475,9 @@
 "yzfr7ow2": "YZF R7 OW2"
 },
 "Zeeho": {
+"zs1": "ZS1",
 "zs12026enasturias10223832htm": "ZS1 2026 EN Asturias 10223832.HTM",
+"zs6": "ZS6",
 "zs62026enasturias10223828htm": "ZS6 2026 EN Asturias 10223828.HTM"
 },
 "Zero": {
