@@ -63,6 +63,13 @@ def _listings():
     return L if isinstance(L, list) else L.get("items", [])
 
 
+def _moto_img_ok(it):
+    """Foto de moto usable en redes: absoluta y de la CDN de motos.net (las de algunos
+    concesionarios son rutas relativas o con hotlink bloqueado y no cargan)."""
+    u = it.get("img") or ""
+    return u.startswith("http") and "mcdn.es" in u
+
+
 def pick_comparativa(used):
     data = load(EQUIP, {})
     sources = data.get("sources", {})
@@ -107,7 +114,7 @@ def pick_chollo(used):
     # motos que han bajado (pa -> p), filtrando bajadas absurdas
     for it in _listings():
         p, pa = it.get("p"), it.get("pa")
-        if not (p and pa and pa > p and it.get("img")) or it["id"] in used:
+        if not (p and pa and pa > p and _moto_img_ok(it)) or it["id"] in used:
             continue
         if p < 800:
             continue
@@ -147,6 +154,39 @@ def pick_chollo(used):
     return c["id"], c["d"], cap
 
 
+def pick_multi(used):
+    """Post del multibuscador: una moto y una pieza de equipación, lado a lado."""
+    # moto representativa con foto y precio en rango atractivo
+    moto = None
+    for it in sorted(_listings(), key=lambda i: i.get("p") or 0):
+        if _moto_img_ok(it) and it.get("p") and 2500 <= it["p"] <= 9000:
+            t = (it.get("t") or f'{it.get("mk","")} {it.get("md","")}').strip()
+            if it.get("y"):
+                t = f'{t} {it["y"]}'
+            moto = {"img": it["img"], "name": t[:40], "price": it["p"]}
+            break
+    # equipación con foto: un casco de MOTO de marca, en rango atractivo (no bici/patinete)
+    KNOWN = {"LS2", "MT", "MT Helmets", "Shoei", "AGV", "Shark", "HJC", "Nolan", "Scorpion",
+             "Caberg", "Airoh", "Nexx", "Nzi", "NZI", "Bell", "Schuberth", "KYT", "Premier"}
+    eq = None
+    cascos = [it for it in load(EQUIP, {}).get("items", [])
+              if it.get("img") and it.get("p") and it.get("cat") == "casco"
+              and 80 <= it["p"] <= 400
+              and not any(w in f'{it["mk"]} {it["md"]}'.lower() for w in ("biciclet", "bici", "patin"))]
+    cascos.sort(key=lambda it: (it["mk"] not in KNOWN, it["p"]))
+    if cascos:
+        it = cascos[len(cascos) // 3]   # uno de gama media-baja, de marca
+        eq = {"img": it["img"], "name": f'{it["mk"]} {it["md"]}'[:40], "price": it["p"]}
+    if not moto or not eq:
+        return None
+    data = {"kind": "multi", "moto": moto, "equip": eq}
+    cap = ("🔎 El multibuscador de mootle: busca MOTO y EQUIPACIÓN a la vez, en la misma pantalla.\n"
+           "Encuentra tu próxima moto de ocasión y el casco, guantes o chaqueta al mejor precio "
+           "sin saltar de web. 👉 mootle.es\n\n"
+           "#motos #motosdeocasion #equipacionmoto #cascos #moteros #multibuscador #mootle")
+    return f'multi-{date.today().isoformat()}', data, cap
+
+
 def pick_marca(state):
     i = state.get("marca_i", 0) % len(MARCA)
     m = MARCA[i]
@@ -157,7 +197,8 @@ def pick_marca(state):
 
 def kind_for_today():
     wd = date.today().weekday()   # 0=lunes
-    return "comparativa" if wd in (0, 2, 4) else "chollo" if wd in (1, 3) else "marca"
+    return ("comparativa" if wd in (0, 2, 4) else "chollo" if wd in (1, 3)
+            else "multi" if wd == 6 else "marca")   # sáb marca, dom multibuscador
 
 
 def render(data, out):
@@ -195,7 +236,7 @@ def wait_url(url, tries=40):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--kind", choices=["comparativa", "chollo", "marca"])
+    ap.add_argument("--kind", choices=["comparativa", "chollo", "marca", "multi"])
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--force", action="store_true", help="publicar aunque ya se haya publicado hoy")
     args = ap.parse_args()
@@ -210,6 +251,7 @@ def main():
 
     picker = {"comparativa": lambda: pick_comparativa(set(used.get("comparativa", []))),
               "chollo": lambda: pick_chollo(set(used.get("chollo", []))),
+              "multi": lambda: pick_multi(set(used.get("multi", []))),
               "marca": lambda: pick_marca(state)}[kind]
     got = picker()
     if not got:
