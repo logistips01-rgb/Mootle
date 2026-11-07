@@ -82,6 +82,19 @@ def publish_carousel(image_urls, caption):
     return out
 
 
+def publish_reel(video_url, caption):
+    tok = _token()
+    uid = me()["id"]
+    cont = _post(f"{uid}/media", {"media_type": "REELS", "video_url": video_url,
+                                  "caption": caption, "share_to_feed": "true", "access_token": tok})
+    cid = cont["id"]
+    # el vídeo tarda en procesarse; esperamos más que para una imagen
+    if not _wait_ready(cid, tok, tries=60):
+        raise RuntimeError("el reel no terminó de procesarse a tiempo")
+    out = _post(f"{uid}/media_publish", {"creation_id": cid, "access_token": tok})
+    return out
+
+
 def main():
     if len(sys.argv) < 2:
         print(__doc__)
@@ -93,6 +106,8 @@ def main():
         print(publish_image(sys.argv[2], sys.argv[3]))
     elif cmd == "carousel":
         print(publish_carousel(sys.argv[3:], sys.argv[2]))
+    elif cmd == "reel":
+        print(publish_reel(sys.argv[2], sys.argv[3]))
     else:
         print("comando desconocido:", cmd)
 

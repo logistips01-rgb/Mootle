@@ -1,0 +1,70 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@800;900&family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--o:#e8590c;--ink:#16150f;--bg:#faf9f6;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{width:1080px;height:1920px;overflow:hidden;background:var(--ink);}
+  .stage{position:relative;width:1080px;height:1920px;font-family:"Inter Tight",sans-serif;}
+  .scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 90px;opacity:0;will-change:opacity,transform;}
+  .scene.o{background:var(--o);color:#fff;} .scene.l{background:var(--bg);color:var(--ink);} .scene.d{background:var(--ink);color:#fff;}
+  .kick{font-weight:800;font-size:40px;letter-spacing:.1em;text-transform:uppercase;color:var(--o);margin-bottom:30px;}
+  .o .kick{color:#ffe3cf;} .d .kick{color:var(--o);}
+  h1{font-weight:900;letter-spacing:-.03em;line-height:1.03;font-size:118px;}
+  h1 em{font-style:normal;color:var(--o);} .o h1 em{color:#fff;} .d h1 em{color:var(--o);}
+  .sub{font-family:Inter;font-weight:600;font-size:46px;margin-top:34px;opacity:.85;max-width:17ch;}
+  .mark{width:300px;height:300px;border-radius:22%;background:#fff;display:flex;align-items:center;justify-content:center;margin-bottom:54px;}
+  .mark svg{width:62%;height:62%;} .mark svg circle{stroke:var(--o);} .mark svg circle.h{fill:var(--o);stroke:none;}
+  .pill{font-weight:800;font-size:54px;background:#fff;color:var(--o);padding:28px 64px;border-radius:999px;margin-top:50px;}
+  .bar{position:absolute;left:0;bottom:0;height:14px;background:var(--o);width:0;z-index:5;}
+  /* tarjeta de producto */
+  .card{width:720px;background:#fff;border:2px solid #eadfd2;border-radius:36px;padding:34px;display:flex;flex-direction:column;gap:22px;box-shadow:0 30px 60px rgba(0,0,0,.12);}
+  .d .card{border-color:#2a2822;}
+  .card .ph{height:620px;border-radius:24px;background:#f6f1ea;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  .card .ph img{width:100%;height:100%;object-fit:contain;padding:18px;}
+  .card .nm{font-family:Inter;font-weight:700;font-size:44px;color:#2a2620;line-height:1.1;text-align:left;}
+  .card .pr{font-weight:900;font-size:76px;color:var(--o);text-align:left;}
+  .tab{font-weight:800;font-size:46px;letter-spacing:.04em;text-transform:uppercase;color:#fff;background:var(--o);padding:18px 44px;border-radius:999px;margin-bottom:40px;}
+  .tab.b{background:var(--ink);}
+</style></head>
+<body><div class="stage" id="st">
+  <div class="scene o" data-i="0"><div class="mark"><svg viewBox="0 0 92 48"><circle cx="22" cy="26" r="16" fill="none" stroke-width="8"/><circle cx="70" cy="26" r="16" fill="none" stroke-width="8"/><circle class="h" cx="22" cy="26" r="4"/><circle class="h" cx="70" cy="26" r="4"/></svg></div><h1>Moto y<br><em>equipación</em></h1><p class="sub">los dos a la vez</p></div>
+  <div class="scene l" data-i="1"><div class="tab">Motos</div><div class="card"><div class="ph" id="moto-ph"></div><div class="nm" id="moto-nm"></div><div class="pr" id="moto-pr"></div></div></div>
+  <div class="scene d" data-i="2"><div class="tab b" style="background:#fff;color:var(--ink)">Equipación</div><div class="card"><div class="ph" id="eq-ph"></div><div class="nm" id="eq-nm"></div><div class="pr" id="eq-pr"></div></div></div>
+  <div class="scene l" data-i="3"><div class="kick">El multibuscador</div><h1>Las dos cosas,<br><em>una pantalla</em></h1><p class="sub">busca moto y equipación a la vez</p></div>
+  <div class="scene o" data-i="4"><div class="mark"><svg viewBox="0 0 92 48"><circle cx="22" cy="26" r="16" fill="none" stroke-width="8"/><circle cx="70" cy="26" r="16" fill="none" stroke-width="8"/><circle class="h" cx="22" cy="26" r="4"/><circle class="h" cx="70" cy="26" r="4"/></svg></div><h1>mootle<em>.es</em></h1><p class="sub">Gratis. Sin registro.</p><div class="pill">Pruébalo →</div></div>
+  <div class="bar" id="bar"></div>
+</div>
+<script>
+  var scenes=[].slice.call(document.querySelectorAll('.scene'));
+  var START=[0,2.6,5.2,7.8,9.9], DUR=[2.7,2.7,2.7,2.2,2.6], TOTAL=12.5;
+  function ease(x){return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;}
+  function nf(v){return new Intl.NumberFormat('es-ES').format(v)+' €';}
+  window.renderReel=function(d){
+    d=d||{};
+    function set(ph,nm,pr,x){
+      if(!x) return;
+      if(x.img) document.getElementById(ph).innerHTML='<img src="'+x.img+'" referrerpolicy="no-referrer">';
+      document.getElementById(nm).textContent=x.name||'';
+      document.getElementById(pr).textContent=x.price?nf(x.price):'';
+    }
+    set('moto-ph','moto-nm','moto-pr',d.moto);
+    set('eq-ph','eq-nm','eq-pr',d.equip);
+  };
+  window.setTime=function(t){
+    scenes.forEach(function(el,i){
+      var s=START[i], d=DUR[i], loc=(t-s)/d, op=0, ty=60, sc=.96;
+      if(loc>=0 && loc<=1){
+        if(loc<.16){var p=ease(loc/.16);op=p;ty=60*(1-p);sc=.96+.04*p;}
+        else if(loc>.88){var q=ease((loc-.88)/.12);op=1-q;ty=-34*q;sc=1-.015*q;}
+        else {op=1;ty=0;sc=1;}
+      }
+      el.style.opacity=op; el.style.transform='translateY('+ty+'px) scale('+sc+')';
+      el.style.zIndex=(loc>=0&&loc<=1)?2:1;
+    });
+    document.getElementById('bar').style.width=(1080*Math.min(1,t/TOTAL))+'px';
+  };
+  window.__total=12.5;
+  window.setTime(0);
+  window.__ready=true;
+</script></body></html>
