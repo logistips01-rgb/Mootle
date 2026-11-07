@@ -10,3 +10,4 @@ Thumbs.db
 data/albabike_raw.json
 node_modules/
 package*.json
+.cache_audio/
