@@ -10,7 +10,7 @@ from collections import defaultdict
 from pathlib import Path
 
 from .equip import CAT_NAMES
-from .pages import FOOT, SITE, chart, e, eur, head, num, slug, write
+from .pages import FOOT, SITE, _amazon, chart, e, eur, head, num, slug, write
 
 ROOT = Path(__file__).resolve().parent.parent
 DIR = ROOT / "equipacion"
@@ -155,7 +155,8 @@ def product_page(g, sources, history, cat_items=()):
       <span class="kicker">{e(g['mk'])} · {e(catn)}</span>
       <h1 class="display">{e(name)}</h1>
       <p class="sub">{g['n']} oferta{'s' if g['n'] > 1 else ''}{f" en {len(g['webs'])} tiendas" if len(g['webs']) > 1 else ''}. Desde {eur(g['min'])}.</p>
-      <p><a class="btn" href="{e(g['best']['url'])}" target="_blank" rel="sponsored nofollow noopener noreferrer">Ver la más barata ↗</a></p>
+      <p><a class="btn" href="{e(g['best']['url'])}" target="_blank" rel="sponsored nofollow noopener noreferrer">Ver la más barata ↗</a>
+      <a class="btn ghost" href="{_amazon(f'{name} {catn.lower()}')}" target="_blank" rel="sponsored nofollow noopener noreferrer">Buscar en Amazon ↗</a></p>
     </div>
   </div>
   <div class="panel"><h2 class="display">Ofertas</h2><div class="offers eq">{rows}</div></div>
