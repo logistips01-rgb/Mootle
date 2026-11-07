@@ -1,0 +1,82 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--logo:#e8590c;--accent:#c2410c;--ink:#16150f;--bg:#faf7f2;--muted:#7a736a;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{width:1080px;height:1080px;}
+  body{font-family:"Inter Tight",Inter,sans-serif;color:var(--ink);background:var(--bg);
+       display:flex;flex-direction:column;padding:64px 64px 56px;}
+  .top{display:flex;align-items:center;justify-content:space-between;}
+  .word{display:inline-flex;align-items:center;font-weight:800;letter-spacing:-.045em;line-height:1;font-size:62px;}
+  .word svg{width:1.53em;height:.8em;margin:0 .02em;position:relative;top:.06em;}
+  .word svg circle{stroke:var(--logo);}.word svg circle.hub{fill:var(--logo);stroke:none;}
+  .badge{font-family:Inter,sans-serif;font-weight:700;font-size:26px;color:#fff;background:var(--logo);
+         padding:12px 22px;border-radius:999px;letter-spacing:.01em;}
+  .badge.ink{background:var(--ink);}
+  .mid{flex:1;display:flex;flex-direction:column;justify-content:center;gap:28px;min-height:0;}
+  h1{font-weight:800;letter-spacing:-.02em;line-height:1.04;font-size:var(--h1,74px);}
+  .kicker{font-family:Inter,sans-serif;font-weight:700;font-size:30px;color:var(--accent);text-transform:uppercase;letter-spacing:.04em;}
+  .photo{width:100%;height:470px;border-radius:28px;background:#fff;border:1px solid #eadfd2;
+         display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  .photo img{width:100%;height:100%;object-fit:contain;padding:22px;}
+  .row{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;}
+  .price{font-weight:800;font-size:96px;color:var(--logo);line-height:1;}
+  .was{font-size:46px;color:var(--muted);text-decoration:line-through;font-weight:700;}
+  .save{font-family:Inter,sans-serif;font-weight:800;font-size:34px;color:#fff;background:#16a34a;padding:8px 18px;border-radius:14px;}
+  .sub{font-family:Inter,sans-serif;font-weight:600;font-size:34px;color:var(--muted);}
+  .shops{display:flex;flex-direction:column;gap:14px;}
+  .shop{display:flex;align-items:center;justify-content:space-between;background:#fff;border:1px solid #eadfd2;
+        border-radius:16px;padding:18px 26px;font-size:34px;}
+  .shop b{color:var(--logo);font-weight:800;}
+  .shop .nm{font-family:Inter,sans-serif;font-weight:600;color:#3a352e;}
+  .foot{display:flex;align-items:center;justify-content:space-between;font-family:Inter,sans-serif;}
+  .foot .url{font-weight:800;font-size:40px;color:var(--ink);}
+  .foot .cta{font-weight:700;font-size:30px;color:var(--accent);}
+  .big h1{font-size:92px;}
+</style></head>
+<body>
+  <div class="top">
+    <div class="word">m<svg viewBox="0 0 92 48" aria-hidden="true"><circle cx="22" cy="26" r="16" fill="none" stroke-width="8"/><circle cx="70" cy="26" r="16" fill="none" stroke-width="8"/><circle class="hub" cx="22" cy="26" r="4"/><circle class="hub" cx="70" cy="26" r="4"/></svg>tle</div>
+    <div class="badge" id="badge">CHOLLO DEL DÍA</div>
+  </div>
+  <div class="mid" id="mid"></div>
+  <div class="foot"><span class="url">mootle.es</span><span class="cta" id="cta">Gratis · sin registro</span></div>
+<script>
+function renderPost(d){
+  d=d||{};
+  var nf=new Intl.NumberFormat("es-ES");
+  var eur=function(v){return nf.format(v)+" €";};
+  var badge=document.getElementById("badge"), mid=document.getElementById("mid");
+  var cta=document.getElementById("cta");
+  function img(u){return u?'<div class="photo"><img src="'+u+'" referrerpolicy="no-referrer"></div>':'';}
+  if(d.kind==="comparativa"){
+    badge.textContent="COMPARATIVA"; badge.classList.add("ink");
+    var shops=(d.shops||[]).map(function(s){return '<div class="shop"><span class="nm">'+s.name+'</span><b>'+eur(s.p)+'</b></div>';}).join("");
+    mid.innerHTML='<div class="kicker">'+(d.cat||"Equipación")+'</div>'
+      +'<h1 style="--h1:62px">'+d.title+'</h1>'
+      +img(d.img)
+      +'<div class="row"><span class="sub">desde</span><span class="price">'+eur(d.min)+'</span>'
+      +(d.n>1?'<span class="sub">en '+d.n+' tiendas</span>':'')+'</div>'
+      +'<div class="shops">'+shops+'</div>';
+    cta.textContent="Compara en mootle.es";
+  } else if(d.kind==="marca"){
+    badge.textContent=d.badge||"mootle";
+    mid.classList.add("big");
+    mid.innerHTML='<h1>'+d.title+'</h1>'+(d.sub?'<div class="sub">'+d.sub+'</div>':'');
+    cta.textContent=d.cta||"Gratis · sin registro";
+  } else {
+    badge.textContent="CHOLLO DEL DÍA";
+    var save=d.save?('<span class="save">−'+eur(d.save)+(d.pct?' · '+d.pct+'%':'')+'</span>'):'';
+    var was=d.was?('<span class="was">'+eur(d.was)+'</span>'):'';
+    mid.innerHTML='<div class="kicker">'+(d.cat||"Oferta")+'</div>'
+      +'<h1>'+d.title+'</h1>'
+      +img(d.img)
+      +'<div class="row"><span class="price">'+eur(d.p)+'</span>'+was+save+'</div>';
+    cta.textContent="Verlo en mootle.es";
+  }
+}
+window.renderPost=renderPost;
+try{var _q=new URLSearchParams(location.search).get("d");if(_q)renderPost(JSON.parse(decodeURIComponent(_q)));}catch(e){}
+</script></body></html>
