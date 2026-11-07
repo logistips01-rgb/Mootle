@@ -197,10 +197,15 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--kind", choices=["comparativa", "chollo", "marca"])
     ap.add_argument("--dry", action="store_true")
+    ap.add_argument("--force", action="store_true", help="publicar aunque ya se haya publicado hoy")
     args = ap.parse_args()
 
     state = load(STATE, {})
     used = state.setdefault("used", {})
+    today = date.today().isoformat()
+    if not args.dry and not args.force and any(e.get("date") == today for e in state.get("log", [])):
+        print(f"Ya hay un post publicado hoy ({today}). Nada que hacer.")
+        return
     kind = args.kind or kind_for_today()
 
     picker = {"comparativa": lambda: pick_comparativa(set(used.get("comparativa", []))),
@@ -241,6 +246,7 @@ def main():
         used[kind] = used[kind][-400:]
     state.setdefault("log", []).append({"date": date.today().isoformat(), "kind": kind, "id": mid, "permalink": perma})
     STATE.write_text(json.dumps(state, ensure_ascii=False, indent=1), encoding="utf-8")
+    git_push([STATE])   # guardar el estado en el repo (dedupe entre ejecuciones)
     print(f"PUBLICADO ({kind}): {perma or mid}")
 
 
