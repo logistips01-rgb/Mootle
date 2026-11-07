@@ -110,6 +110,31 @@ def _is_accessory(title):
     return bool(_ACCESSORY.search(_fold(title)))
 
 
+# palabras que identifican cada categoría (ES/EN/otros idiomas de eBay)
+_CATWORDS = {
+    "casco": {"casco", "cascos", "helmet", "helm", "jethelm", "casque", "capacete"},
+    "guantes": {"guante", "guantes", "glove", "gloves", "handschuh", "handschuhe", "guanti"},
+    "chaqueta": {"chaqueta", "chaquetas", "jacket", "jacke", "giacca", "cazadora", "blouson"},
+    "botas": {"bota", "botas", "boot", "boots", "stiefel", "stivali", "stivale"},
+    "pantalon": {"pantalon", "pantalones", "pant", "pants", "trouser", "hose", "jean", "jeans", "vaquero"},
+    "mono": {"mono", "traje", "suit", "overall", "tuta", "combinaison", "jumpsuit"},
+}
+
+
+def category_ok(cat, title):
+    """False si el título es claramente de OTRA categoría (p. ej. un casco colado en unos
+    guantes). Si no sabemos la categoría, o el título no delata otra, se acepta."""
+    if not cat or cat not in _CATWORDS:
+        return True
+    toks = set(_fold(title).split(" "))
+    if toks & _CATWORDS[cat]:
+        return True                      # dice su propia categoría: perfecto
+    for other, words in _CATWORDS.items():
+        if other != cat and (toks & words):
+            return False                 # dice otra categoría y no la suya: fuera
+    return True
+
+
 def match_ok(brand, model, title):
     """¿El resultado de eBay es de verdad este producto? Exige la marca y los códigos de
     modelo (p. ej. "FF808"); si el modelo no tiene código, pide al menos dos palabras suyas."""
@@ -130,7 +155,7 @@ def match_ok(brand, model, title):
     return hits >= min(2, len(sig))
 
 
-def _pick(items, cur, min_pct, min_score, brand=None, model=None):
+def _pick(items, cur, min_pct, min_score, brand=None, model=None, cat=None):
     """Primera oferta válida: moneda del país, vendedor profesional con buen feedback y,
     si se pasan marca/modelo, que el título case de verdad. items ya viene de barato a caro."""
     for it in items:
@@ -138,6 +163,8 @@ def _pick(items, cur, min_pct, min_score, brand=None, model=None):
         if price.get("currency") != cur:
             continue
         if _is_accessory(it.get("title") or ""):
+            continue
+        if not category_ok(cat, it.get("title") or ""):
             continue
         seller = it.get("seller") or {}
         if (seller.get("sellerAccountType") or "BUSINESS") != "BUSINESS":
@@ -169,7 +196,7 @@ def _pick(items, cur, min_pct, min_score, brand=None, model=None):
 
 
 def lookup(brand=None, model=None, ean=None, text=None, markets=None,
-           min_pct=97.0, min_score=100, sellers=None, counter=None):
+           min_pct=97.0, min_score=100, sellers=None, counter=None, cat=None):
     """Mejor oferta (nuevo, precio fijo, profesional) recorriendo los mercados en orden y
     parando en el primero con coincidencia válida. `counter` (dict con "calls") suma las
     llamadas HTTP hechas. Devuelve dict (con `market` y `matched`) o None."""
@@ -184,7 +211,7 @@ def lookup(brand=None, model=None, ean=None, text=None, markets=None,
         if ean:
             items, st = _search({"gtin": str(ean)}, mp, sellers)
             bump()
-            o = _pick(items, cur, min_pct, min_score)   # por EAN no hace falta guard de texto
+            o = _pick(items, cur, min_pct, min_score, cat=cat)   # por EAN, guard de texto no; de categoría sí
             if o:
                 o.update({"market": mp, "matched": "ean"})
                 return o
@@ -192,7 +219,7 @@ def lookup(brand=None, model=None, ean=None, text=None, markets=None,
         if q:
             items, st = _search({"q": q}, mp, sellers)
             bump()
-            o = _pick(items, cur, min_pct, min_score, brand=brand, model=model)
+            o = _pick(items, cur, min_pct, min_score, brand=brand, model=model, cat=cat)
             if o:
                 o.update({"market": mp, "matched": "texto"})
                 return o

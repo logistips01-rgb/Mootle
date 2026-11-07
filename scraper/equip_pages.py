@@ -28,6 +28,16 @@ def groups_of(items):
     out = {}
     for mid, offers in by.items():
         offers.sort(key=lambda m: m["p"])
+        # dedupe: misma tienda + mismo precio + mismo título = oferta duplicada (p. ej. un
+        # producto re-listado con otro handle en la tienda). Se deja una sola.
+        seen, uniq = set(), []
+        for m in offers:
+            k = (m["src"], round(m["p"]), (m.get("t") or "").strip().lower())
+            if k in seen:
+                continue
+            seen.add(k)
+            uniq.append(m)
+        offers = uniq
         best = offers[0]
         prices = [m["p"] for m in offers]
         out[mid] = {"mid": mid, "mk": best["mk"], "md": best["md"], "cat": best["cat"],

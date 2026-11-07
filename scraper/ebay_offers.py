@@ -157,7 +157,7 @@ def run():
         if skip(mid):
             continue
         g = catalog[mid]
-        o = ebay.lookup(brand=g["mk"], model=g["md"], markets=markets,
+        o = ebay.lookup(brand=g["mk"], model=g["md"], cat=g["cat"], markets=markets,
                         min_pct=min_pct, min_score=min_score, sellers=sellers, counter=counter)
         if o:
             if mid not in offers:
