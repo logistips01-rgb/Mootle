@@ -572,6 +572,9 @@
 "xr250": "XR 250",
 "xr400r": "XR 400 R"
 },
+"Horwin": {
+"ek3": "EK3"
+},
 "Husaberg": {
 "fe350": "FE 350"
 },
@@ -922,7 +925,8 @@
 },
 "Montesa": {
 "4ride": "4RIDE",
-"cota348": "Cota 348"
+"cota348": "Cota 348",
+"cota4rt": "Cota 4 RT"
 },
 "Morbidelli Mbp": {
 "c1002v": "C 1002 V",
@@ -1214,6 +1218,7 @@
 "intruderm1800r": "Intruder M1800R",
 "intruderm800": "Intruder M800",
 "marauder125": "Marauder 125",
+"marauder1600": "Marauder 1600",
 "marauder250": "Marauder 250",
 "sv1000s": "SV 1000 S",
 "sv650": "SV 650",
@@ -1324,6 +1329,7 @@
 "pk75elestar": "PK 75 Elestar",
 "pk75xl": "PK 75 XL",
 "primavera": "Primavera",
+"primavera125": "Primavera 125",
 "px200iris": "PX 200 Iris",
 "seigiorni300": "SEI Giorni 300",
 "sprint125ie3v": "Sprint 125 IE 3V",
@@ -1481,6 +1487,7 @@
 "yz125": "YZ 125",
 "yz250f": "YZ 250 F",
 "yz450f": "YZ 450 F",
+"yzf750r": "YZF 750 R",
 "yzfr1": "YZF R1",
 "yzfr125": "YZF R 125",
 "yzfr3": "YZF R3",
@@ -1518,6 +1525,7 @@
 "368d": "368 D",
 "368detc": "368 D ETC",
 "368e": "368 E",
+"368eetc": "368 E ETC",
 "368g": "368 G",
 "368getc": "368 G ETC",
 "368k": "368 K",
