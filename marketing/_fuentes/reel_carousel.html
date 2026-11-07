@@ -1,0 +1,51 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@800&family=Inter:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--o:#e8590c;--ink:#16150f;--bg:#faf7f2;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);}
+  .stage{position:relative;width:1080px;height:1920px;font-family:"Inter Tight",sans-serif;}
+  .top{position:absolute;top:70px;left:0;right:0;display:flex;justify-content:center;z-index:4;}
+  .word{display:inline-flex;align-items:center;font-weight:800;letter-spacing:-.045em;line-height:1;font-size:72px;color:var(--ink);}
+  .word svg{width:1.53em;height:.8em;margin:0 .02em;position:relative;top:.06em;}
+  .word svg circle{stroke:var(--o);}.word svg circle.hub{fill:var(--o);stroke:none;}
+  .foot{position:absolute;bottom:80px;left:0;right:0;text-align:center;z-index:4;font-family:Inter;font-weight:700;font-size:46px;color:var(--ink);}
+  .foot small{display:block;font-weight:600;font-size:30px;color:var(--o);margin-top:6px;}
+  .slides{position:absolute;top:230px;bottom:230px;left:0;right:0;}
+  .slide{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;will-change:opacity,transform;}
+  .slide img{width:1010px;height:1010px;object-fit:contain;border-radius:36px;box-shadow:0 30px 70px rgba(0,0,0,.14);}
+  .bar{position:absolute;left:0;bottom:0;height:14px;background:var(--o);width:0;z-index:5;}
+</style></head>
+<body><div class="stage">
+  <div class="top"><div class="word">m<svg viewBox="0 0 92 48" aria-hidden="true"><circle cx="22" cy="26" r="16" fill="none" stroke-width="8"/><circle cx="70" cy="26" r="16" fill="none" stroke-width="8"/><circle class="hub" cx="22" cy="26" r="4"/><circle class="hub" cx="70" cy="26" r="4"/></svg>tle</div></div>
+  <div class="slides" id="slides"></div>
+  <div class="foot">mootle.es<small>Gratis · sin registro</small></div>
+  <div class="bar" id="bar"></div>
+</div>
+<script>
+  var SLIDES=[], DUR=1.8, TOTAL=0;
+  function ease(x){return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2;}
+  window.renderReel=function(d){
+    var imgs=(d&&d.images)||[];
+    var c=document.getElementById('slides');
+    c.innerHTML=imgs.map(function(u){return '<div class="slide"><img src="'+u+'" referrerpolicy="no-referrer"></div>';}).join('');
+    SLIDES=[].slice.call(document.querySelectorAll('.slide'));
+    TOTAL=SLIDES.length*DUR;
+    window.__total=TOTAL;
+  };
+  window.setTime=function(t){
+    SLIDES.forEach(function(el,i){
+      var loc=(t-i*DUR)/DUR, op=0, ty=50, sc=.97;
+      if(loc>=0 && loc<=1){
+        if(loc<.18){var p=ease(loc/.18);op=p;ty=50*(1-p);sc=.97+.03*p;}
+        else if(loc>.86){var q=ease((loc-.86)/.14);op=1-q;ty=-30*q;sc=1-.01*q;}
+        else {op=1;ty=0;sc=1;}
+      }
+      el.style.opacity=op; el.style.transform='translateY('+ty+'px) scale('+sc+')';
+      el.style.zIndex=(loc>=0&&loc<=1)?2:1;
+    });
+    document.getElementById('bar').style.width=(1080*Math.min(1,t/(TOTAL||1)))+'px';
+  };
+  window.__total=0; window.__ready=true;
+</script></body></html>
