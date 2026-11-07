@@ -51,5 +51,7 @@
     document.querySelector('.hatbody').setAttribute('fill','#e8590c');
     document.documentElement.style.setProperty('--ribbon','#16150f');
   }
+  if(q.get('hat')==='none') document.querySelector('.hat').style.display='none';
+  if(q.get('ribbon')==='none') document.getElementById('ribbon').style.display='none';
   window.__ready=true;
 </script></body></html>
