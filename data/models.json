@@ -247,6 +247,7 @@
 "daystar125": "Daystar 125",
 "roadwin125rfi": "Roadwin 125R FI",
 "s2125": "S2 125",
+"s3125fitouring": "S3 125 FI Touring",
 "vs125": "VS 125"
 },
 "Derbi": {
@@ -295,6 +296,7 @@
 "panigalev2": "Panigale V2",
 "panigalev4": "Panigale V4",
 "scrambler": "Scrambler",
+"streetfighter1100s": "Streetfighter 1100 S",
 "streetfighterv2": "Streetfighter V2",
 "streetfighterv4": "Streetfighter V4",
 "supersport": "Supersport",
@@ -1231,6 +1233,7 @@
 "sv650": "SV 650",
 "sv650s": "SV 650 S",
 "sv650s2004envalencia10193393htm": "SV 650 S 2004 EN Valencia 10193393.HTM",
+"tu250x": "TU 250 X",
 "vanvan125": "Vanvan 125",
 "vl1500intruder": "VL 1500 Intruder",
 "vl800intrudervolusia": "VL 800 Intruder Volusia",
@@ -1240,6 +1243,9 @@
 "vstrom650": "V Strom 650",
 "vstrom650xt": "V Strom 650 XT",
 "vstrom800": "V Strom 800"
+},
+"TM": {
+"en125": "EN 125"
 },
 "Tinbot": {
 "es1spro125e": "ES1 S PRO 125E"
@@ -1332,6 +1338,7 @@
 "gts310e5": "GTS 310 E5",
 "gtv310officina8euro5": "GTV 310 Officina 8 Euro 5",
 "lx502t": "LX 50 2T",
+"p200e": "P 200 E",
 "pk125xl": "PK 125 XL",
 "pk75elestar": "PK 75 Elestar",
 "pk75xl": "PK 75 XL",
@@ -1341,6 +1348,9 @@
 "seigiorni300": "SEI Giorni 300",
 "sprint125ie3v": "Sprint 125 IE 3V",
 "sprints125ie3v": "Sprint S 125 IE 3V"
+},
+"Vespino": {
+"al50": "AL 50"
 },
 "Victory": {
 "octane": "Octane",
