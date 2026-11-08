@@ -8,11 +8,11 @@ const path = require('path');
 const { execFileSync } = require('child_process');
 
 (async () => {
-  const [, , dataPath, out] = process.argv;
+  const [, , dataPath, out, template] = process.argv;
   const data = JSON.parse(fs.readFileSync(dataPath, 'utf8'));
   const fps = 25;
   const tmp = fs.mkdtempSync('/tmp/reel_');
-  const tpl = 'file://' + path.resolve(__dirname, '../marketing/_fuentes/reel_multi.html');
+  const tpl = 'file://' + path.resolve(__dirname, '../marketing/_fuentes/' + (template || 'reel_multi.html'));
   const browser = await chromium.launch();
   const page = await browser.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: 1 });
   await page.goto(tpl, { waitUntil: 'load', timeout: 60000 });

@@ -1,0 +1,35 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8">
+<style>
+  :root{--bg:#faf7f2;--o:#e8590c;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);}
+  .stage{position:relative;width:1080px;height:1920px;display:flex;align-items:center;justify-content:center;}
+  .card{width:1080px;height:1080px;will-change:transform,opacity;}
+  .card img{width:100%;height:100%;object-fit:contain;}
+  .bar{position:absolute;left:0;bottom:0;height:16px;background:var(--o);width:0;}
+</style></head>
+<body><div class="stage">
+  <div class="card" id="card"></div>
+  <div class="bar" id="bar"></div>
+</div>
+<script>
+  var TOTAL=7.0;
+  window.renderReel=function(d){
+    d=d||{};
+    if(d.image) document.getElementById('card').innerHTML='<img src="'+d.image+'" referrerpolicy="no-referrer">';
+    if(d.bg) document.documentElement.style.setProperty('--bg', d.bg);
+    window.__total=TOTAL;
+  };
+  window.setTime=function(t){
+    var p=Math.min(1,t/TOTAL);
+    var sc=1+0.06*p;                 // zoom lento (Ken Burns)
+    var op=1;
+    if(t<0.4) op=t/0.4;             // fade in
+    else if(t>TOTAL-0.5) op=Math.max(0,(TOTAL-t)/0.5);  // fade out
+    var c=document.getElementById('card');
+    c.style.transform='scale('+sc+')';
+    c.style.opacity=op;
+    document.getElementById('bar').style.width=(1080*p)+'px';
+  };
+  window.__total=TOTAL; window.__ready=true;
+</script></body></html>

@@ -234,6 +234,24 @@ def wait_url(url, tries=40):
     return False
 
 
+def build_reel(cardpng, out_mp4):
+    """Convierte la tarjeta (PNG 1080x1080) en un Reel vertical con música libre.
+    Devuelve la línea de crédito de la música (o None si no se pudo añadir)."""
+    from . import musica_libre
+    dj = OUTDIR / "_reel.json"
+    dj.write_text(json.dumps({"image": "file://" + str(cardpng)}), encoding="utf-8")
+    silent = OUTDIR / (out_mp4.stem + ".silent.mp4")
+    subprocess.run(["node", str(ROOT / "scraper" / "render_reel.cjs"),
+                    str(dj), str(silent), "reel_card.html"], check=True)
+    dj.unlink(missing_ok=True)
+    credito = musica_libre.poner(silent, out_mp4)
+    if credito:
+        silent.unlink(missing_ok=True)
+    else:
+        silent.replace(out_mp4)   # sin música: al menos el vídeo (nunca un Reel sin pista)
+    return credito
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--kind", choices=["comparativa", "chollo", "marca", "multi"])
@@ -259,20 +277,27 @@ def main():
         return
     key, data, caption = got
 
-    fname = f'{date.today().isoformat()}-{kind}.png'
-    out = OUTDIR / fname
-    render(data, out)
-    print(f"Imagen generada: {out}")
+    stamp = f'{date.today().isoformat()}-{kind}'
+    cardpng = OUTDIR / f'{stamp}.png'
+    render(data, cardpng)
+    print(f"Imagen generada: {cardpng}")
+
+    # Instagram no pone música a imágenes: convertimos la tarjeta en Reel con música libre.
+    reelmp4 = OUTDIR / f'{stamp}.mp4'
+    credito = build_reel(cardpng, reelmp4)
+    if credito:
+        caption = caption + "\n\n" + credito
+    print(f"Reel generado: {reelmp4} · música: {credito or 'sin música'}")
     print(f"Texto:\n{caption}")
     if args.dry:
         return
 
-    git_push([out])
-    url = RAW + fname
+    git_push([cardpng, reelmp4])
+    url = RAW + f'{stamp}.mp4'
     if not wait_url(url):
-        print(f"Aviso: la imagen aún no responde en {url}; intento publicar igualmente.")
+        print(f"Aviso: el vídeo aún no responde en {url}; intento publicar igualmente.")
     from . import social
-    res = social.publish_image(url, caption)
+    res = social.publish_reel(url, caption)
     mid = res.get("id")
     perma = ""
     try:
