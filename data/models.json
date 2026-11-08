@@ -924,7 +924,8 @@
 "trox125": "T ROX 125",
 "tt125": "TT 125",
 "tt555": "TT 555",
-"urban125": "Urban 125"
+"urban125": "Urban 125",
+"xrs125": "XRS 125"
 },
 "Montesa": {
 "4ride": "4RIDE",
@@ -1187,6 +1188,7 @@
 "drz4s": "DR Z4S",
 "gladius650": "Gladius 650",
 "gs500": "GS 500",
+"gs500e": "GS 500 E",
 "gsf1250bandit": "GSF 1250 Bandit",
 "gsf600bandit": "GSF 600 Bandit",
 "gsf600bandits": "GSF 600 Bandit S",
