@@ -93,12 +93,14 @@ def pick_comparativa(used):
             if o["src"] not in per or o["p"] < per[o["src"]]["p"]:
                 per[o["src"]] = o
         shoplist = sorted(per.values(), key=lambda o: o["p"])[:4]
+        # En redes NO nombramos las tiendas (A/B/C, A = la más barata): sin publi gratis y
+        # con intriga para que entren a mootle.es a ver dónde está. En la web sí se nombran.
         cand.append({"mid": mid, "n": len(shops), "spread": offs[-1]["p"] - best["p"],
                      "d": {"kind": "comparativa", "title": f'{best["mk"]} {best["md"]}'[:48],
                            "cat": CAT_NAMES.get(best["cat"], best["cat"]), "img": img,
                            "min": best["p"], "n": len(shops),
-                           "shops": [{"name": sources.get(o["src"], {}).get("name", o["src"]), "p": o["p"]}
-                                     for o in shoplist]}})
+                           "shops": [{"name": f"Tienda {chr(65 + i)}", "p": o["p"]}
+                                     for i, o in enumerate(shoplist)]}})
     if not cand:
         return None
     cand.sort(key=lambda c: (-c["n"], -c["spread"]))
@@ -124,12 +126,15 @@ def pick_chollo(used):
         t = (it.get("t") or f'{it.get("mk","")} {it.get("md","")}').strip()
         if it.get("y"):
             t = f'{t} {it["y"]}'
+        shop = "motos.net" if it.get("src") == "motosnet" else (it.get("src") or "").replace("-", " ").title()
         cand.append({"id": it["id"], "save": pa - p, "pct": pct,
-                     "d": {"kind": "chollo", "cat": "Moto de ocasión", "title": t[:46],
+                     "d": {"kind": "chollo", "cat": "Moto de ocasión", "title": t[:46], "shop": shop,
                            "img": it["img"], "p": p, "was": pa, "save": pa - p, "pct": pct},
                      "tags": TAGS_MOTO})
     # equipación que ha bajado (p0 tachado o pa detectado)
-    for it in load(EQUIP, {}).get("items", []):
+    eqdata = load(EQUIP, {})
+    eqsrc = eqdata.get("sources", {})
+    for it in eqdata.get("items", []):
         p = it.get("p")
         ref = max(it.get("p0") or 0, it.get("pa") or 0)
         if not (p and ref > p and it.get("img")) or it.get("id") in used:
@@ -139,17 +144,19 @@ def pick_chollo(used):
         pct = round((ref - p) * 100 / ref)
         if pct < 10 or pct > 55:
             continue
+        shop = eqsrc.get(it["src"], {}).get("name", it["src"])
         cand.append({"id": it["id"], "save": ref - p, "pct": pct,
                      "d": {"kind": "chollo", "cat": CAT_NAMES.get(it["cat"], it["cat"]),
-                           "title": f'{it["mk"]} {it["md"]}'[:46], "img": it["img"],
+                           "title": f'{it["mk"]} {it["md"]}'[:46], "img": it["img"], "shop": shop,
                            "p": p, "was": ref, "save": ref - p, "pct": pct},
                      "tags": TAGS_EQUIP})
     if not cand:
         return None
     cand.sort(key=lambda c: (-c["pct"], -c["save"]))
     c = cand[0]
+    tienda = f' en {c["d"]["shop"]}' if c["d"].get("shop") else ""
     cap = (f'🔥 CHOLLO · {c["d"]["title"]}\n'
-           f'Ha bajado a {c["d"]["p"]} € (antes {c["d"]["was"]} €, −{c["pct"]}%). '
+           f'Ha bajado a {c["d"]["p"]} € (antes {c["d"]["was"]} €, −{c["pct"]}%){tienda}. '
            f'Ficha e histórico en mootle.es 👉\n\n' + c["tags"])
     return c["id"], c["d"], cap
 

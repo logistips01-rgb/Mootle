@@ -90,10 +90,11 @@ function renderPost(d){
     badge.textContent="CHOLLO DEL DÍA";
     var save=d.save?('<span class="save">−'+eur(d.save)+(d.pct?' · '+d.pct+'%':'')+'</span>'):'';
     var was=d.was?('<span class="was">'+eur(d.was)+'</span>'):'';
-    mid.innerHTML='<div class="kicker">'+(d.cat||"Oferta")+'</div>'
+    mid.innerHTML='<div class="kicker">'+(d.cat||"Oferta")+(d.shop?' · '+d.shop:'')+'</div>'
       +'<h1>'+d.title+'</h1>'
       +img(d.img)
-      +'<div class="row"><span class="price">'+eur(d.p)+'</span>'+was+save+'</div>';
+      +'<div class="row"><span class="price">'+eur(d.p)+'</span>'+was+save+'</div>'
+      +(d.shop?'<div class="sub">en '+d.shop+'</div>':'');
     cta.textContent="Verlo en mootle.es";
   }
 }
