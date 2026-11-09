@@ -167,8 +167,11 @@ def merge(old_items, results, today):
         if it["id"] in out:
             continue
         found, info = results.get(it["src"], (None, None))
-        if info and info.get("complete") and info.get("status") == "ok":
-            continue  # la fuente se ha leído entera y ya no está: vendida
+        # Solo damos por "vendido" lo que desaparece si la fuente se leyó entera, sin error Y
+        # devolvió algún anuncio. Si devuelve 0 (caída/anti-bot/página vacía que no se detecta
+        # como challenge), NO borramos su stock: una tienda no vende 100 motos de golpe.
+        if info and info.get("complete") and info.get("status") == "ok" and found:
+            continue  # la fuente se ha leído entera y este anuncio ya no está: vendido
         days = getattr(SOURCES.get(it["src"]), "DROP_AFTER_DAYS", DROP_AFTER_DAYS)
         if it.get("ls", today) >= (date.fromisoformat(today) - timedelta(days=days)).isoformat():
             out[it["id"]] = it
