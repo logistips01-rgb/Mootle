@@ -63,6 +63,27 @@ def _is_accessory(title):
     return bool(_ACC.search(t))
 
 
+def _pin_status(body_html):
+    """A partir de la descripción de la tienda: '¿lleva pinlock (antivaho)?'
+    -> 'incluido' (viene con el inserto), 'preparado' (compatible, se compra aparte) o None."""
+    if not body_html:
+        return None
+    t = re.sub(r"<[^>]+>", " ", _html.unescape(body_html)).lower()
+    t = re.sub(r"\s+", " ", t)
+    if "pinlock" not in t:
+        return None
+    incl = re.search(r"(inserto|lente|l[aá]mina|lamina|visera)\s+(antivaho\s+)?.{0,12}pinlock"
+                     r"|pinlock[^.]{0,25}(incluid|incorpora|de serie)"
+                     r"|(incluye|incorpora|con)\s+(un\s+)?(inserto\s+)?pinlock", t)
+    ready = re.search(r"(preparad\w*|compatible|lista?\w*|apta?|pre.?instal\w*)\s+(para\s+)?"
+                      r"(el\s+)?(sistema\s+)?(antivaho\s+)?pinlock|pinlock\s*(ready|compatible)", t)
+    if incl:
+        return "incluido"
+    if ready:
+        return "preparado"
+    return None
+
+
 def _tok(w):
     return w if (any(c.isdigit() for c in w) or len(w) <= 3) else w.capitalize()
 
@@ -132,6 +153,10 @@ def read_shopify(fetcher, store):
                 "img": img,
                 "mid": f"{slug(brand)}-{slug(model)}-{cat}",
             }
+            if cat == "casco":
+                pin = _pin_status(p.get("body_html"))
+                if pin:
+                    listing["pin"] = pin
             found[listing["id"]] = listing
     return list(found.values()), {"name": store["name"], "home": store["home"], "status": "ok", "count": len(found), "complete": pages > 0}
 

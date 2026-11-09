@@ -75,6 +75,11 @@ form.search .btn { border-radius: 999px; min-height: 48px; padding: 0 26px; font
 .btn:hover { background: var(--accent-hover); color: var(--on-accent); }
 .btn.ghost { background: var(--surface-1); color: var(--text-primary); border: 1px solid var(--border-strong); margin-left: 8px; }
 .btn.ghost:hover { background: var(--surface-1); border-color: var(--accent); color: var(--accent); }
+.pinbadge { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 700; padding: 6px 12px; border-radius: 999px;
+            background: var(--surface-1); color: var(--text-secondary); border: 1px solid var(--border-strong); }
+.pinbadge small { font-weight: 500; color: var(--text-muted); }
+.pinbadge.yes { background: #16a34a; color: #fff; border-color: #16a34a; }
+.card .pintag { color: #16a34a; font-weight: 700; }
 .quick { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 18px; align-items: center; }
 .pill { font: inherit; font-size: 14px; color: var(--text-secondary); text-decoration: none; background: var(--surface-1); border: 1px solid var(--border-strong);
         border-radius: 999px; padding: 6px 14px; cursor: pointer; }

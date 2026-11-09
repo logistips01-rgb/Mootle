@@ -40,11 +40,13 @@ def groups_of(items):
         offers = uniq
         best = offers[0]
         prices = [m["p"] for m in offers]
+        pins = {m.get("pin") for m in offers if m.get("pin")}
+        pin = "incluido" if "incluido" in pins else ("preparado" if "preparado" in pins else None)
         out[mid] = {"mid": mid, "mk": best["mk"], "md": best["md"], "cat": best["cat"],
                     "offers": offers, "best": best, "n": len(offers),
                     "min": best["p"], "max": max(prices), "med": int(statistics.median(prices)),
                     "img": next((m["img"] for m in offers if m.get("img")), None),
-                    "webs": sorted({m["src"] for m in offers})}
+                    "webs": sorted({m["src"] for m in offers}), "pin": pin}
     return out
 
 
@@ -70,12 +72,14 @@ def _card(g):
     s = _saving(g)
     if s > 0:
         drop = f'<span class="drop">−{eur(s)}</span>'
+    tiendas = f' · {len(g["webs"])} tiendas' if len(g["webs"]) > 1 else ""
+    pintag = ' · <span class="pintag">Pinlock</span>' if g.get("pin") == "incluido" else ""
+    foot = f'{g["n"]} oferta{"s" if g["n"] > 1 else ""}{tiendas}{pintag}'
     return (f'<a class="card eq" href="{g["mid"]}.html"><div class="photo">{img}{drop}</div><div class="body">'
             f'<span class="brand">{e(g["mk"])} · {e(CAT_NAMES.get(g["cat"], g["cat"]).rstrip("s"))}</span>'
             f'<span class="name">{e(g["md"])[:60]}</span>'
             f'<span class="price"><strong>{eur(g["min"])}</strong></span>'
-            f'<span class="foot">{g["n"]} oferta{"s" if g["n"] > 1 else ""}'
-            f'{" · " + str(len(g["webs"])) + " tiendas" if len(g["webs"]) > 1 else ""}</span></div></a>')
+            f'<span class="foot">{foot}</span></div></a>')
 
 
 def _sim_card(it, ref, sources):
@@ -128,6 +132,11 @@ def _similars(g, cat_items, limit=8):
 def product_page(g, sources, history, cat_items=()):
     name = _name(g)
     catn = CAT_NAMES.get(g["cat"], g["cat"]).rstrip("s")
+    pin_badge = ""
+    if g.get("pin") == "incluido":
+        pin_badge = '<p><span class="pinbadge yes">🛡️ Pinlock incluido</span></p>'
+    elif g.get("pin") == "preparado":
+        pin_badge = '<p><span class="pinbadge">Preparado para Pinlock <small>(se compra aparte)</small></span></p>'
     title = f"{name} al mejor precio · equipación · mootle"
     desc = (f"{name} ({catn.lower()} de moto) desde {eur(g['min'])}" +
             (f" comparando {len(g['webs'])} tiendas" if len(g["webs"]) > 1 else "") +
@@ -165,6 +174,7 @@ def product_page(g, sources, history, cat_items=()):
       <span class="kicker">{e(g['mk'])} · {e(catn)}</span>
       <h1 class="display">{e(name)}</h1>
       <p class="sub">{g['n']} oferta{'s' if g['n'] > 1 else ''}{f" en {len(g['webs'])} tiendas" if len(g['webs']) > 1 else ''}. Desde {eur(g['min'])}.</p>
+      {pin_badge}
       <p><a class="btn" href="{e(g['best']['url'])}" target="_blank" rel="sponsored nofollow noopener noreferrer">Ver la más barata ↗</a>
       <a class="btn ghost" href="{_amazon(f'{name} {catn.lower()}')}" target="_blank" rel="sponsored nofollow noopener noreferrer">Buscar en Amazon ↗</a></p>
     </div>
@@ -323,7 +333,8 @@ def build(data, history):
             changed += 1
     # índice ligero para el buscador de equipación (cliente)
     idx = [{"mid": g["mid"], "mk": g["mk"], "md": g["md"], "cat": g["cat"], "p": g["min"],
-            "n": g["n"], "w": len(g["webs"]), "img": g["img"]} for g in groups.values()]
+            "n": g["n"], "w": len(g["webs"]), "img": g["img"], **({"pin": g["pin"]} if g.get("pin") else {})}
+           for g in groups.values()]
     idx.sort(key=lambda x: (-x["w"], -x["n"], x["p"]))
     write(DIR / "buscador.json", json.dumps(idx, ensure_ascii=False, separators=(",", ":")))
     urls = [f"{SITE}/equipacion/"] + [f"{SITE}/equipacion/{cat}.html" for cat in sorted(by_cat)] + \
