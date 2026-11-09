@@ -146,6 +146,7 @@
 "r1300rs": "R 1300 RS",
 "r1300rt": "R 1300 RT",
 "r18": "R 18",
+"r850": "R 850",
 "r850gs": "R 850 GS",
 "r850r": "R 850 R",
 "rninet": "R Ninet",
@@ -963,6 +964,7 @@
 },
 "Moto Morini": {
 "excalibur501": "Excalibur 501",
+"seiemmezzo": "Seiemmezzo",
 "xcape": "X Cape",
 "xcape1200": "X Cape 1200",
 "xcape700": "X Cape 700"
@@ -1333,6 +1335,7 @@
 "elettrica": "Elettrica",
 "et4125": "ET4 125",
 "gts125": "GTS 125",
+"gts250ie": "GTS 250 IE",
 "gts300": "GTS 300",
 "gts300iesuper": "GTS 300 IE Super",
 "gts310e5": "GTS 310 E5",
@@ -1521,6 +1524,7 @@
 "zs62026enasturias10223828htm": "ZS6 2026 EN Asturias 10223828.HTM"
 },
 "Zero": {
+"dsrblackforest": "DSR Black Forest",
 "fxzf": "FX ZF"
 },
 "Zitmuv": {
