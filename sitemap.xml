@@ -517,7 +517,6 @@
   <url><loc>https://mootle.es/m/bmw-r-1150-rt-2001.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-r-1150-rt-2002.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-r-1150-rt-2003.html</loc></url>
-  <url><loc>https://mootle.es/m/bmw-r-12-2003.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-r-12-2006.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-r-12-2024.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-r-12-2025.html</loc></url>
@@ -528,6 +527,7 @@
   <url><loc>https://mootle.es/m/bmw-r-12-ninet-2025.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-r-12-ninet-2026.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-r-12-s-2025.html</loc></url>
+  <url><loc>https://mootle.es/m/bmw-r-1200-c-2003.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-r-1200-c-classic-2003.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-r-1200-cl-2003.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-r-1200-gs-105cv-2007.html</loc></url>
@@ -2338,6 +2338,7 @@
   <url><loc>https://mootle.es/m/macbor-shifter-125-evo-2026.html</loc></url>
   <url><loc>https://mootle.es/m/macbor-xr-5-montana-2022.html</loc></url>
   <url><loc>https://mootle.es/m/malaguti-drakon-125-2024.html</loc></url>
+  <url><loc>https://mootle.es/m/malaguti-dune-125-x-2022.html</loc></url>
   <url><loc>https://mootle.es/m/malaguti-spidermax-gt-500-2006.html</loc></url>
   <url><loc>https://mootle.es/m/malaguti-xtm-125-2023.html</loc></url>
   <url><loc>https://mootle.es/m/mash-five-hundred-2019.html</loc></url>
@@ -2378,6 +2379,7 @@
   <url><loc>https://mootle.es/m/mitt-t-rox-125-2025.html</loc></url>
   <url><loc>https://mootle.es/m/mitt-t-rox-125-2026.html</loc></url>
   <url><loc>https://mootle.es/m/mitt-tt-125-2026.html</loc></url>
+  <url><loc>https://mootle.es/m/mitt-tt-530-2023.html</loc></url>
   <url><loc>https://mootle.es/m/mitt-tt-555-2024.html</loc></url>
   <url><loc>https://mootle.es/m/mitt-tt-555-2026.html</loc></url>
   <url><loc>https://mootle.es/m/mitt-ty125t-rox-2026.html</loc></url>
@@ -3025,6 +3027,7 @@
   <url><loc>https://mootle.es/m/sym-joymax-125-2016.html</loc></url>
   <url><loc>https://mootle.es/m/sym-joymax-125i-2016.html</loc></url>
   <url><loc>https://mootle.es/m/sym-joymax-125i-2017.html</loc></url>
+  <url><loc>https://mootle.es/m/sym-joymax-300i-2016.html</loc></url>
   <url><loc>https://mootle.es/m/sym-joymax-z-300-2026.html</loc></url>
   <url><loc>https://mootle.es/m/sym-joyride-300-2023.html</loc></url>
   <url><loc>https://mootle.es/m/sym-maxsym-400-2016.html</loc></url>
@@ -3719,6 +3722,7 @@
   <url><loc>https://mootle.es/m/yamaha-xt-1200-z-super-tenere-2015.html</loc></url>
   <url><loc>https://mootle.es/m/yamaha-xt-1200-z-super-tenere-2017.html</loc></url>
   <url><loc>https://mootle.es/m/yamaha-xt-1200-z-super-tenere-worldcrosser-2013.html</loc></url>
+  <url><loc>https://mootle.es/m/yamaha-xt-600-e-1999.html</loc></url>
   <url><loc>https://mootle.es/m/yamaha-xt-660-r-2008.html</loc></url>
   <url><loc>https://mootle.es/m/yamaha-xt-660-re-2004.html</loc></url>
   <url><loc>https://mootle.es/m/yamaha-xt-660-re-2005.html</loc></url>

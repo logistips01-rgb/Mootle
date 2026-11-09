@@ -106,6 +106,7 @@
 "r1150rrockster": "R 1150 R Rockster",
 "r1150rt": "R 1150 RT",
 "r12": "R 12",
+"r1200c": "R 1200 C",
 "r1200cclassic": "R 1200 C Classic",
 "r1200cl": "R 1200 CL",
 "r1200gs": "R 1200 GS",
@@ -897,6 +898,7 @@
 },
 "Malaguti": {
 "drakon125": "Drakon 125",
+"dune125x": "Dune 125 X",
 "spidermaxgt500": "Spidermax GT 500",
 "xtm125": "XTM 125"
 },
@@ -928,6 +930,7 @@
 "rt50": "RT 50",
 "trox125": "T ROX 125",
 "tt125": "TT 125",
+"tt530": "TT 530",
 "tt555": "TT 555",
 "urban125": "Urban 125",
 "xrs125": "XRS 125"
@@ -1139,6 +1142,7 @@
 "jetx125": "JET X 125",
 "joymax125": "Joymax 125",
 "joymax125i": "Joymax 125I",
+"joymax300i": "Joymax 300I",
 "joymaxz300": "Joymax Z 300",
 "joyride300": "Joyride 300",
 "maxsym400": "Maxsym 400",
@@ -1484,6 +1488,7 @@
 "xsr900gp": "XSR 900 GP",
 "xt1200zsupertenere": "XT 1200 Z Super Tenere",
 "xt1200zsupertenereworldcrosser": "XT 1200 Z Super Tenere Worldcrosser",
+"xt600e": "XT 600 E",
 "xt660r": "XT 660 R",
 "xt660re": "XT 660 RE",
 "xt660x": "XT 660 X",
