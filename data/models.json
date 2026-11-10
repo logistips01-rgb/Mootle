@@ -87,6 +87,7 @@
 "k1200rsport": "K 1200 R Sport",
 "k1200s": "K 1200 S",
 "k1300gt": "K 1300 GT",
+"k1300r": "K 1300 R",
 "k1600": "K 1600",
 "k1600grandamerica": "K 1600 Grand America",
 "k1600gt": "K 1600 GT",
@@ -208,6 +209,9 @@
 },
 "Buell": {
 "1125r": "1125 R"
+},
+"Bultaco": {
+"metralla250gts": "Metralla 250 GTS"
 },
 "CFMoto": {
 "1000mtx": "1000 MT X",
@@ -954,6 +958,7 @@
 "california1400touring": "California 1400 Touring",
 "griso8v": "Griso 8 V",
 "grisov1100": "Griso V1100",
+"lemans850": "LE Mans 850",
 "stelvio": "Stelvio",
 "v100mandello": "V100 Mandello",
 "v65650": "V 65 650",
@@ -1250,7 +1255,8 @@
 "vstrom1050": "V Strom 1050",
 "vstrom650": "V Strom 650",
 "vstrom650xt": "V Strom 650 XT",
-"vstrom800": "V Strom 800"
+"vstrom800": "V Strom 800",
+"xf650freewind": "XF 650 Freewind"
 },
 "TM": {
 "en125": "EN 125"
