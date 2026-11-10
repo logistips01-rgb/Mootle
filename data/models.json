@@ -1118,6 +1118,7 @@
 "bullet350": "Bullet 350",
 "bulletclassic": "Bullet Classic",
 "classic": "Classic",
+"classic350": "Classic 350",
 "classic650": "Classic 650",
 "continentalgt650": "Continental GT 650",
 "guerrilla450": "Guerrilla 450",
@@ -1406,7 +1407,8 @@
 "stormr125sport": "Storm R 125 Sport",
 "stormr300": "Storm R 300",
 "storms300": "Storm S 300",
-"stormt125": "Storm T 125"
+"stormt125": "Storm T 125",
+"stormv125": "Storm V 125"
 },
 "Yadea": {
 "c1spro": "C1S PRO",
@@ -1508,6 +1510,7 @@
 "xv250virago": "XV 250 Virago",
 "xv535dxvirago": "XV 535 DX Virago",
 "xv535virago": "XV 535 Virago",
+"xv950": "XV 950",
 "xv950boltracer": "XV950 Bolt Racer",
 "xv950r": "XV 950R",
 "xvs1100adragstarclassic": "XVS 1100 A Drag Star Classic",
