@@ -582,6 +582,7 @@
 "vtx1800": "VTX 1800",
 "xadv": "X ADV",
 "xl750transalp": "XL 750 Transalp",
+"xl750transalpecluth": "XL 750 Transalp E Cluth",
 "xr250": "XR 250",
 "xr400r": "XR 400 R"
 },
@@ -910,6 +911,7 @@
 "xtm125": "XTM 125"
 },
 "Mash": {
+"blackseven": "Black Seven",
 "fivehundred": "Five Hundred",
 "seventyfive": "Seventy Five"
 },
