@@ -795,6 +795,7 @@
 "rks125sport": "RKS 125 Sport",
 "rkv125": "RKV 125",
 "sixties300": "Sixties 300",
+"superlight125": "Superlight 125",
 "tx125s": "TX 125 S",
 "v302c": "V 302 C",
 "vcruise125": "V Cruise 125",
@@ -959,9 +960,12 @@
 "Morbidelli Mbp": {
 "c1002v": "C 1002 V",
 "f352": "F 352",
+"n125v": "N 125 V",
 "nr125x": "NR 125 X",
 "sc125": "SC 125",
-"t1002vx": "T1002VX"
+"t1002vx": "T1002VX",
+"t352x": "T 352 X",
+"t502x": "T 502 X"
 },
 "Moto Guzzi": {
 "california1100": "California 1100",
@@ -1133,6 +1137,7 @@
 "classic350": "Classic 350",
 "classic650": "Classic 650",
 "continentalgt650": "Continental GT 650",
+"continentalgt650120aniversario": "Continental GT 650 120 Aniversario",
 "guerrilla450": "Guerrilla 450",
 "himalayan410": "Himalayan 410",
 "himalayan450": "Himalayan 450",
