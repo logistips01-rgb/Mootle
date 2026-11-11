@@ -341,6 +341,7 @@
 "ec450f": "EC 450 F",
 "es700": "ES 700",
 "tx200": "TX 200",
+"txtgp300": "TXT GP 300",
 "txtracing300": "TXT Racing 300"
 },
 "Generic": {
@@ -679,6 +680,7 @@
 "450excfsixdays": "450 EXC F SIX Days",
 "450rallyreplica": "450 Rally Replica",
 "450sxf": "450 SX F",
+"609adventure": "609 Adventure",
 "690duke": "690 Duke",
 "690duker": "690 Duke R",
 "690enduro": "690 Enduro",
@@ -1191,6 +1193,9 @@
 "Silence": {
 "s01": "S 01",
 "s02": "S 02"
+},
+"Stark Future": {
+"varg": "Varg"
 },
 "Super Soco": {
 "tcmax": "TC MAX"
