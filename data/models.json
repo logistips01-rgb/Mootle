@@ -351,7 +351,8 @@
 },
 "Hanway": {
 "raw125": "RAW 125",
-"raw125sr": "RAW 125 SR"
+"raw125sr": "RAW 125 SR",
+"sc125s": "SC 125 S"
 },
 "Harley-Davidson": {
 "breakout": "Breakout",
@@ -577,6 +578,7 @@
 "vfr800f": "VFR 800F",
 "vfr800fi": "VFR 800 FI",
 "vision110": "Vision 110",
+"vt600c": "VT 600 C",
 "vt750c2shadow": "VT 750 C2 Shadow",
 "vt750cshadow": "VT 750 C Shadow",
 "vt750s": "VT 750 S",
@@ -1143,6 +1145,7 @@
 },
 "SWM": {
 "aceofspades125": "ACE OF Spades 125",
+"outlaw500": "Outlaw 500",
 "silvervaset650": "Silver Vase T 650"
 },
 "SYM": {
@@ -1428,6 +1431,7 @@
 },
 "Yamaha": {
 "aerox50": "Aerox 50",
+"aerox50r": "Aerox 50 R",
 "bt1100bulldog": "BT 1100 Bulldog",
 "delight125": "Delight 125",
 "dt125": "DT 125",
