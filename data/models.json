@@ -398,6 +398,7 @@
 "softailheritagesoftailclassic": "Softail Heritage Softail Classic",
 "softailnighttrain": "Softail Night Train",
 "softailslim": "Softail Slim",
+"softailsoftailcustom": "Softail Softail Custom",
 "softailsoftaildeluxe": "Softail Softail Deluxe",
 "softailsoftaildeuce": "Softail Softail Deuce",
 "softailstandard": "Softail Standard",
@@ -932,6 +933,7 @@
 "775r": "775 R",
 "808big": "808 BIG",
 "808traverler": "808 Traverler",
+"adv125": "ADV 125",
 "advpro125": "ADV PRO 125",
 "advxtreme125": "ADV Xtreme 125",
 "desert125": "Desert 125",
@@ -1183,6 +1185,7 @@
 "symphony125dd": "Symphony 125 DD",
 "symphony125sr": "Symphony 125 SR",
 "symphony50": "Symphony 50",
+"symphonyst125": "Symphony ST 125",
 "symphonystlc125": "Symphony ST LC 125"
 },
 "Seat": {
