@@ -195,6 +195,7 @@
 "trl902xplorer": "TRL 902 Xplorer"
 },
 "Beta": {
+"rr250enduro2t": "RR 250 Enduro 2T",
 "rrracing4t": "RR Racing 4T"
 },
 "Bimota": {
@@ -435,6 +436,7 @@
 "touringroadking": "Touring Road King",
 "touringroadkingclassic": "Touring Road King Classic",
 "touringstreetglide": "Touring Street Glide",
+"trikeultraclassiclimited": "Trike Ultra Classic Limited",
 "ultralimited": "Ultra Limited",
 "vrscavrod": "Vrsca V ROD",
 "vrscnightrod": "Vrsc Night ROD",
@@ -1156,7 +1158,8 @@
 "SWM": {
 "aceofspades125": "ACE OF Spades 125",
 "outlaw500": "Outlaw 500",
-"silvervaset650": "Silver Vase T 650"
+"silvervaset650": "Silver Vase T 650",
+"stormbrakerv1200": "Stormbraker V 1200"
 },
 "SYM": {
 "adx300": "ADX 300",
