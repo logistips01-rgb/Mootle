@@ -14,8 +14,8 @@ registro en su web; abajo van (A) los pasos y (B) los textos listos para pegar.
 2. Datos: elige país **España**, web **https://mootle.es**, tipo de publisher
    **"Comparador / Shopping / Content"**.
 3. Descripción del sitio → pega el **texto B.1**.
-4. Awin pide un **depósito reembolsable de ~5 $** (se devuelve con las primeras
-   comisiones) y validar la cuenta. Datos fiscales a tu nombre/empresa.
+4. Validar la cuenta (datos fiscales a tu nombre/empresa). **Sin depósito** en el alta
+   de España (a Manuel no se lo han pedido; antes pedían 5 $ reembolsables).
 5. Una vez dentro: **"Advertisers" → buscar** cada anunciante → **"Join programme"** y
    pega el mensaje de solicitud (textos B.2).
 6. Cuando aprueben: **"Links & Tools → Link Builder"**, pega la URL de destino, genera

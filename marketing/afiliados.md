@@ -69,9 +69,9 @@ muchos anunciantes. Prioridad por nº de anunciantes de moto relevantes:
 | **TradeTracker** | Motardinn, otras | `pendiente` | Deeplink + subid (`ref`). |
 | **FlexOffers** | FC-Moto, Motocard (genéricos) | `pendiente` (plan B) | Solo si la red nativa no aprueba. |
 
-> Awin pide normalmente un **depósito reembolsable de 5 $** al registrar el publisher
-> y una pequeña validación del sitio. mootle.es (web real, con tráfico y catálogo)
-> cumple el perfil sin problema.
+> Awin **ya no pide depósito** en el alta de publisher en España (antes pedía uno
+> reembolsable de 5 $; a Manuel no se lo han pedido). Solo una pequeña validación del
+> sitio, que mootle.es (web real, con tráfico y catálogo) cumple sin problema.
 
 ---
 
@@ -81,7 +81,7 @@ Orden recomendado para Manuel. "Esfuerzo" es lo que cuesta ponerlo a facturar.
 
 | # | Objetivo | Vía de monetización | Por qué ahora | Esfuerzo |
 |---|---|---|---|---|
-| 1 | **Alta de mootle en Awin** | Red (abre Línea Directa + más) | Llave maestra: un alta desbloquea el lead de seguros mejor pagado | Bajo (1 alta + depósito 5 $) |
+| 1 | **Alta de mootle en Awin** | Red (abre Línea Directa + más) | Llave maestra: un alta desbloquea el lead de seguros mejor pagado | Bajo (1 alta, sin depósito) |
 | 2 | **Línea Directa (seguros)** vía Awin | CPL ~8 €/lead | Ya la listamos en `/seguros`; solo falta el enlace de afiliado | Bajo (solicitar anunciante + cablear 1 enlace) |
 | 3 | **Rastreator (seguros)** | CPL alto | Contacto directo conocido; comparador = lead de alto valor | Bajo (1 correo) |
 | 4 | **outletmotard** (equipación) | Shopify feed + afiliación directa | Scrapeable **ya** como fuente aunque no haya acuerdo; 1.000 productos Alpinestars | Bajo-medio (1 correo + integrar feed) |
@@ -102,8 +102,8 @@ SEO → tiendas Shopify se integran como fuente **aunque no haya afiliación tod
 
 ## 4. Decisiones que necesito de Manuel
 
-1. **¿Damos de alta mootle en Awin?** (incluye depósito reembolsable de ~5 $ y aceptar
-   términos — esto lo haces tú, yo te guío paso a paso). Es el paso que más desbloquea.
+1. **¿Damos de alta mootle en Awin?** (sin depósito; solo aceptar términos y validar el
+   sitio — esto lo haces tú, yo te guío paso a paso). Es el paso que más desbloquea.
 2. **¿Email de contacto público de mootle** para la correspondencia de afiliación?
    (p. ej. `info@mootle.es`). Los borradores llevan un hueco `[email de contacto]`.
 3. **¿Enviamos ya** los borradores a outletmotard y a Rastreator, y reactivamos los de
