@@ -246,6 +246,7 @@
 "battlo125": "Battlo 125",
 "ra600": "RA 600",
 "rt3s": "RT 3 S",
+"rx1pro": "RX1 PRO",
 "rx2": "RX2",
 "rx4": "RX4",
 "rx6": "RX6",
@@ -276,6 +277,7 @@
 "diavel1198": "Diavel 1198",
 "diaveldark": "Diavel Dark",
 "diavelv4": "Diavel V4",
+"gt1000": "GT 1000",
 "hypermotard": "Hypermotard",
 "hypermotard698mono": "Hypermotard 698 Mono",
 "hypermotard796": "Hypermotard 796",
@@ -450,8 +452,10 @@
 },
 "Honda": {
 "adv350": "ADV 350",
+"cb1000gt": "CB 1000 GT",
 "cb1000hornet": "CB 1000 Hornet",
 "cb1000r": "CB 1000R",
+"cb1100": "CB1100",
 "cb125": "CB 125",
 "cb125r": "CB 125 R",
 "cb1300": "CB 1300",
@@ -1108,6 +1112,9 @@
 "srv300": "SRV 300",
 "srv600v": "SRV 600 V",
 "trx125": "TRX 125"
+},
+"Quadro": {
+"qv3": "QV3"
 },
 "Rieju": {
 "adventurarally307": "Adventura Rally 307",
