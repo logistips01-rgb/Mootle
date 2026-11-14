@@ -2,7 +2,7 @@
 
 **Estado:** listo para enviar (lo envía Manuel).
 **Para:** formulario de contacto de outletmotard.es o su email comercial.
-**De:** [email de contacto de mootle, p. ej. info@mootle.es]
+**De:** mootle@guitle.com
 **Asunto:** Os estamos enviando tráfico desde mootle.es — ¿montamos feed + afiliación?
 
 ---
@@ -32,4 +32,4 @@ seguimiento correcto de las ventas que os generemos.
 
 Un saludo,
 Manuel — mootle.es
-[email de contacto de mootle]
+mootle@guitle.com

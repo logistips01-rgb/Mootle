@@ -41,7 +41,7 @@ en cada enlace nuevo, o las comisiones se mezclan con las de Guitle.
 
 | Marca | Web | Red / Programa | Estado | Parámetros | Comisión | Notas |
 |---|---|---|---|---|---|---|
-| **Línea Directa** | lineadirecta.com | **Awin** (merchant 11078) | `pendiente` → alta Awin + solicitar | CPL, `clickref=mootle`, IP española, ventana 30 d | **~8 €/lead** (verificar en Awin) | Lead = completar formulario y ver precios. Solo en una plataforma a la vez. Ya listada en `/seguros` **sin** enlace de afiliado. |
+| **Línea Directa** | lineadirecta.com | **Awin** (merchant 11078) | `solicitado` pendiente → **Join programme** (cuenta Awin ✅) | CPL, `clickref=mootle`, IP española, ventana 30 d | **~8 €/lead** (verificar en Awin) | Lead = completar formulario y ver precios. Solo en una plataforma a la vez. Ya listada en `/seguros` **sin** enlace de afiliado — cablear deeplink al aprobar. |
 | **Rastreator** | rastreator.com | Programa propio / partner | `pendiente` → contactar | — | CPL (alto) | Contacto: **afiliados@rastreator.com**. **Borrador listo:** `correos/rastreator-seguros.md`. |
 | **Acierto** | acierto.com | Por confirmar (red/propio) | `pendiente` | — | CPL | Alternativa/complemento a Rastreator. |
 
@@ -62,7 +62,7 @@ muchos anunciantes. Prioridad por nº de anunciantes de moto relevantes:
 
 | Red | Qué desbloquea para mootle | Estado | Cómo se saca el enlace/feed |
 |---|---|---|---|
-| **Awin** | Línea Directa (seguros, ~8 €/lead), Polo Motorrad, y muchos más | `pendiente` → dar de alta a mootle | Tras aprobación del anunciante: "Create a Link" → pegar deeplink + `&clickref=mootle`. Feed de productos en "Toolbox → Product Feeds". |
+| **Awin** | Línea Directa (seguros, ~8 €/lead), Polo Motorrad, y muchos más | `aprobado` ✅ (publisher de mootle creado; login `mootle@guitle.com`) | Tras aprobación del anunciante: "Create a Link" → pegar deeplink + `&clickref=mootle`. Feed de productos en "Toolbox → Product Feeds". |
 | **TradeDoubler** | Motoblouz, XLmoto, Motocard (histórico) | `pendiente` | Deeplink + parámetro `epi`/`a` para el subid (usar `mootle`). Feeds en "Product feeds". |
 | **Webgains** | FC-Moto (ES) | `pendiente` | Deeplink con `clickref=mootle`. |
 | **Belboon** | Tradeinn | `pendiente` | Deeplink + subid. |
@@ -81,8 +81,8 @@ Orden recomendado para Manuel. "Esfuerzo" es lo que cuesta ponerlo a facturar.
 
 | # | Objetivo | Vía de monetización | Por qué ahora | Esfuerzo |
 |---|---|---|---|---|
-| 1 | **Alta de mootle en Awin** | Red (abre Línea Directa + más) | Llave maestra: un alta desbloquea el lead de seguros mejor pagado | Bajo (1 alta, sin depósito) |
-| 2 | **Línea Directa (seguros)** vía Awin | CPL ~8 €/lead | Ya la listamos en `/seguros`; solo falta el enlace de afiliado | Bajo (solicitar anunciante + cablear 1 enlace) |
+| 1 | **Alta de mootle en Awin** | Red (abre Línea Directa + más) | Llave maestra: un alta desbloquea el lead de seguros mejor pagado | ✅ Hecho (login `mootle@guitle.com`) |
+| 2 | **Línea Directa (seguros)** vía Awin | CPL ~8 €/lead | Ya la listamos en `/seguros`; solo falta el enlace de afiliado | **Siguiente**: Join programme → deeplink → cablear 1 enlace |
 | 3 | **Rastreator (seguros)** | CPL alto | Contacto directo conocido; comparador = lead de alto valor | Bajo (1 correo) |
 | 4 | **outletmotard** (equipación) | Shopify feed + afiliación directa | Scrapeable **ya** como fuente aunque no haya acuerdo; 1.000 productos Alpinestars | Bajo-medio (1 correo + integrar feed) |
 | 5 | **FC-Moto** vía Webgains | CPA ~6 % | Catálogo enorme, envía a ES, red clara y activa | Medio (alta Webgains + solicitar + enlaces) |
@@ -102,13 +102,13 @@ SEO → tiendas Shopify se integran como fuente **aunque no haya afiliación tod
 
 ## 4. Decisiones que necesito de Manuel
 
-1. **¿Damos de alta mootle en Awin?** (sin depósito; solo aceptar términos y validar el
-   sitio — esto lo haces tú, yo te guío paso a paso). Es el paso que más desbloquea.
-2. **¿Email de contacto público de mootle** para la correspondencia de afiliación?
-   (p. ej. `info@mootle.es`). Los borradores llevan un hueco `[email de contacto]`.
-3. **¿Enviamos ya** los borradores a outletmotard y a Rastreator, y reactivamos los de
+1. ~~Alta en Awin~~ ✅ **Hecho** (publisher de mootle, login `mootle@guitle.com`).
+2. ~~Email de contacto~~ ✅ **mootle@guitle.com** (ya puesto en los borradores).
+3. **En Awin, solicitar Línea Directa**: Advertisers → "Línea Directa" → *Join programme*
+   (mensaje listo en `correos/alta-red-awin.md`, B.2). Al aprobar, sácame el **deeplink**.
+4. **¿Enviamos ya** los borradores a outletmotard y a Rastreator, y reactivamos los de
    Máximo/Albabike? (Los redacto/actualizo yo; los envías tú.)
-4. **outletmotard**: ¿quieres que prepare ya la integración como fuente Shopify
+5. **outletmotard**: ¿quieres que prepare ya la integración como fuente Shopify
    (`scraper/sources/shopify.py` / `scraper/equip.py`) **en una rama + PR**, en paralelo
    al contacto comercial? Se puede listar como fuente de precios sin esperar al acuerdo.
 

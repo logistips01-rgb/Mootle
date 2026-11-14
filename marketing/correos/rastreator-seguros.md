@@ -2,7 +2,7 @@
 
 **Estado:** listo para enviar (lo envía Manuel).
 **Para:** afiliados@rastreator.com
-**De:** [email de contacto de mootle, p. ej. info@mootle.es]
+**De:** mootle@guitle.com
 **Asunto:** Alta de afiliado — mootle.es (comparador de motos con sección de seguros)
 
 ---
@@ -29,4 +29,4 @@ que encaja muy bien. ¿Me podéis indicar los pasos para el alta?
 
 Gracias y un saludo,
 Manuel — mootle.es
-[email de contacto de mootle]
+mootle@guitle.com
