@@ -1,0 +1,80 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@600;700;800&family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--logo:#e8590c;--accent:#c2410c;--ink:#16150f;--bg:#faf7f2;--muted:#7a736a;--best:#16a34a;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{width:1080px;}
+  body{font-family:"Inter Tight",Inter,sans-serif;color:var(--ink);
+       background:radial-gradient(120% 90% at 50% 0%,#fff 0%,var(--bg) 55%,#f3ece2 100%);
+       min-height:1080px;display:flex;flex-direction:column;padding:60px 68px 56px;}
+  body.tall{min-height:1920px;padding:120px 80px 110px;}
+  /* header */
+  .top{display:flex;align-items:center;justify-content:space-between;}
+  .word{display:inline-flex;align-items:center;font-weight:800;letter-spacing:-.045em;line-height:1;font-size:66px;}
+  .word svg{width:1.53em;height:.8em;margin:0 .02em;position:relative;top:.06em;}
+  .word svg circle{stroke:var(--logo);}.word svg circle.hub{fill:var(--logo);stroke:none;}
+  .tagpill{font-family:Inter,sans-serif;font-weight:700;font-size:25px;color:var(--accent);
+           background:#fff;border:1px solid #f0d9c6;padding:12px 22px;border-radius:999px;}
+  /* hero */
+  .mid{flex:1;display:flex;flex-direction:column;justify-content:center;gap:30px;min-height:0;}
+  body.tall .mid{gap:64px;}
+  .kicker{font-family:Inter,sans-serif;font-weight:800;font-size:27px;color:var(--accent);
+          text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px;}
+  h1{font-weight:800;letter-spacing:-.02em;line-height:1.03;font-size:78px;}
+  body.tall h1{font-size:110px;}
+  h1 .hl{color:var(--logo);}
+  /* comparison card */
+  .card{background:#fff;border:1px solid #ecdfd0;border-radius:28px;padding:32px 40px;
+        box-shadow:0 30px 60px -32px rgba(40,22,5,.35);}
+  body.tall .card{padding:44px 48px;}
+  .model{font-family:Inter,sans-serif;font-weight:700;font-size:32px;color:#3a352e;
+         padding-bottom:20px;border-bottom:2px dashed #ecdfd0;}
+  .sites{list-style:none;display:flex;flex-direction:column;gap:12px;margin-top:18px;}
+  .site{display:flex;align-items:center;justify-content:space-between;gap:16px;
+        font-size:38px;padding:12px 18px;border-radius:16px;}
+  .site .nm{font-family:Inter,sans-serif;font-weight:600;color:#6c655b;}
+  .site .pr{font-weight:800;color:#6c655b;}
+  .site.best{background:#eafbef;border:2px solid var(--best);}
+  .site.best .nm{color:var(--ink);}
+  .site.best .pr{color:var(--best);font-size:44px;}
+  .flag{font-family:Inter,sans-serif;font-weight:800;font-size:22px;color:#fff;background:var(--best);
+        padding:6px 14px;border-radius:10px;margin-left:12px;white-space:nowrap;}
+  .also{font-family:Inter,sans-serif;font-weight:600;font-size:29px;color:var(--muted);text-align:center;white-space:nowrap;}
+  .also b{color:var(--ink);font-weight:800;}
+  /* footer cta */
+  .foot{display:flex;align-items:center;justify-content:space-between;gap:20px;}
+  .foot .url{font-family:Inter,sans-serif;font-weight:800;font-size:52px;color:var(--ink);}
+  .foot .cta{font-family:Inter,sans-serif;font-weight:800;font-size:30px;color:#fff;
+             background:var(--logo);padding:18px 30px;border-radius:999px;}
+</style></head>
+<body>
+  <div class="top">
+    <div class="word">m<svg viewBox="0 0 92 48" aria-hidden="true"><circle cx="22" cy="26" r="16" fill="none" stroke-width="8"/><circle cx="70" cy="26" r="16" fill="none" stroke-width="8"/><circle class="hub" cx="22" cy="26" r="4"/><circle class="hub" cx="70" cy="26" r="4"/></svg>tle</div>
+    <div class="tagpill">motos de ocasión</div>
+  </div>
+
+  <div class="mid">
+    <div>
+      <div class="kicker">Comparador de motos de ocasión</div>
+      <h1>La misma moto,<br>al <span class="hl">precio más bajo</span><br>de todas las webs</h1>
+    </div>
+
+    <div class="card">
+      <div class="model">Honda CB500F · 2021 · 12.000 km</div>
+      <ul class="sites">
+        <li class="site"><span class="nm">Web 1</span><span class="pr">6.490 €</span></li>
+        <li class="site"><span class="nm">Web 2</span><span class="pr">6.300 €</span></li>
+        <li class="site best"><span class="nm">Web 3 <span class="flag">la más barata</span></span><span class="pr">5.950 €</span></li>
+      </ul>
+    </div>
+
+    <div class="also">Y tu equipación: <b>casco · guantes · chaqueta · botas</b></div>
+  </div>
+
+  <div class="foot">
+    <span class="url">mootle.es</span>
+    <span class="cta">Gratis · sin registro</span>
+  </div>
+</body></html>
