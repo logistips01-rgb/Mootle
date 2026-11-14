@@ -23,6 +23,7 @@
 "rsv41100": "RSV4 1100",
 "rsv4factory": "RSV4 Factory",
 "rsv4rf": "RSV4 RF",
+"rsvmilletuono": "RSV Mille Tuono",
 "rx125": "RX 125",
 "shiver750": "Shiver 750",
 "shiver750gt": "Shiver 750 GT",
@@ -1392,6 +1393,7 @@
 "gts125": "GTS 125",
 "gts250ie": "GTS 250 IE",
 "gts300": "GTS 300",
+"gts300ie": "GTS 300 IE",
 "gts300iesuper": "GTS 300 IE Super",
 "gts310e5": "GTS 310 E5",
 "gtv310officina8euro5": "GTV 310 Officina 8 Euro 5",
@@ -1416,6 +1418,7 @@
 },
 "Voge": {
 "125r": "125 R",
+"300ac": "300 AC",
 "300ds": "300 DS",
 "300rally": "300 Rally",
 "350ac": "350 AC",
