@@ -196,6 +196,7 @@
 "trl902xplorer": "TRL 902 Xplorer"
 },
 "Beta": {
+"alp40": "ALP 40",
 "rr250enduro2t": "RR 250 Enduro 2T",
 "rrracing2t": "RR Racing 2T",
 "rrracing4t": "RR Racing 4T"
@@ -224,6 +225,7 @@
 "300clx": "300 CL X",
 "450mt": "450 MT",
 "450nk": "450 NK",
+"450sr": "450 SR",
 "650gt": "650 GT",
 "650mt": "650 MT",
 "675nk": "675 NK",
@@ -767,6 +769,7 @@
 "vulcans2016engranada10151514htm": "Vulcan S 2016 EN Granada 10151514.HTM",
 "vulcans2017enmadrid10169759htm": "Vulcan S 2017 EN Madrid 10169759.HTM",
 "vulcans2022enbarcelona10219342htm": "Vulcan S 2022 EN Barcelona 10219342.HTM",
+"w230": "W 230",
 "w800": "W 800",
 "w800sp": "W 800 SP",
 "z1000": "Z 1000",
@@ -1244,6 +1247,7 @@
 "burgmanstreet125": "Burgman Street 125",
 "dr350se": "DR 350 SE",
 "dr600djebel": "DR 600 Djebel",
+"dr750big": "DR 750 BIG",
 "drz400sm": "DR Z 400 SM",
 "drz4s": "DR Z4S",
 "gladius650": "Gladius 650",
@@ -1392,6 +1396,7 @@
 "94610aniversario": "946 10 Aniversario",
 "elettrica": "Elettrica",
 "et4125": "ET4 125",
+"granturismo125": "Gran Turismo 125",
 "gts125": "GTS 125",
 "gts250ie": "GTS 250 IE",
 "gts300": "GTS 300",
@@ -1420,6 +1425,7 @@
 },
 "Voge": {
 "125r": "125 R",
+"125rs": "125 RS",
 "300ac": "300 AC",
 "300ds": "300 DS",
 "300rally": "300 Rally",
