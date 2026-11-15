@@ -27,7 +27,7 @@ en cada enlace nuevo, o las comisiones se mezclan con las de Guitle.
 | **Amazon** | amazon.es | Amazon Afiliados | `cableado` ✅ | `tag=mootle-21` | Variable por categoría | Enlace neumáticos en ficha de moto + botón "Buscar en Amazon" en equipación. PA-API se desbloquea tras 3 ventas. `scraper/pages.py` (`AMAZON_TAG`). |
 | **Máximo Moto** | maximo-moto.com | Shopify (fuente de precios, **sin afiliación**) | `contactado` (borrador pendiente de enviar) | `/products.json` diario | — | Fuente de comparación ya integrada. Borrador para formalizar afiliación. |
 | **Albabike** | albabike.com | Propio / sin red (fuente de precios) | `contactado` (borrador pendiente de enviar) | Seed manual + scrape semanal | — | Fuente de comparación integrada; sin acuerdo de afiliación todavía. |
-| **outletmotard** | outletmotard.es | Shopify, **sin afiliación pública** | `pendiente` → contactar | `/products.json` (~1.000 prod. Alpinestars outlet) | — | Scrapeable ya como fuente. Pedir feed + comisión. **Borrador listo:** `correos/outletmotard.md`. |
+| **outletMOTARD** | outletmotard.es | Shopify, **sin afiliación pública** | fuente `cableado` ✅ (PR #1) · afiliación `pendiente` → contactar | `/products.json` (~788 prod.) | — | Integrada como fuente de precios (Scorpion, Alpinestars, HJC, Nox, CGM, Five…). Falta pedir feed oficial + afiliación. **Borrador listo:** `correos/outletmotard.md`. |
 | **FC-Moto** | fc-moto.es | **Webgains** (ES activo desde 2024) · también FlexOffers | `pendiente` → alta Webgains + solicitar | CPA, cookie 30 d, aprobación manual | ~6 % CPA | Catálogo enorme, envía a España. Buen primer anunciante no-Shopify. |
 | **Tradeinn / Motardinn** | motardinn.com | **Belboon** (Tradeinn, activo desde 2018) · Motardinn en TradeTracker | `pendiente` | — | 5–10 % (Motardinn, por confirmar) | Grupo español (Girona), multi-tienda. |
 | **Motocard** | motocard.com | **TradeDoubler** (MOTOCARD ES) | `solicitado` ⏳ (esperando aprobación en TD) | subid `epi=mootle` | ~4 % (ref. PT) | Al aprobar: pedir deeplink + feed de producto → cablear en mootle. |
@@ -85,7 +85,7 @@ Orden recomendado para Manuel. "Esfuerzo" es lo que cuesta ponerlo a facturar.
 | 1 | **Alta de mootle en Awin** | Red (abre Línea Directa + más) | Llave maestra: un alta desbloquea el lead de seguros mejor pagado | ✅ Hecho (login `mootle@guitle.com`) |
 | 2 | **Línea Directa (seguros)** vía Awin | CPL ~8 €/lead | Ya la listamos en `/seguros`; solo falta el enlace de afiliado | **Siguiente**: Join programme → deeplink → cablear 1 enlace |
 | 3 | **Rastreator (seguros)** | CPL alto | Contacto directo conocido; comparador = lead de alto valor | Bajo (1 correo) |
-| 4 | **outletmotard** (equipación) | Shopify feed + afiliación directa | Scrapeable **ya** como fuente aunque no haya acuerdo; 1.000 productos Alpinestars | Bajo-medio (1 correo + integrar feed) |
+| 4 | **outletMOTARD** (equipación) | Shopify feed + afiliación directa | ✅ **Integrada como fuente** (PR #1, ~788 prod.); falta el correo pidiendo feed + afiliación | Hecho el código · falta 1 correo |
 | 5 | **FC-Moto** vía Webgains | CPA ~6 % | Catálogo enorme, envía a ES, red clara y activa | Medio (alta Webgains + solicitar + enlaces) |
 | 6 | **Alta de mootle en TradeDoubler** | Red (Motoblouz, XLmoto…) | Segunda red con varias tiendas de moto | Medio |
 | 7 | **Motoblouz** vía TradeDoubler | CPA | Programa ES abierto | Medio |
