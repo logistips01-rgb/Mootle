@@ -31,6 +31,7 @@
 "sportcityone125": "Sportcity ONE 125",
 "srgt125": "SR GT 125",
 "srgt400": "SR GT 400",
+"srmax125": "SR MAX 125",
 "srv850": "SRV 850",
 "sx125": "SX 125",
 "sxr50": "SXR 50",
@@ -210,6 +211,7 @@
 "felsberg250": "Felsberg 250"
 },
 "Bsa": {
+"bantam350": "Bantam 350",
 "goldstar650": "Gold Star 650",
 "scrambler650": "Scrambler 650"
 },
@@ -348,6 +350,7 @@
 "ec350f": "EC 350 F",
 "ec450f": "EC 450 F",
 "es700": "ES 700",
+"fse450": "FSE 450",
 "tx200": "TX 200",
 "txtgp300": "TXT GP 300",
 "txtracing300": "TXT Racing 300"
@@ -568,6 +571,7 @@
 "rebel500": "Rebel 500",
 "scoopysh125": "Scoopy SH125",
 "scoopysh125i": "Scoopy SH125I",
+"scoopysh125isport": "Scoopy SH125I Sport",
 "scoopysh125itopbox": "Scoopy SH125I TOP BOX",
 "scoopysh150i": "Scoopy SH150I",
 "scoopysh300i": "Scoopy SH300I",
@@ -692,6 +696,7 @@
 "390duke": "390 Duke",
 "390enduror": "390 Enduro R",
 "390smc": "390 SMC",
+"400exc": "400 EXC",
 "450excf": "450 EXC F",
 "450excfsixdays": "450 EXC F SIX Days",
 "450rallyreplica": "450 Rally Replica",
