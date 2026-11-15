@@ -30,10 +30,11 @@ en cada enlace nuevo, o las comisiones se mezclan con las de Guitle.
 | **outletmotard** | outletmotard.es | Shopify, **sin afiliación pública** | `pendiente` → contactar | `/products.json` (~1.000 prod. Alpinestars outlet) | — | Scrapeable ya como fuente. Pedir feed + comisión. **Borrador listo:** `correos/outletmotard.md`. |
 | **FC-Moto** | fc-moto.es | **Webgains** (ES activo desde 2024) · también FlexOffers | `pendiente` → alta Webgains + solicitar | CPA, cookie 30 d, aprobación manual | ~6 % CPA | Catálogo enorme, envía a España. Buen primer anunciante no-Shopify. |
 | **Tradeinn / Motardinn** | motardinn.com | **Belboon** (Tradeinn, activo desde 2018) · Motardinn en TradeTracker | `pendiente` | — | 5–10 % (Motardinn, por confirmar) | Grupo español (Girona), multi-tienda. |
-| **Motoblouz** | motoblouz.es | **TradeDoubler** (+ otras redes) | `pendiente` | — | Por confirmar en ES | Programa ES figura abierto; verificar comisión. |
-| **XLmoto** | xlmoto.es | **TradeDoubler** (FR/UK confirmado; ES por verificar) | `pendiente` | — | Por confirmar | Confirmar que hay programa ES abierto. |
+| **Motocard** | motocard.com | **TradeDoubler** (MOTOCARD ES, abierto) | `pendiente` → **Solicitar en TD** (red ✅) | subid `epi=mootle` | ~4 % (ref. PT) | Confirmado abierto en el directorio TD. Grande en equipación. |
+| **Motoblouz** | motoblouz.es | **TradeDoubler** (ES abierto; + BlueAff/Effinity) | `pendiente` → **Solicitar en TD** (red ✅) | subid `epi=mootle` | Por confirmar en ES | Confirmado abierto en el directorio TD. |
+| **XLmoto** | xlmoto.es | TradeDoubler (solo **FR/UK**; sin ES) | `pendiente` → verificar | — | ~8 % (ref. IT) | En TD no hay programa España ahora mismo; revisar si lo abren. |
+| **Neumáticos** (Delticom / Neumáticos-online) | — | Red por confirmar (coche + **moto**) | `pendiente` → buscar en directorios | — | ~ (tickets ~210 €) | Complementa a Amazon en neumáticos. Buscar en TD/otras. |
 | **Polo Motorrad** | polo-motorrad.com | **Awin** (DE, cookie 60 d) · Webgains ~5 % | `pendiente` | — | ~5 % | Verificar tienda/envío España antes de priorizar. |
-| **Motocard** | motocard.com | TradeDoubler / FlexOffers (histórico) | `pendiente` → verificar estado | — | ~2,4 % (dato antiguo) | El programa puede estar cerrado; confirmar antes de invertir tiempo. |
 | **24MX** | 24mx.es | Por confirmar (no aparece en Awin ES) | `pendiente` | — | — | Off-road/cross. Buscar su red. |
 | **Tienda-Moto** | tienda-moto.com | Por confirmar | `pendiente` | — | — | Recambio genérico. Buscar su red. |
 
@@ -63,7 +64,7 @@ muchos anunciantes. Prioridad por nº de anunciantes de moto relevantes:
 | Red | Qué desbloquea para mootle | Estado | Cómo se saca el enlace/feed |
 |---|---|---|---|
 | **Awin** | Línea Directa (seguros, ~8 €/lead), Polo Motorrad, y muchos más | `aprobado` ✅ (publisher de mootle creado; login `mootle@guitle.com`) | Tras aprobación del anunciante: "Create a Link" → pegar deeplink + `&clickref=mootle`. Feed de productos en "Toolbox → Product Feeds". |
-| **TradeDoubler** | Motoblouz, XLmoto, Motocard (histórico) | `pendiente` | Deeplink + parámetro `epi`/`a` para el subid (usar `mootle`). Feeds en "Product feeds". |
+| **TradeDoubler** | **Motocard ES** ✅, **Motoblouz ES** ✅ (XLmoto solo FR/UK) | `aprobado` ✅ (publisher de mootle aceptado) | Solicitar cada anunciante en el directorio → al generar enlaces, subid con `epi=mootle` (confirmar nombre del parámetro en el panel). Feeds en "Product feeds". |
 | **Webgains** | FC-Moto (ES) | `pendiente` | Deeplink con `clickref=mootle`. |
 | **Belboon** | Tradeinn | `pendiente` | Deeplink + subid. |
 | **TradeTracker** | Motardinn, otras | `pendiente` | Deeplink + subid (`ref`). |
