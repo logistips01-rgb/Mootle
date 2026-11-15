@@ -10,7 +10,7 @@ import argparse
 import json
 import statistics
 import time
-from collections import defaultdict
+from collections import Counter, defaultdict
 from concurrent.futures import ThreadPoolExecutor
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
@@ -152,6 +152,10 @@ def merge(old_items, results, today):
     """Junta lo leído con lo que había. results: {fuente: (anuncios, info)}."""
     old = {it["id"]: it for it in old_items}
     out = {}
+    # nº de anuncios que teníamos y que hemos leído ahora, por fuente (para detectar lecturas
+    # parciales: si una fuente devuelve muchos menos de los que tenía, no es fiable para "vender").
+    old_counts = Counter(it.get("src") for it in old_items)
+    found_counts = {src: len(found) for src, (found, info) in results.items()}
     for src, (found, info) in results.items():
         for it in found:
             prev = old.get(it["id"])
@@ -167,10 +171,12 @@ def merge(old_items, results, today):
         if it["id"] in out:
             continue
         found, info = results.get(it["src"], (None, None))
-        # Solo damos por "vendido" lo que desaparece si la fuente se leyó entera, sin error Y
-        # devolvió algún anuncio. Si devuelve 0 (caída/anti-bot/página vacía que no se detecta
-        # como challenge), NO borramos su stock: una tienda no vende 100 motos de golpe.
-        if info and info.get("complete") and info.get("status") == "ok" and found:
+        # Solo damos por "vendido" lo que desaparece si la fuente se leyó entera, sin error, y
+        # la lectura es FIABLE: devolvió al menos la mitad de lo que ya teníamos. Si devuelve 0
+        # o muy pocos (caída/anti-bot/lectura parcial que no se detecta como challenge), NO
+        # borramos su stock: una fuente no vende de golpe la mitad de su catálogo.
+        reliable = found_counts.get(it["src"], 0) >= 0.5 * old_counts.get(it["src"], 0) and found_counts.get(it["src"], 0) > 0
+        if info and info.get("complete") and info.get("status") == "ok" and reliable:
             continue  # la fuente se ha leído entera y este anuncio ya no está: vendido
         days = getattr(SOURCES.get(it["src"]), "DROP_AFTER_DAYS", DROP_AFTER_DAYS)
         if it.get("ls", today) >= (date.fromisoformat(today) - timedelta(days=days)).isoformat():
