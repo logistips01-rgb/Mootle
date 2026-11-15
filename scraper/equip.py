@@ -37,6 +37,11 @@ CAT_NAMES = {"casco": "Cascos", "guantes": "Guantes", "chaqueta": "Chaquetas",
 
 SHOPIFY_STORES = [
     {"id": "maximomoto", "name": "Máximo Moto", "home": "https://maximo-moto.com/"},
+    # outletMOTARD: Shopify (outlet de Scorpion, Alpinestars, HJC, Nox, CGM, Five…). Sus
+    # product_type no son los de Máximo ("Casco Integrales", "Alpinestars Gloves"…), así que
+    # usa el mapeo por palabras clave (cats="kw") y limpia el sufijo de marca ("Scorpion
+    # Helmets" → "Scorpion"). Fuente de comparación; sin afiliación todavía (feed pedido).
+    {"id": "outletmotard", "name": "outletMOTARD", "home": "https://outletmotard.es/", "cats": "kw"},
 ]
 
 
@@ -104,6 +109,44 @@ def _clean_model(title, vendor):
     return _disp(t)
 
 
+# --- Tiendas con product_type irregular (cats="kw"): mapeo por palabras clave ---
+# Excluir accesorios/recambios que no son prenda/casco (viseras, intercomunicadores, packs…).
+_KW_SKIP = re.compile(r"visera|visor|intercomunicad|pinlock|\bpack\b|recambio|repuesto", re.I)
+_KW_CAT = [("casco", r"casco|helmet"), ("guantes", r"guante|glove"),
+           ("chaqueta", r"chaqueta|jacket"), ("mono", r"mono|suit"),
+           ("pantalon", r"pantal[oó]n|\bpant"), ("botas", r"bota|boot")]
+# "Scorpion Helmets" → "Scorpion", "Five Gloves" → "Five" (marca sin el sufijo de categoría)
+_BRAND_SUFFIX = re.compile(r"\s+(helmets?|gloves?|boots?)$", re.I)
+
+
+def _cat_keywords(ptype):
+    t = (ptype or "").strip()
+    if not t or _KW_SKIP.search(t):
+        return None
+    for cat, pat in _KW_CAT:
+        if re.search(pat, t, re.I):
+            return cat
+    return None
+
+
+def _brand_clean(vendor):
+    return _disp(_BRAND_SUFFIX.sub("", (vendor or "").strip()))
+
+
+def _clean_model_kw(title, vendor):
+    """Como _clean_model pero para títulos que empiezan por la categoría ('Casco Scorpion
+    EXO-R1…'): quita primero el relleno de categoría y luego la marca del principio."""
+    t = re.sub(r"\s+", " ", _html.unescape(title or "")).strip()
+    t = _FILLER.sub(" ", t)
+    t = re.sub(r"\bde\s+moto\b", " ", t, flags=re.I)
+    t = re.sub(r"\s+", " ", t).strip(" -·,")
+    for pref in filter(None, [_brand_clean(vendor), vendor, (vendor or "").split(" ")[0]]):
+        if t.upper().startswith(pref.upper() + " "):
+            t = t[len(pref):].strip(" -·,")
+            break
+    return _disp(t)
+
+
 def read_shopify(fetcher, store):
     """Lee la equipación de una tienda Shopify por /products.json."""
     found = {}
@@ -119,8 +162,9 @@ def read_shopify(fetcher, store):
         if not prods:
             break
         pages += 1
+        kw = store.get("cats") == "kw"
         for p in prods:
-            cat = CATS.get((p.get("product_type") or "").upper())
+            cat = _cat_keywords(p.get("product_type")) if kw else CATS.get((p.get("product_type") or "").upper())
             if not cat:
                 continue
             v = (p.get("variants") or [{}])[0]
@@ -138,8 +182,8 @@ def read_shopify(fetcher, store):
             if _is_accessory(raw_title):   # fuera pinlocks, visores, recambios…
                 continue
             vendor = (p.get("vendor") or "").strip()
-            brand = _disp(vendor)
-            model = _clean_model(raw_title, vendor)
+            brand = _brand_clean(vendor) if kw else _disp(vendor)
+            model = _clean_model_kw(raw_title, vendor) if kw else _clean_model(raw_title, vendor)
             if not model:
                 continue
             img = (p.get("images") or [{}])[0].get("src")
