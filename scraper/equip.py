@@ -299,15 +299,27 @@ def read_tradedoubler(site_id=MOOTLE_TD_SITE):
     feeds, st = _td_feeds(token)
     seen_prods = 0
     found = {}
+    skipped_cats = {}   # diagnóstico: categorías descartadas (no están entre las 6 de mootle)
     for f in feeds:
         fid = f.get("feedId") or f.get("id")
         if not fid:
             continue
-        for p in _td_products(token, fid):
+        kept0 = len(found)
+        prods = _td_products(token, fid)
+        for p in prods:
             seen_prods += 1
             it = _td_parse(p, site_id)
             if it:
                 found[it["id"]] = it
+            else:
+                rc = " / ".join(c.get("name") or "" for c in (p.get("categories") or [])) or "(sin categoría)"
+                skipped_cats[rc] = skipped_cats.get(rc, 0) + 1
+        print(f'[TradeDoubler] feed "{f.get("name") or fid}": numberOfProducts='
+              f'{f.get("numberOfProducts")}, leídos={len(prods)}, guardados={len(found) - kept0}')
+    if skipped_cats:
+        top = sorted(skipped_cats.items(), key=lambda x: -x[1])[:12]
+        print("[TradeDoubler] categorías descartadas (no comparadas por mootle): "
+              + " · ".join(f"{c} ×{n}" for c, n in top))
     if seen_prods and not found:
         print(f"[TradeDoubler] aviso: {seen_prods} productos leídos pero 0 del sitio "
               f"a({site_id}) — ¿feed conectado a otro sitio o sin categoría de equipación?")
