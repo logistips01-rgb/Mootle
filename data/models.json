@@ -46,6 +46,9 @@
 "Ariic": {
 "gemma": "Gemma"
 },
+"Askoll": {
+"ngs3": "NGS 3"
+},
 "BMW": {
 "2021enstactenerife10226793htm": "2021 EN STA C Tenerife 10226793.HTM",
 "c400gt": "C 400 GT",
@@ -450,6 +453,7 @@
 "touringroadking": "Touring Road King",
 "touringroadkingclassic": "Touring Road King Classic",
 "touringstreetglide": "Touring Street Glide",
+"triglideultra": "TRI Glide Ultra",
 "trikeultraclassiclimited": "Trike Ultra Classic Limited",
 "ultralimited": "Ultra Limited",
 "vrscavrod": "Vrsca V ROD",
@@ -517,6 +521,7 @@
 "crf1000l": "CRF 1000 L",
 "crf1000lafricatwin": "CRF1000L Africa Twin",
 "crf1100lafricatwin": "CRF1100L Africa Twin",
+"crf110f": "CRF 110 F",
 "crf250l": "CRF 250L",
 "crf250r": "CRF 250R",
 "crf250rx": "CRF 250 RX",
@@ -1080,6 +1085,7 @@
 "libertys125": "Liberty S 125",
 "medley": "Medley",
 "mp3": "MP3",
+"mp3125": "MP3 125",
 "mp3250": "MP3 250",
 "mp3300touring": "MP3 300 Touring",
 "mp3300yourbanltsport": "MP3 300 Yourban LT Sport",
