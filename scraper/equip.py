@@ -11,10 +11,13 @@ Fuente inicial: Máximo Moto (Shopify). Crece con Albabike (feed) y feeds de afi
 import argparse
 import html as _html
 import json
+import os
 import re
 import statistics
 from datetime import date
 from pathlib import Path
+
+import requests
 
 from .fetch import Fetcher, is_challenge
 from .models import group_history, price_history
@@ -147,6 +150,177 @@ def _clean_model_kw(title, vendor):
     return _disp(t)
 
 
+# --- TradeDoubler (feeds de afiliado: Motocard…) -----------------------------------------
+# API de productos de TradeDoubler. El token "PRODUCTS" (40 car., uno por usuario) se guarda
+# como secreto del repo (TRADEDOUBLER_PRODUCTS_TOKEN); nunca se escribe en código ni en logs.
+TD_API = "https://api.tradedoubler.com/1.0"
+# Sitio de mootle en TradeDoubler. ¡CRÍTICO! guitle es 3505824; solo cogemos ofertas cuyo
+# productUrl lleve a(3505826), así la comisión es de mootle y nunca de guitle.
+MOOTLE_TD_SITE = "3505826"
+TD_HOMES = {"motocard": "https://www.motocard.com/"}
+_TD_PREV_FIELDS = {"previousprice", "previous_price", "compare_at_price", "listprice", "rrp"}
+_TD_PRICE_FIELDS = {"saleprice", "sale_price", "price"}
+# Accesorios que caen en una categoría de prenda/casco: el producto ES una visera/recambio
+# si el título EMPIEZA por eso (no excluye "Casco ... con visera solar").
+_TD_ACC_LEAD = re.compile(r"^\s*(visera|pantalla|recambio|repuesto|pinlock|intercomunicad|"
+                          r"funda|bolsa|maleta|spoiler|interior(es)?)\b", re.I)
+
+
+def _to_eur(val):
+    """'369.72' / '218.19 EUR' / '1.234,56' → entero de euros. None si no hay número."""
+    if val is None:
+        return None
+    s = re.sub(r"[^\d.,]", "", str(val))
+    if not s:
+        return None
+    if "," in s and "." in s:
+        s = s.replace(".", "").replace(",", ".")   # 1.234,56 → 1234.56
+    elif "," in s:
+        s = s.replace(",", ".")
+    try:
+        return int(round(float(s)))
+    except ValueError:
+        return None
+
+
+def _td_token():
+    return os.environ.get("TRADEDOUBLER_PRODUCTS_TOKEN", "").strip()
+
+
+def _td_json(url, token):
+    try:
+        r = requests.get(url, params={"token": token}, timeout=120,
+                         headers={"Accept": "application/json"})
+    except requests.RequestException:
+        return None, None
+    if r.status_code != 200:
+        return None, r.status_code
+    try:
+        return r.json(), 200
+    except ValueError:
+        return None, r.status_code
+
+
+def _td_feeds(token):
+    j, st = _td_json(f"{TD_API}/productFeeds", token)
+    if not j:
+        return [], st
+    feeds = j.get("feeds", j) if isinstance(j, dict) else j
+    return (feeds or []), st
+
+
+def _td_products(token, fid, max_pages=40):
+    out = []
+    for pg in range(1, max_pages + 1):
+        j, st = _td_json(f"{TD_API}/products.json;page={pg};pageSize=100;fid={fid}", token)
+        if not j:
+            break
+        prods = j.get("products") or []
+        if not prods:
+            break
+        out.extend(prods)
+        total = (j.get("productHeader") or {}).get("totalHits")
+        try:
+            if total and len(out) >= int(total):
+                break
+        except (TypeError, ValueError):
+            pass
+    return out
+
+
+def _td_offer_for_site(p, site_id):
+    """Oferta cuyo productUrl lleva a(site_id). Si ninguna es del sitio de mootle → None
+    (así nunca cableamos un enlace que pague a guitle)."""
+    tag = f"a({site_id})"
+    for o in (p.get("offers") or []):
+        if tag in (o.get("productUrl") or ""):
+            return o
+    return None
+
+
+def _td_price(off, p):
+    for pt in reversed(off.get("priceHistory") or []):
+        n = _to_eur(((pt or {}).get("price") or {}).get("value"))
+        if n:
+            return n
+    for f in (p.get("fields") or []):
+        if (f.get("name") or "").lower() in _TD_PRICE_FIELDS:
+            n = _to_eur(f.get("value"))
+            if n:
+                return n
+    return None
+
+
+def _td_prev(p):
+    for f in (p.get("fields") or []):
+        if (f.get("name") or "").lower() in _TD_PREV_FIELDS:
+            return _to_eur(f.get("value"))
+    return None
+
+
+def _td_parse(p, site_id):
+    off = _td_offer_for_site(p, site_id)
+    if not off or not off.get("productUrl"):
+        return None
+    cat = _cat_keywords(" ".join((c.get("name") or "") for c in (p.get("categories") or [])))
+    if not cat:
+        return None
+    raw_title = p.get("name") or ""
+    if _is_accessory(raw_title) or _TD_ACC_LEAD.match(raw_title):
+        return None
+    price = _td_price(off, p)
+    if not price:
+        return None
+    vendor = (p.get("brand") or "").strip()
+    brand = _brand_clean(vendor)
+    model = _clean_model_kw(raw_title, vendor)
+    if not model:
+        return None
+    prog = (off.get("programName") or "").strip() or "TradeDoubler"
+    src = slug(prog) or "tradedoubler"
+    ident = p.get("identifiers") or {}
+    pid = off.get("sourceProductId") or ident.get("sku") or ident.get("mpn") or slug(raw_title)
+    prev = _td_prev(p)
+    return {
+        "id": f"{src}:{pid}", "src": src, "url": off["productUrl"],
+        "t": f"{brand} {model}".strip(), "mk": brand, "md": model, "cat": cat,
+        "p": price, "p0": prev if (prev and prev > price) else None,
+        "img": (p.get("productImage") or {}).get("url"),
+        "mid": f"{slug(brand)}-{slug(model)}-{cat}",
+    }
+
+
+def read_tradedoubler(site_id=MOOTLE_TD_SITE):
+    """Lee los feeds de producto conectados al sitio de mootle (Motocard…). No-op (sin error)
+    si falta el token. Devuelve (items, sources) como las tiendas Shopify."""
+    token = _td_token()
+    if not token:
+        return [], {}
+    feeds, st = _td_feeds(token)
+    seen_prods = 0
+    found = {}
+    for f in feeds:
+        fid = f.get("feedId") or f.get("id")
+        if not fid:
+            continue
+        for p in _td_products(token, fid):
+            seen_prods += 1
+            it = _td_parse(p, site_id)
+            if it:
+                found[it["id"]] = it
+    if seen_prods and not found:
+        print(f"[TradeDoubler] aviso: {seen_prods} productos leídos pero 0 del sitio "
+              f"a({site_id}) — ¿feed conectado a otro sitio o sin categoría de equipación?")
+    sources = {}
+    for it in found.values():
+        s = it["src"]
+        info = sources.setdefault(s, {"name": it["src"].replace("-", " ").title(),
+                                      "home": TD_HOMES.get(s.split("-")[0], ""),
+                                      "status": "td", "count": 0})
+        info["count"] += 1
+    return list(found.values()), sources
+
+
 def read_shopify(fetcher, store):
     """Lee la equipación de una tienda Shopify por /products.json."""
     found = {}
@@ -244,6 +418,25 @@ def run(dry=False):
                 it["pa"], it["pc"] = prev["pa"], prev.get("pc")
             results.append(it)
             seen.add(it["id"])
+
+    # TradeDoubler (feeds de afiliado conectados al sitio de mootle: Motocard…). Enlace de
+    # afiliado ya incluido en cada producto. No hace nada si falta el token (secreto).
+    td_items, td_sources = read_tradedoubler()
+    if td_sources:
+        sources.update(td_sources)
+    for it in td_items:
+        prev = oldmap.get(it["id"])
+        it["fs"] = prev.get("fs", today) if prev else today
+        it["ls"] = today
+        it["ph"] = price_history(it, prev, today)
+        if prev and prev.get("p") and prev["p"] != it["p"]:
+            it["pa"], it["pc"] = prev["p"], today
+        elif prev and prev.get("pa"):
+            it["pa"], it["pc"] = prev["pa"], prev.get("pc")
+        results.append(it)
+        seen.add(it["id"])
+    for s, info in td_sources.items():
+        print(f'[{info["name"]}] td · {info["count"]} productos')
 
     # eBay: una oferta más por producto (con enlace de afiliado). Solo para productos que ya
     # tenemos en el catálogo (empareja por `mid`); así es una oferta extra del mismo producto.
