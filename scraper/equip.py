@@ -58,7 +58,7 @@ def load(path, default):
 # accesorios que NO son la prenda/casco y ensucian el feed (se descartan)
 _ACC = re.compile(r"\b(visor|pantalla|recambio|repuesto|spoiler|bolsa|funda|soporte|mentonera|"
                   r"tornill\w*|adhesiv\w*|pegatina|gafas|c[aá]mara|estuche|spray|limpiador|"
-                  r"deflector|carrillera|almohad\w*|interiores?)\b", re.I)
+                  r"deflector|carrillera|almohad\w*|perfilador\w*|interiores?)\b", re.I)
 # relleno de categoría en el título de la tienda ("CASCO INTEGRAL DE MOTO", "GUANTES DE MOTO"…)
 _FILLER = re.compile(r"\b(cascos?|guantes?|chaquetas?|botas?|pantal[oó]n(?:es)?|monos?)\b"
                      r"(\s+(integral\w*|modular\w*|jet|abierto\w*|trail|cross|infantil\w*))*", re.I)
@@ -162,8 +162,18 @@ _TD_PREV_FIELDS = {"previousprice", "previous_price", "compare_at_price", "listp
 _TD_PRICE_FIELDS = {"saleprice", "sale_price", "price"}
 # Accesorios que caen en una categoría de prenda/casco: el producto ES una visera/recambio
 # si el título EMPIEZA por eso (no excluye "Casco ... con visera solar").
-_TD_ACC_LEAD = re.compile(r"^\s*(visera|pantalla|recambio|repuesto|pinlock|intercomunicad|"
-                          r"funda|bolsa|maleta|spoiler|interior(es)?)\b", re.I)
+# Accesorios/recambios que caen en una categoría de prenda/casco: el producto ES el accesorio
+# cuando el título EMPIEZA por eso. Palabra inicial (no substring) para no excluir prendas que
+# los mencionen de pasada ("Botas con puntera reforzada", "Casco con visera solar").
+_ACC_LEAD = re.compile(r"^\s*(visera|pantalla|puntera|suela|plantilla|deslizador|slider|"
+                       r"cord[oó]n(es)?|tacos?|kit|recambio|repuesto|pinlock|intercomunicad\w*|"
+                       r"funda|bolsa|maleta|spoiler|protector(es)?|interior(es)?)\b", re.I)
+
+
+def _looks_accessory(title):
+    """Accesorio/recambio y no la prenda/casco: por palabra distintiva en cualquier parte
+    (_is_accessory) o por nombre que empieza por el accesorio (_ACC_LEAD)."""
+    return _is_accessory(title) or bool(_ACC_LEAD.match(title or ""))
 
 
 def _to_eur(val):
@@ -266,7 +276,7 @@ def _td_parse(p, site_id):
     if not cat:
         return None
     raw_title = p.get("name") or ""
-    if _is_accessory(raw_title) or _TD_ACC_LEAD.match(raw_title):
+    if _looks_accessory(raw_title):
         return None
     price = _td_price(off, p)
     if not price:
@@ -365,7 +375,7 @@ def read_shopify(fetcher, store):
             except (TypeError, ValueError):
                 comp = 0
             raw_title = p.get("title") or ""
-            if _is_accessory(raw_title):   # fuera pinlocks, visores, recambios…
+            if _looks_accessory(raw_title):   # fuera pinlocks, visores, punteras, recambios…
                 continue
             vendor = (p.get("vendor") or "").strip()
             brand = _brand_clean(vendor) if kw else _disp(vendor)
@@ -389,6 +399,30 @@ def read_shopify(fetcher, store):
                     listing["pin"] = pin
             found[listing["id"]] = listing
     return list(found.values()), {"name": store["name"], "home": store["home"], "status": "ok", "count": len(found), "complete": pages > 0}
+
+
+def _drop_price_outliers(results, frac=0.35, min_group=3):
+    """Quita items cuyo precio queda muy por debajo de la mediana de su grupo (mismo mid):
+    casi siempre un accesorio/recambio mal emparejado que falsea el 'desde' (p. ej. un
+    perfilador de 29 € entre botas de 280 €). Conservador: solo cae si queda por debajo del
+    `frac` de la mediana del grupo."""
+    groups = {}
+    for it in results:
+        groups.setdefault(it["mid"], []).append(it)
+    drop = set()
+    for items in groups.values():
+        if len(items) < min_group:
+            continue
+        med = statistics.median([it["p"] for it in items])
+        if med <= 0:
+            continue
+        for it in items:
+            if it["p"] < frac * med:
+                drop.add(id(it))
+    if not drop:
+        return results, 0
+    kept = [it for it in results if id(it) not in drop]
+    return kept, len(results) - len(kept)
 
 
 def run(dry=False):
@@ -478,6 +512,11 @@ def run(dry=False):
         if n_ebay:
             sources["ebay"] = {"name": "eBay", "home": "https://www.ebay.es/", "status": "api", "count": n_ebay}
             print(f"[eBay] {n_ebay} ofertas emparejadas")
+
+    # saneo: fuera accesorios/recambios mal emparejados que quedan muy por debajo del grupo
+    results, n_out = _drop_price_outliers(results)
+    if n_out:
+        print(f"Saneo de precios: {n_out} items descartados (muy por debajo de la mediana del grupo)")
 
     # precio de mercado (mediana del grupo) para detectar chollos cuando hay varias ofertas
     by_mid = {}
