@@ -15,6 +15,7 @@ Uso:
 """
 import argparse
 import json
+import statistics
 import subprocess
 import time
 import urllib.request
@@ -84,6 +85,11 @@ def pick_comparativa(used):
             continue
         offs = sorted(offs, key=lambda o: o["p"])
         best = offs[0]
+        # Descarta emparejamientos erróneos: si el más barato está muy por debajo de la
+        # mediana del grupo (p. ej. un accesorio colado), el "desde X €" sería engañoso.
+        med = statistics.median([o["p"] for o in offs])
+        if best["p"] < 0.5 * med:
+            continue
         img = next((o["img"] for o in offs if o.get("img")), None)
         if not img:
             continue

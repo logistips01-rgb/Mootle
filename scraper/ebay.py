@@ -103,7 +103,8 @@ _NOISE = {"casco", "guantes", "guante", "chaqueta", "botas", "bota", "pantalon",
 _ACCESSORY = re.compile(
     r"\b(frontal|visor|visera|pantalla|recambio|repuesto|kit|hebilla\w*|cinturon\w*|correa\w*|"
     r"funda|bolsa|soporte|mentonera|tornillo\w*|adhesivo\w*|pegatina|gafas|estuche|spray|"
-    r"limpiador|deflector|carrillera|almohad\w*|pinlock)\b|\bpara\s+(casco|botas?|guantes?)\b")
+    r"limpiador|deflector|carrillera|almohad\w*|pinlock|puntera\w*|perfilador\w*|slider\w*|"
+    r"deslizador\w*|tacos?|suela\w*|plantilla\w*|cordon\w*)\b|\bpara\s+(casco|botas?|guantes?)\b")
 
 
 def _is_accessory(title):
