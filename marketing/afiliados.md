@@ -74,6 +74,14 @@ muchos anunciantes. Prioridad por nº de anunciantes de moto relevantes:
 > reembolsable de 5 $; a Manuel no se lo han pedido). Solo una pequeña validación del
 > sitio, que mootle.es (web real, con tráfico y catálogo) cumple sin problema.
 
+> ⚠️ **TradeDoubler — atribución mootle vs guitle (CRÍTICO).** Con el token actual de
+> Manuel solo aparecen los feeds del **sitio de guitle (ID 3505824)** y todos los
+> `offers[].productUrl` llevan `a(3505824)`. Antes de cablear Motocard hay que confirmar
+> que su feed se conecta al **sitio de mootle** y que el `productUrl` lleva `a(<ID sitio
+> mootle>)`. Si mootle no tiene sitio propio en TradeDoubler, hay que crearlo (o pedir un
+> token del sitio de mootle). Si el enlace viniera con `a(3505824)`, **no usarlo tal cual**:
+> reescribir `a(…)` con el sitio de mootle, o la comisión se la lleva guitle.
+
 ---
 
 ## 3. Lista priorizada de objetivos (esfuerzo vs. retorno)
