@@ -401,7 +401,7 @@ def read_shopify(fetcher, store):
     return list(found.values()), {"name": store["name"], "home": store["home"], "status": "ok", "count": len(found), "complete": pages > 0}
 
 
-def _drop_price_outliers(results, frac=0.35, min_group=2):
+def _drop_price_outliers(results, frac=0.35, min_group=3):
     """Quita items cuyo precio queda muy por debajo de la mediana de su grupo (mismo mid):
     casi siempre un accesorio/recambio mal emparejado que falsea el 'desde' (p. ej. un
     perfilador de 29 € entre botas de 280 €). Conservador: solo cae si queda por debajo del
