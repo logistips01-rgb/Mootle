@@ -44,7 +44,11 @@ jobs:
         run: python -m scraper.run --minutes "$MINUTES" ${ONLY:+--only $ONLY}
 
       - name: Leer equipación
-        # Comparador de equipación (Máximo Moto y demás tiendas); guarda histórico propio.
+        # Comparador de equipación (Máximo Moto, outletMOTARD y feeds de afiliado); histórico propio.
+        env:
+          # Token PRODUCTS de TradeDoubler (feeds de Motocard… conectados al sitio de mootle).
+          # Si el secreto no existe, equip.py lo ignora sin error.
+          TRADEDOUBLER_PRODUCTS_TOKEN: ${{ secrets.TRADEDOUBLER_PRODUCTS_TOKEN }}
         run: python -m scraper.equip
 
       - name: Commit de datos
