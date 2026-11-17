@@ -51,6 +51,45 @@ def slug(text):
     return re.sub(r"[^a-z0-9]+", "-", text).strip("-")
 
 
+# Colores y acabados que cada tienda escribe distinto en el nombre del modelo ("LS2 FF901 Advant
+# X Nova" vs "...Nova White Blue Red"). Se QUITAN del modelo SOLO para emparejar entre tiendas
+# (el nombre visible `md` no se toca). NUNCA se quitan materiales (carbon, kevlar) ni palabras de
+# modelo (air, evo, pro, sport): eso distingue productos y mezclarlos daría comparativas falsas.
+_CANON_STOP = {
+    "negro", "negra", "blanco", "blanca", "rojo", "roja", "azul", "verde", "amarillo", "amarilla",
+    "naranja", "gris", "grises", "rosa", "morado", "morada", "violeta", "marron", "beige", "dorado",
+    "dorada", "plata", "plateado", "plateada", "antracita", "fucsia", "lila", "celeste", "turquesa",
+    "crema", "arena", "camel", "burdeos", "granate", "coral", "menta", "oro", "cobre", "bronce",
+    "nacar", "perla", "cemento", "militar", "military", "khaki", "kaki", "caqui", "oliva", "mostaza",
+    "salmon", "cian", "magenta", "azzurro", "rosso", "bianco", "nero", "giallo", "grigio", "arancione",
+    "blu", "viola", "argento", "anthracite", "fuchsia", "titanium", "titanio", "pearl", "nardo",
+    "chameleon", "lava", "ice", "smoke",
+    "black", "white", "red", "blue", "green", "yellow", "orange", "grey", "gray", "pink", "purple",
+    "silver", "gold", "brown", "navy", "lime", "cyan", "ivory", "sand", "olive",
+    # acabados / modificadores de color
+    "mate", "mat", "matt", "matte", "opaco", "brillo", "brillante", "gloss", "glossy", "satin",
+    "satinado", "metalizado", "metalico", "metallic", "fluor", "fluo", "flou", "flo", "fluorescente",
+    "neon", "hivis", "hiviz", "hv", "bright", "transparente", "tintado", "ahumado", "espejo",
+    "iridium", "solid", "oscuro", "claro",
+}
+# Códigos de color (se repiten por color, no por modelo): HJC MCxx(sf/h), Shoei TC-x, Premier *BM.
+_CANON_CODE = re.compile(r"^(mc\d+[a-z]*|tc-?\d+|hv|[a-z]{1,4}\d+bm)$")
+
+
+def canon_model(model):
+    """Modelo normalizado para emparejar entre tiendas: quita color/acabado/código de color."""
+    import unicodedata
+    folded = unicodedata.normalize("NFKD", str(model or "")).encode("ascii", "ignore").decode().lower()
+    toks = [t for t in re.split(r"[^a-z0-9]+", folded) if t]
+    keep = [t for t in toks if t not in _CANON_STOP and not _CANON_CODE.match(t)]
+    return " ".join(keep) if keep else " ".join(toks)   # si todo era color, no vaciar
+
+
+def equip_mid(brand, model, cat):
+    """Clave de agrupación de equipación: marca + modelo normalizado + categoría."""
+    return f"{slug(brand)}-{slug(canon_model(model))}-{cat}"
+
+
 def safe_url(u):
     return u if re.match(r"^https?://", u or "", re.I) else "#"
 

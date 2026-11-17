@@ -23,7 +23,7 @@ import requests
 
 from .fetch import Fetcher, is_challenge
 from .models import group_history, price_history
-from .pages import slug
+from .pages import slug, equip_mid
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "equipacion.json"
@@ -426,6 +426,10 @@ def read_shopify(fetcher, store):
                 continue
             if not price:
                 continue
+            # outletMOTARD marca "sin precio" con 499 € fijo (placeholder) en decenas de cascos
+            # baratos; es un precio falso que falsearía el "desde" y la mediana -> lo ignoramos.
+            if store["id"] == "outletmotard" and price in (499, 500):
+                continue
             try:
                 comp = float(v.get("compare_at_price") or 0)
             except (TypeError, ValueError):
@@ -457,23 +461,29 @@ def read_shopify(fetcher, store):
     return list(found.values()), {"name": store["name"], "home": store["home"], "status": "ok", "count": len(found), "complete": pages > 0}
 
 
-def _drop_price_outliers(results, frac=0.35, min_group=3):
-    """Quita items cuyo precio queda muy por debajo de la mediana de su grupo (mismo mid):
-    casi siempre un accesorio/recambio mal emparejado que falsea el 'desde' (p. ej. un
-    perfilador de 29 € entre botas de 280 €). Conservador: solo cae si queda por debajo del
-    `frac` de la mediana del grupo."""
+# Suelo de precio plausible por categoría: por debajo es casi siempre un accesorio/recambio mal
+# emparejado (un casco nuevo a 4 €, unos guantes a 5 €…), nunca el producto real.
+_CAT_FLOOR = {"casco": 22, "botas": 25, "chaqueta": 28, "pantalon": 25, "guantes": 8, "mono": 40}
+
+
+def _drop_price_outliers(results, frac=0.35):
+    """Quita precios que falsean el 'desde' (accesorio/recambio mal emparejado por debajo del
+    grupo). En grupos de >=3 basta con quedar por debajo del `frac` de la mediana. En PARES la
+    mediana es frágil (un listado inflado la dispara), así que solo se cae si además el precio es
+    absurdamente bajo para su categoría (suelo); así nunca borramos el precio REAL cuando el otro
+    es el inflado (p. ej. 90 € real vs 499 € placeholder: se conserva el 90)."""
     groups = {}
     for it in results:
         groups.setdefault(it["mid"], []).append(it)
     drop = set()
     for items in groups.values():
-        if len(items) < min_group:
+        if len(items) < 2:
             continue
         med = statistics.median([it["p"] for it in items])
         if med <= 0:
             continue
         for it in items:
-            if it["p"] < frac * med:
+            if it["p"] < frac * med and (len(items) >= 3 or it["p"] < _CAT_FLOOR.get(it["cat"], 0)):
                 drop.add(id(it))
     if not drop:
         return results, 0
@@ -555,6 +565,13 @@ def run(dry=False):
         seen.add(it["id"])
     for s, info in td_sources.items():
         print(f'[{info["name"]}] td · {info["count"]} productos')
+
+    # Clave de agrupación canónica: recalculamos el `mid` de TODOS los productos de tienda con el
+    # mismo criterio (marca + modelo sin color/acabado + categoría), para que el mismo casco de
+    # Máximo, Albabike y Motocard caiga en la MISMA ficha comparada. eBay se empareja justo
+    # después usando estos mids, así que hereda el formato sin tocar nada más.
+    for it in results:
+        it["mid"] = equip_mid(it["mk"], it["md"], it["cat"])
 
     # eBay: una oferta más por producto (con enlace de afiliado). Solo para productos que ya
     # tenemos en el catálogo (empareja por `mid`); así es una oferta extra del mismo producto.
