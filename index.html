@@ -150,6 +150,11 @@
   var thisYear = new Date().getFullYear();
   var PRICES = [1500,3000,5000,8000,12000,20000], KMS = [5000,15000,30000,50000,80000];
   function options(id,label,values,fmt){ fmt=fmt||function(v){return v;}; $(id).innerHTML='<option value="">'+label+'</option>'+values.map(function(v){return '<option value="'+v+'">'+esc(fmt(v))+'</option>';}).join(''); }
+  // Orden "destacados" que cambia cada día (mismo durante el día, distinto al siguiente),
+  // para que la portada no parezca siempre la misma. Barajado determinista por fecha.
+  function daySeed(){ var d=new Date(); return (d.getFullYear()*372 + d.getMonth()*31 + d.getDate())||1; }
+  function dailyShuffle(a){ var s=daySeed()%233280; a=a.slice();
+    for(var i=a.length-1;i>0;i--){ s=(s*9301+49297)%233280; var j=Math.floor((s/233280)*(i+1)); var t=a[i];a[i]=a[j];a[j]=t; } return a; }
 
   /* ---------- MOTOS ---------- */
   var MOTOS = null, motosShown = PAGE, motosList = [];
@@ -200,8 +205,14 @@
     });
     var groups = motosGroups(offers);
     var active = words.length || fb || fp || fy || fk;
-    // con filtros/búsqueda: más barata primero; sin nada: más ofertas (destacados)
-    groups.sort(active ? function(a,b){return a.min-b.min;} : function(a,b){return b.n-a.n || a.min-b.min;});
+    if(active){
+      groups.sort(function(a,b){return a.min-b.min;});           // búsqueda: más barata primero
+    } else {
+      // portada: primero los que han bajado de precio (chollos), luego rotación diaria
+      var drop = function(g){ return (g.best && g.best.pa && g.best.pa>g.min) ? (g.best.pa-g.min) : 0; };
+      var chollos = groups.filter(function(g){return drop(g)>0;}).sort(function(a,b){return drop(b)-drop(a);});
+      groups = chollos.concat(dailyShuffle(groups.filter(function(g){return drop(g)===0;})));
+    }
     $("reset-motos").hidden = !(q || fb || fp || fy || fk);
     motosList = groups; motosShown = PAGE; renderMotos();
   }
@@ -249,8 +260,13 @@
       if(!g._h) g._h = fold(g.mk+" "+g.md+" "+(CN[g.cat]||""));
       return words.every(function(w){ return g._h.indexOf(w)>=0; });
     });
-    // presencia de ofertas primero (nº tiendas, nº ofertas), luego precio
-    r.sort(function(a,b){ return (b.w-a.w)||(b.n-a.n)||(a.p-b.p); });
+    if(q || fc || pv){
+      // búsqueda/filtros: presencia de ofertas primero (nº tiendas, nº ofertas), luego precio
+      r.sort(function(a,b){ return (b.w-a.w)||(b.n-a.n)||(a.p-b.p); });
+    } else {
+      // portada: multi-tienda arriba pero con rotación diaria, para que no sea siempre igual
+      r = dailyShuffle(r.filter(function(g){return g.w>1;})).concat(dailyShuffle(r.filter(function(g){return g.w<=1;})));
+    }
     $("reset-equip").hidden = !(q || fc || pv);
     equipList = r; equipShown = PAGE; renderEquip();
   }
