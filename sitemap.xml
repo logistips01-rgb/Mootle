@@ -130,7 +130,6 @@
   <url><loc>https://mootle.es/m/aprilia-shiver-750-2008.html</loc></url>
   <url><loc>https://mootle.es/m/aprilia-shiver-750-2016.html</loc></url>
   <url><loc>https://mootle.es/m/aprilia-shiver-900-2018.html</loc></url>
-  <url><loc>https://mootle.es/m/aprilia-shiver-900-2019.html</loc></url>
   <url><loc>https://mootle.es/m/aprilia-shiver-900-2021.html</loc></url>
   <url><loc>https://mootle.es/m/aprilia-sportcity-one-125-2011.html</loc></url>
   <url><loc>https://mootle.es/m/aprilia-sr-gt-125-2025.html</loc></url>
@@ -389,6 +388,7 @@
   <url><loc>https://mootle.es/m/bmw-m-1000-rr-2022.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-m-1000-rr-2024.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-m-1000-xr-2026.html</loc></url>
+  <url><loc>https://mootle.es/m/bmw-r-1100-r-2001.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-r-1150-r-2003.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-r-1150-r-rockster-2004.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-r-1150-r-rockster-2005.html</loc></url>
@@ -451,6 +451,7 @@
   <url><loc>https://mootle.es/m/bmw-r-1200-rt-2010.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-r-1200-rt-2013.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-r-1200-rt-2014.html</loc></url>
+  <url><loc>https://mootle.es/m/bmw-r-1200-rt-2015.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-r-1200-rt-2016.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-r-1200-rt-2017.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-r-1200-rt-2018.html</loc></url>
@@ -527,7 +528,6 @@
   <url><loc>https://mootle.es/m/bmw-s-1000-rr-2020.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-s-1000-rr-2021.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-s-1000-rr-2022.html</loc></url>
-  <url><loc>https://mootle.es/m/bmw-s-1000-rr-2024.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-s-1000-rr-2025.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-s-1000-rr-2026.html</loc></url>
   <url><loc>https://mootle.es/m/bmw-s-1000-xr-2016.html</loc></url>
@@ -633,7 +633,6 @@
   <url><loc>https://mootle.es/m/ducati-monster-696-2008.html</loc></url>
   <url><loc>https://mootle.es/m/ducati-monster-696-2009.html</loc></url>
   <url><loc>https://mootle.es/m/ducati-monster-696-2010.html</loc></url>
-  <url><loc>https://mootle.es/m/ducati-monster-696-2011.html</loc></url>
   <url><loc>https://mootle.es/m/ducati-monster-696-2012.html</loc></url>
   <url><loc>https://mootle.es/m/ducati-monster-796-2011.html</loc></url>
   <url><loc>https://mootle.es/m/ducati-monster-796-2013.html</loc></url>
@@ -943,12 +942,14 @@
   <url><loc>https://mootle.es/m/honda-cb650f-2017.html</loc></url>
   <url><loc>https://mootle.es/m/honda-cb650f-2018.html</loc></url>
   <url><loc>https://mootle.es/m/honda-cb650f-2019.html</loc></url>
+  <url><loc>https://mootle.es/m/honda-cbf-125-2009.html</loc></url>
   <url><loc>https://mootle.es/m/honda-cbf-125-2014.html</loc></url>
   <url><loc>https://mootle.es/m/honda-cbf-500-2004.html</loc></url>
   <url><loc>https://mootle.es/m/honda-cbf-600-na-2006.html</loc></url>
   <url><loc>https://mootle.es/m/honda-cbf-600-sa-2006.html</loc></url>
   <url><loc>https://mootle.es/m/honda-cbf-600n-2007.html</loc></url>
   <url><loc>https://mootle.es/m/honda-cbf-600s-2013.html</loc></url>
+  <url><loc>https://mootle.es/m/honda-cbr-1000-rr-fireblade-2017.html</loc></url>
   <url><loc>https://mootle.es/m/honda-cbr-1000-rr-fireblade-2018.html</loc></url>
   <url><loc>https://mootle.es/m/honda-cbr-1000-rr-fireblade-2019.html</loc></url>
   <url><loc>https://mootle.es/m/honda-cbr-1000-rr-r-fireblade-sp-2021.html</loc></url>
@@ -1275,7 +1276,6 @@
   <url><loc>https://mootle.es/m/indian-scout-2026.html</loc></url>
   <url><loc>https://mootle.es/m/indian-sport-chief-2023.html</loc></url>
   <url><loc>https://mootle.es/m/indian-sport-chief-2024.html</loc></url>
-  <url><loc>https://mootle.es/m/indian-super-chief-2024.html</loc></url>
   <url><loc>https://mootle.es/m/italjet-dragster-125-2022.html</loc></url>
   <url><loc>https://mootle.es/m/italjet-dragster-125-2025.html</loc></url>
   <url><loc>https://mootle.es/m/italjet-dragster-700-2026.html</loc></url>
@@ -1291,7 +1291,6 @@
   <url><loc>https://mootle.es/m/kawasaki-er-6n-2009.html</loc></url>
   <url><loc>https://mootle.es/m/kawasaki-er-6n-2011.html</loc></url>
   <url><loc>https://mootle.es/m/kawasaki-er-6n-2012.html</loc></url>
-  <url><loc>https://mootle.es/m/kawasaki-er-6n-2015.html</loc></url>
   <url><loc>https://mootle.es/m/kawasaki-er-6n-2016.html</loc></url>
   <url><loc>https://mootle.es/m/kawasaki-gpx-600-r-1988.html</loc></url>
   <url><loc>https://mootle.es/m/kawasaki-gtr-1400-2007.html</loc></url>
@@ -1338,7 +1337,6 @@
   <url><loc>https://mootle.es/m/kawasaki-ninja-zx-10r-40th-anniversary-akrapovic-2024.html</loc></url>
   <url><loc>https://mootle.es/m/kawasaki-ninja-zx-4rr-2025.html</loc></url>
   <url><loc>https://mootle.es/m/kawasaki-ninja-zx-6r-2018.html</loc></url>
-  <url><loc>https://mootle.es/m/kawasaki-ninja-zx-6r-2019.html</loc></url>
   <url><loc>https://mootle.es/m/kawasaki-ninja-zx-6r-2024.html</loc></url>
   <url><loc>https://mootle.es/m/kawasaki-ninja-zx-6r-2025.html</loc></url>
   <url><loc>https://mootle.es/m/kawasaki-ninja-zx-6r-636-ktr-2023.html</loc></url>
@@ -1439,6 +1437,7 @@
   <url><loc>https://mootle.es/m/kawasaki-z-800-2016.html</loc></url>
   <url><loc>https://mootle.es/m/kawasaki-z-800e-2014.html</loc></url>
   <url><loc>https://mootle.es/m/kawasaki-z-800e-2015.html</loc></url>
+  <url><loc>https://mootle.es/m/kawasaki-z-800e-2016.html</loc></url>
   <url><loc>https://mootle.es/m/kawasaki-z-900-2017.html</loc></url>
   <url><loc>https://mootle.es/m/kawasaki-z-900-2018.html</loc></url>
   <url><loc>https://mootle.es/m/kawasaki-z-900-2019.html</loc></url>
@@ -1628,6 +1627,7 @@
   <url><loc>https://mootle.es/m/kymco-dtx-125-2024.html</loc></url>
   <url><loc>https://mootle.es/m/kymco-dtx-125-2025.html</loc></url>
   <url><loc>https://mootle.es/m/kymco-dtx-125-2026.html</loc></url>
+  <url><loc>https://mootle.es/m/kymco-dtx-350-2022.html</loc></url>
   <url><loc>https://mootle.es/m/kymco-dtx-350-2023.html</loc></url>
   <url><loc>https://mootle.es/m/kymco-dtx-350-2025.html</loc></url>
   <url><loc>https://mootle.es/m/kymco-dtx-350-2026.html</loc></url>
@@ -1783,6 +1783,7 @@
   <url><loc>https://mootle.es/m/mv-agusta-brutale-800-2021.html</loc></url>
   <url><loc>https://mootle.es/m/mv-agusta-brutale-800-2025.html</loc></url>
   <url><loc>https://mootle.es/m/mv-agusta-brutale-800-2026.html</loc></url>
+  <url><loc>https://mootle.es/m/mv-agusta-dragster-800-2019.html</loc></url>
   <url><loc>https://mootle.es/m/mv-agusta-dragster-800-2020.html</loc></url>
   <url><loc>https://mootle.es/m/mv-agusta-dragster-800-2022.html</loc></url>
   <url><loc>https://mootle.es/m/mv-agusta-dragster-800-2023.html</loc></url>
@@ -2088,6 +2089,7 @@
   <url><loc>https://mootle.es/m/suzuki-v-strom-1000-2020.html</loc></url>
   <url><loc>https://mootle.es/m/suzuki-v-strom-1000xt-2017.html</loc></url>
   <url><loc>https://mootle.es/m/suzuki-v-strom-1050-2020.html</loc></url>
+  <url><loc>https://mootle.es/m/suzuki-v-strom-1050-2021.html</loc></url>
   <url><loc>https://mootle.es/m/suzuki-v-strom-1050-2022.html</loc></url>
   <url><loc>https://mootle.es/m/suzuki-v-strom-1050-2023.html</loc></url>
   <url><loc>https://mootle.es/m/suzuki-v-strom-650-2004.html</loc></url>
@@ -2246,6 +2248,7 @@
   <url><loc>https://mootle.es/m/triumph-street-twin-2018.html</loc></url>
   <url><loc>https://mootle.es/m/triumph-street-twin-2019.html</loc></url>
   <url><loc>https://mootle.es/m/triumph-street-twin-2021.html</loc></url>
+  <url><loc>https://mootle.es/m/triumph-street-twin-900-2018.html</loc></url>
   <url><loc>https://mootle.es/m/triumph-street-twin-900-2019.html</loc></url>
   <url><loc>https://mootle.es/m/triumph-street-twin-900-2021.html</loc></url>
   <url><loc>https://mootle.es/m/triumph-thruxton-1200-rs-2023.html</loc></url>
@@ -2262,6 +2265,7 @@
   <url><loc>https://mootle.es/m/triumph-tiger-1200-2024.html</loc></url>
   <url><loc>https://mootle.es/m/triumph-tiger-1200-gt-2022.html</loc></url>
   <url><loc>https://mootle.es/m/triumph-tiger-1200-gt-2023.html</loc></url>
+  <url><loc>https://mootle.es/m/triumph-tiger-1200-gt-2024.html</loc></url>
   <url><loc>https://mootle.es/m/triumph-tiger-1200-gt-2025.html</loc></url>
   <url><loc>https://mootle.es/m/triumph-tiger-800-2011.html</loc></url>
   <url><loc>https://mootle.es/m/triumph-tiger-800-2012.html</loc></url>
@@ -2361,6 +2365,7 @@
   <url><loc>https://mootle.es/m/voge-300-ds-2022.html</loc></url>
   <url><loc>https://mootle.es/m/voge-300-ds-2023.html</loc></url>
   <url><loc>https://mootle.es/m/voge-300-rally-2023.html</loc></url>
+  <url><loc>https://mootle.es/m/voge-300-rally-2025.html</loc></url>
   <url><loc>https://mootle.es/m/voge-300-rally-2026.html</loc></url>
   <url><loc>https://mootle.es/m/voge-350-ac-2025.html</loc></url>
   <url><loc>https://mootle.es/m/voge-500-ac-2022.html</loc></url>
@@ -2418,7 +2423,6 @@
   <url><loc>https://mootle.es/m/yamaha-delight-125-2023.html</loc></url>
   <url><loc>https://mootle.es/m/yamaha-fazer8-2014.html</loc></url>
   <url><loc>https://mootle.es/m/yamaha-fjr-1300-a-2017.html</loc></url>
-  <url><loc>https://mootle.es/m/yamaha-fjr-1300-ae-2016.html</loc></url>
   <url><loc>https://mootle.es/m/yamaha-fz1-n-2012.html</loc></url>
   <url><loc>https://mootle.es/m/yamaha-fz1-s-fazer-2007.html</loc></url>
   <url><loc>https://mootle.es/m/yamaha-fz6-n-2005.html</loc></url>
@@ -2645,6 +2649,7 @@
   <url><loc>https://mootle.es/m/yamaha-xt-1200-z-super-tenere-worldcrosser-2013.html</loc></url>
   <url><loc>https://mootle.es/m/yamaha-xt-600-e-1991.html</loc></url>
   <url><loc>https://mootle.es/m/yamaha-xt-600-e-1999.html</loc></url>
+  <url><loc>https://mootle.es/m/yamaha-xt-660-r-2007.html</loc></url>
   <url><loc>https://mootle.es/m/yamaha-xt-660-r-2008.html</loc></url>
   <url><loc>https://mootle.es/m/yamaha-xt-660-re-2004.html</loc></url>
   <url><loc>https://mootle.es/m/yamaha-xt-660-re-2005.html</loc></url>
@@ -2707,6 +2712,7 @@
   <url><loc>https://mootle.es/m/zontes-350-t-2024.html</loc></url>
   <url><loc>https://mootle.es/m/zontes-350-t-x-2025.html</loc></url>
   <url><loc>https://mootle.es/m/zontes-350-t-x-2026.html</loc></url>
+  <url><loc>https://mootle.es/m/zontes-350-x-2022.html</loc></url>
   <url><loc>https://mootle.es/m/zontes-350-x-2024.html</loc></url>
   <url><loc>https://mootle.es/m/zontes-350-x-2025.html</loc></url>
   <url><loc>https://mootle.es/m/zontes-368-d-2026.html</loc></url>
@@ -2727,6 +2733,7 @@
   <url><loc>https://mootle.es/m/zontes-703-rr-etc-2026.html</loc></url>
   <url><loc>https://mootle.es/m/zontes-703-t-etc-2026.html</loc></url>
   <url><loc>https://mootle.es/m/zontes-adv-t-310-2024.html</loc></url>
+  <url><loc>https://mootle.es/m/zontes-d-350-2024.html</loc></url>
   <url><loc>https://mootle.es/m/zontes-g1-125-2022.html</loc></url>
   <url><loc>https://mootle.es/m/zontes-g1-125-2023.html</loc></url>
   <url><loc>https://mootle.es/m/zontes-g1-125-2024.html</loc></url>
@@ -2751,6 +2758,7 @@
   <url><loc>https://mootle.es/m/zontes-t-350-2024.html</loc></url>
   <url><loc>https://mootle.es/m/zontes-u-125-2022.html</loc></url>
   <url><loc>https://mootle.es/m/zontes-u-125-2023.html</loc></url>
+  <url><loc>https://mootle.es/m/zontes-u-125-2024.html</loc></url>
   <url><loc>https://mootle.es/m/zontes-u-125-2025.html</loc></url>
   <url><loc>https://mootle.es/m/zontes-u1-125-2022.html</loc></url>
   <url><loc>https://mootle.es/m/zontes-v-310-2019.html</loc></url>
