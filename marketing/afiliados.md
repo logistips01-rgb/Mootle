@@ -26,7 +26,7 @@ en cada enlace nuevo, o las comisiones se mezclan con las de Guitle.
 | **eBay** | ebay.es | eBay Partner Network (EPN) | `cableado` ✅ | `campid=5339241544`, `customid=mootle`; feed vía API diaria | Variable (~1–4 % según categoría) | ~430 ofertas y subiendo. `scraper/ebay.py`. |
 | **Amazon** | amazon.es | Amazon Afiliados | `cableado` ✅ | `tag=mootle-21` | Variable por categoría | Enlace neumáticos en ficha de moto + botón "Buscar en Amazon" en equipación. PA-API se desbloquea tras 3 ventas. `scraper/pages.py` (`AMAZON_TAG`). |
 | **Máximo Moto** | maximo-moto.com | Shopify (fuente de precios, **sin afiliación**) | `contactado` (borrador pendiente de enviar) | `/products.json` diario | — | Fuente de comparación ya integrada. Borrador para formalizar afiliación. |
-| **Albabike** | albabike.com | Propio / sin red (fuente de precios) | `contactado` (borrador pendiente de enviar) | Seed manual + scrape semanal | — | Fuente de comparación integrada; sin acuerdo de afiliación todavía. |
+| **Albabike** | albabike.com | Propio / sin red (fuente de precios) | `pendiente` → enviar | Seed manual + scrape semanal | — | Fuente de comparación integrada; sin acuerdo aún. **Borrador listo:** `correos/albabike.md` (falta confirmar email de contacto de Albabike). |
 | **outletMOTARD** | outletmotard.es | Shopify, **sin afiliación pública** | fuente `cableado` ✅ (PR #1 fusionado) · afiliación `pendiente` → contactar | `/products.json` (~788 prod.) | — | Integrada como fuente de precios (Scorpion, Alpinestars, HJC, Nox, CGM, Five…). Falta pedir feed oficial + afiliación. **Borrador listo:** `correos/outletmotard.md`. |
 | **FC-Moto** | fc-moto.es | **Webgains** (ES activo desde 2024) · también FlexOffers | `pendiente` → alta Webgains + solicitar | CPA, cookie 30 d, aprobación manual | ~6 % CPA | Catálogo enorme, envía a España. Buen primer anunciante no-Shopify. |
 | **Tradeinn / Motardinn** | motardinn.com | **Belboon** (Tradeinn, activo desde 2018) · Motardinn en TradeTracker | `pendiente` | — | 5–10 % (Motardinn, por confirmar) | Grupo español (Girona), multi-tienda. |
@@ -129,6 +129,7 @@ SEO → tiendas Shopify se integran como fuente **aunque no haya afiliación tod
 - `marketing/correos/rastreator-seguros.md` — alta de afiliación de seguros.
 - `marketing/correos/alta-red-awin.md` — texto para el alta en Awin + primeras
   solicitudes de anunciante (Línea Directa, FC-Moto).
+- `marketing/correos/albabike.md` — formalizar feed + afiliación (ya les listamos).
 
 > Los borradores están **listos para que los envíe Manuel**. Yo no envío correos ni me
 > doy de alta en ninguna red: investigo, redacto y preparo la integración.
