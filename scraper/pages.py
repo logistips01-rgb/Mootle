@@ -60,17 +60,20 @@ _CANON_STOP = {
     "naranja", "gris", "grises", "rosa", "morado", "morada", "violeta", "marron", "beige", "dorado",
     "dorada", "plata", "plateado", "plateada", "antracita", "fucsia", "lila", "celeste", "turquesa",
     "crema", "arena", "camel", "burdeos", "granate", "coral", "menta", "oro", "cobre", "bronce",
-    "nacar", "perla", "cemento", "militar", "khaki", "caqui", "oliva", "mostaza", "salmon", "cian",
-    "magenta", "azzurro", "rosso", "bianco", "nero", "giallo", "verde", "grigio", "arancione",
+    "nacar", "perla", "cemento", "militar", "military", "khaki", "kaki", "caqui", "oliva", "mostaza",
+    "salmon", "cian", "magenta", "azzurro", "rosso", "bianco", "nero", "giallo", "grigio", "arancione",
+    "blu", "viola", "argento", "anthracite", "fuchsia", "titanium", "titanio", "pearl", "nardo",
+    "chameleon", "lava", "ice", "smoke",
     "black", "white", "red", "blue", "green", "yellow", "orange", "grey", "gray", "pink", "purple",
     "silver", "gold", "brown", "navy", "lime", "cyan", "ivory", "sand", "olive",
-    # acabados
-    "mate", "matt", "matte", "opaco", "brillo", "gloss", "glossy", "satin", "satinado",
-    "metalizado", "metalico", "metallic", "fluor", "fluo", "fluorescente", "neon", "hivis",
-    "hiviz", "hv", "transparente", "tintado", "ahumado", "espejo", "iridium", "solid",
+    # acabados / modificadores de color
+    "mate", "mat", "matt", "matte", "opaco", "brillo", "brillante", "gloss", "glossy", "satin",
+    "satinado", "metalizado", "metalico", "metallic", "fluor", "fluo", "flou", "flo", "fluorescente",
+    "neon", "hivis", "hiviz", "hv", "bright", "transparente", "tintado", "ahumado", "espejo",
+    "iridium", "solid", "oscuro", "claro",
 }
-# Códigos de color de casco (se repiten por color, no por modelo): HJC MCxx(sf/h), Shoei TC-x.
-_CANON_CODE = re.compile(r"^(mc\d+[a-z]*|tc-?\d+|hv)$")
+# Códigos de color (se repiten por color, no por modelo): HJC MCxx(sf/h), Shoei TC-x, Premier *BM.
+_CANON_CODE = re.compile(r"^(mc\d+[a-z]*|tc-?\d+|hv|[a-z]{1,4}\d+bm)$")
 
 
 def canon_model(model):
