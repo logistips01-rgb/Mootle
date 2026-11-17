@@ -14,6 +14,8 @@ import json
 import os
 import re
 import statistics
+import time
+from collections import Counter
 from datetime import date
 from pathlib import Path
 
@@ -219,22 +221,32 @@ def _td_feeds(token):
     return (feeds or []), st
 
 
-def _td_products(token, fid, max_pages=40):
-    out = []
+def _td_products(token, fid, max_pages=80):
+    """Lee TODAS las páginas del feed, con reintentos por página para que un error puntual
+    (timeout/500) no trunque el catálogo (causaba lecturas parciales inestables: 871→31)."""
+    out, total = [], None
     for pg in range(1, max_pages + 1):
-        j, st = _td_json(f"{TD_API}/products.json;page={pg};pageSize=100;fid={fid}", token)
+        j = None
+        for attempt in range(3):
+            j, st = _td_json(f"{TD_API}/products.json;page={pg};pageSize=100;fid={fid}", token)
+            if j:
+                break
+            time.sleep(2 * (attempt + 1))
         if not j:
+            # error persistente en esta página: cortamos, pero avisamos de lectura parcial
+            print(f"[TradeDoubler] feed {fid}: corte en página {pg} (lectura posiblemente parcial)")
             break
         prods = j.get("products") or []
         if not prods:
             break
         out.extend(prods)
-        total = (j.get("productHeader") or {}).get("totalHits")
-        try:
-            if total and len(out) >= int(total):
-                break
-        except (TypeError, ValueError):
-            pass
+        if total is None:
+            try:
+                total = int((j.get("productHeader") or {}).get("totalHits"))
+            except (TypeError, ValueError):
+                total = None
+        if total and len(out) >= total:
+            break
     return out
 
 
@@ -320,7 +332,12 @@ def read_tradedoubler(site_id=MOOTLE_TD_SITE):
             seen_prods += 1
             it = _td_parse(p, site_id)
             if it:
-                found[it["id"]] = it
+                # dedup de variantes (colores/tallas del mismo modelo) por tienda+mid: la más
+                # barata. Evita el mismo casco repetido 3 veces en la ficha.
+                k = (it["src"], it["mid"])
+                cur = found.get(k)
+                if cur is None or it["p"] < cur["p"]:
+                    found[k] = it
             else:
                 rc = " / ".join(c.get("name") or "" for c in (p.get("categories") or [])) or "(sin categoría)"
                 skipped_cats[rc] = skipped_cats.get(rc, 0) + 1
@@ -468,6 +485,22 @@ def run(dry=False):
     # TradeDoubler (feeds de afiliado conectados al sitio de mootle: Motocard…). Enlace de
     # afiliado ya incluido en cada producto. No hace nada si falta el token (secreto).
     td_items, td_sources = read_tradedoubler()
+    # Guardia anti-lectura-parcial: si un feed de TradeDoubler devuelve muchos menos productos
+    # que la última vez (lectura incompleta), conservamos el catálogo anterior de esa tienda en
+    # lugar de pisarlo con una lectura a medias (evita el baile 871→31).
+    old_sources = load(DATA, {}).get("sources", {})
+    td_src_ids = {s for s, inf in old_sources.items() if inf.get("status") == "td"} | set(td_sources)
+    new_cnt = Counter(it["src"] for it in td_items)
+    old_cnt = Counter(it.get("src") for it in old if it.get("src") in td_src_ids)
+    for s in td_src_ids:
+        oc, nc = old_cnt.get(s, 0), new_cnt.get(s, 0)
+        if oc >= 20 and nc < 0.5 * oc:
+            td_items = [it for it in td_items if it["src"] != s] + [it for it in old if it.get("src") == s]
+            td_sources[s] = old_sources.get(s, {"name": s.replace("-", " ").title(),
+                                                "home": TD_HOMES.get(s.split("-")[0], ""),
+                                                "status": "td", "count": 0})
+            td_sources[s]["count"] = oc
+            print(f"[TradeDoubler] {s}: lectura parcial ({nc} < {oc}); conservado catálogo anterior")
     if td_sources:
         sources.update(td_sources)
     for it in td_items:
