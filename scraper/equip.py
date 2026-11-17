@@ -221,33 +221,62 @@ def _td_feeds(token):
     return (feeds or []), st
 
 
-def _td_products(token, fid, max_pages=80):
-    """Lee TODAS las páginas del feed, con reintentos por página para que un error puntual
-    (timeout/500) no trunque el catálogo (causaba lecturas parciales inestables: 871→31)."""
+# La API de BÚSQUEDA de TradeDoubler topa en 1000 productos por consulta (10 páginas de 100):
+# barrer el feed entero es imposible (Motocard tiene 114k productos, el 99% recambios de motor
+# que no comparamos; además a partir del producto 1000 la API corta). Así que en lugar de hojear
+# el catálogo pedimos SOLO equipación con búsquedas filtradas por término (q) y, si una categoría
+# pasa de 1000, la troceamos por franjas de precio. Motocard es tienda española, así que el título
+# va en español y q=casco/guantes/... recupera la prenda; el filtro fino sigue siendo _td_parse.
+_TD_Q_TERMS = ["casco", "guantes", "chaqueta", "cazadora", "pantalon",
+               "botas", "mono", "traje", "buzo"]
+_TD_PRICE_BANDS = [(0, 40), (40, 70), (70, 100), (100, 140),
+                   (140, 200), (200, 300), (300, 500), (500, None)]
+
+
+def _td_matrix(params):
+    return "".join(f";{k}={v}" for k, v in params.items() if v is not None)
+
+
+def _td_search(token, fid, params):
+    """Una búsqueda filtrada del feed (q / precio). La API topa en 1000 productos (10×100),
+    con reintentos por página. Devuelve (productos, totalHits)."""
     out, total = [], None
-    for pg in range(1, max_pages + 1):
+    for pg in range(1, 11):
+        url = f"{TD_API}/products.json;fid={fid}{_td_matrix(params)};page={pg};pageSize=100"
         j = None
         for attempt in range(3):
-            j, st = _td_json(f"{TD_API}/products.json;page={pg};pageSize=100;fid={fid}", token)
-            if j:
+            j, st = _td_json(url, token)
+            if j is not None:
                 break
             time.sleep(2 * (attempt + 1))
-        if not j:
-            # error persistente en esta página: cortamos, pero avisamos de lectura parcial
-            print(f"[TradeDoubler] feed {fid}: corte en página {pg} (lectura posiblemente parcial)")
+        if j is None:
             break
         prods = j.get("products") or []
-        if not prods:
-            break
-        out.extend(prods)
         if total is None:
             try:
                 total = int((j.get("productHeader") or {}).get("totalHits"))
             except (TypeError, ValueError):
                 total = None
-        if total and len(out) >= total:
+        out.extend(prods)
+        if len(prods) < 100:
             break
-    return out
+    return out, total
+
+
+def _td_term_products(token, fid, term):
+    """Todos los productos del feed para un término, troceando por precio si supera el tope de
+    1000 (así no nos quedamos con solo los 1000 más baratos de los cascos, p.ej.)."""
+    prods, total = _td_search(token, fid, {"q": term})
+    if not (total and total > 1000):
+        return prods, total
+    acc = list(prods)          # el primer lote (<=1000); las franjas recuperan el resto
+    for lo, hi in _TD_PRICE_BANDS:
+        p = {"q": term, "minPrice": lo}
+        if hi is not None:
+            p["maxPrice"] = hi
+        bp, _ = _td_search(token, fid, p)
+        acc.extend(bp)
+    return acc, total
 
 
 def _td_offer_for_site(p, site_id):
@@ -327,7 +356,11 @@ def read_tradedoubler(site_id=MOOTLE_TD_SITE):
         if not fid:
             continue
         kept0 = len(found)
-        prods = _td_products(token, fid)
+        prods, per = [], []
+        for term in _TD_Q_TERMS:
+            tp, tot = _td_term_products(token, fid, term)
+            prods.extend(tp)           # los duplicados entre términos colapsan luego por (src, mid)
+            per.append(f'{term}={len(tp)}' + (f'/{tot}' if (tot and tot > len(tp)) else ''))
         for p in prods:
             seen_prods += 1
             it = _td_parse(p, site_id)
@@ -341,8 +374,9 @@ def read_tradedoubler(site_id=MOOTLE_TD_SITE):
             else:
                 rc = " / ".join(c.get("name") or "" for c in (p.get("categories") or [])) or "(sin categoría)"
                 skipped_cats[rc] = skipped_cats.get(rc, 0) + 1
-        print(f'[TradeDoubler] feed "{f.get("name") or fid}": numberOfProducts='
-              f'{f.get("numberOfProducts")}, leídos={len(prods)}, guardados={len(found) - kept0}')
+        print(f'[TradeDoubler] feed "{f.get("name") or fid}": por término -> ' + " · ".join(per))
+        print(f'[TradeDoubler] feed "{f.get("name") or fid}": leídos={len(prods)}, '
+              f'guardados={len(found) - kept0}')
     if skipped_cats:
         top = sorted(skipped_cats.items(), key=lambda x: -x[1])[:12]
         print("[TradeDoubler] categorías descartadas (no comparadas por mootle): "
