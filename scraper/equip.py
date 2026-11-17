@@ -23,7 +23,7 @@ import requests
 
 from .fetch import Fetcher, is_challenge
 from .models import group_history, price_history
-from .pages import slug
+from .pages import slug, equip_mid
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "data" / "equipacion.json"
@@ -457,7 +457,7 @@ def read_shopify(fetcher, store):
     return list(found.values()), {"name": store["name"], "home": store["home"], "status": "ok", "count": len(found), "complete": pages > 0}
 
 
-def _drop_price_outliers(results, frac=0.35, min_group=3):
+def _drop_price_outliers(results, frac=0.35, min_group=2):
     """Quita items cuyo precio queda muy por debajo de la mediana de su grupo (mismo mid):
     casi siempre un accesorio/recambio mal emparejado que falsea el 'desde' (p. ej. un
     perfilador de 29 € entre botas de 280 €). Conservador: solo cae si queda por debajo del
@@ -555,6 +555,13 @@ def run(dry=False):
         seen.add(it["id"])
     for s, info in td_sources.items():
         print(f'[{info["name"]}] td · {info["count"]} productos')
+
+    # Clave de agrupación canónica: recalculamos el `mid` de TODOS los productos de tienda con el
+    # mismo criterio (marca + modelo sin color/acabado + categoría), para que el mismo casco de
+    # Máximo, Albabike y Motocard caiga en la MISMA ficha comparada. eBay se empareja justo
+    # después usando estos mids, así que hereda el formato sin tocar nada más.
+    for it in results:
+        it["mid"] = equip_mid(it["mk"], it["md"], it["cat"])
 
     # eBay: una oferta más por producto (con enlace de afiliado). Solo para productos que ya
     # tenemos en el catálogo (empareja por `mid`); así es una oferta extra del mismo producto.
