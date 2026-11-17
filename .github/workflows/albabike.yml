@@ -51,6 +51,8 @@ jobs:
         run: python -m scraper.albabike_build
 
       - name: Regenerar equipación
+        env:
+          TRADEDOUBLER_PRODUCTS_TOKEN: ${{ secrets.TRADEDOUBLER_PRODUCTS_TOKEN }}
         run: python -m scraper.equip
 
       - name: Commit de datos
