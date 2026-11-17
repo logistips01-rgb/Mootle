@@ -87,6 +87,28 @@ def main():
     raw = json.loads(RAW.read_text(encoding="utf-8"))
     curated = json.loads(CURATED.read_text(encoding="utf-8")) if CURATED.exists() else []
     old_ids = {it["id"] for it in curated}
+    # Índice del scrape fresco por id, para refrescar el PRECIO de los curados (conservan su
+    # `mid` y título emparejados a mano, pero el precio/p0/img se actualizan desde la tienda;
+    # antes quedaban congelados al precio del día que se curaron).
+    raw_by_id, refreshed = {}, 0
+    for cat, items in raw.items():
+        for it in items:
+            pid = it["href"].rsplit("/", 1)[-1].replace(".html", "")
+            raw_by_id[f"albabike:{pid}"] = it
+    for it in curated:
+        r = raw_by_id.get(it["id"])
+        if not r:
+            continue
+        p = price(r.get("newp"))
+        if not p:
+            continue
+        p0 = price(r.get("oldp"))
+        if it.get("p") != p or it.get("p0") != (p0 if (p0 and p0 > p) else None):
+            refreshed += 1
+        it["p"] = p
+        it["p0"] = p0 if (p0 and p0 > p) else None
+        if r.get("img"):
+            it["img"] = r["img"]
     new, seen = [], set(old_ids)
     for cat, items in raw.items():
         for it in items:
@@ -110,8 +132,8 @@ def main():
     merged = curated + new
     OUT.write_text(json.dumps(merged, ensure_ascii=False, indent=1), encoding="utf-8")
     from collections import Counter
-    print(f"albabike_seed.json: {len(merged)} ({len(curated)} curados + {len(new)} nuevos) · "
-          f"{dict(Counter(x['cat'] for x in merged))}")
+    print(f"albabike_seed.json: {len(merged)} ({len(curated)} curados, {refreshed} con precio "
+          f"refrescado + {len(new)} nuevos) · {dict(Counter(x['cat'] for x in merged))}")
 
 
 if __name__ == "__main__":
