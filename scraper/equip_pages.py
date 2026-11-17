@@ -227,6 +227,12 @@ def index_page(groups, sources):
     cat_chips = '<button class="chip on" data-cat="">Todas</button>' + "".join(
         f'<button class="chip" data-cat="{cat}">{e(CAT_NAMES.get(cat, cat))}</button>'
         for cat in sorted(by_cat, key=lambda c: -len(by_cat[c])))
+    # Desplegable "por tienda": solo las tiendas que de verdad tienen producto, las más surtidas
+    # primero. El valor es el id de tienda (src) y el filtro se hace en el cliente con g.s.
+    present = sorted({w for g in gl for w in g["webs"]},
+                     key=lambda s: -sum(1 for g in gl if s in g["webs"]))
+    shop_opts = "".join(f'<option value="{e(s)}">{e(sources.get(s, {}).get("name", s))}</option>'
+                        for s in present)
     body = f"""  <div class="hero" style="padding:26px 0 6px;text-align:center">
     <h1 class="display" style="font-size:clamp(28px,5vw,44px);margin:0">Equipación de moto <span style="color:var(--accent)">al mejor precio</span></h1>
     <p class="sub" style="color:var(--text-muted);margin:8px 0 0">Cascos, guantes, chaquetas, botas y más — comparados entre tiendas.</p>
@@ -243,6 +249,10 @@ def index_page(groups, sources):
         <option value="100-200">100 - 200 €</option>
         <option value="200-400">200 - 400 €</option>
         <option value="400-">Más de 400 €</option>
+      </select>
+      <select id="eq-shop" class="eq-price" aria-label="Tienda" style="margin-left:8px">
+        <option value="">Tienda: todas</option>
+        {shop_opts}
       </select>
     </div>
   </div>
@@ -265,7 +275,7 @@ _SEARCH_JS = """<script>
   var fold=function(s){return String(s||"").normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").toLowerCase();};
   var eur=function(v){return nf.format(v)+" €";};
   var $=function(id){return document.getElementById(id);};
-  var DATA=[], cat="";
+  var DATA=[], cat="", shop="";
   function card(g){
     var img=g.img?'<img src="'+g.img+'" alt="" loading="lazy" referrerpolicy="no-referrer">':'';
     var foot=(g.n+" oferta"+(g.n>1?"s":""))+(g.w>1?" \\u00b7 "+g.w+" tiendas":"");
@@ -279,12 +289,13 @@ _SEARCH_JS = """<script>
     var qs=fold($("q-eq").value).split(/\\s+/).filter(Boolean);
     var pv=$("eq-price").value, lo=0, hi=Infinity;
     if(pv){var pp=pv.split("-"); lo=+pp[0]||0; hi=(pp[1]==="")?Infinity:(+pp[1]||Infinity);}
-    var browsing=!qs.length && !cat && !pv;
+    var browsing=!qs.length && !cat && !pv && !shop;
     $("eq-browse").hidden=!browsing; $("eq-results").hidden=browsing;
     if(browsing){history.replaceState(null,"",location.pathname);return;}
     if(window.mootleSearch) window.mootleSearch($("q-eq").value);
     var r=DATA.filter(function(g){
       if(cat && g.cat!==cat) return false;
+      if(shop && (!g.s || g.s.indexOf(shop)<0)) return false;
       if(g.p<lo || g.p>hi) return false;
       var hay=fold(g.mk+" "+g.md+" "+(CN[g.cat]||""));
       return qs.every(function(w){return hay.indexOf(w)>=0;});
@@ -292,16 +303,17 @@ _SEARCH_JS = """<script>
     r.sort(function(a,b){return (b.w-a.w)||(b.n-a.n)||(a.p-b.p);});
     $("eq-count").textContent=nf.format(r.length)+(r.length===1?" producto":" productos");
     $("eq-grid").innerHTML=r.length?r.slice(0,150).map(card).join(""):'<p class="empty">Nada por aquí. Prueba otra búsqueda.</p>';
-    var p=new URLSearchParams(); if($("q-eq").value.trim())p.set("q",$("q-eq").value.trim()); if(cat)p.set("cat",cat); if(pv)p.set("precio",pv);
+    var p=new URLSearchParams(); if($("q-eq").value.trim())p.set("q",$("q-eq").value.trim()); if(cat)p.set("cat",cat); if(pv)p.set("precio",pv); if(shop)p.set("tienda",shop);
     history.replaceState(null,"","?"+p.toString());
   }
   $("eq-form").addEventListener("submit",function(e){e.preventDefault();run();});
   $("q-eq").addEventListener("input",function(){clearTimeout(window.__t);window.__t=setTimeout(run,180);});
   $("eq-price").addEventListener("change",run);
+  $("eq-shop").addEventListener("change",function(){shop=$("eq-shop").value;run();});
   $("eq-chips").addEventListener("click",function(e){var b=e.target.closest("[data-cat]");if(!b)return;cat=b.dataset.cat;var cs=document.querySelectorAll("#eq-chips .chip");for(var i=0;i<cs.length;i++)cs[i].classList.toggle("on",cs[i]===b);run();});
   fetch("buscador.json").then(function(r){return r.json();}).then(function(d){
-    DATA=d; var p=new URLSearchParams(location.search); var q=p.get("q")||""; cat=p.get("cat")||"";
-    $("q-eq").value=q; $("eq-price").value=p.get("precio")||"";
+    DATA=d; var p=new URLSearchParams(location.search); var q=p.get("q")||""; cat=p.get("cat")||""; shop=p.get("tienda")||"";
+    $("q-eq").value=q; $("eq-price").value=p.get("precio")||""; $("eq-shop").value=shop;
     var cs=document.querySelectorAll("#eq-chips .chip"); for(var i=0;i<cs.length;i++)cs[i].classList.toggle("on",cs[i].dataset.cat===cat);
     run();
   }).catch(function(){});
@@ -333,7 +345,8 @@ def build(data, history):
             changed += 1
     # índice ligero para el buscador de equipación (cliente)
     idx = [{"mid": g["mid"], "mk": g["mk"], "md": g["md"], "cat": g["cat"], "p": g["min"],
-            "n": g["n"], "w": len(g["webs"]), "img": g["img"], **({"pin": g["pin"]} if g.get("pin") else {})}
+            "n": g["n"], "w": len(g["webs"]), "s": g["webs"], "img": g["img"],
+            **({"pin": g["pin"]} if g.get("pin") else {})}
            for g in groups.values()]
     idx.sort(key=lambda x: (-x["w"], -x["n"], x["p"]))
     write(DIR / "buscador.json", json.dumps(idx, ensure_ascii=False, separators=(",", ":")))

@@ -160,6 +160,11 @@ TD_API = "https://api.tradedoubler.com/1.0"
 # productUrl lleve a(3505826), así la comisión es de mootle y nunca de guitle.
 MOOTLE_TD_SITE = "3505826"
 TD_HOMES = {"motocard": "https://www.motocard.com/"}
+TD_NAMES = {"motocard": "Motocard"}   # nombre bonito (el src es slug(programName): "motocard-es")
+
+
+def _td_name(src):
+    return TD_NAMES.get(src.split("-")[0], src.replace("-", " ").title())
 _TD_PREV_FIELDS = {"previousprice", "previous_price", "compare_at_price", "listprice", "rrp"}
 _TD_PRICE_FIELDS = {"saleprice", "sale_price", "price"}
 # Accesorios que caen en una categoría de prenda/casco: el producto ES una visera/recambio
@@ -387,7 +392,7 @@ def read_tradedoubler(site_id=MOOTLE_TD_SITE):
     sources = {}
     for it in found.values():
         s = it["src"]
-        info = sources.setdefault(s, {"name": it["src"].replace("-", " ").title(),
+        info = sources.setdefault(s, {"name": _td_name(s),
                                       "home": TD_HOMES.get(s.split("-")[0], ""),
                                       "status": "td", "count": 0})
         info["count"] += 1
@@ -530,7 +535,7 @@ def run(dry=False):
         oc, nc = old_cnt.get(s, 0), new_cnt.get(s, 0)
         if oc >= 20 and nc < 0.5 * oc:
             td_items = [it for it in td_items if it["src"] != s] + [it for it in old if it.get("src") == s]
-            td_sources[s] = old_sources.get(s, {"name": s.replace("-", " ").title(),
+            td_sources[s] = old_sources.get(s, {"name": _td_name(s),
                                                 "home": TD_HOMES.get(s.split("-")[0], ""),
                                                 "status": "td", "count": 0})
             td_sources[s]["count"] = oc
