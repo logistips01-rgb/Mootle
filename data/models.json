@@ -224,6 +224,9 @@
 "Bultaco": {
 "metralla250gts": "Metralla 250 GTS"
 },
+"Bunker Trike": {
+"hr250": "HR 250"
+},
 "CFMoto": {
 "1000mtx": "1000 MT X",
 "125nk": "125 NK",
@@ -1157,6 +1160,7 @@
 "mrt50pro": "MRT 50 PRO",
 "mrt50sm": "MRT 50 SM",
 "nkd125": "NKD 125",
+"nkx125": "NKX 125",
 "strada125": "Strada 125",
 "tango": "Tango",
 "tango125": "Tango 125",
@@ -1261,6 +1265,7 @@
 "burgman125": "Burgman 125",
 "burgman150": "Burgman 150",
 "burgman200": "Burgman 200",
+"burgman200executive": "Burgman 200 Executive",
 "burgman400": "Burgman 400",
 "burgman400a": "Burgman 400 A",
 "burgman400a2011envalencia10032408htm": "Burgman 400 A 2011 EN Valencia 10032408.HTM",
