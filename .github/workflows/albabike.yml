@@ -1,13 +1,15 @@
 name: albabike
 
-# Refresca el catálogo de equipación de Albabike (precios y stock) una vez por semana.
+# Refresca el catálogo de equipación de Albabike (precios y stock) a diario.
 # Su web es Vue, así que hay que renderizar con Playwright: lee las páginas de listado
 # (rápido, ~95% de precios correctos) y reconstruye el seed, que luego mezcla scraper.equip.
 # Los cascos emparejados a mano (data/albabike_curated.json) se conservan siempre.
+# Antes era semanal, pero Albabike cambia precios a menudo (promos) y las fichas quedaban
+# desfasadas toda la semana; el scrape de listados es ligero, así que va a diario.
 
 on:
   schedule:
-    - cron: "23 3 * * 1"   # lunes, 03:23 UTC
+    - cron: "23 3 * * *"   # a diario, 03:23 UTC
   workflow_dispatch:
 
 permissions:
