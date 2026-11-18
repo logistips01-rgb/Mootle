@@ -36,24 +36,26 @@ jobs:
       - name: Leer motos.net (10 páginas, foco novedades)
         run: python -m scraper.run --only motosnet --minutes 10
 
-      # Refresco de equipación 1×/día colgado del cron horario (que SÍ es fiable), porque los
-      # cron diarios de GitHub (scrape/scrape-ebay/albabike) disparan tarde o no disparan. Solo
-      # corre si equipacion.json no es de hoy (UTC), así es una vez al día. No necesita Playwright
-      # (lee Shopify/TradeDoubler por HTTP y mezcla el seed de Albabike + ofertas eBay ya guardadas).
-      - name: Refrescar equipación (1×/día)
+      # La EQUIPACIÓN es el negocio (afiliados), así que se prioriza su frescura: se refresca
+      # varias veces al día colgado del cron horario (el único fiable; los cron diarios de GitHub
+      # disparan tarde o no disparan). Corre en 4 franjas (04/10/16/22 UTC, cada 6 h) y además
+      # siempre que equipacion.json no sea de hoy (para ponerse al día cuanto antes). No necesita
+      # Playwright (lee Shopify/TradeDoubler por HTTP y mezcla el seed de Albabike + ofertas eBay).
+      - name: Refrescar equipación (varias veces/día)
         env:
           TRADEDOUBLER_PRODUCTS_TOKEN: ${{ secrets.TRADEDOUBLER_PRODUCTS_TOKEN }}
           EBAY_CLIENT_ID: ${{ secrets.EBAY_CLIENT_ID }}
           EBAY_CLIENT_SECRET: ${{ secrets.EBAY_CLIENT_SECRET }}
           EBAY_MARKETS: ${{ vars.EBAY_MARKETS }}
         run: |
-          HOY=$(date -u +%F)
+          H=$(date -u +%H); HOY=$(date -u +%F)
           UPD=$(python -c "import json;print(json.load(open('data/equipacion.json')).get('updated',''))" 2>/dev/null || echo "")
-          if [ "$UPD" != "$HOY" ]; then
-            echo "Equipación de $UPD (!= hoy $HOY): refrescando precios…"
+          case "$H" in 04|10|16|22) SLOT=1;; *) SLOT=0;; esac
+          if [ "$SLOT" = "1" ] || [ "$UPD" != "$HOY" ]; then
+            echo "Refrescando equipación (franja=$SLOT, última=$UPD)…"
             python -m scraper.equip
           else
-            echo "Equipación ya al día ($UPD), no se refresca."
+            echo "Hora $H sin franja y equipación ya de hoy ($UPD): no se refresca."
           fi
 
       - name: Commit de datos
