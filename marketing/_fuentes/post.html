@@ -45,6 +45,16 @@
   .mini .ph img{width:100%;height:100%;object-fit:contain;padding:12px;}
   .mini .nm{font-family:Inter,sans-serif;font-weight:600;font-size:28px;color:#3a352e;line-height:1.15;min-height:64px;}
   .mini .pr{font-weight:800;font-size:40px;color:var(--logo);}
+  /* comparativa: la FOTO manda (hero), tiendas en rejilla compacta debajo */
+  .mid.cmp{gap:16px;justify-content:flex-start;}
+  .mid.cmp .photo{flex:1 1 auto;height:auto;min-height:360px;}
+  .mid.cmp .photo img{padding:28px;}
+  .mid.cmp h1{font-size:50px;}
+  .mid.cmp .kicker{font-size:28px;}
+  .mid.cmp .price{font-size:72px;}
+  .mid.cmp .sub{font-size:28px;}
+  .mid.cmp .shops{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .mid.cmp .shop{padding:14px 22px;font-size:30px;}
 </style></head>
 <body>
   <div class="top">
@@ -63,9 +73,10 @@ function renderPost(d){
   function img(u){return u?'<div class="photo"><img src="'+u+'" referrerpolicy="no-referrer"></div>':'';}
   if(d.kind==="comparativa"){
     badge.textContent="COMPARATIVA"; badge.classList.add("ink");
+    mid.classList.add("cmp");
     var shops=(d.shops||[]).map(function(s){return '<div class="shop"><span class="nm">'+s.name+'</span><b>'+eur(s.p)+'</b></div>';}).join("");
     mid.innerHTML='<div class="kicker">'+(d.cat||"Equipación")+'</div>'
-      +'<h1 style="--h1:62px">'+d.title+'</h1>'
+      +'<h1>'+d.title+'</h1>'
       +img(d.img)
       +'<div class="row"><span class="sub">desde</span><span class="price">'+eur(d.min)+'</span>'
       +(d.n>1?'<span class="sub">en '+d.n+' tiendas</span>':'')+'</div>'
