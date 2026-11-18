@@ -214,6 +214,9 @@
 "crossfire500": "Crossfire 500",
 "felsberg250": "Felsberg 250"
 },
+"Brp": {
+"canamspyderrtlimited": "CAN AM Spyder RT Limited"
+},
 "Bsa": {
 "bantam350": "Bantam 350",
 "goldstar650": "Gold Star 650",
@@ -762,6 +765,7 @@
 "j300se": "J 300 SE",
 "kle500": "KLE 500",
 "klx250": "KLX 250",
+"klx650r": "KLX 650R",
 "kx250f": "KX250F",
 "kx250x": "KX 250 X",
 "kx450": "KX 450",
@@ -1007,6 +1011,7 @@
 "nr125x": "NR 125 X",
 "sc125": "SC 125",
 "t1002vx": "T1002VX",
+"t125x": "T 125 X",
 "t352x": "T 352 X",
 "t502x": "T 502 X"
 },
@@ -1227,6 +1232,7 @@
 "joymax125i": "Joymax 125I",
 "joymax300i": "Joymax 300I",
 "joymaxz300": "Joymax Z 300",
+"joyride125evo": "Joyride 125 EVO",
 "joyride300": "Joyride 300",
 "maxsym400": "Maxsym 400",
 "maxsym400i": "Maxsym 400I",
@@ -1649,6 +1655,7 @@
 "125c2": "125 C2",
 "125d": "125 D",
 "125e": "125 E",
+"125m": "125 M",
 "125v": "125 V",
 "125x": "125 X",
 "350d": "350 D",
