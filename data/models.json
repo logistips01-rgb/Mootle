@@ -708,6 +708,7 @@
 "1390superduke": "1390 Super Duke",
 "150exctpi": "150 EXC TPI",
 "250excf": "250 EXC F",
+"250exctpi": "250 EXC TPI",
 "300exc": "300 EXC",
 "300exctpi": "300 EXC TPI",
 "300exctpisixdays": "300 EXC TPI SIX Days",
@@ -1261,7 +1262,8 @@
 "Sherco": {
 "250seffactory": "250 SEF Factory",
 "300sefr": "300 SEF R",
-"50ser": "50 SE R"
+"50ser": "50 SE R",
+"50smr": "50 SM R"
 },
 "Silence": {
 "s01": "S 01",
