@@ -175,6 +175,7 @@
 "napoleonbob500": "Napoleon BOB 500"
 },
 "Benelli": {
+"302s": "302 S",
 "502c": "502 C",
 "654t": "654 T",
 "752s": "752 S",
@@ -501,6 +502,7 @@
 "cb750": "CB 750",
 "cb750hornet": "CB 750 Hornet",
 "cb750hornetecluth": "CB 750 Hornet E Cluth",
+"cb750nighthawk": "CB 750 Nighthawk",
 "cb750sevenfifty": "CB 750 Seven Fifty",
 "cbf1000c": "CBF 1000 C",
 "cbf125": "CBF 125",
@@ -1010,6 +1012,7 @@
 },
 "Morbidelli Mbp": {
 "c1002v": "C 1002 V",
+"f125": "F 125",
 "f352": "F 352",
 "n125v": "N 125 V",
 "nr125x": "NR 125 X",
@@ -1127,6 +1130,7 @@
 "x7evo300ie": "X7 EVO 300 IE",
 "x9125": "X9 125",
 "x9250": "X9 250",
+"zip1004t": "ZIP 100 4T",
 "zip125": "ZIP 125",
 "zip502t": "ZIP 50 2T"
 },
@@ -1486,6 +1490,7 @@
 "500ac": "500 AC",
 "500ds": "500 DS",
 "500dsx": "500 DSX",
+"525acx": "525 ACX",
 "525dsx": "525 DSX",
 "625dsx": "625 DSX",
 "625r": "625 R",
