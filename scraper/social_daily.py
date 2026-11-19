@@ -71,6 +71,13 @@ def _moto_img_ok(it):
     return u.startswith("http") and "mcdn.es" in u
 
 
+def _nonebay_img(offers):
+    """Mejor foto del producto: preferimos una de TIENDA, porque las ofertas de eBay a veces
+    traen un banner del vendedor (logos de mensajería) en vez de la foto del artículo."""
+    return (next((o.get("img") for o in offers if o.get("img") and o.get("src") != "ebay"), None)
+            or next((o.get("img") for o in offers if o.get("img")), None))
+
+
 def pick_comparativa(used):
     data = load(EQUIP, {})
     sources = data.get("sources", {})
@@ -90,7 +97,7 @@ def pick_comparativa(used):
         med = statistics.median([o["p"] for o in offs])
         if best["p"] < 0.5 * med:
             continue
-        img = next((o["img"] for o in offs if o.get("img")), None)
+        img = _nonebay_img(offs)
         if not img:
             continue
         # una oferta por tienda (la más barata de cada una)
@@ -140,6 +147,9 @@ def pick_chollo(used):
     # equipación que ha bajado (p0 tachado o pa detectado)
     eqdata = load(EQUIP, {})
     eqsrc = eqdata.get("sources", {})
+    _img_by_mid = defaultdict(list)
+    for it in eqdata.get("items", []):
+        _img_by_mid[it.get("mid")].append(it)
     for it in eqdata.get("items", []):
         p = it.get("p")
         ref = max(it.get("p0") or 0, it.get("pa") or 0)
@@ -153,7 +163,8 @@ def pick_chollo(used):
         shop = eqsrc.get(it["src"], {}).get("name", it["src"])
         cand.append({"id": it["id"], "save": ref - p, "pct": pct,
                      "d": {"kind": "chollo", "cat": CAT_NAMES.get(it["cat"], it["cat"]),
-                           "title": f'{it["mk"]} {it["md"]}'[:46], "img": it["img"], "shop": shop,
+                           "title": f'{it["mk"]} {it["md"]}'[:46],
+                           "img": _nonebay_img(_img_by_mid.get(it.get("mid"), [])) or it["img"], "shop": shop,
                            "p": p, "was": ref, "save": ref - p, "pct": pct},
                      "tags": TAGS_EQUIP})
     if not cand:
