@@ -12,7 +12,6 @@
   <url><loc>https://mootle.es/equipacion/100-brisker-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/100-brisker-junior-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/100-brisker-xtreme-guantes.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/100-cognito-army-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/100-cognito-smart-shock-2023-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/100-langdale-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/130r-accesorios-arida-v2-lining-back-and-check-pads-casco.html</loc></url>
@@ -86,6 +85,7 @@
   <url><loc>https://mootle.es/equipacion/130r-kodaira-v2-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/130r-kure-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/130r-miura-carbon-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/130r-outrush-r-p-j-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/130r-saku-p-j-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/130r-showa-p-j-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/130r-tamura-casco.html</loc></url>
@@ -207,6 +207,7 @@
   <url><loc>https://mootle.es/equipacion/acerbis-x-rock-mm-two-2-botas.html</loc></url>
   <url><loc>https://mootle.es/equipacion/acerbis-x-rover-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/acerbis-x-rover-pantalon.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/acerbis-x-street-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/acerbis-x-team-botas.html</loc></url>
   <url><loc>https://mootle.es/equipacion/acerbis-x-team-jr-botas.html</loc></url>
   <url><loc>https://mootle.es/equipacion/acerbis-x-track-casco.html</loc></url>
@@ -261,7 +262,6 @@
   <url><loc>https://mootle.es/equipacion/agv-irides-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/agv-irides-materia-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/agv-irides-profondo-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/agv-irides-zurigo-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/agv-k1-s-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/agv-k1-s-fastlap-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/agv-k1-s-legacy-casco.html</loc></url>
@@ -269,6 +269,7 @@
   <url><loc>https://mootle.es/equipacion/agv-k1-s-rossi-dreamtime-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/agv-k1-s-rossi-soleluna-2017-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/agv-k1-s-rossi-soleluna-2018-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/agv-k1-s-sling-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/agv-k1-s-speedarmor-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/agv-k3-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/agv-k3-mplk-casco.html</loc></url>
@@ -288,9 +289,11 @@
   <url><loc>https://mootle.es/equipacion/agv-k6-s-salom-tribute-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/agv-k6-s-sic58-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/agv-k6-s-timewarp-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/agv-k7-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/agv-k7-damascus-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/agv-k7-flow-46-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/agv-k7-super-46-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/agv-k7-taurax-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/agv-k7-tectron-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/agv-k7-tideforce-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/agv-pista-gp-rr-e2206-carbon-casco.html</loc></url>
@@ -313,7 +316,9 @@
   <url><loc>https://mootle.es/equipacion/airoh-aviator-3-saber-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/airoh-aviator-3-six-days-2021-italia-limited-edition-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/airoh-aviator-ace-2-2024-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/airoh-aviator-ace-2-engine-2024-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/airoh-aviator-ace-2-ground-2024-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/airoh-aviator-ace-2-proud-2024-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/airoh-aviator-ace-2-proud-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/airoh-aviator-ace-2-sake-2024-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/airoh-aviator-ace-2-sake-casco.html</loc></url>
@@ -322,6 +327,7 @@
   <url><loc>https://mootle.es/equipacion/airoh-badx-x-airspeed-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/airoh-badx-x-cube-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/airoh-badx-x-glitch-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/airoh-bandit-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/airoh-bandit-horn-aventura-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/airoh-bandit-horn-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/airoh-bandit-spicy-casco.html</loc></url>
@@ -368,10 +374,10 @@
   <url><loc>https://mootle.es/equipacion/airoh-specktre-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/airoh-specktre-clever-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/airoh-strycker-axe-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/airoh-strycker-shaded-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/airoh-strycker-skin-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/airoh-trr-ii-hunt-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/airoh-twist-2-0-lift-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/airoh-twist-3-2024-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/airoh-twist-3-adventure-2024-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/airoh-twist-3-amazonia-2024-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/airoh-twist-3-dynasty-2026-casco.html</loc></url>
@@ -382,6 +388,7 @@
   <url><loc>https://mootle.es/equipacion/airoh-twist-3-toxic-2024-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/airoh-valor-replica-zanetti-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/airoh-valor-wings-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/airoh-wraaap-6days-italy-2025-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/airoh-wraaap-conquer-2026-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/airoh-wraaap-music-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/airoh-wraaap-paint-2024-casco.html</loc></url>
@@ -398,6 +405,7 @@
   <url><loc>https://mootle.es/equipacion/alpinestars-accesorios-supertech-m10-m8-cheek-pad-set-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-accesorios-supertech-m10-m8-cheek-pads-5mm-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-accesorios-supertech-m10-m8-helmet-top-pad-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/alpinestars-accesorios-supertech-r-10-r-7-gen-2-1-r-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-accesorios-supertech-r-10-r-7-gen2-1-light-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-accesorios-supertech-r-10-r-7-gen2-1-r-mirror-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-accesorios-supertech-r10-chin-straps-covers-casco.html</loc></url>
@@ -425,6 +433,7 @@
   <url><loc>https://mootle.es/equipacion/alpinestars-amt-7-air-dark-shadow-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-amt-8-stretch-drystar-xf-dark-dark-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-amt-8-stretch-drystar-xf-walnut-rust-chaqueta.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/alpinestars-amt-storm-gear-drystar-xf-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-andes-air-drystar-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-andes-air-drystar-deep-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-andes-air-drystar-pantalon.html</loc></url>
@@ -439,7 +448,6 @@
   <url><loc>https://mootle.es/equipacion/alpinestars-andes-v4-drystar-nogal-pantalon.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-andes-v4-drystar-pantalon.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-andes-v4-drystar-walnut-mastic-chaqueta.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/alpinestars-aragon-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-arenis-gore-tex-almond-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-arenis-gore-tex-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-ast-v3-air-chaqueta.html</loc></url>
@@ -527,7 +535,6 @@
   <url><loc>https://mootle.es/equipacion/alpinestars-drystar-pantalon.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-durack-adventure-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-dusk-chaqueta.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/alpinestars-dyno-leather-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-dyno-leather-lady-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-dyno-ruby-ecru-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-explorer-ast-almendra-pantalon.html</loc></url>
@@ -676,7 +683,6 @@
   <url><loc>https://mootle.es/equipacion/alpinestars-morfex-parka-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-morph-sport-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-morph-sport-negros-y-rojos-intensos-guantes.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/alpinestars-morph-sport-sodalite-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-morph-street-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-mospher-wp-dark-petrol-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-mustang-v3-leather-guantes.html</loc></url>
@@ -710,7 +716,6 @@
   <url><loc>https://mootle.es/equipacion/alpinestars-radar-junior-2023-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-radar-junior-ash-2027-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-radar-junior-dark-camo-2024-guantes.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/alpinestars-radar-junior-hot-2023-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-radar-junior-iron-camo-2024-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-radar-junior-magnet-2023-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-radar-junior-mars-2024-guantes.html</loc></url>
@@ -725,6 +730,7 @@
   <url><loc>https://mootle.es/equipacion/alpinestars-raider-v2-drystar-pantalon.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-ramjet-air-pantalon.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-range-2in1-gore-tex-guantes.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/alpinestars-rayburn-v2-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-reef-v2-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-revea-lady-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-revern-chaqueta.html</loc></url>
@@ -761,7 +767,6 @@
   <url><loc>https://mootle.es/equipacion/alpinestars-s-m5-mineral-warm-celadon-gren-2024-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-s-m5-sail-diva-enamel-2024-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-s-m5-sail-enamel-2024-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/alpinestars-s-m7-cast-2026-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-s-m7-core-2026-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-s-m7-deed-2026-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-s-m7-fuse-2026-casco.html</loc></url>
@@ -796,7 +801,6 @@
   <url><loc>https://mootle.es/equipacion/alpinestars-smx-z-drystar-negros-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-smx-z-drystar-negros-y-rojos-fluorescentes-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-sp-3-guantes.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/alpinestars-sp-365-drystar-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-sp-365-drystar-negros-rojos-fluorescentes-blancos-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-sp-5-negros-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-sp-8-v2-guantes.html</loc></url>
@@ -840,7 +844,6 @@
   <url><loc>https://mootle.es/equipacion/alpinestars-st-7-2l-gore-tex-gobi-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-st-7-prime-gore-tex-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-st-7-v2-2l-gore-tex-chaqueta.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/alpinestars-stated-air-dark-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-stated-air-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-stated-botas.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-stated-flair-botas.html</loc></url>
@@ -939,10 +942,8 @@
   <url><loc>https://mootle.es/equipacion/alpinestars-supertech-r-vented-mm93-le-dark-botas.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-supertech-r10-acosta-le-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-supertech-r10-arius-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/alpinestars-supertech-r10-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-supertech-r10-martinator-thai-le-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-supertech-r10-miller-le-carbon-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/alpinestars-supertech-r10-team-carbon-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-supertech-r7-a-core-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-supertech-r7-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-supertech-r7-kinetis-casco.html</loc></url>
@@ -1014,7 +1015,6 @@
   <url><loc>https://mootle.es/equipacion/alpinestars-techdura-falcon-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-techdura-falcon-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-techdura-fire-guantes.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/alpinestars-techdura-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-techstar-2025-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-techstar-2027-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/alpinestars-techstar-light-2025-guantes.html</loc></url>
@@ -1150,6 +1150,7 @@
   <url><loc>https://mootle.es/equipacion/armure-aland-vented-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/armure-amer-waterproof-botas.html</loc></url>
   <url><loc>https://mootle.es/equipacion/armure-aren-waterproof-chaqueta.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/armure-astera-hdry-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/armure-astrid-v2-vented-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/armure-astrid-v2-vented-lady-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/armure-astrid-vented-aa-chaqueta.html</loc></url>
@@ -1163,7 +1164,6 @@
   <url><loc>https://mootle.es/equipacion/armure-charle-leather-aaa-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/armure-colter-waterproof-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/armure-dodd-botas.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/armure-drake-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/armure-drexel-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/armure-duke-v2-botas.html</loc></url>
   <url><loc>https://mootle.es/equipacion/armure-duke-v2-full-botas.html</loc></url>
@@ -1230,6 +1230,7 @@
   <url><loc>https://mootle.es/equipacion/armure-nash-botas.html</loc></url>
   <url><loc>https://mootle.es/equipacion/armure-norwell-waterproof-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/armure-odel-guantes.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/armure-radley-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/armure-rambler-waterproof-lady-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/armure-randy-waterproof-botas.html</loc></url>
   <url><loc>https://mootle.es/equipacion/armure-randy-waterproof-new-botas.html</loc></url>
@@ -1244,7 +1245,6 @@
   <url><loc>https://mootle.es/equipacion/armure-slade-botas.html</loc></url>
   <url><loc>https://mootle.es/equipacion/armure-stace-lady-v2-mint-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/armure-stace-v2-guantes.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/armure-stace-v2-lady-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/armure-sven-windstopper-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/armure-tailor-waterproof-botas.html</loc></url>
   <url><loc>https://mootle.es/equipacion/armure-thorne-lady-chaqueta.html</loc></url>
@@ -1524,6 +1524,7 @@
   <url><loc>https://mootle.es/equipacion/bering-jag-botas.html</loc></url>
   <url><loc>https://mootle.es/equipacion/bering-jag-lady-botas.html</loc></url>
   <url><loc>https://mootle.es/equipacion/bering-minsk-gtx-chaqueta.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/bering-octane-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/bering-ozone-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/bering-portland-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/bering-profil-guantes.html</loc></url>
@@ -1543,16 +1544,17 @@
   <url><loc>https://mootle.es/equipacion/bering-stroke-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/bering-sumba-lady-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/bering-tivano-guantes.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/bering-trend-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/bering-twinner-pantalon.html</loc></url>
   <url><loc>https://mootle.es/equipacion/bering-ursula-lady-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/bering-vision-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/bering-wallace-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/bering-warwick-chaqueta.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/bering-warwick-lady-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/bering-warwick-lady-light-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/bering-wembley-lady-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/bering-zao-lady-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/bering-zephyr-guantes.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/bering-zephyr-lady-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/black-pandle-wax-cotton-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/blauer-combo-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/blh-blh-roadster-2-lady-botas.html</loc></url>
@@ -1562,9 +1564,12 @@
   <url><loc>https://mootle.es/equipacion/by-city-180tech-ii-shiny-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/by-city-70s-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/by-city-90-degrees-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/by-city-accesorios-00000096-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/by-city-accesorios-00000114-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/by-city-accesorios-00000119-clear-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/by-city-accesorios-bubble-roadster-ii-22-06r-smoked-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/by-city-africa-chaqueta.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/by-city-africa-lady-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/by-city-africa-short-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/by-city-alfa-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/by-city-artic-guantes.html</loc></url>
@@ -1597,6 +1602,8 @@
   <url><loc>https://mootle.es/equipacion/by-city-magnum-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/by-city-maverik-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/by-city-maverik-lady-chaqueta.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/by-city-montana-chaqueta.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/by-city-montana-lady-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/by-city-moscow-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/by-city-norway-lady-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/by-city-nova-guantes.html</loc></url>
@@ -1611,7 +1618,6 @@
   <url><loc>https://mootle.es/equipacion/by-city-rider-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/by-city-rider-junior-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/by-city-roadster-carbon-ii-se-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/by-city-roadster-ii-r-22-06-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/by-city-roadster-ii-r22-06-aqua-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/by-city-roadster-ii-se-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/by-city-roadster-iii-aqua-casco.html</loc></url>
@@ -1647,6 +1653,7 @@
   <url><loc>https://mootle.es/equipacion/by-city-winter-route-ii-lady-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/by-city-winter-route-iii-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/by-city-winter-route-iii-lady-chaqueta.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/by-city-x-treme-camo-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/by-city-xtreme-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/by-city-zambia-lady-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/caberg-avalon-blast-casco.html</loc></url>
@@ -1655,6 +1662,7 @@
   <url><loc>https://mootle.es/equipacion/caberg-roxter-colt-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/caberg-tourmax-titan-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/caberg-tourmax-titan-gun-metal-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/cardo-venture-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/cgm-116a-air-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/cgm-116x-air-city-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/cgm-126a-ipe-casco.html</loc></url>
@@ -1773,6 +1781,7 @@
   <url><loc>https://mootle.es/equipacion/dainese-ermex-lady-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/dainese-ermex-lady-mirage-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/dainese-fiero-metal-guantes.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/dainese-folgor-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/dainese-freeland-2-gore-tex-botas.html</loc></url>
   <url><loc>https://mootle.es/equipacion/dainese-freeland-gore-tex-botas.html</loc></url>
   <url><loc>https://mootle.es/equipacion/dainese-freeland-gore-tex-guantes.html</loc></url>
@@ -1796,6 +1805,7 @@
   <url><loc>https://mootle.es/equipacion/dainese-hydraflux-2-air-d-dry-lady-charcoal-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/dainese-ignite-2-tex-lady-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/dainese-ignite-tex-grape-leaf-grape-leaf-chaqueta.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/dainese-intrepyd-griffin-camo-lines-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/dainese-iperattiva-leather-tex-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/dainese-karakum-ergo-tek-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/dainese-karakum-ergo-tek-magic-connection-guantes.html</loc></url>
@@ -1901,6 +1911,7 @@
   <url><loc>https://mootle.es/equipacion/dainese-teyde-gore-tex-army-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/dainese-teyde-gore-tex-iron-gate-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/dainese-torino-guantes.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/dainese-torino-lady-apple-butter-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/dainese-torino-para-mujer-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/dainese-torque-4-air-botas.html</loc></url>
   <url><loc>https://mootle.es/equipacion/dainese-torque-4-botas.html</loc></url>
@@ -2009,6 +2020,7 @@
   <url><loc>https://mootle.es/equipacion/five-tfx3-airflow-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/five-tfx4-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/five-tfx4-lady-guantes.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/five-tfx5-lady-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/five-wfx-district-wp-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/five-wfx-prime-evo-goretex-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/five-wfx-prime-evo-gtx-guantes.html</loc></url>
@@ -2029,7 +2041,6 @@
   <url><loc>https://mootle.es/equipacion/forma-phantom-flow-racing-boot-botas.html</loc></url>
   <url><loc>https://mootle.es/equipacion/forma-stinger-evo-flow-boot-botas.html</loc></url>
   <url><loc>https://mootle.es/equipacion/fox-180-abyss-2027-guantes.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/fox-180-atlas-2024-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/fox-180-blackout-2027-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/fox-180-bnkr-camo-2027-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/fox-180-collect-grape-2026-guantes.html</loc></url>
@@ -2092,12 +2103,11 @@
   <url><loc>https://mootle.es/equipacion/fox-motion-x-gum-2023-botas.html</loc></url>
   <url><loc>https://mootle.es/equipacion/fox-pawtector-2025-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/fox-pawtector-ce-2024-guantes.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/fox-ranger-off-road-softshell-ash-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/fox-ranger-off-road-softshell-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/fox-recon-gore-tex-adv-chaqueta.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/fox-v1-2024-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/fox-v1-ash-2024-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/fox-v1-bnkr-camo-2024-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/fox-v1-bnkr-junior-camo-2024-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/fox-v1-collect-2026-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/fox-v1-collect-junior-2026-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/fox-v1-diffuse-special-edition-casco.html</loc></url>
@@ -2118,16 +2128,13 @@
   <url><loc>https://mootle.es/equipacion/fox-v1-taunt-junior-2025-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/fox-v2-hayl-2020-junior-fluorescent-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/fox-v3-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/fox-v3-divider-tru-2025-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/fox-v3-fade-2025-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/fox-v3-rs-acric-multicolor-2025-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/fox-v3-rs-anaheim-1-50th-anniversary-le-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/fox-v3-rs-carbon-2024-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/fox-v3-rs-elevated-future-le-multicolor-2025-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/fox-v3-rs-fracture-2026-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/fox-v3-rs-ghost-2026-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/fox-v3-rs-infinite-c-2025-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/fox-v3-rs-infinite-fluorescent-2025-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/fox-v3-rs-inning-2026-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/fox-v3-rs-slait-multi-2023-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/fox-v3-rs-tactile-jewel-2026-casco.html</loc></url>
@@ -2257,11 +2264,15 @@
   <url><loc>https://mootle.es/equipacion/givi-x-25-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/givi-x-25-target-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/givi-x-27-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/givi-x-27-sector-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/givi-x-27-tourer-basic-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/givi-x26-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/givi-x26-square-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/givi-x27-dimension-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/givi-x27-sector-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/givi-x30-b910-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/givi-x30-pulsar-putp-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/givi-x31-fiber-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/givi-x31-impact-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/givi-x31fiber-t54-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/givi-x31impact-brilloazul-metalizadoazulrojo-t54-casco.html</loc></url>
@@ -2281,9 +2292,9 @@
   <url><loc>https://mootle.es/equipacion/hebo-nano-pro-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hebo-over-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hebo-panam-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/hebo-scratch-2022-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hebo-sentinel-2-0-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hebo-stratos-2022-guantes.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/hebo-tech-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hebo-technical-3-0-botas.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hebo-technical-3-0-leather-botas.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hebo-technical-3-0-micro-botas.html</loc></url>
@@ -2372,7 +2383,6 @@
   <url><loc>https://mootle.es/equipacion/hjc-accesorios-xd-16-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-accesorios-xd-16-dark-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-accesorios-xd-16-dks295-clear-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/hjc-c-70-semi-flat-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-c10-aspa-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-c10-blade-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-c10-casco.html</loc></url>
@@ -2390,8 +2400,10 @@
   <url><loc>https://mootle.es/equipacion/hjc-c10-semi-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-c10-tez-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-c10-tins-deportivo-motocicleta-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/hjc-c10-tins-mc-1sf-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-c10-tins-mc-21sf-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-c10-tins-mc-3h-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/hjc-c10-tins-mc-8-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-c50-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-c50-dash-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-c50-mecha-beast-casco.html</loc></url>
@@ -2441,8 +2453,11 @@
   <url><loc>https://mootle.es/equipacion/hjc-cs-14-n-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-f100-antman-marvel-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-f100-askan-carbon-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/hjc-f100-astra-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-f100-astra-modular-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-f100-bios-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/hjc-f100-carbon-askan-carbon-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/hjc-f100-carbon-carbon-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-f100-carbon-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-f100-carbon-stan-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-f100-casco.html</loc></url>
@@ -2490,6 +2505,7 @@
   <url><loc>https://mootle.es/equipacion/hjc-i20-batol-motocicleta-abierto-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-i20-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-i20n-metal-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/hjc-i20n-semi-flat-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-i20n-thorn-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-i20n-uni-blanc-perle-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-i20n-uni-n-casco.html</loc></url>
@@ -2504,6 +2520,7 @@
   <url><loc>https://mootle.es/equipacion/hjc-i40n-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-i40n-linia-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-i40n-pyle-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/hjc-i40n-velu-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-i40n-vision-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-i41-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-i41-maia-casco.html</loc></url>
@@ -2517,16 +2534,19 @@
   <url><loc>https://mootle.es/equipacion/hjc-i50-hex-de-motocross-todoterreno-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-i50-tona-mc-2sf-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-i70-surf-integral-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/hjc-i71-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-i71-celos-deportivo-moto-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-i71-semi-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-i71-zest-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-i72-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-i72-electra-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-i72-marti-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/hjc-i72-metal-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-i72-perlado-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-i72-semimate-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-i72-shard-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-i72-tala-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/hjc-i72-tala-teal-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-i80-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-i80-imes-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-i80-reign-casco.html</loc></url>
@@ -2539,6 +2559,7 @@
   <url><loc>https://mootle.es/equipacion/hjc-i91-fluorescent-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-i91-gaia-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-i91-titan-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/hjc-i91-tricus-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-rpha-1-ben-spies-star-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-rpha-1-binder-replica-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-rpha-1-carbon-quartararo-replica-casco.html</loc></url>
@@ -2548,6 +2569,7 @@
   <url><loc>https://mootle.es/equipacion/hjc-rpha-1-v2-carbon-quartararo-le-mans-iii-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-rpha-1-v2-quartararo-funky-diablo-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-rpha-11-bine-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/hjc-rpha-11-eldon-mc-10-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-rpha-12-bull-misano-gp-ii-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-rpha-12-carbon-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-rpha-12-carbon-quartararo-le-mans-4-casco.html</loc></url>
@@ -2566,7 +2588,6 @@
   <url><loc>https://mootle.es/equipacion/hjc-rpha-12-mister-peeks-call-of-duty-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-rpha-12-ottin-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-rpha-12-skully-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/hjc-rpha-12-venom-3-marvel-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-rpha-31-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-rpha-31-dereen-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-rpha-31-semi-casco.html</loc></url>
@@ -2599,6 +2620,7 @@
   <url><loc>https://mootle.es/equipacion/hjc-rpha-72-phyta-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-rpha-72-value-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-rpha-72-veldine-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/hjc-rpha-91-blat-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-rpha-91-carbon-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-rpha-91-carbon-elig-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-rpha-91-carbon-lagos-casco.html</loc></url>
@@ -2606,6 +2628,7 @@
   <url><loc>https://mootle.es/equipacion/hjc-rpha-91-madal-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-rpha-91-rafino-mc-1sf-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-rpha-91-rafino-mc-21-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/hjc-rpha-91-rafino-mc-3hsf-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-rpha-91-riu-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-rpha-91-semi-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-rpha-x-seeze-casco.html</loc></url>
@@ -2642,6 +2665,7 @@
   <url><loc>https://mootle.es/equipacion/hjc-y10-cric-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-y10-frank-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-y10-frank-ninos-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/hjc-y10-kid-cric-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-y10-metal-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-y10-mika-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-y10-mika-ninos-casco.html</loc></url>
@@ -2652,6 +2676,7 @@
   <url><loc>https://mootle.es/equipacion/hjc-y10-uni-ninos-semi-plano-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-y50-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-y50-dash-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/hjc-y50-megadon-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-y50-megadon-de-motocross-nino-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/hjc-y50-semimate-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/icon-accesorios-fliteshield-clear-casco.html</loc></url>
@@ -2716,6 +2741,7 @@
   <url><loc>https://mootle.es/equipacion/ixon-ilana-evo-lady-bordeaux-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ixon-ilana-evo-lady-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ixon-invierno-estilo-vintage-comodidad-excepcional-guantes.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/ixon-ionix-lady-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ixon-it-yuga-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ixon-ixflow-knit-hombres-roadster-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ixon-ixon-bull-wp-botas.html</loc></url>
@@ -2778,6 +2804,7 @@
   <url><loc>https://mootle.es/equipacion/ixon-pro-hurricane-2-lady-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ixon-pro-hurricane-2-mujer-moto-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ixon-pro-knarr-guantes.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/ixon-pro-knarr-lady-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ixon-pro-midgard-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ixon-pro-midgard-lady-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ixon-pro-miles-guantes.html</loc></url>
@@ -2810,11 +2837,11 @@
   <url><loc>https://mootle.es/equipacion/ixon-rs-rise-air-mujer-cortos-moto-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ixon-rs-shine-2-cuero-textil-moto-mujer-fushia-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ixon-rs-shine-2-cuero-textil-moto-mujer-guantes.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/ixon-rs-shine-2-lady-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ixon-section-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ixon-siwa-lady-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ixon-snake-wp-botas.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ixon-square-chaqueta.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/ixon-striker-2-air-wp-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ixon-striker-2-air-wp-lady-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ixon-striker-2-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ixon-striker-2-lady-chaqueta.html</loc></url>
@@ -2918,9 +2945,7 @@
   <url><loc>https://mootle.es/equipacion/klim-dakar-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/klim-enduro-gtx-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/klim-f3-carbon-lightning-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/klim-f3-carbon-lightning-peyote-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/klim-f3-carbon-pro-ece-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/klim-f3-carbon-pro-striker-petrol-2025-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/klim-gt1-expedition-asphalt-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/klim-gt1-expedition-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/klim-induction-asphalt-electric-lemonade-guantes.html</loc></url>
@@ -3014,8 +3039,6 @@
   <url><loc>https://mootle.es/equipacion/kyt-tt-revo-sushi-time-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/kyt-tt-revo-synchrotr-e06-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/kyt-tt-revo-synchrotron-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/leatt-1-5-gripr-2023-guantes.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/leatt-1-5-gripr-2026-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/leatt-1-5-gripr-2027-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/leatt-1-5-gripr-junior-2026-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/leatt-1-5-gripr-stealth-2027-guantes.html</loc></url>
@@ -3069,7 +3092,6 @@
   <url><loc>https://mootle.es/equipacion/leatt-6-5-botas.html</loc></url>
   <url><loc>https://mootle.es/equipacion/leatt-accesorios-adv-8-5-9-5-clear-88-vlt-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/leatt-accesorios-adv-8-5-9-5-iriz-20-vlt-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/leatt-adv-7-5-2027-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/leatt-adv-7-5-bronze-2027-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/leatt-adv-dritour-7-5-royal-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/leatt-adv-flowtour-5-5-iron-chaqueta.html</loc></url>
@@ -3107,6 +3129,7 @@
   <url><loc>https://mootle.es/equipacion/leatt-adv-x-flow-7-5-desert-2024-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/leatt-adv-x-flow-7-5-short-2027-botas.html</loc></url>
   <url><loc>https://mootle.es/equipacion/leatt-adv-x-flow-7-5-short-botas.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/leatt-adv-x-flow-7-5-short-desert-2024-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/leatt-adv-x-flow-7-5-short-stealth-2024-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/leatt-adv-x-flow-7-5-short-steel-2024-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/leatt-adv-x-flow-7-5-stealth-2024-guantes.html</loc></url>
@@ -3116,11 +3139,10 @@
   <url><loc>https://mootle.es/equipacion/leatt-kit-adv-8-5-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/leatt-kit-adv-8-5-h-v-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/leatt-kit-adv-8-5-stealth-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/leatt-kit-moto-3-5-2026-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/leatt-kit-moto-3-5-2027-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/leatt-kit-moto-3-5-stealth-2025-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/leatt-kit-moto-3-5-steel-2025-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/leatt-kit-moto-3-5-storm-2026-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/leatt-kit-moto-7-5-2026-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/leatt-kit-moto-8-5-2024-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/leatt-kit-moto-8-5-2026-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/leatt-moto-1-5-gripr-argon-2025-guantes.html</loc></url>
@@ -3129,7 +3151,6 @@
   <url><loc>https://mootle.es/equipacion/leatt-moto-1-5-junior-pitboard-royal-2025-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/leatt-moto-1-5-mini-carnival-2025-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/leatt-moto-2-5-2025-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/leatt-moto-2-5-argon-2025-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/leatt-moto-2-5-stealth-2024-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/leatt-moto-2-5-x-flow-pitboard-ruby-2025-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/leatt-multitour-7-5-royal-chaqueta.html</loc></url>
@@ -3210,6 +3231,7 @@
   <url><loc>https://mootle.es/equipacion/ls2-ff811-vector-ii-concrete-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ls2-ff811-vector-ii-darflo-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ls2-ff811-vector-ii-freedom-camaleon-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/ls2-ff811-vector-ii-splitter-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ls2-ff812-kid-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ls2-ff812-kid-cyberg-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ls2-ff812-kid-next-level-casco.html</loc></url>
@@ -3263,7 +3285,6 @@
   <url><loc>https://mootle.es/equipacion/ls2-ff901-advant-x-de-modular-marino-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ls2-ff901-advant-x-nova-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ls2-ff901-advant-x-nova-h-v-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/ls2-ff901-advant-x-spectrum-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ls2-ff901-advant-x-ultra-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ls2-ff901-advant-x-ultra-de-modular-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ls2-ff901-advant-x-ultra-purpura-casco.html</loc></url>
@@ -3310,6 +3331,7 @@
   <url><loc>https://mootle.es/equipacion/ls2-mx700-subverter-single-06-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ls2-mx701-explorer-alter-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ls2-mx701-explorer-c-frontier-ii-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/ls2-mx701-explorer-c-trick-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ls2-mx701-explorer-hexa-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ls2-mx701-explorer-hpfc-2206-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ls2-mx702-pioneer-ii-06-casco.html</loc></url>
@@ -3350,6 +3372,7 @@
   <url><loc>https://mootle.es/equipacion/ls2-of600-copter-ii-urbane-h-v-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ls2-of601-bob-ii-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ls2-of603-infinity-ii-carbon-carbon-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/ls2-of603-infinity-ii-carbon-urus-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ls2-of603-infinity-ii-carbon-urus-h-v-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ls2-of603-infinity-ii-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/ls2-of603-infinity-ii-focus-casco.html</loc></url>
@@ -3498,7 +3521,6 @@
   <url><loc>https://mootle.es/equipacion/macna-octar-2-0-mujer-moto-de-cuero-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/macna-octavius-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/macna-orcano-chaqueta.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/macna-orcano-night-eye-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/macna-othano-rtx-hombres-moto-de-aventura-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/macna-othano-rtx-mujer-moto-de-aventura-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/macna-pelgram-guantes.html</loc></url>
@@ -3563,7 +3585,6 @@
   <url><loc>https://mootle.es/equipacion/macna-unite-rtx-2-0-mujer-moto-calentado-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/macna-vanca-rtx-mujeres-moto-impermeable-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/macna-vanco-rtx-impermeables-motocicleta-de-cuero-guantes.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/macna-velocity-lady-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/macna-ventilada-orcano-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/macna-vicor-moto-equitacion-urbana-hombre-vaqueros-pantalon.html</loc></url>
   <url><loc>https://mootle.es/equipacion/macna-wardan-rtx-hombres-moto-impermeable-guantes.html</loc></url>
@@ -3573,7 +3594,6 @@
   <url><loc>https://mootle.es/equipacion/mds-accesorios-city-15-clear-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/merchandising-alwaysgas-racing-sudadera-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/momo-fgtr-classic-candy-lake-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/momo-fgtr-classic-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/momo-fgtr-evo-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/momo-fgtr-evo-cherry-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/montesa-zapatillas-deportivas-classic-sw-gear-botas.html</loc></url>
@@ -3771,7 +3791,6 @@
   <url><loc>https://mootle.es/equipacion/nexx-x-70-city-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nexx-x-g10-purist-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nexx-x-g20-saloon-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/nexx-x-g30-carbon-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nexx-x-g30-svelto-teal-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nexx-x-lifecountry-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nexx-x-lifecountry-evolander-casco.html</loc></url>
@@ -3781,6 +3800,7 @@
   <url><loc>https://mootle.es/equipacion/nexx-x-lifecountry-zero-pro-carbon-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nexx-x-lifetour-aura-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nexx-x-lifetour-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/nexx-x-lifetour-pro-mile-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nexx-x-r3r-carbon-hagibis-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nexx-x-r3r-hagibis-carbon-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nexx-x-r3r-plain-casco.html</loc></url>
@@ -3789,6 +3809,7 @@
   <url><loc>https://mootle.es/equipacion/nexx-x-rally-austral-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nexx-x-rally-carbon-fim-racing-2-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nexx-x-rally-carbon-gravix-carbon-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/nexx-x-rally-carbon-namib-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nexx-x-rally-carbon-pro-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nexx-x-rally-carbon-raid-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nexx-x-rally-casco.html</loc></url>
@@ -3801,6 +3822,7 @@
   <url><loc>https://mootle.es/equipacion/nexx-x-tr-pro-sky-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nexx-x-wed-3-carbon-zero-pro-carbon-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nexx-x-wed3-carbon-furka-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/nexx-x-wed3-carbon-golden-dune-carbon-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nexx-x-wed3-kodiak-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nexx-x-wst3-carbon-manga-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nexx-x-wst3-carbon-zero-pro-carbon-casco.html</loc></url>
@@ -3862,6 +3884,7 @@
   <url><loc>https://mootle.es/equipacion/nolan-n100-6-ncognito-344-moto-modular-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-n100-6-radiante-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-n100-6-radiante-metal-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/nolan-n100-6-scia-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-n100-6-ssoluto-347-modular-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-n100-6-verniciatura-speciale-341-abatibles-viscerale-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-n100-6-verniciatura-speciale-342-abatibles-sabbia-casco.html</loc></url>
@@ -3874,7 +3897,6 @@
   <url><loc>https://mootle.es/equipacion/nolan-n120-1-classico-nobile-320-modular-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-n120-1-classico-nobile-deep-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-n120-1-classico-stone-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/nolan-n120-1-duetto-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-n120-1-fluente-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-n120-1-grafo-350-modular-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-n120-1-lineo-casco.html</loc></url>
@@ -3888,7 +3910,6 @@
   <url><loc>https://mootle.es/equipacion/nolan-n20-2-asso-italia-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-n20-2-classico-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-n20-2-classico-metal-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/nolan-n20-2-classico-nobile-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-n21-06-classico-302-cara-abierta-moto-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-n21-06-classico-307-cara-abierta-moto-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-n21-06-classico-309-cara-abierta-moto-casco.html</loc></url>
@@ -3897,7 +3918,6 @@
   <url><loc>https://mootle.es/equipacion/nolan-n21-06-verniciatura-speciale-349-cara-abierta-moto-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-n21-classico-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-n21-verniciatura-speciale-351-abierto-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/nolan-n30-4-t-classic-metal-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-n30-4-t-classic-noble-313-abierto-moto-profundo-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-n30-4-t-classic-noble-317-abierto-moto-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-n30-4-t-classico-301-abierto-moto-casco.html</loc></url>
@@ -3992,13 +4012,11 @@
   <url><loc>https://mootle.es/equipacion/nolan-n80-8-verniciatura-speciale-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-n90-3-classico-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-n90-3-roboto-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/nolan-n90-3-sincrono-metal-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-n90-3-verniciatura-speciale-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-nolan-n21-verniciatura-speciale-352-abierto-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-x-1005-ultra-carbon-liquido-326-modular-liquido-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-x-1005-ultra-carbon-mivedi-329-modular-impulso-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-x-1005-ultra-carbon-puro-324-modular-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/nolan-x-1005-ultra-carbon-ritmo-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-x-1005-ultra-carbon-verniciatura-speciale-341-viscerale-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-x-1005-ultra-carbon-verniciatura-speciale-342-modular-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-x-1005-ultra-carbon-verniciatura-speciale-343-modular-ocra-casco.html</loc></url>
@@ -4039,6 +4057,7 @@
   <url><loc>https://mootle.es/equipacion/nolan-x-903-ultra-carbon-verniciatura-speciale-carbon-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-x-903-ultra-carbon-verniciatura-speciale-carbon-deep-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-x-904-ultra-carbon-emblema-carbon-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/nolan-x-904-ultra-carbon-gemini-carbon-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-x-904-ultra-carbon-puro-carbon-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-x-904-ultra-carbon-quin-triplonero-carbon-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nolan-x-904-ultra-carbon-sfida-casco.html</loc></url>
@@ -4048,6 +4067,8 @@
   <url><loc>https://mootle.es/equipacion/nos-ns-10-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nos-ns-14-nitro-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nos-ns-14-nitro-italy-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/nos-ns-9-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/nos-ns-9-mirage-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nos-ns-9-omega-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nox-abatible-nox-premium-spinner-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nox-abatible-nox-premium-spinner-cepillado-casco.html</loc></url>
@@ -4084,6 +4105,7 @@
   <url><loc>https://mootle.es/equipacion/nzi-combi-3-duo-metric-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nzi-fastback-duo-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nzi-fastback-duo-shadow-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/nzi-freccia-duo-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nzi-pasarela-agatha-ruiz-de-la-prada-daisy-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nzi-pasarela-agatha-ruiz-de-la-prada-dots-multicolor-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/nzi-pasarela-agatha-ruiz-de-la-prada-heart-casco.html</loc></url>
@@ -4139,7 +4161,6 @@
   <url><loc>https://mootle.es/equipacion/premier-commander-gp-13-bm-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/premier-commander-gp-92-bm-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/premier-devil-carbon-mn-8-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/premier-devil-carbon-st-8-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/premier-devil-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/premier-devil-ev-6-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/premier-devil-fz-2-bm-casco.html</loc></url>
@@ -4147,7 +4168,6 @@
   <url><loc>https://mootle.es/equipacion/premier-discovery-carbon-ea-2-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/premier-discovery-ea-y-17-bm-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/premier-discovery-u9-bm-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/premier-dokker-u-8-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/premier-dokker-u-9-bm-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/premier-evoluzione-pr8-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/premier-evoluzione-rt-8-casco.html</loc></url>
@@ -4158,7 +4178,6 @@
   <url><loc>https://mootle.es/equipacion/premier-hyper-de-motocicleta-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/premier-hyper-kr8-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/premier-hyper-rw-2-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/premier-jt5-u8-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/premier-land-cruiser-carbon-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/premier-le-petit-classic-btr-8-bm-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/premier-le-petit-classic-op-9-bm-casco.html</loc></url>
@@ -4177,17 +4196,9 @@
   <url><loc>https://mootle.es/equipacion/premier-typhoon-ba-17-bm-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/premier-typhoon-ba-mily-bm-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/premier-typhoon-ly-12-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/premier-typhoon-rs-2-bm-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/premier-typhoon-u9-bm-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/premier-vintage-btr-12-bm-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/premier-vintage-ex-chromed-bm-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/premier-vintage-fr-2-bm-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/premier-vintage-fr-chromed-bm-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/premier-vintage-fr-iride-bm-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/premier-vintage-k-8-bm-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/premier-vintage-nx-chromed-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/premier-vintage-sk-9-bm-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/premier-vintage-u9-bm-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/premier-x-charger-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/premier-x-charger-de-motocicleta-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/pureracer-pure-racer-its-all-right-hoodie-chaqueta.html</loc></url>
@@ -4363,15 +4374,19 @@
   <url><loc>https://mootle.es/equipacion/revit-5-h2o-lady-short-pantalon.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-5-h2o-pantalon.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-5-h2o-short-pantalon.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/revit-5-lady-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-access-lady-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-action-h2o-dark-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-afterburn-2-h2o-dark-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-afterburn-2-h2o-lady-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-airwave-4-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-airwave-4-lady-chaqueta.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/revit-airwave-4-lady-short-pantalon.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/revit-airwave-4-long-pantalon.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/revit-airwave-4-pantalon.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/revit-airwave-4-short-pantalon.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-alpinus-gore-tex-short-pantalon.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-alpinus-gtx-pantalon.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/revit-altair-h2o-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-apex-long-pantalon.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-apex-pantalon.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-apex-short-pantalon.html</loc></url>
@@ -4397,10 +4412,8 @@
   <url><loc>https://mootle.es/equipacion/revit-cargo-2-tf-l32-tarmac-pantalon.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-cassini-2-h2o-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-cassini-2-h2o-lady-guantes.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/revit-cavern-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-cayenne-2-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-cayenne-2-guantes.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/revit-chevak-2-gtx-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-chevak-2-gtx-lady-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-coast-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-combustion-guantes.html</loc></url>
@@ -4437,9 +4450,10 @@
   <url><loc>https://mootle.es/equipacion/revit-eclipse-2-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-eclipse-2-lady-aubergine-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-eclipse-2-lady-chaqueta.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/revit-eclipse-2-tarmac-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-ellison-2-lady-pantalon.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/revit-ellison-lady-sk-l30-pantalon.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-ellison-sk-lady-pantalon.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/revit-endo-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-endo-lady-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-entropy-h2o-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-epsilon-h2o-chaqueta.html</loc></url>
@@ -4469,6 +4483,7 @@
   <url><loc>https://mootle.es/equipacion/revit-horizon-3-h2o-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-horizon-3-h2o-short-lady-pantalon.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-horizon-3-h2o-short-pantalon.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/revit-hydra-3-h2o-dark-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-hydra-3-h2o-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-hydra-3-h2o-lady-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-hyperspeed-2-gt-air-chaqueta.html</loc></url>
@@ -4518,13 +4533,11 @@
   <url><loc>https://mootle.es/equipacion/revit-montford-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-morocco-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-mosca-2-guantes.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/revit-mosca-2-h2o-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-neptune-3-gore-tex-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-neptune-3-gore-tex-short-pantalon.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-neptune-3-gtx-long-pantalon.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-neptune-3-gtx-pantalon.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-new-heights-guantes.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/revit-new-heights-lady-aubergine-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-new-heights-lady-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-offtrack-2-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-offtrack-3-h2o-chaqueta.html</loc></url>
@@ -4560,6 +4573,7 @@
   <url><loc>https://mootle.es/equipacion/revit-shade-2-h2o-dark-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-shade-2-h2o-lady-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-shade-h2o-camo-breen-chaqueta.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/revit-shade-h2o-lady-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-shade-h2o-lady-leopard-dark-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-slate-h2o-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-solar-3-burgundy-chaqueta.html</loc></url>
@@ -4579,7 +4593,6 @@
   <url><loc>https://mootle.es/equipacion/revit-surface-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-surge-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-tacto-guantes.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/revit-tana-h2o-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-taurus-2-gtx-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-tectonic-h2o-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-tectonic-h2o-light-chaqueta.html</loc></url>
@@ -4610,6 +4623,7 @@
   <url><loc>https://mootle.es/equipacion/revit-trajes-quantum-3-light-mono.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-trajes-quantum-3-mono.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-trajes-xena-4-lady-mono.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/revit-troque-2-h2o-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-undercut-h2o-botas.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-undulate-h2o-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/revit-undulate-h2o-tarmac-chaqueta.html</loc></url>
@@ -4699,12 +4713,14 @@
   <url><loc>https://mootle.es/equipacion/schuberth-accesorios-sv1-e-e1-dark-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/schuberth-accesorios-sv6-e2-e2-carbon-clear-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/schuberth-accesorios-ventilation-c3-pro-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/schuberth-c5-carbon-carbon-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/schuberth-c5-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/schuberth-c5-globe-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/schuberth-c5-omega-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/schuberth-concept-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/schuberth-concept-kinetic-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/schuberth-concept-tracer-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/schuberth-e1-cut-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/schuberth-e1-tuareg-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/schuberth-e2-expedition-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/schuberth-e2-explorer-casco.html</loc></url>
@@ -4749,7 +4765,6 @@
   <url><loc>https://mootle.es/equipacion/scorpion-accesorios-kds-f-03-dark-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/scorpion-accesorios-kds-f-03-mirror-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/scorpion-adf-9000-air-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/scorpion-adf-9000-air-feat-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/scorpion-adf-9000-air-feat-sliver-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/scorpion-adf-9000-air-patrol-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/scorpion-adx-2-casco.html</loc></url>
@@ -4868,10 +4883,8 @@
   <url><loc>https://mootle.es/equipacion/scorpion-exo-gt-sp-air-carbon-arkon-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/scorpion-exo-gt-sp-air-carbon-atlas-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/scorpion-exo-gt-sp-air-flex-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/scorpion-exo-gt-sp-air-metal-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/scorpion-exo-gt-sp-air-noble-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/scorpion-exo-gt-sp-air-tornado-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/scorpion-exo-gt-sp-air-touradven-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/scorpion-exo-jnr-air-boum-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/scorpion-exo-jnr-air-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/scorpion-exo-jnr-air-fun-casco.html</loc></url>
@@ -4915,7 +4928,6 @@
   <url><loc>https://mootle.es/equipacion/scorpion-exo-z1-prymus-y-integral-deportivo-premium-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/scorpion-exo-z1-vue-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/scorpion-modular-exo-tech-evo-traveller-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/scorpion-vx-16-evo-air-analog-metal-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/scorpion-vx-16-evo-air-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/scorpion-vx-16-evo-air-lignes-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/scorpion-vx-16-evo-air-patriot-casco.html</loc></url>
@@ -4959,6 +4971,7 @@
   <url><loc>https://mootle.es/equipacion/sena-outlander-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/sena-phantom-anc-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/sena-phantom-cam-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/sena-phantom-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/sena-specter-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/seventy-degrees-sd-ba4-adventure-unisex-botas.html</loc></url>
   <url><loc>https://mootle.es/equipacion/seventy-degrees-sd-ba5-adventure-unisex-botas.html</loc></url>
@@ -5139,7 +5152,6 @@
   <url><loc>https://mootle.es/equipacion/shark-aeron-edgy-carbon-cromo-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-aeron-fawn-carbon-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-aeron-gp-blank-de-carbono-de-carreras-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/shark-aeron-gp-blank-sp-carbon-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-aeron-gp-fim-racing-1-replica-raul-fernandez-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-aeron-gp-fim-racing-2-carbon-chrom-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-aeron-gp-fim-racing-2-full-carbon-carbon-carbon-casco.html</loc></url>
@@ -5167,6 +5179,7 @@
   <url><loc>https://mootle.es/equipacion/shark-aeron-speed-fancy-carbon-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-aeron-speed-tech-carbon-anthra-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-aeron-speed-tech-carbon-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/shark-aeron-zarco-gp-de-france-carbon-chrom-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-aeron-zarco-gp-france-carbono-cromado-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-cup-replica-zarco-gp-de-france-2026-bur-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-d-skwal-3-blast-r-glitter-casco.html</loc></url>
@@ -5191,6 +5204,7 @@
   <url><loc>https://mootle.es/equipacion/shark-d-skwal-3-venum-crom-antracite-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-oxo-blank-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-oxo-blank-deportivo-modular-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/shark-oxo-dark-shadow-titan-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-oxo-gang-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-oxo-mekarium-cromo-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-oxo-ready-casco.html</loc></url>
@@ -5198,7 +5212,6 @@
   <url><loc>https://mootle.es/equipacion/shark-oxo-sieve-cromado-y-motocicleta-modular-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-oxo-speed-tech-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-race-r-pro-aspy-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/shark-race-r-pro-carbon-aspy-carbon-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-race-r-pro-gp-06-carbon-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-race-r-pro-gp-06-tld-cam-petersen-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-race-r-pro-gp-antracite-carbono-casco.html</loc></url>
@@ -5223,7 +5236,6 @@
   <url><loc>https://mootle.es/equipacion/shark-ridill-2-whizz-purpurina-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-rs-jet-blank-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-rs-jet-carbon-carbon-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/shark-rs-jet-carbon-ikonik-chrom-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-rs-jet-carbon-shaytan-violet-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-rs-jet-stride-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-sharl-skwal-icup-dark-shadow-casco.html</loc></url>
@@ -5270,7 +5282,6 @@
   <url><loc>https://mootle.es/equipacion/shark-skwal-jet-cup-motogp-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-skwal-jet-cup-motogp-jet-antracite-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-skwal-jet-cup-replica-granado-amarilo-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/shark-skwal-jet-cup-replica-granado-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-skwal-jet-cup-speed-tech-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-skwal-jet-dark-shadow-titan-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-skwal-jet-reptaia-anthra-anthra-casco.html</loc></url>
@@ -5289,9 +5300,11 @@
   <url><loc>https://mootle.es/equipacion/shark-spartan-gt-pro-carbon-replica-zarco-gp-france-2026-carbono-cromado-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-spartan-gt-pro-carbon-silicium-2-carbono-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-spartan-gt-pro-carbon-speed-vib-carbon-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/shark-spartan-gt-pro-carbon-sthyr-carbon-violet-chrom-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-spartan-gt-pro-carbono-axium-carbono-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-spartan-gt-pro-dokhta-carbon-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-spartan-gt-pro-kultram-carbon-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/shark-spartan-gt-pro-mekarium-carbon-chrom-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-spartan-gt-pro-silicium-2-carbon-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-spartan-gt-pro-tld-flagstaff-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-spartan-gt-pro-zarco-track-racer-carbon-casco.html</loc></url>
@@ -5299,7 +5312,6 @@
   <url><loc>https://mootle.es/equipacion/shark-spartan-gt-replikan-bcl-micr-cromo-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-spartan-rs-blank-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-spartan-rs-blank-sp-cupper-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/shark-spartan-rs-byhron-chrom-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-spartan-rs-capacete-carbon-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-spartan-rs-carbon-raceblock-carbono-cromado-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-spartan-rs-carbon-replica-zarco-suzuka-carbono-casco.html</loc></url>
@@ -5307,6 +5319,7 @@
   <url><loc>https://mootle.es/equipacion/shark-spartan-rs-carbon-skin-carbon-carbon-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-spartan-rs-carbon-vibetrack-carbono-cromado-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-spartan-rs-dark-shadow-steel-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/shark-spartan-rs-dark-shadow-titan-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-spartan-rs-dashed-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-spartan-rs-shaytan-2-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shark-spartan-rs-skilful-casco.html</loc></url>
@@ -5429,7 +5442,6 @@
   <url><loc>https://mootle.es/equipacion/shoei-accesorios-xr1100-cheek-pads-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shoei-accesorios-xr1100-chin-curtain-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shoei-cns-3c-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/shoei-ex-zero-basalt-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shoei-gt-air-2-aperture-tc-3-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shoei-gt-air-2-tesseract-tc-10-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shoei-gt-air-3-agility-casco.html</loc></url>
@@ -5453,6 +5465,7 @@
   <url><loc>https://mootle.es/equipacion/shoei-jo-2-laguna-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shoei-neotec-2-deep-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shoei-neotec-3-anthem-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/shoei-neotec-3-breeze-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shoei-neotec-3-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shoei-neotec-3-fragments-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shoei-neotec-3-grasp-casco.html</loc></url>
@@ -5463,10 +5476,13 @@
   <url><loc>https://mootle.es/equipacion/shoei-nxr-2-capriccio-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shoei-nxr-2-capriccio-tc-1-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shoei-nxr-2-capriccio-tc-10-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/shoei-nxr-2-capriccio-tc-4-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shoei-nxr-2-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shoei-nxr-2-fearless-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shoei-nxr-2-fortress-tc-6-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shoei-nxr-2-gleam-tc-5-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/shoei-nxr-2-mm93-collection-track-tc-1-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/shoei-nxr-2-origami-2-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shoei-nxr-2-rx-78-02-gundam-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shoei-nxr-2-yagyo-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shoei-nxr-2-yonder-tc-2-casco.html</loc></url>
@@ -5534,7 +5550,6 @@
   <url><loc>https://mootle.es/equipacion/shot-drift-spider-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shot-drift-tactic-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shot-drop-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/shot-furious-2025-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shot-furious-2026-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shot-furious-apex-2025-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shot-furious-apex-casco.html</loc></url>
@@ -5645,6 +5660,7 @@
   <url><loc>https://mootle.es/equipacion/shot-race-sprint-holograp-pearly-xs-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shot-race-sprint-xs-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shot-race-xs-casco.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/shot-racetech-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shot-rain-jacket-2-0-de-lluvia-2-0-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shot-rain-pants-2-0-de-lluvia-2-0-pantalon.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shot-rain-suit-2-0-conjunto-de-lluvia-2-0-mono.html</loc></url>
@@ -5656,7 +5672,6 @@
   <url><loc>https://mootle.es/equipacion/shot-speed-battle-2026-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shot-speed-beast-pearly-2026-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shot-speed-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/shot-speed-fury-2026-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shot-speed-fury-cameleon-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shot-speed-ghost-2026-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shot-speed-heavy-2027-casco.html</loc></url>
@@ -5671,7 +5686,6 @@
   <url><loc>https://mootle.es/equipacion/shot-speed-olymp-pearly-2026-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shot-speed-rac-2027-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shot-speed-rac-junior-2027-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/shot-speed-s-2027-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shot-speed-s-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shot-speed-side-2027-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/shot-speed-side-pearla-casco.html</loc></url>
@@ -5840,6 +5854,7 @@
   <url><loc>https://mootle.es/equipacion/spidi-hard-track-3-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/spidi-hoodie-armor-evo-2-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/spidi-hoodie-armor-light-chaqueta.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/spidi-hoodie-armor-light-lady-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/spidi-hoodie-h2out-ii-lady-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/spidi-hoodie-net-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/spidi-hoodie-warrior-chaqueta.html</loc></url>
@@ -5851,6 +5866,8 @@
   <url><loc>https://mootle.es/equipacion/spidi-master-2-lady-dark-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/spidi-metro-windout-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/spidi-metromover-h2out-dark-chaqueta.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/spidi-metropole-lady-guantes.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/spidi-mission-t-softshell-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/spidi-mission-v-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/spidi-motojoy-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/spidi-neo-r-guantes.html</loc></url>
@@ -5903,7 +5920,6 @@
   <url><loc>https://mootle.es/equipacion/spidi-stretch-lady-dark-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/spidi-sts-3-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/spidi-sts-3-lady-guantes.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/spidi-sts-r2-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/spidi-super-net-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/spidi-super-net-lady-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/spidi-tech-armor-2-chaqueta.html</loc></url>
@@ -5940,7 +5956,6 @@
   <url><loc>https://mootle.es/equipacion/spidi-vintage-lady-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/spidi-windout-shell-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/spidi-windout-softshell-lady-chaqueta.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/spidi-wintertourer-kp-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/spidi-wnt-2-h2out-lady-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/spidi-wnt3-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/spidi-x-4-coupe-guantes.html</loc></url>
@@ -5999,7 +6014,6 @@
   <url><loc>https://mootle.es/equipacion/suomy-s1-xr-gp-hickman-replica-2024-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/suomy-speedstar-2-visual-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/suomy-sr-gp-evo-casco.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/suomy-sr-gp-evo-glory-race-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/suomy-sr-gp-evo-legacy-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/suomy-sr-gp-plain-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/suomy-stellar-2-blackstar-casco.html</loc></url>
@@ -6024,6 +6038,7 @@
   <url><loc>https://mootle.es/equipacion/t-ur-elba-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/t-ur-g-adv-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/t-ur-g-fast-hydroscud-guantes.html</loc></url>
+  <url><loc>https://mootle.es/equipacion/t-ur-g-knit-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/t-ur-g-one-hydroscud-lady-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/t-ur-g-one-pro-hydroscud-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/t-ur-g-speed-guantes.html</loc></url>
@@ -6031,7 +6046,6 @@
   <url><loc>https://mootle.es/equipacion/t-ur-g-two-lady-hydroscud-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/t-ur-g-warm-3-hydroscud-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/t-ur-overcast-hydroscud-lady-chaqueta.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/t-ur-podium-hydroscud-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/t-ur-roadbook-hydroscud-dark-anthra-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/t-ur-roadtrip-hydroscud-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/t-ur-siena-chaqueta.html</loc></url>
@@ -6089,7 +6103,6 @@
   <url><loc>https://mootle.es/equipacion/thor-hallman-gp-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/thor-launchmode-bleach-acid-2026-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/thor-launchmode-cw-2026-guantes.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/thor-launchmode-xp-lady-aqua-2026-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/thor-monster-thrive-tour-camo-2026-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/thor-pulse-2023-pantalon.html</loc></url>
   <url><loc>https://mootle.es/equipacion/thor-radial-botas.html</loc></url>
@@ -6097,10 +6110,8 @@
   <url><loc>https://mootle.es/equipacion/thor-reflex-ece-cube-2022-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/thor-ridemode-static-junior-camo-2026-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/thor-sector-guantes.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/thor-sector-junior-2022-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/thor-spectrum-2022-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/thor-spectrum-junior-2023-guantes.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/thor-spectrum-junior-mint-2023-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/thor-spectrum-lady-2023-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/thor-spectrum-lady-midnight-2023-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/thor-sportmode-lady-cheetah-tan-2026-guantes.html</loc></url>
@@ -6199,7 +6210,6 @@
   <url><loc>https://mootle.es/equipacion/tucano-urbano-hyperlink-casco.html</loc></url>
   <url><loc>https://mootle.es/equipacion/tucano-urbano-krill-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/tucano-urbano-levante-pantalon.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/tucano-urbano-lilli-lady-dark-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/tucano-urbano-livigno-2in1-hydroscud-dark-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/tucano-urbano-lot-pack-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/tucano-urbano-mark-chaqueta.html</loc></url>
@@ -6238,9 +6248,7 @@
   <url><loc>https://mootle.es/equipacion/tucano-urbano-password-plus-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/tucano-urbano-penna-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/tucano-urbano-penna-lady-guantes.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/tucano-urbano-penna-reflex-guantes.html</loc></url>
   <url><loc>https://mootle.es/equipacion/tucano-urbano-pol-2g-chaqueta.html</loc></url>
-  <url><loc>https://mootle.es/equipacion/tucano-urbano-polette-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/tucano-urbano-rock-hydroscud-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/tucano-urbano-rocket-chaqueta.html</loc></url>
   <url><loc>https://mootle.es/equipacion/tucano-urbano-router-chaqueta.html</loc></url>
