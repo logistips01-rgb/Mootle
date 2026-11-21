@@ -219,10 +219,64 @@ def pick_marca(state):
                           "sub": m["sub"], "cta": m["cta"]}, m["cap"]
 
 
+def pick_top(used):
+    """Los mejores chollos de equipación de la semana (para el reel 'Top chollos')."""
+    eqdata = load(EQUIP, {})
+    by_mid = defaultdict(list)
+    for it in eqdata.get("items", []):
+        by_mid[it.get("mid")].append(it)
+    best = {}
+    for it in eqdata.get("items", []):
+        p = it.get("p")
+        ref = max(it.get("p0") or 0, it.get("pa") or 0)
+        if not (p and ref > p) or p < 40:
+            continue
+        pct = round((ref - p) * 100 / ref)
+        if pct < 20 or pct > 70:          # chollos de verdad, sin rebajas absurdas
+            continue
+        mid = it.get("mid")
+        cur = best.get(mid)
+        if cur is None or pct > cur["pct"]:
+            img = _nonebay_img(by_mid.get(mid, [])) or it.get("img")
+            if not img:
+                continue
+            best[mid] = {"mid": mid, "cat": it["cat"], "mk": it["mk"], "md": it["md"],
+                         "p": p, "was": ref, "pct": pct, "img": img}
+    cands = sorted(best.values(), key=lambda b: -b["pct"])
+    if len(cands) < 3:
+        return None
+    picked, seen_cat, seen_mk = [], set(), set()
+    for b in cands:                        # 1ª pasada: marca Y categoría distintas (variedad)
+        if b["cat"] not in seen_cat and b["mk"].lower() not in seen_mk:
+            picked.append(b); seen_cat.add(b["cat"]); seen_mk.add(b["mk"].lower())
+        if len(picked) >= 5:
+            break
+    cats = {x["cat"] for x in picked}
+    for b in cands:                        # 2ª: categoría nueva (marca ya puede repetir)
+        if len(picked) >= 5:
+            break
+        if b not in picked and b["cat"] not in cats:
+            picked.append(b); cats.add(b["cat"])
+    for b in cands:                        # 3ª: rellenar con los de mayor descuento
+        if len(picked) >= 5:
+            break
+        if b not in picked:
+            picked.append(b)
+    items = [{"img": b["img"], "cat": CAT_NAMES.get(b["cat"], b["cat"]),
+              "title": f'{b["mk"]} {b["md"]}'[:40], "p": b["p"], "was": b["was"], "pct": b["pct"]}
+             for b in picked[:5]]
+    lines = "\n".join(f'• {x["title"]} — {x["p"]} € (−{x["pct"]}%)' for x in items)
+    cap = ("🔥 TOP CHOLLOS DE LA SEMANA · equipación de moto\n\n" + lines +
+           "\n\nTodos con precio e histórico de precios en 👉 mootle.es\n\n"
+           "#equipacionmoto #cascos #guantesmoto #chaquetamoto #chollo #ofertas #moteros #mootle")
+    key = "top-" + "-".join(b["mid"] for b in picked[:5])
+    return key, {"kind": "top", "items": items}, cap
+
+
 def kind_for_today():
     wd = date.today().weekday()   # 0=lunes
     return ("comparativa" if wd in (0, 2, 4) else "chollo" if wd in (1, 3)
-            else "multi" if wd == 6 else "marca")   # sáb marca, dom multibuscador
+            else "top" if wd == 5 else "multi")   # sáb Top chollos, dom multibuscador
 
 
 def render(data, out):
@@ -258,15 +312,15 @@ def wait_url(url, tries=40):
     return False
 
 
-def build_reel(cardpng, out_mp4):
-    """Convierte la tarjeta (PNG 1080x1080) en un Reel vertical con música libre.
-    Devuelve la línea de crédito de la música (o None si no se pudo añadir)."""
+def _reel_from(payload, out_mp4, template):
+    """Monta un Reel vertical con música libre a partir de `payload` (lo que recibe
+    window.renderReel en la plantilla). Devuelve la línea de crédito de la música."""
     from . import musica_libre
     dj = OUTDIR / "_reel.json"
-    dj.write_text(json.dumps({"image": "file://" + str(cardpng)}), encoding="utf-8")
+    dj.write_text(json.dumps(payload), encoding="utf-8")
     silent = OUTDIR / (out_mp4.stem + ".silent.mp4")
     subprocess.run(["node", str(ROOT / "scraper" / "render_reel.cjs"),
-                    str(dj), str(silent), "reel_card.html"], check=True)
+                    str(dj), str(silent), template], check=True)
     dj.unlink(missing_ok=True)
     credito = musica_libre.poner(silent, out_mp4)
     if credito:
@@ -276,9 +330,14 @@ def build_reel(cardpng, out_mp4):
     return credito
 
 
+def build_reel(cardpng, out_mp4):
+    """Convierte la tarjeta (PNG 1080x1080) en un Reel vertical con música (Ken Burns)."""
+    return _reel_from({"image": "file://" + str(cardpng)}, out_mp4, "reel_card.html")
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--kind", choices=["comparativa", "chollo", "marca", "multi"])
+    ap.add_argument("--kind", choices=["comparativa", "chollo", "marca", "multi", "top"])
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--force", action="store_true", help="publicar aunque ya se haya publicado hoy")
     args = ap.parse_args()
@@ -294,6 +353,7 @@ def main():
     picker = {"comparativa": lambda: pick_comparativa(set(used.get("comparativa", []))),
               "chollo": lambda: pick_chollo(set(used.get("chollo", []))),
               "multi": lambda: pick_multi(set(used.get("multi", []))),
+              "top": lambda: pick_top(set(used.get("top", []))),
               "marca": lambda: pick_marca(state)}[kind]
     got = picker()
     if not got:
@@ -302,13 +362,19 @@ def main():
     key, data, caption = got
 
     stamp = f'{date.today().isoformat()}-{kind}'
-    cardpng = OUTDIR / f'{stamp}.png'
-    render(data, cardpng)
-    print(f"Imagen generada: {cardpng}")
-
-    # Instagram no pone música a imágenes: convertimos la tarjeta en Reel con música libre.
     reelmp4 = OUTDIR / f'{stamp}.mp4'
-    credito = build_reel(cardpng, reelmp4)
+
+    # Instagram no pone música a imágenes: todo va como Reel con música libre.
+    if kind == "top":
+        # reel multi-slide animado (varios chollos), sin tarjeta intermedia
+        assets = [reelmp4]
+        credito = _reel_from(data, reelmp4, "reel_top.html")
+    else:
+        cardpng = OUTDIR / f'{stamp}.png'
+        render(data, cardpng)
+        print(f"Imagen generada: {cardpng}")
+        assets = [cardpng, reelmp4]
+        credito = build_reel(cardpng, reelmp4)
     if credito:
         caption = caption + "\n\n" + credito
     print(f"Reel generado: {reelmp4} · música: {credito or 'sin música'}")
@@ -316,7 +382,7 @@ def main():
     if args.dry:
         return
 
-    git_push([cardpng, reelmp4])
+    git_push(assets)
     url = RAW + f'{stamp}.mp4'
     if not wait_url(url):
         print(f"Aviso: el vídeo aún no responde en {url}; intento publicar igualmente.")

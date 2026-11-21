@@ -1,0 +1,110 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@700;800&family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#faf7f2;--logo:#e8590c;--accent:#c2410c;--ink:#16150f;--muted:#7a736a;--line:#eadfd2;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg);}
+  body{font-family:Inter,sans-serif;color:var(--ink);}
+  .seg{position:absolute;inset:0;opacity:0;will-change:opacity,transform;}
+  .wrap{position:absolute;inset:0;padding:70px 64px;display:flex;flex-direction:column;}
+  .top{display:flex;align-items:center;justify-content:space-between;}
+  .word{display:inline-flex;align-items:center;font-family:"Inter Tight";font-weight:800;letter-spacing:-.045em;font-size:60px;line-height:1;}
+  .word svg{width:1.53em;height:.8em;margin:0 .02em;position:relative;top:.06em;}
+  .word svg circle{stroke:var(--logo);}.word svg circle.hub{fill:var(--logo);stroke:none;}
+  .count{font-family:"Inter Tight";font-weight:800;font-size:30px;color:#fff;background:var(--logo);padding:12px 24px;border-radius:999px;}
+  /* INTRO / OUTRO */
+  .center{align-items:center;justify-content:center;text-align:center;gap:34px;}
+  .kick{font-weight:700;font-size:40px;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;}
+  .huge{font-family:"Inter Tight";font-weight:800;letter-spacing:-.02em;line-height:1;font-size:150px;}
+  .huge .o{color:var(--logo);}
+  .big2{font-family:"Inter Tight";font-weight:800;font-size:72px;letter-spacing:-.01em;}
+  .url{font-family:"Inter Tight";font-weight:800;font-size:60px;color:#fff;background:var(--logo);border-radius:999px;padding:20px 48px;}
+  .notec{font-size:40px;color:var(--muted);font-weight:600;}
+  /* ITEM */
+  .photo{flex:1 1 auto;margin:34px 0;border-radius:40px;background:#fff;border:1px solid var(--line);
+         display:flex;align-items:center;justify-content:center;overflow:hidden;will-change:transform;}
+  .photo img{width:100%;height:100%;object-fit:contain;padding:40px;}
+  .cat{font-weight:700;font-size:38px;color:var(--accent);text-transform:uppercase;letter-spacing:.04em;}
+  .ttl{font-family:"Inter Tight";font-weight:800;letter-spacing:-.02em;line-height:1.04;font-size:66px;margin-top:10px;min-height:150px;}
+  .prow{display:flex;align-items:baseline;gap:24px;flex-wrap:wrap;margin-top:8px;}
+  .price{font-family:"Inter Tight";font-weight:800;font-size:132px;color:var(--logo);line-height:.9;}
+  .was{font-size:58px;color:var(--muted);text-decoration:line-through;font-weight:700;}
+  .save{font-weight:800;font-size:46px;color:#fff;background:#16a34a;padding:12px 26px;border-radius:18px;}
+  .foot{display:flex;align-items:center;justify-content:space-between;}
+  .foot .u{font-family:"Inter Tight";font-weight:800;font-size:46px;color:var(--ink);}
+  .foot .c{font-weight:700;font-size:34px;color:var(--accent);}
+  .bar{position:absolute;left:0;bottom:0;height:14px;background:var(--logo);width:0;}
+  .content{will-change:transform,opacity;}
+</style></head>
+<body>
+  <div id="root"></div>
+  <div class="bar" id="bar"></div>
+<script>
+  var nf=new Intl.NumberFormat("es-ES");
+  var eur=function(v){return nf.format(v)+" €";};
+  var LOGO='<span class="word">m<svg viewBox="0 0 92 48"><circle cx="22" cy="26" r="16" fill="none" stroke-width="8"/><circle cx="70" cy="26" r="16" fill="none" stroke-width="8"/><circle class="hub" cx="22" cy="26" r="4"/><circle class="hub" cx="70" cy="26" r="4"/></svg>tle</span>';
+  var INTRO=1.5, ITEM=2.6, OUTRO=1.8, segs=[], TOTAL=0;
+
+  window.renderReel=function(d){
+    d=d||{}; var items=(d.items||[]).slice(0,5); var n=items.length;
+    var root=document.getElementById('root'); root.innerHTML='';
+    // intro
+    root.insertAdjacentHTML('beforeend',
+      '<div class="seg" data-k="intro"><div class="wrap center"><div class="content">'
+      +'<div class="kick">Esta semana en mootle</div>'
+      +'<div class="huge">TOP<br>CH<span class="o">◉</span>LLOS</div>'
+      +'<div class="notec">Las mayores rebajas en equipación</div>'
+      +'</div></div></div>');
+    // items
+    items.forEach(function(it,i){
+      root.insertAdjacentHTML('beforeend',
+        '<div class="seg" data-k="item"><div class="wrap">'
+        +'<div class="top">'+LOGO+'<span class="count">CHOLLO '+(i+1)+'/'+n+'</span></div>'
+        +'<div class="photo"><img src="'+(it.img||'')+'" referrerpolicy="no-referrer"></div>'
+        +'<div class="content"><div class="cat">'+(it.cat||'Equipación')+'</div>'
+        +'<div class="ttl">'+(it.title||'')+'</div>'
+        +'<div class="prow"><span class="price">'+eur(it.p)+'</span>'
+        +(it.was?'<span class="was">'+eur(it.was)+'</span>':'')
+        +(it.pct?'<span class="save">−'+it.pct+'%</span>':'')+'</div></div>'
+        +'<div class="foot" style="margin-top:20px"><span class="u">mootle.es</span><span class="c">Verlos en mootle.es</span></div>'
+        +'</div></div>');
+    });
+    // outro
+    root.insertAdjacentHTML('beforeend',
+      '<div class="seg" data-k="outro"><div class="wrap center"><div class="content">'
+      +LOGO+'<div class="big2">Más chollos cada día</div>'
+      +'<div class="url">mootle.es</div>'
+      +'<div class="notec">Gratis · sin registro</div>'
+      +'</div></div></div>');
+
+    segs=[]; var t=0;
+    segs.push({el:root.children[0], s:0, e:INTRO, kind:'intro'}); t=INTRO;
+    for(var i=0;i<n;i++){ segs.push({el:root.children[1+i], s:t, e:t+ITEM, kind:'item'}); t+=ITEM; }
+    segs.push({el:root.children[1+n], s:t, e:t+OUTRO, kind:'outro'}); t+=OUTRO;
+    TOTAL=t; window.__total=TOTAL;
+  };
+
+  function ease(x){return 1-Math.pow(1-x,3);}   // easeOutCubic
+
+  window.setTime=function(tt){
+    for(var i=0;i<segs.length;i++){
+      var sg=segs[i], d=sg.e-sg.s, lt=tt-sg.s, p=lt/d;
+      if(lt<-0.001 || lt>d){ sg.el.style.opacity=0; continue; }
+      // opacidad: entrada/salida
+      var op=1, IN=0.22/d, OUT=0.15/d;
+      if(p<IN) op=p/IN; else if(p>1-OUT) op=Math.max(0,(1-p)/OUT);
+      sg.el.style.opacity=op;
+      var cont=sg.el.querySelector('.content'), ph=sg.el.querySelector('.photo');
+      var ein=ease(Math.min(1,p/IN));
+      if(sg.kind==='item'){
+        if(ph) ph.style.transform='scale('+(1.02+0.08*p)+')';   // zoom lento
+        if(cont) cont.style.transform='translateY('+(28*(1-ein))+'px)';
+      } else {
+        if(cont) cont.style.transform='scale('+(0.92+0.08*ein)+')';
+      }
+    }
+    document.getElementById('bar').style.width=(1080*Math.min(1,tt/TOTAL))+'px';
+  };
+  window.__total=TOTAL; window.__ready=true;
+</script></body></html>

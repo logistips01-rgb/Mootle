@@ -20,14 +20,16 @@
     if(d.bg) document.documentElement.style.setProperty('--bg', d.bg);
     window.__total=TOTAL;
   };
+  function ease(x){return 1-Math.pow(1-x,3);}
   window.setTime=function(t){
     var p=Math.min(1,t/TOTAL);
-    var sc=1+0.06*p;                 // zoom lento (Ken Burns)
-    var op=1;
-    if(t<0.4) op=t/0.4;             // fade in
+    var sc=1+0.11*p;                 // zoom (Ken Burns, más marcado)
+    var dy=14*(1-p);                 // ligera deriva vertical
+    var op=1, ein=ease(Math.min(1,t/0.5));
+    if(t<0.5){ op=ein; sc=1+0.11*p+0.03*(1-ein); }   // entrada con micro-zoom
     else if(t>TOTAL-0.5) op=Math.max(0,(TOTAL-t)/0.5);  // fade out
     var c=document.getElementById('card');
-    c.style.transform='scale('+sc+')';
+    c.style.transform='scale('+sc+') translateY('+dy+'px)';
     c.style.opacity=op;
     document.getElementById('bar').style.width=(1080*p)+'px';
   };
