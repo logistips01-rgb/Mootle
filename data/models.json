@@ -10,6 +10,7 @@
 "pr7650adventure": "PR7 650 Adventure"
 },
 "Aprilia": {
+"arrecife125": "Arrecife 125",
 "compaycustom": "Compay Custom",
 "dorsoduro900": "Dorsoduro 900",
 "mana850": "Mana 850",
@@ -366,6 +367,7 @@
 "GasGas": {
 "contacttxt249": "Contact TXT 249",
 "ec125": "EC 125",
+"ec2502t": "EC 250 2T",
 "ec300sixdays": "EC 300 SIX Days",
 "ec350f": "EC 350 F",
 "ec450f": "EC 450 F",
@@ -1036,6 +1038,7 @@
 "Moto Guzzi": {
 "california1100": "California 1100",
 "california1400touring": "California 1400 Touring",
+"californiaaluminium": "California Aluminium",
 "griso8v": "Griso 8 V",
 "grisov1100": "Griso V1100",
 "lemans850": "LE Mans 850",
@@ -1281,6 +1284,7 @@
 "Sherco": {
 "250seffactory": "250 SEF Factory",
 "300sefr": "300 SEF R",
+"500seffactory": "500 SEF Factory",
 "50ser": "50 SE R",
 "50smr": "50 SM R"
 },
@@ -1353,6 +1357,7 @@
 "intruderc800volusia": "Intruder C800 Volusia",
 "intruderm1800r": "Intruder M1800R",
 "intruderm800": "Intruder M800",
+"king1340": "King 1340",
 "marauder125": "Marauder 125",
 "marauder1600": "Marauder 1600",
 "marauder250": "Marauder 250",
@@ -1613,6 +1618,7 @@
 "tricity": "Tricity",
 "tricity125": "Tricity 125",
 "tricker250": "Tricker 250",
+"ttr600": "TT R 600",
 "why50": "WHY 50",
 "wr250f": "WR 250 F",
 "wr250r": "WR 250 R",
