@@ -473,6 +473,7 @@
 "touringelectraglideultralimited": "Touring Electra Glide Ultra Limited",
 "touringroadking": "Touring Road King",
 "touringroadkingclassic": "Touring Road King Classic",
+"touringroadkinginjection": "Touring Road King Injection",
 "touringstreetglide": "Touring Street Glide",
 "triglideultra": "TRI Glide Ultra",
 "trikeultraclassiclimited": "Trike Ultra Classic Limited",
@@ -496,6 +497,7 @@
 "cb125": "CB 125",
 "cb125r": "CB 125 R",
 "cb1300": "CB 1300",
+"cb250twofifty": "CB 250 TWO Fifty",
 "cb300r": "CB 300 R",
 "cb450": "CB 450",
 "cb450dx": "CB 450 DX",
@@ -1368,6 +1370,7 @@
 "intruderm1800r": "Intruder M1800R",
 "intruderm800": "Intruder M800",
 "king1340": "King 1340",
+"ls650savage": "LS 650 Savage",
 "marauder125": "Marauder 125",
 "marauder1600": "Marauder 1600",
 "marauder250": "Marauder 250",
@@ -1410,6 +1413,7 @@
 "daytona660": "Daytona 660",
 "daytona675": "Daytona 675",
 "daytonamoto2765limited": "Daytona MOTO2 765 Limited",
+"legendtt": "Legend TT",
 "rocket": "Rocket",
 "rocket3": "Rocket 3",
 "rocketiii": "Rocket III",
@@ -1472,10 +1476,14 @@
 },
 "UM": {
 "dsradventure": "DSR Adventure",
+"dsrex": "DSR EX",
 "dsrsm": "DSR SM",
 "renegadecommando": "Renegade Commando",
 "renegadecommando300": "Renegade Commando 300",
 "renegadevegas300": "Renegade Vegas 300"
+},
+"Ultraviolette": {
+"f77superstreetrecon": "F77 Superstreet Recon"
 },
 "Vespa": {
 "94610aniversario": "946 10 Aniversario",
