@@ -288,7 +288,8 @@
 "Derbi": {
 "senda50": "Senda 50",
 "senda50r": "Senda 50 R",
-"sendarxtreme": "Senda R X Treme"
+"sendarxtreme": "Senda R X Treme",
+"sendasm125": "Senda SM 125"
 },
 "Ducati": {
 "1198superbike": "1198 Superbike",
@@ -611,6 +612,7 @@
 "scoopysh125itopbox": "Scoopy SH125I TOP BOX",
 "scoopysh150i": "Scoopy SH150I",
 "scoopysh300i": "Scoopy SH300I",
+"scoopysh300ic": "Scoopy SH300I C",
 "scoopysh300isporttopbox": "Scoopy SH300I Sport Topbox",
 "scoopysh300itopbox": "Scoopy SH300I Topbox",
 "sh125i": "SH125I",
@@ -618,9 +620,11 @@
 "sh350i": "SH 350I",
 "shadowvt125c": "Shadow VT 125 C",
 "shmode125": "SH Mode 125",
+"silverwing400": "Silver Wing 400",
 "silverwing600": "Silver Wing 600",
 "supercubc125": "Super CUB C 125",
 "swing125": "S Wing 125",
+"swt400": "SW T400",
 "swt600": "SW T600",
 "transalp600v": "Transalp 600 V",
 "transalpxl650v": "Transalp XL 650 V",
