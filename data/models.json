@@ -1102,6 +1102,7 @@
 },
 "Peugeot": {
 "citystar125i": "Citystar 125I",
+"citystar200i": "Citystar 200I",
 "django125": "Django 125",
 "eludix": "E Ludix",
 "kisbee50": "Kisbee 50",
@@ -1637,6 +1638,7 @@
 "tmax530": "T MAX 530",
 "tmax560": "Tmax 560",
 "tmax560techmax": "Tmax 560 Tech MAX",
+"tmaxtechmax": "T MAX Tech MAX",
 "tracer7": "Tracer 7",
 "tracer700": "Tracer 700",
 "tracer9": "Tracer 9",
