@@ -66,6 +66,7 @@
 "f650": "F 650",
 "f650gs": "F 650 GS",
 "f650gs30yearsgs": "F 650 GS 30 Years GS",
+"f650st": "F 650 ST",
 "f700gs": "F 700 GS",
 "f750": "F 750",
 "f800gs": "F 800 GS",
@@ -585,6 +586,7 @@
 "integra": "Integra",
 "integra2019enbarcelona10218346htm": "Integra 2019 EN Barcelona 10218346.HTM",
 "integras": "Integra S",
+"lead100": "Lead 100",
 "monkey125": "Monkey 125",
 "msx125": "MSX 125",
 "nc700s": "NC 700 S",
@@ -657,7 +659,8 @@
 "ek3": "EK3"
 },
 "Husaberg": {
-"fe350": "FE 350"
+"fe350": "FE 350",
+"fe450": "FE 450"
 },
 "Husqvarna": {
 "701enduro": "701 Enduro",
@@ -858,6 +861,7 @@
 "zx4rr": "ZX 4RR",
 "zx6r": "ZX 6R",
 "zx6r636": "ZX 6R 636",
+"zxr400": "ZXR 400",
 "zzr1200": "ZZR 1200",
 "zzr1400": "ZZR 1400"
 },
