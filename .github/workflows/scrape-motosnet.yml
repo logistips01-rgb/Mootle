@@ -38,13 +38,23 @@ jobs:
       # y las webs de concesionario caducaban sin refrescarse (se caían fuentes: ByMotors, Indalmar…).
       # El barrido profundo de motos.net está en pausa por config (cursor parado), así que una
       # pasada completa no lo reactiva: solo lee novedades de motos.net + todos los concesionarios.
-      - name: Leer motos.net (novedades) + concesionarios 2x/día
+      # OJO: GitHub estrangula los cron de este repo y este workflow "horario" solo dispara ~3-4
+      # veces/día a horas aleatorias, así que NO sirve fijar franjas horarias. Igual que la
+      # equipación: hacemos una pasada COMPLETA (motos.net novedades + TODOS los concesionarios)
+      # en la 1ª ejecución de cada día (marcador data/.dealers_last); el resto, solo novedades.
+      # Así los concesionarios se refrescan a diario y no se caen por caducidad.
+      - name: Leer motos.net (novedades) + concesionarios (1ª del día)
         run: |
-          H=$(date -u +%H)
-          case "$H" in
-            06|18) echo "Pasada completa: motos.net (novedades) + concesionarios"; python -m scraper.run --minutes 10 ;;
-            *)     python -m scraper.run --only motosnet --minutes 10 ;;
-          esac
+          HOY=$(date -u +%F)
+          LAST=$(cat data/.dealers_last 2>/dev/null || echo "")
+          if [ "$LAST" != "$HOY" ]; then
+            echo "Pasada completa (última: ${LAST:-nunca})"
+            python -m scraper.run --minutes 10
+            echo "$HOY" > data/.dealers_last
+          else
+            echo "Concesionarios ya refrescados hoy ($LAST); solo novedades motos.net"
+            python -m scraper.run --only motosnet --minutes 10
+          fi
 
       # La EQUIPACIÓN es el negocio (afiliados), así que se prioriza su frescura: se refresca
       # varias veces al día colgado del cron horario (el único fiable; los cron diarios de GitHub
