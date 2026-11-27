@@ -1529,6 +1529,7 @@
 "al50": "AL 50"
 },
 "Victory": {
+"judge": "Judge",
 "octane": "Octane",
 "visiontour": "Vision Tour"
 },
@@ -1608,6 +1609,7 @@
 "jog50rrmotogp": "JOG 50 RR Motogp",
 "majesty": "Majesty",
 "majesty250": "Majesty 250",
+"majesty400": "Majesty 400",
 "mt01": "MT 01",
 "mt03": "MT 03",
 "mt07": "MT 07",
