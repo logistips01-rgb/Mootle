@@ -359,7 +359,8 @@
 "caballeroscrambler500": "Caballero Scrambler 500",
 "issimocity125": "Issimo City 125",
 "xef450": "XEF 450",
-"xmf125": "XMF 125"
+"xmf125": "XMF 125",
+"xx250": "XX 250"
 },
 "Fb Mondial": {
 "flattrack125": "Flat Track 125",
@@ -732,6 +733,7 @@
 "1390superduke": "1390 Super Duke",
 "150exctpi": "150 EXC TPI",
 "250excf": "250 EXC F",
+"250excsixdaystpi": "250 EXC SIX Days TPI",
 "250exctpi": "250 EXC TPI",
 "300exc": "300 EXC",
 "300exctpi": "300 EXC TPI",
@@ -1146,6 +1148,7 @@
 "mp3300yourbansport": "MP3 300 Yourban Sport",
 "mp3400": "MP3 400",
 "mp3500business": "MP3 500 Business",
+"mp3500touring": "MP3 500 Touring",
 "mp3business500hpe": "MP3 Business 500 HPE",
 "mp3exclusive530": "MP3 Exclusive 530",
 "mp3lt300yourban": "MP3 LT 300 Yourban",
@@ -1164,6 +1167,7 @@
 "x7evo300ie": "X7 EVO 300 IE",
 "x9125": "X9 125",
 "x9250": "X9 250",
+"xevo125": "X EVO 125",
 "zip1004t": "ZIP 100 4T",
 "zip125": "ZIP 125",
 "zip502t": "ZIP 50 2T"
@@ -1540,6 +1544,7 @@
 "500dsx": "500 DSX",
 "525acx": "525 ACX",
 "525dsx": "525 DSX",
+"525r": "525 R",
 "625dsx": "625 DSX",
 "625r": "625 R",
 "650ds": "650 DS",
