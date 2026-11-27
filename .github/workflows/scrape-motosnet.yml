@@ -33,8 +33,18 @@ jobs:
       - name: Instalar dependencias
         run: pip install -r requirements.txt
 
-      - name: Leer motos.net (10 páginas, foco novedades)
-        run: python -m scraper.run --only motosnet --minutes 10
+      # Cada hora: motos.net (novedades). Dos veces al día (06 y 18 UTC): pasada COMPLETA que
+      # también refresca los concesionarios, porque el cron diario de scrape.yml no dispara fiable
+      # y las webs de concesionario caducaban sin refrescarse (se caían fuentes: ByMotors, Indalmar…).
+      # El barrido profundo de motos.net está en pausa por config (cursor parado), así que una
+      # pasada completa no lo reactiva: solo lee novedades de motos.net + todos los concesionarios.
+      - name: Leer motos.net (novedades) + concesionarios 2x/día
+        run: |
+          H=$(date -u +%H)
+          case "$H" in
+            06|18) echo "Pasada completa: motos.net (novedades) + concesionarios"; python -m scraper.run --minutes 10 ;;
+            *)     python -m scraper.run --only motosnet --minutes 10 ;;
+          esac
 
       # La EQUIPACIÓN es el negocio (afiliados), así que se prioriza su frescura: se refresca
       # varias veces al día colgado del cron horario (el único fiable; los cron diarios de GitHub
